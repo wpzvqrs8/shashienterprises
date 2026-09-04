@@ -206,56 +206,57 @@ export const Navbar: React.FC = () => {
               </Link>
             )}
 
-            {/* Expanded Search Input */}
-
-            {isSearchOpen ? (
-              <form onSubmit={handleSearchSubmit} className="relative flex items-center">
-                <input
-                  type="text"
-                  placeholder="Search SKU, series, product..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  autoFocus
-                  className="bg-ink-900 border border-ember-500 text-parchment-50 text-xs sm:text-sm px-3.5 py-1.5 rounded-l-[6px] focus:outline-none w-48 sm:w-72 tracking-wide"
-                />
+            {/* Desktop Only Search Icon / Form */}
+            <div className="hidden lg:block">
+              {isSearchOpen ? (
+                <form onSubmit={handleSearchSubmit} className="relative flex items-center">
+                  <input
+                    type="text"
+                    placeholder="Search SKU, series, product..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    autoFocus
+                    className="bg-ink-900 border border-ember-500 text-parchment-50 text-xs sm:text-sm px-3.5 py-1.5 rounded-l-[6px] focus:outline-none w-48 sm:w-72 tracking-wide"
+                  />
+                  <button
+                    type="submit"
+                    className="bg-ember-500 text-white px-3.5 py-1.5 rounded-r-[6px] hover:bg-ember-600"
+                  >
+                    <Search className="w-4 h-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setIsSearchOpen(false)}
+                    className="ml-2 text-muted hover:text-white"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </form>
+              ) : (
                 <button
-                  type="submit"
-                  className="bg-ember-500 text-white px-3.5 py-1.5 rounded-r-[6px] hover:bg-ember-600"
+                  onClick={() => setIsSearchOpen(true)}
+                  aria-label="Search"
+                  className="p-2 text-parchment-text hover:text-ember-500 transition-colors"
                 >
-                  <Search className="w-4 h-4" />
+                  <Search className="w-5 h-5 sm:w-6 sm:h-6" />
                 </button>
-                <button
-                  type="button"
-                  onClick={() => setIsSearchOpen(false)}
-                  className="ml-2 text-muted hover:text-white"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              </form>
-            ) : (
-              <button
-                onClick={() => setIsSearchOpen(true)}
-                aria-label="Search"
-                className="p-2 text-parchment-text hover:text-ember-500 transition-colors"
-              >
-                <Search className="w-5 h-5 sm:w-6 sm:h-6" />
-              </button>
-            )}
+              )}
+            </div>
 
-            {/* Account Icon */}
+            {/* Desktop Only Account Icon */}
             <Link
               href="/login"
               aria-label="Account"
-              className="p-2 text-parchment-text hover:text-ember-500 transition-colors"
+              className="hidden lg:flex p-2 text-parchment-text hover:text-ember-500 transition-colors"
             >
               <User className="w-5 h-5 sm:w-6 sm:h-6" />
             </Link>
 
-            {/* Cart Icon & Counter */}
+            {/* Desktop Only Cart Icon & Counter */}
             <button
               onClick={() => setIsCartOpen(true)}
               aria-label="Cart"
-              className="relative p-2 text-parchment-text hover:text-ember-500 transition-colors cursor-pointer"
+              className="hidden lg:flex relative p-2 text-parchment-text hover:text-ember-500 transition-colors cursor-pointer"
             >
               <ShoppingBag className="w-5 h-5 sm:w-6 sm:h-6" />
               {itemCount > 0 && (
@@ -265,7 +266,7 @@ export const Navbar: React.FC = () => {
               )}
             </button>
 
-            {/* Mobile Hamburger Toggle (Custom 2-Line Animated Icon -> X) */}
+            {/* Mobile Hamburger Toggle (ONLY icon on mobile) */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={isMobileMenuOpen ? "Close mobile menu" : "Open mobile menu"}
@@ -292,6 +293,28 @@ export const Navbar: React.FC = () => {
       {/* Mobile Navigation Drawer */}
       {isMobileMenuOpen && (
         <div className="lg:hidden bg-ink-900 border-b border-ink-800 px-4 pt-4 pb-6 space-y-4 max-h-[85vh] overflow-y-auto animate-in slide-in-from-top-2 duration-200">
+          {/* Quick Cart & Account bar for Mobile */}
+          <div className="grid grid-cols-2 gap-2 pb-1">
+            <button
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                setIsCartOpen(true);
+              }}
+              className="flex items-center justify-center gap-2 bg-ember-500/10 border border-ember-500/30 text-ember-400 py-2 px-3 rounded-md text-xs font-semibold hover:bg-ember-500/20"
+            >
+              <ShoppingBag className="w-4 h-4" />
+              <span>Cart ({itemCount})</span>
+            </button>
+            <Link
+              href="/login"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center justify-center gap-2 bg-ink-950 border border-ink-800 text-parchment-200 py-2 px-3 rounded-md text-xs font-semibold hover:border-ember-500/40"
+            >
+              <User className="w-4 h-4" />
+              <span>Account</span>
+            </Link>
+          </div>
+
           {/* Mobile Search Bar */}
           <form onSubmit={handleSearchSubmit} className="flex">
             <input
