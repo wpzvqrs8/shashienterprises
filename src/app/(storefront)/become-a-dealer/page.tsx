@@ -147,7 +147,7 @@ export default function BecomeADealerPage() {
                     type="text"
                     value={formData.gstin}
                     onChange={e => setFormData({ ...formData, gstin: e.target.value })}
-                    placeholder="07BWTPD0774Q1ZR"
+                    placeholder=""
                     className="w-full bg-parchment-50 border border-parchment-300 text-xs p-2.5 rounded-[6px] focus:outline-none focus:border-ember-500 text-ink-950 uppercase"
                   />
                 </div>

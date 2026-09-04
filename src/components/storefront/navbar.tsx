@@ -265,12 +265,24 @@ export const Navbar: React.FC = () => {
               )}
             </button>
 
-            {/* Mobile Hamburger Toggle */}
+            {/* Mobile Hamburger Toggle (Custom 2-Line Animated Icon -> X) */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 text-parchment-text hover:text-ember-500"
+              aria-label={isMobileMenuOpen ? "Close mobile menu" : "Open mobile menu"}
+              className="lg:hidden p-2 text-parchment-text hover:text-ember-500 relative flex items-center justify-center w-10 h-10 rounded-md focus:outline-none"
             >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              <div className="w-6 h-6 relative flex items-center justify-center">
+                <span
+                  className={`absolute w-6 h-0.5 bg-current rounded-full transition-all duration-300 ease-in-out origin-center ${
+                    isMobileMenuOpen ? 'top-[11px] rotate-45' : 'top-[6px] rotate-0'
+                  }`}
+                />
+                <span
+                  className={`absolute w-6 h-0.5 bg-current rounded-full transition-all duration-300 ease-in-out origin-center ${
+                    isMobileMenuOpen ? 'top-[11px] -rotate-45' : 'bottom-[6px] rotate-0'
+                  }`}
+                />
+              </div>
             </button>
 
           </div>
@@ -279,77 +291,111 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Navigation Drawer */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-ink-900 border-b border-ink-800 px-4 pt-4 pb-6 space-y-3">
-          <form onSubmit={handleSearchSubmit} className="flex mb-4">
+        <div className="lg:hidden bg-ink-900 border-b border-ink-800 px-4 pt-4 pb-6 space-y-4 max-h-[85vh] overflow-y-auto animate-in slide-in-from-top-2 duration-200">
+          {/* Mobile Search Bar */}
+          <form onSubmit={handleSearchSubmit} className="flex">
             <input
               type="text"
-              placeholder="Search products, series..."
+              placeholder="Search SKUs, anime series, figures..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="bg-ink-950 border border-ink-800 text-parchment-50 text-xs sm:text-sm px-3 py-2 rounded-l w-full focus:outline-none"
+              className="bg-ink-950 border border-ink-800 text-parchment-50 text-xs sm:text-sm px-3.5 py-2.5 rounded-l-md w-full focus:outline-none focus:border-ember-500"
             />
-            <button type="submit" className="bg-ember-500 text-white px-3 py-2 rounded-r">
+            <button type="submit" className="bg-ember-500 hover:bg-ember-600 text-white px-4 py-2.5 rounded-r-md transition-colors flex items-center justify-center">
               <Search className="w-4 h-4" />
             </button>
           </form>
 
-          <nav className="flex flex-col space-y-3 text-sm sm:text-base font-semibold uppercase tracking-wider">
+          {/* Core Navigation Links */}
+          <nav className="flex flex-col space-y-3 text-sm font-semibold uppercase tracking-wider">
             <Link
               href="/"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="py-1 border-b border-ink-800"
+              className="py-2 border-b border-ink-800 flex items-center justify-between text-parchment-100 hover:text-ember-500"
             >
-              Home
+              <span>Home</span>
+              <span className="text-xs text-muted font-normal">01</span>
             </Link>
+            
             <Link
               href="/shop"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="py-1 border-b border-ink-800"
+              className="py-2 border-b border-ink-800 flex items-center justify-between text-parchment-100 hover:text-ember-500"
             >
-              All Shop Products
+              <span>All Wholesale Catalog</span>
+              <span className="text-xs text-muted font-normal">21 SKUs</span>
             </Link>
-            <div className="py-1 space-y-1">
-              <span className="text-xs text-ember-500 font-bold uppercase">Popular Categories:</span>
-              <div className="grid grid-cols-2 gap-2 text-xs sm:text-sm normal-case pt-1">
-                {CATEGORIES.slice(0, 6).map(cat => (
+
+            {/* Shop by Anime Series */}
+            <div className="py-2 border-b border-ink-800 space-y-2">
+              <div className="flex items-center gap-1.5 text-xs text-ember-500 font-bold uppercase tracking-wider">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Shop by Series</span>
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-xs normal-case pt-1 font-normal">
+                {seriesCategories.map(cat => (
                   <Link
                     key={cat.id}
                     href={`/shop/${cat.slug}`}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-parchment-text/80 hover:text-white"
+                    className="text-parchment-text/80 hover:text-ember-400 py-1 px-2 rounded bg-ink-950/60 border border-ink-800/60 truncate"
                   >
-                    • {cat.name}
+                    {cat.name}
                   </Link>
                 ))}
               </div>
             </div>
+
+            {/* Shop by Product Type */}
+            <div className="py-2 border-b border-ink-800 space-y-2">
+              <div className="text-xs text-gold-500 font-bold uppercase tracking-wider">
+                Product Categories
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-xs normal-case pt-1 font-normal">
+                {typeCategories.map(cat => (
+                  <Link
+                    key={cat.id}
+                    href={`/shop/${cat.slug}`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="text-parchment-text/80 hover:text-gold-400 py-1 px-2 rounded bg-ink-950/60 border border-ink-800/60 truncate"
+                  >
+                    {cat.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Institutional Links */}
             <Link
               href="/about"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="py-1 border-b border-ink-800"
+              className="py-2 border-b border-ink-800 text-parchment-100 hover:text-ember-500"
             >
               About Us
             </Link>
             <Link
               href="/become-a-dealer"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="py-1 border-b border-ink-800"
+              className="py-2 border-b border-ink-800 text-parchment-100 hover:text-ember-500"
             >
               Become a Dealer
             </Link>
             <Link
               href="/contact"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="py-1 border-b border-ink-800"
+              className="py-2 border-b border-ink-800 text-parchment-100 hover:text-ember-500"
             >
-              Contact
+              Contact Us
             </Link>
+
+            {/* Admin Console Shortcut */}
             <Link
-              href="/admin/login"
+              href="/admin"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="py-1 text-gold-500 text-xs sm:text-sm font-bold"
+              className="py-2.5 px-3 mt-2 text-ink-950 bg-gold-500 hover:bg-gold-600 rounded-md font-bold text-xs uppercase tracking-wider flex items-center justify-between shadow-sm"
             >
-              Admin Portal →
+              <span>Admin Control Center</span>
+              <span>→</span>
             </Link>
           </nav>
         </div>

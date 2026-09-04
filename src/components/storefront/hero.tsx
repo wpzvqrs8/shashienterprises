@@ -87,7 +87,7 @@ export const Hero: React.FC = () => {
                 </div>
                 <div className="text-right">
                   <div className="text-xs text-parchment-text/70 line-through">Retail ₹1,499</div>
-                  <div className="font-display text-xl text-ember-500 font-bold">From ₹700/pc</div>
+                  <div className="font-display text-xl text-ember-500 font-bold " >From ₹700/pc</div>
                 </div>
               </div>
 

@@ -45,17 +45,20 @@ export const CategoryStrip: React.FC = () => {
           </Link>
         </div>
 
-        {/* 7 Symmetrical Queued Items */}
-        <div className="flex items-center justify-between gap-3 sm:gap-6 md:gap-8 py-6 px-2 min-h-[220px] sm:min-h-[260px] overflow-x-auto scrollbar-none">
+        {/* 7 Symmetrical Queued Items (3 visible on Mobile, 7 on Desktop) */}
+        <div className="flex items-center justify-around sm:justify-between gap-2 sm:gap-6 md:gap-8 py-6 px-1 sm:px-2 min-h-[200px] sm:min-h-[260px] w-full max-w-full overflow-hidden">
           {visibleItems.map((category, slotIdx) => {
             const style = slotStyles[slotIdx];
             const displayName = category.name.length > 13 ? `${category.name.slice(0, 13)}...` : category.name;
+
+            // Slots 2, 3 (Center), 4 (3 items) are visible on mobile; slots 0, 1, 5, 6 are hidden on mobile
+            const isMobileVisible = slotIdx >= 2 && slotIdx <= 4;
 
             return (
               <Link
                 key={`${category.id}-${slotIdx}`}
                 href={`/shop/${category.slug}`}
-                className={`flex flex-col items-center shrink-0 group text-center transition-all duration-700 ease-in-out cursor-pointer ${style.scale}`}
+                className={`${isMobileVisible ? 'flex' : 'hidden sm:flex'} flex-col items-center shrink-0 group text-center transition-all duration-700 ease-in-out cursor-pointer ${style.scale}`}
               >
                 <div
                   className={`relative ${style.size} rounded-full bg-ink-950 p-1 border-2 border-ink-800 group-hover:border-ember-500 transition-all duration-500 shadow-md overflow-hidden mb-3`}

@@ -29,16 +29,16 @@ export default function AdminDashboardPage() {
   const totalCatalogValue = products.reduce((sum, p) => sum + (p.wholesalePrice * p.stockQty), 0);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8 w-full max-w-full overflow-x-hidden">
       
       {/* Header Title & Actions */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h1 className="font-display text-3xl text-ink-950">Administrative Overview</h1>
+          <h1 className="font-display text-2xl sm:text-3xl text-ink-950 font-bold">Administrative Overview</h1>
           <p className="text-xs text-muted">Real-time mock analytics for inventory, wholesale orders, and catalog value.</p>
         </div>
         <Link href="/admin/catalog/new">
-          <Button variant="ember" size="md" className="gap-2">
+          <Button variant="ember" size="sm" className="w-full sm:w-auto gap-2 text-xs">
             <Plus className="w-4 h-4" />
             <span>Add New Wholesale SKU</span>
           </Button>
@@ -46,7 +46,7 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* 4 Metric Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         
         <div className="bg-parchment-100 border border-parchment-300 p-5 rounded-[10px] space-y-2 shadow-sm">
           <div className="flex justify-between items-center text-muted text-xs font-bold uppercase">

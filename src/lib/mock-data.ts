@@ -9,7 +9,7 @@ export const INITIAL_STORE_SETTINGS: StoreSettings = {
   address: "Delhi, India",
   whatsapp: "+91-8796138389",
   email: "enterprisesshashi5@gmail.com",
-  gstin: "07BWTPD0774Q1ZR",
+  gstin: "",
   facebook: "https://www.facebook.com/profile.php?id=61589057115880",
   instagram: "https://www.instagram.com/shashienterprises5",
   minimumOrderValue: 15000,

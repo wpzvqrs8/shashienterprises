@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="font-sans">
+    <html lang="en" className="font-sans overflow-x-hidden">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -27,7 +27,7 @@ export default function RootLayout({
 
 
       </head>
-      <body className="antialiased bg-parchment-50 text-ink-text selection:bg-ember-500 selection:text-white min-h-screen flex flex-col">
+      <body className="antialiased bg-parchment-50 text-ink-text selection:bg-ember-500 selection:text-white min-h-screen flex flex-col overflow-x-hidden w-full max-w-full">
         {children}
       </body>
     </html>

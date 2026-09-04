@@ -237,7 +237,7 @@ export default function AdminCatalogPage() {
               variant="outline"
               size="sm"
               onClick={() => setSelectedIds([])}
-              className="text-xs text-white bg-white border-white/30 hover:bg-ink-900 hover:text-white font-bold"
+              className="text-xs !text-white  border-white/30 hover:bg-ink-900 hover:text-white font-bold"
             >
               Deselect All
             </Button>

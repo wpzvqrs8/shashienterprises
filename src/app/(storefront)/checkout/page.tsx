@@ -197,7 +197,7 @@ export default function CheckoutPage() {
                   name="gstin"
                   value={formData.gstin}
                   onChange={handleChange}
-                  placeholder="e.g. 07BWTPD0774Q1ZR"
+                  placeholder="e.g. 079988D0GBSQ1HJ"
                   className="w-full bg-parchment-50 border border-parchment-300 text-xs p-2.5 rounded-[6px] focus:outline-none focus:border-ember-500 text-ink-950 uppercase"
                 />
               </div>

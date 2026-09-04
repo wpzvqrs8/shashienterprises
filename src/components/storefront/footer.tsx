@@ -25,13 +25,7 @@ export const Footer: React.FC = () => {
             <p className="text-xs sm:text-sm text-muted leading-relaxed tracking-wide">
               {INITIAL_STORE_SETTINGS.tagline}. Direct B2B supplier for verified comic shops, anime retail stores, and figure resellers across India.
             </p>
-            <div className="bg-ink-900 border border-ink-800 p-3 rounded-[6px] space-y-1.5 text-xs text-parchment-text/90">
-              <div className="flex items-center gap-2 text-jade-600 font-bold">
-                <ShieldCheck className="w-4 h-4" />
-                <span>GST Registered B2B Entity</span>
-              </div>
-              <div className="text-[11px] text-muted">GSTIN: <strong className="text-parchment-50">{INITIAL_STORE_SETTINGS.gstin}</strong></div>
-            </div>
+            
           </div>
 
           {/* Col 2: Shop Taxonomy */}

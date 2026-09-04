@@ -32,8 +32,8 @@ export const CartDrawer: React.FC = () => {
         onClick={() => setIsCartOpen(false)}
       />
 
-      <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-        <div className="w-screen max-w-md bg-parchment-50 border-l border-ink-800 text-ink-text flex flex-col shadow-2xl">
+      <div className="fixed inset-y-0 right-0 max-w-full flex pl-3 sm:pl-10">
+        <div className="w-[calc(100vw-12px)] sm:w-screen sm:max-w-md bg-parchment-50 border-l border-ink-800 text-ink-text flex flex-col shadow-2xl">
           
           {/* Header */}
           <div className="p-4 bg-ink-950 text-parchment-text flex items-center justify-between border-b border-ink-800">
@@ -173,7 +173,7 @@ export const CartDrawer: React.FC = () => {
                   onClick={() => setIsCartOpen(false)}
                   className="w-1/3"
                 >
-                  <Button variant="outline" size="md" fullWidth className="text-xs text-parchment-50 border-ink-800">
+                  <Button variant="outline" size="md" fullWidth className="text-xs !text-white border-ink-800">
                     View Cart
                   </Button>
                 </Link>

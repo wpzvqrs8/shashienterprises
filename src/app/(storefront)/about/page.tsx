@@ -32,9 +32,7 @@ export default function AboutPage() {
             <div className="bg-parchment-50 p-6 rounded-[10px] border border-parchment-300 space-y-3 shadow-sm">
               <ShieldCheck className="w-8 h-8 text-jade-600" />
               <div className="font-display text-xl text-ink-950 font-bold">GST Registered</div>
-              <div className="text-xs text-muted leading-relaxed">
-                100% Tax Compliant Invoice with business GSTIN credit on every order (GSTIN: <strong className="text-ink-950">{INITIAL_STORE_SETTINGS.gstin}</strong>).
-              </div>
+              
             </div>
 
             <div className="bg-parchment-50 p-6 rounded-[10px] border border-parchment-300 space-y-3 shadow-sm">
