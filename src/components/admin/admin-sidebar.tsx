@@ -50,8 +50,13 @@ export const AdminSidebar: React.FC = () => {
         title="Tap to expand Admin Menu"
       >
         <div className="space-y-6 w-full flex flex-col items-center">
-          <div className="relative w-8 h-8 rounded bg-ember-500 flex items-center justify-center font-bold text-white text-xs shadow-md">
-            SE
+          <div className="relative w-11 h-7 flex items-center justify-center">
+            <Image
+              src="/logo_black_bg.png"
+              alt="Shashi Enterprises Admin Logo"
+              fill
+              className="object-contain"
+            />
           </div>
 
           <div className="space-y-4 w-full flex flex-col items-center">
