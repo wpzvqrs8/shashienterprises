@@ -20,7 +20,8 @@ import {
   Copy,
   Check,
   AlertCircle,
-  Sparkles
+  Sparkles,
+  ChevronDown
 } from 'lucide-react';
 
 export default function AdminCatalogPage() {
@@ -36,6 +37,7 @@ export default function AdminCatalogPage() {
 
   // Multi-select Bulk Actions
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [expandedProductId, setExpandedProductId] = useState<string | null>(null);
 
   // Delete Confirm Modal State
   const [deleteTarget, setDeleteTarget] = useState<Product | null>(null);
