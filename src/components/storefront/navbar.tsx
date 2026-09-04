@@ -38,17 +38,22 @@ export const Navbar: React.FC = () => {
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      const scrollDiff = currentScrollY - lastScrollY;
+
+      // Auto-close mobile menu on scroll so user can access main website
+      if (Math.abs(scrollDiff) > 6) {
+        setIsMobileMenuOpen(false);
+      }
 
       if (currentScrollY <= 60) {
         setIsVisible(true);
-      } else if (currentScrollY > lastScrollY) {
+      } else if (scrollDiff > 4) {
         // User scrolling down the page -> shift navbar up out of screen
         setIsVisible(false);
-      } else {
-        // User scrolling up the page -> bring navbar back down into position
+      } else if (scrollDiff < -4) {
+        // User scrolling up the page -> drop navbar down from top of screen
         setIsVisible(true);
       }
-
 
       lastScrollY = currentScrollY;
     };
@@ -290,11 +295,11 @@ export const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation Drawer */}
+      {/* Streamlined Mobile Navigation Drawer */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-ink-900 border-b border-ink-800 px-4 pt-4 pb-6 space-y-4 max-h-[85vh] overflow-y-auto animate-in slide-in-from-top-2 duration-200">
+        <div className="lg:hidden bg-ink-900 border-b border-ink-800 px-4 pt-3.5 pb-5 space-y-3.5 shadow-2xl animate-in slide-in-from-top-2 duration-200">
           {/* Quick Cart & Account bar for Mobile */}
-          <div className="grid grid-cols-2 gap-2 pb-1">
+          <div className="grid grid-cols-2 gap-2">
             <button
               onClick={() => {
                 setIsMobileMenuOpen(false);
@@ -319,44 +324,42 @@ export const Navbar: React.FC = () => {
           <form onSubmit={handleSearchSubmit} className="flex">
             <input
               type="text"
-              placeholder="Search SKUs, anime series, figures..."
+              placeholder="Search SKUs, anime series..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="bg-ink-950 border border-ink-800 text-parchment-50 text-xs sm:text-sm px-3.5 py-2.5 rounded-l-md w-full focus:outline-none focus:border-ember-500"
+              className="bg-ink-950 border border-ink-800 text-parchment-50 text-xs px-3 py-2 rounded-l-md w-full focus:outline-none focus:border-ember-500"
             />
-            <button type="submit" className="bg-ember-500 hover:bg-ember-600 text-white px-4 py-2.5 rounded-r-md transition-colors flex items-center justify-center">
+            <button type="submit" className="bg-ember-500 hover:bg-ember-600 text-white px-3.5 py-2 rounded-r-md transition-colors flex items-center justify-center">
               <Search className="w-4 h-4" />
             </button>
           </form>
 
           {/* Core Navigation Links */}
-          <nav className="flex flex-col space-y-3 text-sm font-semibold uppercase tracking-wider">
+          <nav className="flex flex-col space-y-2 text-xs font-semibold uppercase tracking-wider">
             <Link
               href="/"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="py-2 border-b border-ink-800 flex items-center justify-between text-parchment-100 hover:text-ember-500"
+              className="py-1.5 border-b border-ink-800/80 flex items-center justify-between text-parchment-100 hover:text-ember-500"
             >
               <span>Home</span>
-              <span className="text-xs text-muted font-normal">01</span>
             </Link>
             
             <Link
               href="/shop"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="py-2 border-b border-ink-800 flex items-center justify-between text-parchment-100 hover:text-ember-500"
+              className="py-1.5 border-b border-ink-800/80 flex items-center justify-between text-parchment-100 hover:text-ember-500"
             >
-              <span>All Wholesale Catalog</span>
-              <span className="text-xs text-muted font-normal">21 SKUs</span>
+              <span>Shop Catalog</span>
+              <span className="text-[10px] bg-ember-500/20 text-ember-400 px-2 py-0.5 rounded font-mono">21 SKUs</span>
             </Link>
 
-            {/* Shop by Anime Series */}
-            <div className="py-2 border-b border-ink-800 space-y-2">
-              <div className="flex items-center gap-1.5 text-xs text-ember-500 font-bold uppercase tracking-wider">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Shop by Series</span>
+            {/* Popular Series (Top 4) */}
+            <div className="py-1.5 border-b border-ink-800/80 space-y-1.5">
+              <div className="text-[11px] text-ember-500 font-bold uppercase tracking-wider">
+                Popular Series
               </div>
-              <div className="grid grid-cols-2 gap-2 text-xs normal-case pt-1 font-normal">
-                {seriesCategories.map(cat => (
+              <div className="grid grid-cols-2 gap-1.5 text-[11px] normal-case font-normal">
+                {seriesCategories.slice(0, 4).map(cat => (
                   <Link
                     key={cat.id}
                     href={`/shop/${cat.slug}`}
@@ -369,44 +372,18 @@ export const Navbar: React.FC = () => {
               </div>
             </div>
 
-            {/* Shop by Product Type */}
-            <div className="py-2 border-b border-ink-800 space-y-2">
-              <div className="text-xs text-gold-500 font-bold uppercase tracking-wider">
-                Product Categories
-              </div>
-              <div className="grid grid-cols-2 gap-2 text-xs normal-case pt-1 font-normal">
-                {typeCategories.map(cat => (
-                  <Link
-                    key={cat.id}
-                    href={`/shop/${cat.slug}`}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-parchment-text/80 hover:text-gold-400 py-1 px-2 rounded bg-ink-950/60 border border-ink-800/60 truncate"
-                  >
-                    {cat.name}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            {/* Institutional Links */}
-            <Link
-              href="/about"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="py-2 border-b border-ink-800 text-parchment-100 hover:text-ember-500"
-            >
-              About Us
-            </Link>
             <Link
               href="/become-a-dealer"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="py-2 border-b border-ink-800 text-parchment-100 hover:text-ember-500"
+              className="py-1.5 border-b border-ink-800/80 text-parchment-100 hover:text-ember-500"
             >
               Become a Dealer
             </Link>
+
             <Link
               href="/contact"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="py-2 border-b border-ink-800 text-parchment-100 hover:text-ember-500"
+              className="py-1.5 border-b border-ink-800/80 text-parchment-100 hover:text-ember-500"
             >
               Contact Us
             </Link>
@@ -415,9 +392,9 @@ export const Navbar: React.FC = () => {
             <Link
               href="/admin"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="py-2.5 px-3 mt-2 text-ink-950 bg-gold-500 hover:bg-gold-600 rounded-md font-bold text-xs uppercase tracking-wider flex items-center justify-between shadow-sm"
+              className="py-2 px-3 mt-1 text-ink-950 bg-gold-500 hover:bg-gold-600 rounded font-bold text-xs uppercase tracking-wider flex items-center justify-between shadow-sm"
             >
-              <span>Admin Control Center</span>
+              <span>Admin Portal</span>
               <span>→</span>
             </Link>
           </nav>
