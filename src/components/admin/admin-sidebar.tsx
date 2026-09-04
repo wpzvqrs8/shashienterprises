@@ -64,20 +64,25 @@ export const AdminSidebar: React.FC = () => {
               const Icon = item.icon;
               const isActive = pathname === item.href || (item.href !== '/admin' && pathname.startsWith(item.href));
               return (
-                <div
+                <Link
                   key={item.href}
-                  className={`p-2.5 rounded-[6px] transition-colors ${
+                  href={item.href}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                  title={item.label}
+                  className={`p-2.5 rounded-[6px] transition-colors cursor-pointer ${
                     isActive ? 'bg-ember-500 text-white shadow-warm' : 'text-white/70 hover:text-white hover:bg-ink-900'
                   }`}
                 >
                   <Icon className="w-5 h-5" />
-                </div>
+                </Link>
               );
             })}
           </div>
         </div>
 
-        <div className="text-[10px] text-ember-500 font-bold tracking-widest uppercase rotate-180 writing-mode-vertical">
+        <div className="text-[10px] text-ember-500 font-bold tracking-widest uppercase writing-mode-vertical">
           MENU
         </div>
       </div>

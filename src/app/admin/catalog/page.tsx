@@ -191,7 +191,7 @@ export default function AdminCatalogPage() {
         </div>
 
         {/* Status Segmented Tabs */}
-        <div className="flex items-center space-x-1 border-t border-parchment-300/80 pt-3 text-xs font-bold">
+        <div className="flex flex-wrap items-center gap-1.5 border-t border-parchment-300/80 pt-3 text-xs font-bold">
           {[
             { id: 'all', label: 'All Items' },
             { id: 'active', label: 'Active' },
@@ -220,7 +220,7 @@ export default function AdminCatalogPage() {
         <div className="sticky top-16 z-30 bg-ink-950 text-parchment-text p-3 rounded-[8px] border border-ink-800 flex items-center justify-between shadow-warm animate-fade-in">
           <div className="text-xs font-bold">
             <span className="text-ember-500 font-mono text-sm mr-2">{selectedIds.length}</span>
-            items selected for bulk action
+            items selected
           </div>
 
           <div className="flex items-center gap-2">
@@ -237,17 +237,147 @@ export default function AdminCatalogPage() {
               variant="outline"
               size="sm"
               onClick={() => setSelectedIds([])}
-              className="text-xs !text-white  border-white/30 hover:bg-ink-900 hover:text-white font-bold"
+              className="text-xs !text-white border-white/30 hover:bg-ink-900 hover:text-white font-bold"
             >
               Deselect All
             </Button>
-
           </div>
         </div>
       )}
 
-      {/* Data Table */}
-      <div className="bg-parchment-100 border border-parchment-300 rounded-[10px] overflow-hidden shadow-sm">
+      {/* MOBILE VIEW: Brief Product Cards (Fits screen cleanly without horizontal scroll) */}
+      <div className="md:hidden space-y-3">
+        {loading ? (
+          <div className="p-6 text-center text-muted bg-parchment-100 rounded-[10px] border border-parchment-300">
+            Loading wholesale catalog...
+          </div>
+        ) : filteredProducts.length === 0 ? (
+          <div className="p-8 text-center text-muted bg-parchment-100 rounded-[10px] border border-parchment-300">
+            No products matching criteria.
+          </div>
+        ) : (
+          filteredProducts.map(product => {
+            const isSelected = selectedIds.includes(product.id);
+            const isExpanded = expandedProductId === product.id;
+
+            return (
+              <div
+                key={product.id}
+                className={`bg-parchment-100 border rounded-[10px] p-3 text-xs space-y-2.5 transition-colors ${
+                  isSelected ? 'border-ember-500 bg-ember-100/30' : 'border-parchment-300'
+                }`}
+              >
+                {/* Main brief row */}
+                <div className="flex items-center justify-between gap-2">
+                  {/* Select Checkbox at first column position + Thumbnail + Brief Info */}
+                  <div className="flex items-center gap-2.5 min-w-0 flex-1">
+                    <input
+                      type="checkbox"
+                      checked={isSelected}
+                      onChange={() => handleToggleSelect(product.id)}
+                      className="accent-ember-500 rounded w-4 h-4 shrink-0"
+                    />
+
+                    <div className="w-11 h-11 bg-parchment-50 rounded-[6px] relative overflow-hidden border border-parchment-300 shrink-0">
+                      <Image src={product.image} alt={product.name} fill className="object-cover" />
+                    </div>
+
+                    <div className="min-w-0 flex-1">
+                      <Link href={`/product/${product.slug}`} target="_blank" className="font-display font-bold text-ink-950 truncate block text-xs hover:text-ember-600">
+                        {product.name}
+                      </Link>
+                      <div className="text-[11px] font-mono text-muted flex items-center gap-2">
+                        <span>SKU: {product.sku}</span>
+                      </div>
+                      <div className="font-display text-xs font-bold text-ember-600">
+                        ₹{product.wholesalePrice.toLocaleString('en-IN')}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Actions: Edit, Duplicate, Delete, Details Expand Chevron */}
+                  <div className="flex items-center gap-1 shrink-0">
+                    <Link href={`/admin/catalog/${product.id}/edit`}>
+                      <button
+                        className="p-1.5 text-muted hover:text-ink-950 hover:bg-parchment-300 rounded"
+                        title="Edit product"
+                      >
+                        <Edit2 className="w-4 h-4" />
+                      </button>
+                    </Link>
+
+                    <button
+                      onClick={() => handleDuplicate(product)}
+                      className="p-1.5 text-muted hover:text-ink-950 hover:bg-parchment-300 rounded"
+                      title="Duplicate product"
+                    >
+                      <Copy className="w-4 h-4" />
+                    </button>
+
+                    <button
+                      onClick={() => setDeleteTarget(product)}
+                      className="p-1.5 text-muted hover:text-danger hover:bg-parchment-300 rounded"
+                      title="Delete product"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+
+                    <button
+                      onClick={() => setExpandedProductId(isExpanded ? null : product.id)}
+                      className="p-1.5 text-ember-500 hover:bg-parchment-300 rounded"
+                      title="View Details"
+                    >
+                      <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`} />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Expandable Details Accordion */}
+                {isExpanded && (
+                  <div className="pt-2 border-t border-parchment-300/80 grid grid-cols-2 gap-2 text-[11px] bg-parchment-50 p-2.5 rounded-[6px] animate-fade-in">
+                    <div>
+                      <span className="text-muted block">Series:</span>
+                      <strong className="text-ink-950">{product.series}</strong>
+                    </div>
+                    <div>
+                      <span className="text-muted block">Category:</span>
+                      <strong className="text-ink-950">{product.category}</strong>
+                    </div>
+                    <div>
+                      <span className="text-muted block">Stock Qty:</span>
+                      <strong className={product.stockQty === 0 ? 'text-danger' : product.stockQty < 50 ? 'text-gold-500' : 'text-ink-950'}>
+                        {product.stockQty} pcs
+                      </strong>
+                    </div>
+                    <div>
+                      <span className="text-muted block">MOQ Tier:</span>
+                      <strong className="text-ink-950">{product.moq} pcs</strong>
+                    </div>
+                    <div>
+                      <span className="text-muted block">Status:</span>
+                      <Badge
+                        variant={
+                          product.status === 'active' ? 'stock' :
+                          product.status === 'draft' ? 'draft' : 'out'
+                        }
+                      >
+                        {product.status}
+                      </Badge>
+                    </div>
+                    <div>
+                      <span className="text-muted block">Last Updated:</span>
+                      <span className="text-ink-950">{new Date(product.createdAt).toLocaleDateString('en-IN')}</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })
+        )}
+      </div>
+
+      {/* DESKTOP DATA TABLE (Visible on md screens and above) */}
+      <div className="hidden md:block bg-parchment-100 border border-parchment-300 rounded-[10px] overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead className="bg-parchment-300/60 border-b border-parchment-300 text-ink-950 font-bold uppercase tracking-wider">

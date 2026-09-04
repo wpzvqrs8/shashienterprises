@@ -38,7 +38,76 @@ export default function AdminOrdersPage() {
         <p className="text-xs text-muted">Review business order requests, issue formal GST quotes, and manage dispatch status.</p>
       </div>
 
-      <div className="bg-parchment-100 border border-parchment-300 rounded-[10px] overflow-hidden shadow-sm">
+      {/* MOBILE VIEW: Compact Quote Order Cards */}
+      <div className="md:hidden space-y-3">
+        {loading ? (
+          <div className="p-6 text-center text-muted bg-parchment-100 rounded-[10px] border border-parchment-300">
+            Loading quote orders...
+          </div>
+        ) : orders.length === 0 ? (
+          <div className="p-8 text-center text-muted bg-parchment-100 rounded-[10px] border border-parchment-300">
+            No quote order requests found.
+          </div>
+        ) : (
+          orders.map(ord => (
+            <div
+              key={ord.id}
+              className="bg-parchment-100 border border-parchment-300 rounded-[10px] p-3.5 text-xs space-y-3 shadow-sm"
+            >
+              {/* Top Bar: Ref # & Amount */}
+              <div className="flex justify-between items-start">
+                <div>
+                  <div className="font-mono font-bold text-ink-950 text-sm">{ord.orderNumber}</div>
+                  <div className="text-[11px] text-muted">{new Date(ord.createdAt).toLocaleDateString('en-IN')}</div>
+                </div>
+                <div className="text-right">
+                  <div className="font-display text-sm font-bold text-ember-600">₹{ord.subtotal.toLocaleString('en-IN')}</div>
+                  <div className="text-[11px] text-muted">{ord.items.length} SKUs</div>
+                </div>
+              </div>
+
+              {/* Middle: Business & Contact Info */}
+              <div className="pt-2 border-t border-parchment-300/80 flex justify-between items-center text-xs">
+                <div>
+                  <div className="font-bold text-ink-950">{ord.businessName}</div>
+                  <div className="text-[11px] text-muted">{ord.contactPerson} ({ord.phone}) • {ord.city}</div>
+                </div>
+              </div>
+
+              {/* Bottom Actions: Status Dropdown + Inspect Button */}
+              <div className="flex items-center justify-between gap-2 pt-2 border-t border-parchment-300/80">
+                <select
+                  value={ord.status}
+                  onChange={e => handleStatusChange(ord.id, e.target.value as any)}
+                  className={`text-[11px] px-2.5 py-1 rounded font-bold uppercase border focus:outline-none ${
+                    ord.status === 'Confirmed' ? 'bg-jade-100 text-jade-600 border-jade-600/30' :
+                    ord.status === 'Dispatched' ? 'bg-ember-100 text-ember-600 border-ember-500/30' :
+                    'bg-parchment-50 text-ink-950 border-parchment-300'
+                  }`}
+                >
+                  <option value="New">New Request</option>
+                  <option value="Quoted">Quoted</option>
+                  <option value="Confirmed">Confirmed</option>
+                  <option value="Dispatched">Dispatched</option>
+                  <option value="Delivered">Delivered</option>
+                </select>
+
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setSelectedOrder(ord)}
+                  className="text-xs"
+                >
+                  Inspect Order →
+                </Button>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* DESKTOP VIEW: Full Data Table */}
+      <div className="hidden md:block bg-parchment-100 border border-parchment-300 rounded-[10px] overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead className="bg-parchment-300/60 border-b border-parchment-300 text-ink-950 font-bold uppercase tracking-wider">
