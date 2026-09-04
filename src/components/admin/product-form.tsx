@@ -97,31 +97,31 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8 max-w-5xl mx-auto">
+    <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8 max-w-5xl mx-auto w-full max-w-full overflow-x-hidden">
       
       {/* Header Bar */}
-      <div className="flex items-center justify-between border-b border-parchment-300 pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-parchment-300 pb-4">
         <div className="flex items-center gap-3">
           <Button type="button" variant="outline" size="sm" onClick={() => router.back()}>
             <ArrowLeft className="w-4 h-4" />
           </Button>
           <div>
-            <h1 className="font-display text-3xl text-ink-950">
+            <h1 className="font-display text-2xl sm:text-3xl text-ink-950">
               {isEdit ? `Edit Product: ${initialProduct?.name}` : 'Add New Wholesale Product'}
             </h1>
             <p className="text-xs text-muted">Configure product specifications, wholesale price tiers, and inventory.</p>
           </div>
         </div>
 
-        <Button type="submit" variant="ember" size="md" disabled={submitting} className="gap-2 shadow-warm">
+        <Button type="submit" variant="ember" size="md" disabled={submitting} className="gap-2 shadow-warm w-full sm:w-auto">
           <Save className="w-4 h-4" />
           <span>{submitting ? 'Saving Product...' : 'Save Product'}</span>
         </Button>
       </div>
 
       {/* Section 1: Basic Information */}
-      <div className="bg-parchment-100 border border-parchment-300 rounded-[10px] p-6 space-y-4 shadow-sm">
-        <h3 className="font-display text-xl text-ink-950 border-b border-parchment-300 pb-2">
+      <div className="bg-parchment-100 border border-parchment-300 rounded-[10px] p-4 sm:p-6 space-y-4 shadow-sm">
+        <h3 className="font-display text-lg sm:text-xl text-ink-950 border-b border-parchment-300 pb-2">
           1. Basic Product Information
         </h3>
 
@@ -202,8 +202,8 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
       </div>
 
       {/* Section 2: Base Pricing & Stock Inventory */}
-      <div className="bg-parchment-100 border border-parchment-300 rounded-[10px] p-6 space-y-4 shadow-sm">
-        <h3 className="font-display text-xl text-ink-950 border-b border-parchment-300 pb-2">
+      <div className="bg-parchment-100 border border-parchment-300 rounded-[10px] p-4 sm:p-6 space-y-4 shadow-sm">
+        <h3 className="font-display text-lg sm:text-xl text-ink-950 border-b border-parchment-300 pb-2">
           2. Base Pricing & Stock Inventory
         </h3>
 
@@ -271,7 +271,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
             id="showOldPriceToggle"
             checked={formData.showOldPrice !== false}
             onChange={e => handleFieldChange('showOldPrice', e.target.checked)}
-            className="w-4 h-4 accent-ember-500 rounded cursor-pointer"
+            className="w-4 h-4 accent-ember-500 rounded cursor-pointer shrink-0"
           />
           <label htmlFor="showOldPriceToggle" className="text-xs font-bold uppercase text-ink-950 cursor-pointer">
             Show Strikethrough Old Price (₹{formData.retailSalePrice || 0}) on Storefront & Product Cards
@@ -280,67 +280,72 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
 
       </div>
 
-      {/* Section 3: Wholesale Tier Builder */}
-      <div className="bg-parchment-100 border border-parchment-300 rounded-[10px] p-6 space-y-4 shadow-sm">
-        <div className="flex justify-between items-center border-b border-parchment-300 pb-2">
-          <h3 className="font-display text-xl text-ink-950">
+      {/* Section 3: Wholesale Tier Builder (Mobile Friendly Stacked/Flex Layout) */}
+      <div className="bg-parchment-100 border border-parchment-300 rounded-[10px] p-4 sm:p-6 space-y-4 shadow-sm">
+        <div className="flex flex-row justify-between items-center border-b border-parchment-300 pb-2">
+          <h3 className="font-display text-lg sm:text-xl text-ink-950">
             3. Wholesale Volume Pricing Tiers
           </h3>
-          <Button type="button" variant="outline" size="sm" onClick={addTierRow} className="gap-1 text-xs">
+          <Button type="button" variant="outline" size="sm" onClick={addTierRow} className="gap-1 text-xs shrink-0">
             <Plus className="w-3.5 h-3.5" />
-            <span>Add Tier Row</span>
+            <span>Add Tier</span>
           </Button>
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-3">
           {formData.wholesaleTiers?.map((tier, idx) => (
-            <div key={idx} className="flex items-center gap-3 bg-parchment-50 p-2.5 rounded-[6px] border border-parchment-300">
-              <div className="flex items-center gap-2 text-xs font-bold">
-                <span className="text-muted">Min Qty:</span>
-                <input
-                  type="number"
-                  value={tier.minQty}
-                  onChange={e => handleTierChange(idx, 'minQty', e.target.value)}
-                  className="w-20 bg-parchment-100 border border-parchment-300 p-1.5 rounded font-mono text-center"
-                />
+            <div key={idx} className="flex flex-col sm:flex-row sm:items-center gap-2.5 bg-parchment-50 p-3 rounded-[6px] border border-parchment-300">
+              <div className="grid grid-cols-2 sm:flex sm:items-center gap-2 text-xs font-bold flex-1">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-muted text-[11px] shrink-0">Min Qty:</span>
+                  <input
+                    type="number"
+                    value={tier.minQty}
+                    onChange={e => handleTierChange(idx, 'minQty', e.target.value)}
+                    className="w-full sm:w-20 bg-parchment-100 border border-parchment-300 p-1.5 rounded font-mono text-center"
+                  />
+                </div>
+
+                <div className="flex items-center gap-1.5">
+                  <span className="text-muted text-[11px] shrink-0">Max Qty:</span>
+                  <input
+                    type="number"
+                    value={tier.maxQty || ''}
+                    placeholder="∞"
+                    onChange={e => handleTierChange(idx, 'maxQty', e.target.value)}
+                    className="w-full sm:w-20 bg-parchment-100 border border-parchment-300 p-1.5 rounded font-mono text-center"
+                  />
+                </div>
               </div>
 
-              <div className="flex items-center gap-2 text-xs font-bold">
-                <span className="text-muted">Max Qty (Optional):</span>
-                <input
-                  type="number"
-                  value={tier.maxQty || ''}
-                  placeholder="∞"
-                  onChange={e => handleTierChange(idx, 'maxQty', e.target.value)}
-                  className="w-20 bg-parchment-100 border border-parchment-300 p-1.5 rounded font-mono text-center"
-                />
-              </div>
+              <div className="flex items-center justify-between sm:justify-start gap-2 text-xs font-bold pt-1 sm:pt-0 border-t sm:border-0 border-parchment-300/60">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-muted text-[11px] shrink-0">Rate/pc (₹):</span>
+                  <input
+                    type="number"
+                    value={tier.pricePerPc}
+                    onChange={e => handleTierChange(idx, 'pricePerPc', e.target.value)}
+                    className="w-28 bg-parchment-100 border border-parchment-300 p-1.5 rounded font-mono text-ember-600 font-bold"
+                  />
+                </div>
 
-              <div className="flex items-center gap-2 text-xs font-bold flex-1">
-                <span className="text-muted">Rate / pc (₹):</span>
-                <input
-                  type="number"
-                  value={tier.pricePerPc}
-                  onChange={e => handleTierChange(idx, 'pricePerPc', e.target.value)}
-                  className="w-28 bg-parchment-100 border border-parchment-300 p-1.5 rounded font-mono text-ember-600 font-bold"
-                />
+                <button
+                  type="button"
+                  onClick={() => removeTierRow(idx)}
+                  className="text-muted hover:text-danger p-1.5 rounded bg-parchment-200/60 sm:bg-transparent"
+                  title="Remove tier row"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
               </div>
-
-              <button
-                type="button"
-                onClick={() => removeTierRow(idx)}
-                className="text-muted hover:text-danger p-1"
-              >
-                <Trash2 className="w-4 h-4" />
-              </button>
             </div>
           ))}
         </div>
       </div>
 
       {/* Section 4: Image Media & Status Badges */}
-      <div className="bg-parchment-100 border border-parchment-300 rounded-[10px] p-6 space-y-4 shadow-sm">
-        <h3 className="font-display text-xl text-ink-950 border-b border-parchment-300 pb-2">
+      <div className="bg-parchment-100 border border-parchment-300 rounded-[10px] p-4 sm:p-6 space-y-4 shadow-sm">
+        <h3 className="font-display text-lg sm:text-xl text-ink-950 border-b border-parchment-300 pb-2">
           4. Image Media, Status & Badges
         </h3>
 
@@ -371,44 +376,64 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
           </div>
         </div>
 
-        {/* Device Image File Upload (Multiple Files) */}
-        <div className="bg-parchment-50 p-4 rounded-[8px] border border-parchment-300 space-y-3">
-          <label className="text-xs font-bold uppercase text-ink-950 block">Upload Product Images From Device (Multiple Allowed)</label>
+        {/* Device Image File Upload (PNG, JPG, JPEG Only) */}
+        <div className="bg-parchment-50 p-3.5 sm:p-4 rounded-[8px] border border-parchment-300 space-y-3">
+          <label className="text-xs font-bold uppercase text-ink-950 block">Upload Product Images From Device (PNG, JPG, JPEG Only)</label>
           <input
             type="file"
             multiple
-            accept="image/*"
+            accept="image/png, image/jpeg, image/jpg"
             onChange={(e) => {
               const files = Array.from(e.target.files || []);
               if (files.length > 0) {
-                files.forEach((file, index) => {
-                  const reader = new FileReader();
-                  reader.onload = (uploadEvent) => {
-                    const result = uploadEvent.target?.result as string;
-                    if (result) {
-                      setFormData(prev => {
-                        const currentGallery = prev.gallery || [];
-                        const updatedGallery = [...currentGallery, result];
-                        const primaryImg = (!prev.image || prev.image.includes('placehold.co')) && index === 0 ? result : prev.image;
-                        return { ...prev, image: primaryImg, gallery: updatedGallery };
-                      });
-                    }
-                  };
-                  reader.readAsDataURL(file);
+                // Filter strictly for PNG, JPG, JPEG formats
+                const validFiles = files.filter(file => {
+                  const type = file.type.toLowerCase();
+                  const name = file.name.toLowerCase();
+                  return (
+                    type === 'image/png' ||
+                    type === 'image/jpeg' ||
+                    type === 'image/jpg' ||
+                    name.endsWith('.png') ||
+                    name.endsWith('.jpg') ||
+                    name.endsWith('.jpeg')
+                  );
                 });
+
+                if (validFiles.length < files.length) {
+                  alert('Only PNG, JPG, and JPEG image formats are allowed.');
+                }
+
+                if (validFiles.length > 0) {
+                  validFiles.forEach((file, index) => {
+                    const reader = new FileReader();
+                    reader.onload = (uploadEvent) => {
+                      const result = uploadEvent.target?.result as string;
+                      if (result) {
+                        setFormData(prev => {
+                          const currentGallery = prev.gallery || [];
+                          const updatedGallery = [...currentGallery, result];
+                          const primaryImg = (!prev.image || prev.image.includes('placehold.co')) && index === 0 ? result : prev.image;
+                          return { ...prev, image: primaryImg, gallery: updatedGallery };
+                        });
+                      }
+                    };
+                    reader.readAsDataURL(file);
+                  });
+                }
               }
             }}
-            className="text-xs text-ink-950 file:mr-4 file:py-2 file:px-4 file:rounded-[6px] file:border-0 file:text-xs file:font-bold file:bg-ember-500 file:text-white hover:file:bg-ember-600 cursor-pointer"
+            className="w-full text-xs text-ink-950 file:mr-3 file:py-2 file:px-3 file:rounded-[6px] file:border-0 file:text-xs file:font-bold file:bg-ember-500 file:text-white hover:file:bg-ember-600 cursor-pointer"
           />
-          <p className="text-[11px] text-muted">Selected device images will be added dynamically to primary image & product page thumbnail rail gallery.</p>
+          <p className="text-[11px] text-muted">Accepts PNG, JPG, and JPEG files only. Uploaded images will populate the main product image and gallery.</p>
 
           {/* Gallery Previews */}
           {formData.gallery && formData.gallery.length > 0 && (
             <div className="pt-2">
               <span className="text-xs font-bold text-ink-950 uppercase block mb-2">Uploaded Gallery Images ({formData.gallery.length}):</span>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-2.5">
                 {formData.gallery.map((img, i) => (
-                  <div key={i} className="relative w-20 h-20 rounded bg-parchment-100 border border-parchment-300 overflow-hidden group">
+                  <div key={i} className="relative w-16 h-16 sm:w-20 sm:h-20 rounded bg-parchment-100 border border-parchment-300 overflow-hidden group">
                     <img src={img} alt={`Gallery ${i}`} className="w-full h-full object-cover" />
                     <button
                       type="button"
@@ -429,7 +454,6 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
             </div>
           )}
         </div>
-
 
         {/* Thumbnail Preview */}
         {formData.image && (
@@ -467,61 +491,63 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
             ))}
           </div>
 
-          {/* Admin Custom Tag Builder with Color Picker */}
+          {/* Admin Custom Tag Builder with Color Picker (Mobile Responsive) */}
           <div className="bg-parchment-50 p-3 rounded-[6px] border border-parchment-300 space-y-2">
-            <span className="text-xs font-bold text-ink-950 uppercase block">Add Custom Tag with Background Color (Black FG Text):</span>
-            <div className="flex items-center gap-3">
+            <span className="text-xs font-bold text-ink-950 uppercase block">Add Custom Tag with Background Color:</span>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
               <input
                 type="text"
                 id="customTagInput"
                 placeholder="Tag text (e.g. Exclusive, 2026 Import)"
-                className="bg-parchment-100 border border-parchment-300 text-xs p-2 rounded focus:outline-none text-black font-bold w-48"
+                className="bg-parchment-100 border border-parchment-300 text-xs p-2 rounded focus:outline-none text-black font-bold flex-1"
               />
-              <div className="flex items-center gap-1">
-                <span className="text-xs text-muted font-bold">Bg Color:</span>
-                <input
-                  type="color"
-                  id="customTagColor"
-                  defaultValue="#FBBF24"
-                  className="w-8 h-8 rounded cursor-pointer border border-parchment-300 p-0"
-                />
-              </div>
-              <button
-                type="button"
-                onClick={() => {
-                  const tagInput = (document.getElementById('customTagInput') as HTMLInputElement)?.value.trim();
-                  if (tagInput) {
-                    const current = formData.badges || [];
-                    if (!current.includes(tagInput as any)) {
-                      handleFieldChange('badges', [...current, tagInput]);
+              <div className="flex items-center justify-between sm:justify-start gap-2">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-xs text-muted font-bold">Color:</span>
+                  <input
+                    type="color"
+                    id="customTagColor"
+                    defaultValue="#FBBF24"
+                    className="w-8 h-8 rounded cursor-pointer border border-parchment-300 p-0"
+                  />
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const tagInput = (document.getElementById('customTagInput') as HTMLInputElement)?.value.trim();
+                    if (tagInput) {
+                      const current = formData.badges || [];
+                      if (!current.includes(tagInput as any)) {
+                        handleFieldChange('badges', [...current, tagInput]);
+                      }
+                      (document.getElementById('customTagInput') as HTMLInputElement).value = '';
                     }
-                    (document.getElementById('customTagInput') as HTMLInputElement).value = '';
-                  }
-                }}
-                className="bg-black text-white text-xs font-bold px-3 py-1.5 rounded hover:bg-ink-900 transition-colors uppercase"
-              >
-                Add Tag
-              </button>
+                  }}
+                  className="bg-black text-white text-xs font-bold px-3 py-2 rounded hover:bg-ink-900 transition-colors uppercase shrink-0"
+                >
+                  Add Tag
+                </button>
+              </div>
             </div>
           </div>
         </div>
 
-          <div className="flex items-center gap-3 pt-4">
-            <input
-              type="checkbox"
-              id="featuredToggle"
-              checked={formData.featured}
-              onChange={e => handleFieldChange('featured', e.target.checked)}
-              className="w-4 h-4 accent-ember-500 rounded"
-            />
-            <label htmlFor="featuredToggle" className="text-xs font-bold uppercase text-ink-950 cursor-pointer">
-              Mark as Featured Homepage Highlight
-            </label>
-          </div>
+        <div className="flex items-center gap-3 pt-4">
+          <input
+            type="checkbox"
+            id="featuredToggle"
+            checked={formData.featured}
+            onChange={e => handleFieldChange('featured', e.target.checked)}
+            className="w-4 h-4 accent-ember-500 rounded shrink-0"
+          />
+          <label htmlFor="featuredToggle" className="text-xs font-bold uppercase text-ink-950 cursor-pointer">
+            Mark as Featured Homepage Highlight
+          </label>
         </div>
+      </div>
 
       {/* Form Submit Footer */}
-      <div className="flex justify-end gap-4 pt-4 border-t border-parchment-300">
+      <div className="flex justify-end gap-3 pt-4 border-t border-parchment-300">
         <Button type="button" variant="outline" size="md" onClick={() => router.back()}>
           Cancel
         </Button>
