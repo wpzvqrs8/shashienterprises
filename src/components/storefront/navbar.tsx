@@ -28,24 +28,30 @@ export const Navbar: React.FC = () => {
   // Auto-hide navbar logic on scroll
   const [isVisible, setIsVisible] = useState(true);
   const [isAdmin, setIsAdmin] = useState(true);
+  const lastScrollYRef = React.useRef(0);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       localStorage.setItem('shashi_admin_logged_in', 'true');
+      lastScrollYRef.current = window.scrollY;
     }
-
-    let lastScrollY = window.scrollY;
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      const scrollDiff = currentScrollY - lastScrollY;
+      const prevScrollY = lastScrollYRef.current;
+      const diff = currentScrollY - prevScrollY;
 
-      // Auto-close mobile menu on scroll so user can access main website
-      if (Math.abs(scrollDiff) > 8) {
-        setIsMobileMenuOpen(false);
+      if (currentScrollY <= 60) {
+        setIsVisible(true);
+      } else if (diff > 4) {
+        // User scrolling down the page -> hide navbar
+        setIsVisible(false);
+      } else if (diff < -4) {
+        // User scrolling up the page -> drop navbar down from top of screen
+        setIsVisible(true);
       }
 
-      lastScrollY = currentScrollY;
+      lastScrollYRef.current = currentScrollY;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -64,7 +70,11 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-ink-950 text-parchment-text border-b border-ink-800 shadow-md">
+    <header
+      className={`sticky top-0 z-40 bg-ink-950 text-parchment-text border-b border-ink-800 shadow-md transition-transform duration-300 ease-in-out ${
+        isVisible || isMobileMenuOpen ? 'translate-y-0' : '-translate-y-full'
+      }`}
+    >
       <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16">
         <div className="flex items-center justify-between h-20">
           
