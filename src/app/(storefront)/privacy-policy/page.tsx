@@ -1,5 +1,4 @@
-import React from 'react';
-import { INITIAL_STORE_SETTINGS } from '@/lib/mock-data';
+import { INITIAL_STORE_SETTINGS } from '@/lib/constants';
 import { Lock, ShieldCheck, Database, EyeOff, MessageSquare } from 'lucide-react';
 
 export default function PrivacyPolicyPage() {

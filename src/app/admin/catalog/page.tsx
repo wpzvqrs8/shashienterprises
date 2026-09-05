@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Product } from '@/lib/types';
 import { getProducts, deleteProduct, bulkDeleteProducts, addProduct } from '@/lib/catalog-store';
-import { CATEGORIES } from '@/lib/mock-data';
+import { CATEGORIES } from '@/lib/constants';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { TableRowSkeleton } from '@/components/ui/skeleton';
@@ -24,6 +24,8 @@ import {
   ChevronDown
 } from 'lucide-react';
 
+const PAGE_SIZE = 15;
+
 export default function AdminCatalogPage() {
   const router = useRouter();
 
@@ -34,6 +36,9 @@ export default function AdminCatalogPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [statusTab, setStatusTab] = useState<string>('all');
+
+  // Pagination / Load More State
+  const [visibleCount, setVisibleCount] = useState<number>(PAGE_SIZE);
 
   // Multi-select Bulk Actions
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
@@ -57,6 +62,11 @@ export default function AdminCatalogPage() {
     fetchCatalog();
   }, []);
 
+  // Reset pagination when filters change
+  useEffect(() => {
+    setVisibleCount(PAGE_SIZE);
+  }, [searchQuery, selectedCategory, statusTab]);
+
   const showToast = (msg: string) => {
     setToastMsg(msg);
     setTimeout(() => setToastMsg(null), 3000);
@@ -78,6 +88,8 @@ export default function AdminCatalogPage() {
 
     return matchesSearch && matchesCategory && matchesStatus;
   });
+
+  const visibleProducts = filteredProducts.slice(0, visibleCount);
 
   // Single Delete Handler
   const handleDeleteConfirm = async () => {
@@ -258,7 +270,7 @@ export default function AdminCatalogPage() {
             No products matching criteria.
           </div>
         ) : (
-          filteredProducts.map(product => {
+          visibleProducts.map(product => {
             const isSelected = selectedIds.includes(product.id);
             const isExpanded = expandedProductId === product.id;
 
@@ -412,7 +424,7 @@ export default function AdminCatalogPage() {
                   </td>
                 </tr>
               ) : (
-                filteredProducts.map(product => {
+                visibleProducts.map(product => {
                   const isSelected = selectedIds.includes(product.id);
                   return (
                     <tr
@@ -522,6 +534,42 @@ export default function AdminCatalogPage() {
           </table>
         </div>
       </div>
+
+      {/* Interactive Load More Pagination Control Bar */}
+      {!loading && filteredProducts.length > 0 && (
+        <div className="mt-6 p-4 bg-parchment-100 border border-parchment-300 rounded-[10px] flex flex-col sm:flex-row justify-between items-center gap-4 shadow-sm">
+          <div className="text-xs text-muted font-medium">
+            Showing <strong className="text-ink-950 font-bold">{visibleProducts.length}</strong> of{' '}
+            <strong className="text-ink-950 font-bold">{filteredProducts.length}</strong> products in catalog
+          </div>
+
+          {visibleCount < filteredProducts.length ? (
+            <div className="flex items-center gap-3">
+              <Button
+                variant="ember"
+                size="sm"
+                onClick={() => setVisibleCount(prev => prev + PAGE_SIZE)}
+                className="gap-2 font-bold"
+              >
+                <span>Load 15 More Products</span>
+                <ChevronDown className="w-4 h-4" />
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setVisibleCount(filteredProducts.length)}
+                className="text-xs border-parchment-300 text-ink-950 hover:bg-parchment-200 font-bold"
+              >
+                Load All ({filteredProducts.length})
+              </Button>
+            </div>
+          ) : (
+            <div className="text-xs text-jade-600 font-bold flex items-center gap-1.5 bg-jade-500/10 px-3 py-1.5 rounded-[6px] border border-jade-600/30">
+              <Check className="w-4 h-4" /> All {filteredProducts.length} products loaded
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Delete Single Product Confirm Modal */}
       <ConfirmDialog

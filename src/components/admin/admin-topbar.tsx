@@ -1,19 +1,11 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
-import { INITIAL_STORE_SETTINGS } from '@/lib/mock-data';
-import { LogOut, UserCheck, ShieldCheck } from 'lucide-react';
+import { useAuth } from '@/components/providers/auth-provider';
+import { LogOut, ShieldCheck } from 'lucide-react';
 
 export const AdminTopbar: React.FC = () => {
-  const router = useRouter();
-
-  const handleLogout = () => {
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem('shashi_admin_logged_in');
-    }
-    router.push('/admin/login');
-  };
+  const { user, signOut } = useAuth();
 
   return (
     <header className="bg-parchment-100 border-b border-parchment-300 px-6 py-3 flex items-center justify-between">
@@ -29,14 +21,18 @@ export const AdminTopbar: React.FC = () => {
 
       <div className="flex items-center gap-4">
         <div className="flex items-center gap-2 text-xs">
-          <div className="w-7 h-7 rounded-full bg-ink-950 text-parchment-text flex items-center justify-center font-bold text-xs">
-            A
-          </div>
-          <span className="font-bold text-ink-950">{INITIAL_STORE_SETTINGS.adminEmail}</span>
+          {user?.user_metadata?.avatar_url ? (
+            <img src={user.user_metadata.avatar_url} alt="Admin Profile" className="w-7 h-7 rounded-full" />
+          ) : (
+            <div className="w-7 h-7 rounded-full bg-ink-950 text-parchment-text flex items-center justify-center font-bold text-xs">
+              {(user?.email?.[0] || 'A').toUpperCase()}
+            </div>
+          )}
+          <span className="font-bold text-ink-950">{user?.email || 'Admin'}</span>
         </div>
 
         <button
-          onClick={handleLogout}
+          onClick={signOut}
           className="text-xs font-bold text-muted hover:text-danger flex items-center gap-1 border-l border-parchment-300 pl-4 py-1"
         >
           <LogOut className="w-3.5 h-3.5" />
@@ -46,3 +42,4 @@ export const AdminTopbar: React.FC = () => {
     </header>
   );
 };
+

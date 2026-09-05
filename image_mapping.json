@@ -1,0 +1,802 @@
+[
+  {
+    "index": 1,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.09 PM (1).jpeg",
+    "newName": "product-001.jpeg",
+    "publicUrl": "/catalog/product-001.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.09 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-001.jpeg"
+  },
+  {
+    "index": 2,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.09 PM (2).jpeg",
+    "newName": "product-002.jpeg",
+    "publicUrl": "/catalog/product-002.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.09 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-002.jpeg"
+  },
+  {
+    "index": 3,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.09 PM.jpeg",
+    "newName": "product-003.jpeg",
+    "publicUrl": "/catalog/product-003.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.09 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-003.jpeg"
+  },
+  {
+    "index": 4,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.10 PM (1).jpeg",
+    "newName": "product-004.jpeg",
+    "publicUrl": "/catalog/product-004.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.10 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-004.jpeg"
+  },
+  {
+    "index": 5,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.10 PM (2).jpeg",
+    "newName": "product-005.jpeg",
+    "publicUrl": "/catalog/product-005.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.10 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-005.jpeg"
+  },
+  {
+    "index": 6,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.10 PM.jpeg",
+    "newName": "product-006.jpeg",
+    "publicUrl": "/catalog/product-006.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.10 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-006.jpeg"
+  },
+  {
+    "index": 7,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.11 PM (1).jpeg",
+    "newName": "product-007.jpeg",
+    "publicUrl": "/catalog/product-007.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.11 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-007.jpeg"
+  },
+  {
+    "index": 8,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.11 PM (2).jpeg",
+    "newName": "product-008.jpeg",
+    "publicUrl": "/catalog/product-008.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.11 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-008.jpeg"
+  },
+  {
+    "index": 9,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.11 PM (3).jpeg",
+    "newName": "product-009.jpeg",
+    "publicUrl": "/catalog/product-009.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.11 PM (3).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-009.jpeg"
+  },
+  {
+    "index": 10,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.11 PM.jpeg",
+    "newName": "product-010.jpeg",
+    "publicUrl": "/catalog/product-010.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.11 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-010.jpeg"
+  },
+  {
+    "index": 11,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.12 PM (1).jpeg",
+    "newName": "product-011.jpeg",
+    "publicUrl": "/catalog/product-011.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.12 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-011.jpeg"
+  },
+  {
+    "index": 12,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.12 PM (2).jpeg",
+    "newName": "product-012.jpeg",
+    "publicUrl": "/catalog/product-012.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.12 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-012.jpeg"
+  },
+  {
+    "index": 13,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.12 PM.jpeg",
+    "newName": "product-013.jpeg",
+    "publicUrl": "/catalog/product-013.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.12 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-013.jpeg"
+  },
+  {
+    "index": 14,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.13 PM (1).jpeg",
+    "newName": "product-014.jpeg",
+    "publicUrl": "/catalog/product-014.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.13 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-014.jpeg"
+  },
+  {
+    "index": 15,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.13 PM.jpeg",
+    "newName": "product-015.jpeg",
+    "publicUrl": "/catalog/product-015.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.13 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-015.jpeg"
+  },
+  {
+    "index": 16,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.14 PM (1).jpeg",
+    "newName": "product-016.jpeg",
+    "publicUrl": "/catalog/product-016.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.14 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-016.jpeg"
+  },
+  {
+    "index": 17,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.14 PM (2).jpeg",
+    "newName": "product-017.jpeg",
+    "publicUrl": "/catalog/product-017.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.14 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-017.jpeg"
+  },
+  {
+    "index": 18,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.14 PM.jpeg",
+    "newName": "product-018.jpeg",
+    "publicUrl": "/catalog/product-018.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.14 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-018.jpeg"
+  },
+  {
+    "index": 19,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.15 PM (1).jpeg",
+    "newName": "product-019.jpeg",
+    "publicUrl": "/catalog/product-019.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.15 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-019.jpeg"
+  },
+  {
+    "index": 20,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.15 PM (2).jpeg",
+    "newName": "product-020.jpeg",
+    "publicUrl": "/catalog/product-020.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.15 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-020.jpeg"
+  },
+  {
+    "index": 21,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.15 PM.jpeg",
+    "newName": "product-021.jpeg",
+    "publicUrl": "/catalog/product-021.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.15 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-021.jpeg"
+  },
+  {
+    "index": 22,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.16 PM (1).jpeg",
+    "newName": "product-022.jpeg",
+    "publicUrl": "/catalog/product-022.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.16 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-022.jpeg"
+  },
+  {
+    "index": 23,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.16 PM (2).jpeg",
+    "newName": "product-023.jpeg",
+    "publicUrl": "/catalog/product-023.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.16 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-023.jpeg"
+  },
+  {
+    "index": 24,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.16 PM.jpeg",
+    "newName": "product-024.jpeg",
+    "publicUrl": "/catalog/product-024.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.16 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-024.jpeg"
+  },
+  {
+    "index": 25,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.17 PM (1).jpeg",
+    "newName": "product-025.jpeg",
+    "publicUrl": "/catalog/product-025.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.17 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-025.jpeg"
+  },
+  {
+    "index": 26,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.17 PM (2).jpeg",
+    "newName": "product-026.jpeg",
+    "publicUrl": "/catalog/product-026.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.17 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-026.jpeg"
+  },
+  {
+    "index": 27,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.17 PM.jpeg",
+    "newName": "product-027.jpeg",
+    "publicUrl": "/catalog/product-027.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.17 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-027.jpeg"
+  },
+  {
+    "index": 28,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.18 PM (1).jpeg",
+    "newName": "product-028.jpeg",
+    "publicUrl": "/catalog/product-028.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.18 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-028.jpeg"
+  },
+  {
+    "index": 29,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.18 PM (2).jpeg",
+    "newName": "product-029.jpeg",
+    "publicUrl": "/catalog/product-029.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.18 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-029.jpeg"
+  },
+  {
+    "index": 30,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.18 PM.jpeg",
+    "newName": "product-030.jpeg",
+    "publicUrl": "/catalog/product-030.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.18 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-030.jpeg"
+  },
+  {
+    "index": 31,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.19 PM (1).jpeg",
+    "newName": "product-031.jpeg",
+    "publicUrl": "/catalog/product-031.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.19 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-031.jpeg"
+  },
+  {
+    "index": 32,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.19 PM (2).jpeg",
+    "newName": "product-032.jpeg",
+    "publicUrl": "/catalog/product-032.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.19 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-032.jpeg"
+  },
+  {
+    "index": 33,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.19 PM.jpeg",
+    "newName": "product-033.jpeg",
+    "publicUrl": "/catalog/product-033.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.19 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-033.jpeg"
+  },
+  {
+    "index": 34,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.20 PM (1).jpeg",
+    "newName": "product-034.jpeg",
+    "publicUrl": "/catalog/product-034.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.20 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-034.jpeg"
+  },
+  {
+    "index": 35,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.20 PM.jpeg",
+    "newName": "product-035.jpeg",
+    "publicUrl": "/catalog/product-035.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.20 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-035.jpeg"
+  },
+  {
+    "index": 36,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.21 PM (1).jpeg",
+    "newName": "product-036.jpeg",
+    "publicUrl": "/catalog/product-036.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.21 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-036.jpeg"
+  },
+  {
+    "index": 37,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.21 PM (2).jpeg",
+    "newName": "product-037.jpeg",
+    "publicUrl": "/catalog/product-037.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.21 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-037.jpeg"
+  },
+  {
+    "index": 38,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.21 PM.jpeg",
+    "newName": "product-038.jpeg",
+    "publicUrl": "/catalog/product-038.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.21 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-038.jpeg"
+  },
+  {
+    "index": 39,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.22 PM (1).jpeg",
+    "newName": "product-039.jpeg",
+    "publicUrl": "/catalog/product-039.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.22 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-039.jpeg"
+  },
+  {
+    "index": 40,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.22 PM (2).jpeg",
+    "newName": "product-040.jpeg",
+    "publicUrl": "/catalog/product-040.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.22 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-040.jpeg"
+  },
+  {
+    "index": 41,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.22 PM (3).jpeg",
+    "newName": "product-041.jpeg",
+    "publicUrl": "/catalog/product-041.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.22 PM (3).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-041.jpeg"
+  },
+  {
+    "index": 42,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.22 PM.jpeg",
+    "newName": "product-042.jpeg",
+    "publicUrl": "/catalog/product-042.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.22 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-042.jpeg"
+  },
+  {
+    "index": 43,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.23 PM (1).jpeg",
+    "newName": "product-043.jpeg",
+    "publicUrl": "/catalog/product-043.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.23 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-043.jpeg"
+  },
+  {
+    "index": 44,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.23 PM (2).jpeg",
+    "newName": "product-044.jpeg",
+    "publicUrl": "/catalog/product-044.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.23 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-044.jpeg"
+  },
+  {
+    "index": 45,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.23 PM.jpeg",
+    "newName": "product-045.jpeg",
+    "publicUrl": "/catalog/product-045.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.23 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-045.jpeg"
+  },
+  {
+    "index": 46,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.24 PM (1).jpeg",
+    "newName": "product-046.jpeg",
+    "publicUrl": "/catalog/product-046.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.24 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-046.jpeg"
+  },
+  {
+    "index": 47,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.24 PM (2).jpeg",
+    "newName": "product-047.jpeg",
+    "publicUrl": "/catalog/product-047.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.24 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-047.jpeg"
+  },
+  {
+    "index": 48,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.24 PM.jpeg",
+    "newName": "product-048.jpeg",
+    "publicUrl": "/catalog/product-048.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.24 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-048.jpeg"
+  },
+  {
+    "index": 49,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.25 PM (1).jpeg",
+    "newName": "product-049.jpeg",
+    "publicUrl": "/catalog/product-049.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.25 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-049.jpeg"
+  },
+  {
+    "index": 50,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.25 PM (2).jpeg",
+    "newName": "product-050.jpeg",
+    "publicUrl": "/catalog/product-050.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.25 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-050.jpeg"
+  },
+  {
+    "index": 51,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.25 PM.jpeg",
+    "newName": "product-051.jpeg",
+    "publicUrl": "/catalog/product-051.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.25 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-051.jpeg"
+  },
+  {
+    "index": 52,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.35 PM.jpeg",
+    "newName": "product-052.jpeg",
+    "publicUrl": "/catalog/product-052.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.35 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-052.jpeg"
+  },
+  {
+    "index": 53,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.36 PM (1).jpeg",
+    "newName": "product-053.jpeg",
+    "publicUrl": "/catalog/product-053.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.36 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-053.jpeg"
+  },
+  {
+    "index": 54,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.36 PM (2).jpeg",
+    "newName": "product-054.jpeg",
+    "publicUrl": "/catalog/product-054.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.36 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-054.jpeg"
+  },
+  {
+    "index": 55,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.36 PM.jpeg",
+    "newName": "product-055.jpeg",
+    "publicUrl": "/catalog/product-055.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.36 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-055.jpeg"
+  },
+  {
+    "index": 56,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.37 PM (1).jpeg",
+    "newName": "product-056.jpeg",
+    "publicUrl": "/catalog/product-056.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.37 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-056.jpeg"
+  },
+  {
+    "index": 57,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.37 PM (2).jpeg",
+    "newName": "product-057.jpeg",
+    "publicUrl": "/catalog/product-057.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.37 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-057.jpeg"
+  },
+  {
+    "index": 58,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.37 PM.jpeg",
+    "newName": "product-058.jpeg",
+    "publicUrl": "/catalog/product-058.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.37 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-058.jpeg"
+  },
+  {
+    "index": 59,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.38 PM (1).jpeg",
+    "newName": "product-059.jpeg",
+    "publicUrl": "/catalog/product-059.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.38 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-059.jpeg"
+  },
+  {
+    "index": 60,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.38 PM (2).jpeg",
+    "newName": "product-060.jpeg",
+    "publicUrl": "/catalog/product-060.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.38 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-060.jpeg"
+  },
+  {
+    "index": 61,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.38 PM.jpeg",
+    "newName": "product-061.jpeg",
+    "publicUrl": "/catalog/product-061.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.38 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-061.jpeg"
+  },
+  {
+    "index": 62,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.39 PM (1).jpeg",
+    "newName": "product-062.jpeg",
+    "publicUrl": "/catalog/product-062.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.39 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-062.jpeg"
+  },
+  {
+    "index": 63,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.39 PM (2).jpeg",
+    "newName": "product-063.jpeg",
+    "publicUrl": "/catalog/product-063.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.39 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-063.jpeg"
+  },
+  {
+    "index": 64,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.39 PM (3).jpeg",
+    "newName": "product-064.jpeg",
+    "publicUrl": "/catalog/product-064.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.39 PM (3).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-064.jpeg"
+  },
+  {
+    "index": 65,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.39 PM.jpeg",
+    "newName": "product-065.jpeg",
+    "publicUrl": "/catalog/product-065.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.39 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-065.jpeg"
+  },
+  {
+    "index": 66,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.40 PM (1).jpeg",
+    "newName": "product-066.jpeg",
+    "publicUrl": "/catalog/product-066.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.40 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-066.jpeg"
+  },
+  {
+    "index": 67,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.40 PM (2).jpeg",
+    "newName": "product-067.jpeg",
+    "publicUrl": "/catalog/product-067.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.40 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-067.jpeg"
+  },
+  {
+    "index": 68,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.40 PM.jpeg",
+    "newName": "product-068.jpeg",
+    "publicUrl": "/catalog/product-068.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.40 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-068.jpeg"
+  },
+  {
+    "index": 69,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.41 PM (1).jpeg",
+    "newName": "product-069.jpeg",
+    "publicUrl": "/catalog/product-069.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.41 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-069.jpeg"
+  },
+  {
+    "index": 70,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.41 PM (2).jpeg",
+    "newName": "product-070.jpeg",
+    "publicUrl": "/catalog/product-070.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.41 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-070.jpeg"
+  },
+  {
+    "index": 71,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.41 PM.jpeg",
+    "newName": "product-071.jpeg",
+    "publicUrl": "/catalog/product-071.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.41 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-071.jpeg"
+  },
+  {
+    "index": 72,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.42 PM (1).jpeg",
+    "newName": "product-072.jpeg",
+    "publicUrl": "/catalog/product-072.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.42 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-072.jpeg"
+  },
+  {
+    "index": 73,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.42 PM.jpeg",
+    "newName": "product-073.jpeg",
+    "publicUrl": "/catalog/product-073.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.42 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-073.jpeg"
+  },
+  {
+    "index": 74,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.43 PM (1).jpeg",
+    "newName": "product-074.jpeg",
+    "publicUrl": "/catalog/product-074.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.43 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-074.jpeg"
+  },
+  {
+    "index": 75,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.43 PM (2).jpeg",
+    "newName": "product-075.jpeg",
+    "publicUrl": "/catalog/product-075.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.43 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-075.jpeg"
+  },
+  {
+    "index": 76,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.43 PM (3).jpeg",
+    "newName": "product-076.jpeg",
+    "publicUrl": "/catalog/product-076.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.43 PM (3).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-076.jpeg"
+  },
+  {
+    "index": 77,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.43 PM.jpeg",
+    "newName": "product-077.jpeg",
+    "publicUrl": "/catalog/product-077.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.43 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-077.jpeg"
+  },
+  {
+    "index": 78,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.44 PM (1).jpeg",
+    "newName": "product-078.jpeg",
+    "publicUrl": "/catalog/product-078.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.44 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-078.jpeg"
+  },
+  {
+    "index": 79,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.44 PM.jpeg",
+    "newName": "product-079.jpeg",
+    "publicUrl": "/catalog/product-079.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.44 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-079.jpeg"
+  },
+  {
+    "index": 80,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.45 PM (1).jpeg",
+    "newName": "product-080.jpeg",
+    "publicUrl": "/catalog/product-080.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.45 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-080.jpeg"
+  },
+  {
+    "index": 81,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.45 PM (2).jpeg",
+    "newName": "product-081.jpeg",
+    "publicUrl": "/catalog/product-081.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.45 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-081.jpeg"
+  },
+  {
+    "index": 82,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.45 PM.jpeg",
+    "newName": "product-082.jpeg",
+    "publicUrl": "/catalog/product-082.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.45 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-082.jpeg"
+  },
+  {
+    "index": 83,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.46 PM (1).jpeg",
+    "newName": "product-083.jpeg",
+    "publicUrl": "/catalog/product-083.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.46 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-083.jpeg"
+  },
+  {
+    "index": 84,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.46 PM (2).jpeg",
+    "newName": "product-084.jpeg",
+    "publicUrl": "/catalog/product-084.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.46 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-084.jpeg"
+  },
+  {
+    "index": 85,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.46 PM.jpeg",
+    "newName": "product-085.jpeg",
+    "publicUrl": "/catalog/product-085.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.46 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-085.jpeg"
+  },
+  {
+    "index": 86,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.47 PM (1).jpeg",
+    "newName": "product-086.jpeg",
+    "publicUrl": "/catalog/product-086.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.47 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-086.jpeg"
+  },
+  {
+    "index": 87,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.47 PM (2).jpeg",
+    "newName": "product-087.jpeg",
+    "publicUrl": "/catalog/product-087.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.47 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-087.jpeg"
+  },
+  {
+    "index": 88,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.47 PM.jpeg",
+    "newName": "product-088.jpeg",
+    "publicUrl": "/catalog/product-088.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.47 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-088.jpeg"
+  },
+  {
+    "index": 89,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.48 PM (1).jpeg",
+    "newName": "product-089.jpeg",
+    "publicUrl": "/catalog/product-089.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.48 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-089.jpeg"
+  },
+  {
+    "index": 90,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.48 PM (2).jpeg",
+    "newName": "product-090.jpeg",
+    "publicUrl": "/catalog/product-090.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.48 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-090.jpeg"
+  },
+  {
+    "index": 91,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.48 PM.jpeg",
+    "newName": "product-091.jpeg",
+    "publicUrl": "/catalog/product-091.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.48 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-091.jpeg"
+  },
+  {
+    "index": 92,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.49 PM (1).jpeg",
+    "newName": "product-092.jpeg",
+    "publicUrl": "/catalog/product-092.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.49 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-092.jpeg"
+  },
+  {
+    "index": 93,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.49 PM (2).jpeg",
+    "newName": "product-093.jpeg",
+    "publicUrl": "/catalog/product-093.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.49 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-093.jpeg"
+  },
+  {
+    "index": 94,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.49 PM.jpeg",
+    "newName": "product-094.jpeg",
+    "publicUrl": "/catalog/product-094.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.49 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-094.jpeg"
+  },
+  {
+    "index": 95,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.50 PM (1).jpeg",
+    "newName": "product-095.jpeg",
+    "publicUrl": "/catalog/product-095.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.50 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-095.jpeg"
+  },
+  {
+    "index": 96,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.50 PM (2).jpeg",
+    "newName": "product-096.jpeg",
+    "publicUrl": "/catalog/product-096.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.50 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-096.jpeg"
+  },
+  {
+    "index": 97,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.50 PM.jpeg",
+    "newName": "product-097.jpeg",
+    "publicUrl": "/catalog/product-097.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.50 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-097.jpeg"
+  },
+  {
+    "index": 98,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.51 PM (1).jpeg",
+    "newName": "product-098.jpeg",
+    "publicUrl": "/catalog/product-098.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.51 PM (1).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-098.jpeg"
+  },
+  {
+    "index": 99,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.51 PM (2).jpeg",
+    "newName": "product-099.jpeg",
+    "publicUrl": "/catalog/product-099.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.51 PM (2).jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-099.jpeg"
+  },
+  {
+    "index": 100,
+    "originalName": "WhatsApp Image 2026-09-05 at 7.51.51 PM.jpeg",
+    "newName": "product-100.jpeg",
+    "publicUrl": "/catalog/product-100.jpeg",
+    "fullSrcPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\images\\WhatsApp Image 2026-09-05 at 7.51.51 PM.jpeg",
+    "fullDestPath": "e:\\WORK\\FREE_LANCING\\shashi_enterprise\\public\\catalog\\product-100.jpeg"
+  }
+]

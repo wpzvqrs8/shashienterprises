@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { Product } from '@/lib/types';
 import { getProducts } from '@/lib/catalog-store';
-import { CATEGORIES } from '@/lib/mock-data';
+import { CATEGORIES } from '@/lib/constants';
 import { ProductCard } from '@/components/storefront/product-card';
 import { ProductCardSkeleton } from '@/components/ui/skeleton';
 import { Tag } from 'lucide-react';

@@ -1,5 +1,4 @@
-import React from 'react';
-import { INITIAL_STORE_SETTINGS } from '@/lib/mock-data';
+import { INITIAL_STORE_SETTINGS } from '@/lib/constants';
 import { FileText, ShieldCheck, DollarSign, PackageCheck, AlertCircle, MessageSquare } from 'lucide-react';
 
 export default function TermsPage() {
@@ -29,16 +28,16 @@ export default function TermsPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           <div className="bg-parchment-100 border border-parchment-300 p-5 rounded-[10px] space-y-2 shadow-sm">
             <DollarSign className="w-6 h-6 text-ember-500" />
-            <h3 className="font-display text-lg text-ink-950 font-bold">₹15,000 Minimum Order</h3>
+            <h3 className="font-display text-lg text-ink-950 font-bold">50 Pcs Minimum Order</h3>
             <p className="text-xs text-muted leading-relaxed">
-              Minimum aggregate order checkout threshold strictly enforced for wholesale trade pricing.
+              Minimum order quantity threshold strictly enforced for wholesale trade pricing.
             </p>
           </div>
           <div className="bg-parchment-100 border border-parchment-300 p-5 rounded-[10px] space-y-2 shadow-sm">
             <PackageCheck className="w-6 h-6 text-gold-500" />
-            <h3 className="font-display text-lg text-ink-950 font-bold">5 Pcs Per SKU MOQ</h3>
+            <h3 className="font-display text-lg text-ink-950 font-bold">50 Pcs Bulk Threshold</h3>
             <p className="text-xs text-muted leading-relaxed">
-              Individual product lines require a minimum unit order quantity of 5 pieces.
+              Order lines require a minimum unit order quantity of 50 pieces.
             </p>
           </div>
           <div className="bg-parchment-100 border border-parchment-300 p-5 rounded-[10px] space-y-2 shadow-sm">

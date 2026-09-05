@@ -148,6 +148,22 @@
 }
 
 @theme inline {
+  --color-ink-950: #141218;
+  --color-ink-900: #1C1A21;
+  --color-ink-800: #28242E;
+  --color-parchment-50: #FAF8F3;
+  --color-parchment-100: #F4F0E6;
+  --color-parchment-300: #E4DCCB;
+  --color-ember-500: #E2632B;
+  --color-ember-600: #C34F1E;
+  --color-ember-100: #FBE3D3;
+  --color-jade-600: #2E6B57;
+  --color-jade-100: #DCEBE4;
+  --color-gold-500: #C79A2E;
+  --color-ink-text: #1C1A21;
+  --color-parchment-text: #F1EAD9;
+  --color-danger: #B8402F;
+
   --font-heading: var(--font-sans);
   --font-sans: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);

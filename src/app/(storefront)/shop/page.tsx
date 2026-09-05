@@ -4,7 +4,7 @@ import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { Product, ProductFilterParams } from '@/lib/types';
 import { getProducts } from '@/lib/catalog-store';
-import { CATEGORIES, INITIAL_PRODUCTS } from '@/lib/mock-data';
+import { CATEGORIES } from '@/lib/constants';
 import { ProductCard } from '@/components/storefront/product-card';
 import { ProductCardSkeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
@@ -14,8 +14,8 @@ function ShopContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const [products, setProducts] = useState<Product[]>(INITIAL_PRODUCTS);
-  const [loading, setLoading] = useState(false);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
   // Filter States

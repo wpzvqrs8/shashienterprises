@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { QuoteOrder } from '@/lib/types';
 import { getOrders } from '@/lib/catalog-store';
 import { Button } from '@/components/ui/button';
-import { INITIAL_STORE_SETTINGS } from '@/lib/mock-data';
+import { INITIAL_STORE_SETTINGS } from '@/lib/constants';
 import { CheckCircle2, MessageSquare, ArrowRight, ShieldCheck } from 'lucide-react';
 
 export default function OrderConfirmationPage() {

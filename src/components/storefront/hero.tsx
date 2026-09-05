@@ -68,28 +68,12 @@ export const Hero: React.FC = () => {
           <div className="lg:col-span-5 relative">
             <div className="relative aspect-square max-w-md mx-auto rounded-[14px] bg-ink-900 border border-ink-800 p-4 shadow-warm-lg overflow-hidden group">
               <Image
-                src="https://static.wixstatic.com/media/30f31b_2702e2ec119d4bf29f3da99ae99b1efa~mv2.jpeg/v1/fit/w_500,h_500,q_90/file.jpg"
+                src="/hero-featured/hero-goku.jpeg"
                 alt="Ultra Instinct Goku Hero Showcase"
                 fill
                 priority
                 className="object-cover rounded-[10px] group-hover:scale-105 transition-transform duration-500"
               />
-
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink-950 via-ink-950/90 to-transparent p-5 pt-12 flex justify-between items-end">
-                <div>
-                  <span className="text-[10px] bg-ember-500 text-white font-bold px-2 py-0.5 rounded uppercase">
-                    Featured Wholesale SKU
-                  </span>
-                  <h3 className="font-display text-xl text-white font-bold mt-1">
-                    Ultra Instinct Goku 28cm
-                  </h3>
-                  <div className="text-xs text-parchment-text/90 font-medium">SKU: SE-DBZ-0101 • MOQ: 5 pcs</div>
-                </div>
-                <div className="text-right">
-                  <div className="text-xs text-parchment-text/70 line-through">Retail ₹1,499</div>
-                  <div className="font-display text-xl text-ember-500 font-bold " >From ₹700/pc</div>
-                </div>
-              </div>
 
             </div>
           </div>

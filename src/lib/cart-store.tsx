@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Product, CartItem } from './types';
-import { INITIAL_STORE_SETTINGS } from './mock-data';
+import { DEFAULT_STORE_SETTINGS } from './constants';
 
 interface CartContextType {
   items: CartItem[];
@@ -17,6 +17,9 @@ interface CartContextType {
   minimumOrderValue: number;
   isCartOpen: boolean;
   setIsCartOpen: (open: boolean) => void;
+  activeTab: 'cart' | 'orders';
+  setActiveTab: (tab: 'cart' | 'orders') => void;
+  openOrders: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -48,9 +51,15 @@ export function calculateTierPrice(product: Product, quantity: number): number {
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState<'cart' | 'orders'>('cart');
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const minimumOrderValue = INITIAL_STORE_SETTINGS.minimumOrderValue || 15000;
+  const minimumOrderValue = 0;
+
+  const openOrders = () => {
+    setActiveTab('orders');
+    setIsCartOpen(true);
+  };
 
   useEffect(() => {
     try {
@@ -104,6 +113,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     });
 
+    setActiveTab('cart');
     setIsCartOpen(true);
   };
 
@@ -143,8 +153,8 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const subtotal = items.reduce((sum, item) => sum + item.lineTotal, 0);
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
-  const isMovMet = subtotal >= minimumOrderValue;
-  const movRemaining = Math.max(0, minimumOrderValue - subtotal);
+  const isMovMet = itemCount >= 50 || subtotal > 0;
+  const movRemaining = Math.max(0, 50 - itemCount);
 
   return (
     <CartContext.Provider
@@ -160,7 +170,10 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         movRemaining,
         minimumOrderValue,
         isCartOpen,
-        setIsCartOpen
+        setIsCartOpen,
+        activeTab,
+        setActiveTab,
+        openOrders
       }}
     >
       {children}

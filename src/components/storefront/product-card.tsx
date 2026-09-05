@@ -39,7 +39,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
 
   return (
-    <div className="group relative bg-parchment-50 hover:bg-[#E5DDD0] border border-parchment-300 hover:border-ink-800 rounded-[10px] p-3 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-warm overflow-hidden h-full">
+    <div className="group relative bg-parchment-50 hover:bg-[#E5DDD0] rounded-[10px] p-3 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-warm overflow-hidden h-full">
       
       {/* Header Row ABOVE the product image: Badge (Left) & Wishlist (Right) */}
       <div className="flex justify-between items-center mb-2.5 h-7">

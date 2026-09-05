@@ -15,15 +15,10 @@ import { FaqAccordion } from '@/components/storefront/faq-accordion';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles, Send, CheckCircle2 } from 'lucide-react';
 
-import { INITIAL_PRODUCTS } from '@/lib/mock-data';
-
 export default function HomePage() {
-  const initialNew = INITIAL_PRODUCTS.filter(p => p.badges && p.badges.includes('new')).slice(0, 8);
-  const initialBest = INITIAL_PRODUCTS.filter(p => p.badges && p.badges.includes('bestseller')).slice(0, 8);
-
-  const [newDrops, setNewDrops] = useState<Product[]>(initialNew.length > 0 ? initialNew : INITIAL_PRODUCTS.slice(0, 8));
-  const [bestSellers, setBestSellers] = useState<Product[]>(initialBest.length > 0 ? initialBest : INITIAL_PRODUCTS.slice(8, 16));
-  const [loading, setLoading] = useState(false);
+  const [newDrops, setNewDrops] = useState<Product[]>([]);
+  const [bestSellers, setBestSellers] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
@@ -79,11 +74,17 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {loading
-              ? [...Array(8)].map((_, i) => <ProductCardSkeleton key={i} />)
-              : newDrops.map(product => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
+            {loading ? (
+              [...Array(8)].map((_, i) => <ProductCardSkeleton key={i} />)
+            ) : newDrops.length > 0 ? (
+              newDrops.map(product => (
+                <ProductCard key={product.id} product={product} />
+              ))
+            ) : (
+              <div className="col-span-full py-8 text-center text-muted text-sm bg-parchment-100 rounded-lg border border-parchment-300">
+                No wholesale drops available yet. Add products in the admin panel.
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -115,7 +116,7 @@ export default function HomePage() {
 
             <div className="lg:col-span-5 relative aspect-square max-w-xs sm:max-w-sm mx-auto rounded-[10px] bg-ink-950 overflow-hidden border border-ink-800">
               <Image
-                src="https://static.wixstatic.com/media/5152cc_2b236876a45b4887a8fe345aa74edcec~mv2.jpg/v1/fit/w_500,h_500,q_90/file.jpg"
+                src="/hero-featured/promo-shanks.jpeg"
                 alt="Shanks 72cm Statue Promo"
                 fill
                 className="object-cover"
@@ -150,11 +151,17 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {loading
-              ? [...Array(8)].map((_, i) => <ProductCardSkeleton key={i} />)
-              : bestSellers.map(product => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
+            {loading ? (
+              [...Array(8)].map((_, i) => <ProductCardSkeleton key={i} />)
+            ) : bestSellers.length > 0 ? (
+              bestSellers.map(product => (
+                <ProductCard key={product.id} product={product} />
+              ))
+            ) : (
+              <div className="col-span-full py-8 text-center text-muted text-sm bg-parchment-100 rounded-lg border border-parchment-300">
+                No bestseller items listed yet.
+              </div>
+            )}
           </div>
         </div>
       </section>

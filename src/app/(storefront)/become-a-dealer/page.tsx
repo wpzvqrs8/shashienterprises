@@ -2,7 +2,15 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { CheckCircle2, ShieldCheck, FileText, Send } from 'lucide-react';
+import {
+  validateBusinessName,
+  validateName,
+  validatePhone,
+  validateEmail,
+  validateCity,
+  validateGSTIN
+} from '@/lib/validation';
+import { CheckCircle2, ShieldCheck, FileText, Send, AlertTriangle } from 'lucide-react';
 
 export default function BecomeADealerPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -16,9 +24,48 @@ export default function BecomeADealerPage() {
     storeType: 'Physical Retail Shop',
     comments: ''
   });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    if (errors[name]) {
+      setErrors(prev => {
+        const next = { ...prev };
+        delete next[name];
+        return next;
+      });
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const newErrors: Record<string, string> = {};
+
+    const sErr = validateBusinessName(formData.storeName);
+    if (sErr) newErrors.storeName = sErr;
+
+    const oErr = validateName(formData.ownerName, 'Proprietor Name');
+    if (oErr) newErrors.ownerName = oErr;
+
+    const pErr = validatePhone(formData.phone);
+    if (pErr) newErrors.phone = pErr;
+
+    const eErr = validateEmail(formData.email);
+    if (eErr) newErrors.email = eErr;
+
+    const cErr = validateCity(formData.city);
+    if (cErr) newErrors.city = cErr;
+
+    const gErr = validateGSTIN(formData.gstin);
+    if (gErr) newErrors.gstin = gErr;
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
     setSubmitted(true);
   };
 
@@ -58,7 +105,7 @@ export default function BecomeADealerPage() {
                 <ul className="space-y-3 text-xs text-ink-text/90">
                   <li className="flex items-start gap-2">
                     <ShieldCheck className="w-4 h-4 text-jade-600 shrink-0 mt-0.5" />
-                    <span>Minimum ₹15,000 per purchase order threshold.</span>
+                    <span>Minimum 50 pcs per purchase order threshold.</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <FileText className="w-4 h-4 text-ember-500 shrink-0 mt-0.5" />
@@ -66,7 +113,7 @@ export default function BecomeADealerPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-gold-500 shrink-0 mt-0.5" />
-                    <span>Minimum 5 pcs per individual SKU quantity.</span>
+                    <span>50 pcs minimum order quantity per order.</span>
                   </li>
                 </ul>
               </div>
@@ -79,16 +126,32 @@ export default function BecomeADealerPage() {
                   Dealer Registration Form
                 </h3>
 
+                {Object.keys(errors).length > 0 && (
+                  <div className="bg-red-50 border border-red-300 text-red-900 p-3 rounded text-xs space-y-0.5 font-bold">
+                    <div className="flex items-center gap-1.5 text-red-950">
+                      <AlertTriangle className="w-4 h-4 text-red-600 shrink-0" />
+                      <span>Please fix the validation errors:</span>
+                    </div>
+                    {Object.values(errors).map((err, i) => (
+                      <div key={i} className="text-[11px] font-normal text-red-700 pl-5">• {err}</div>
+                    ))}
+                  </div>
+                )}
+
                 <div className="space-y-1">
                   <label className="text-xs font-bold uppercase text-ink-950">Store / Company Name *</label>
                   <input
                     type="text"
                     required
+                    name="storeName"
                     value={formData.storeName}
-                    onChange={e => setFormData({ ...formData, storeName: e.target.value })}
+                    onChange={handleChange}
                     placeholder="e.g. Collectible Corner"
-                    className="w-full bg-parchment-50 border border-parchment-300 text-xs p-2.5 rounded-[6px] focus:outline-none focus:border-ember-500 text-ink-950"
+                    className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 ${
+                      errors.storeName ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
+                    }`}
                   />
+                  {errors.storeName && <p className="text-[11px] text-red-600 font-semibold mt-0.5">{errors.storeName}</p>}
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
@@ -97,22 +160,30 @@ export default function BecomeADealerPage() {
                     <input
                       type="text"
                       required
+                      name="ownerName"
                       value={formData.ownerName}
-                      onChange={e => setFormData({ ...formData, ownerName: e.target.value })}
+                      onChange={handleChange}
                       placeholder="Full Name"
-                      className="w-full bg-parchment-50 border border-parchment-300 text-xs p-2.5 rounded-[6px] focus:outline-none focus:border-ember-500 text-ink-950"
+                      className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 ${
+                        errors.ownerName ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
+                      }`}
                     />
+                    {errors.ownerName && <p className="text-[11px] text-red-600 font-semibold mt-0.5">{errors.ownerName}</p>}
                   </div>
                   <div className="space-y-1">
                     <label className="text-xs font-bold uppercase text-ink-950">WhatsApp Mobile *</label>
                     <input
                       type="tel"
                       required
+                      name="phone"
                       value={formData.phone}
-                      onChange={e => setFormData({ ...formData, phone: e.target.value })}
-                      placeholder="+91 9876543210"
-                      className="w-full bg-parchment-50 border border-parchment-300 text-xs p-2.5 rounded-[6px] focus:outline-none focus:border-ember-500 text-ink-950"
+                      onChange={handleChange}
+                      placeholder="9876543210"
+                      className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 ${
+                        errors.phone ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
+                      }`}
                     />
+                    {errors.phone && <p className="text-[11px] text-red-600 font-semibold mt-0.5">{errors.phone}</p>}
                   </div>
                 </div>
 
@@ -122,22 +193,30 @@ export default function BecomeADealerPage() {
                     <input
                       type="email"
                       required
+                      name="email"
                       value={formData.email}
-                      onChange={e => setFormData({ ...formData, email: e.target.value })}
+                      onChange={handleChange}
                       placeholder="trade@store.com"
-                      className="w-full bg-parchment-50 border border-parchment-300 text-xs p-2.5 rounded-[6px] focus:outline-none focus:border-ember-500 text-ink-950"
+                      className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 ${
+                        errors.email ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
+                      }`}
                     />
+                    {errors.email && <p className="text-[11px] text-red-600 font-semibold mt-0.5">{errors.email}</p>}
                   </div>
                   <div className="space-y-1">
                     <label className="text-xs font-bold uppercase text-ink-950">City / Location *</label>
                     <input
                       type="text"
                       required
+                      name="city"
                       value={formData.city}
-                      onChange={e => setFormData({ ...formData, city: e.target.value })}
+                      onChange={handleChange}
                       placeholder="e.g. Pune"
-                      className="w-full bg-parchment-50 border border-parchment-300 text-xs p-2.5 rounded-[6px] focus:outline-none focus:border-ember-500 text-ink-950"
+                      className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 ${
+                        errors.city ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
+                      }`}
                     />
+                    {errors.city && <p className="text-[11px] text-red-600 font-semibold mt-0.5">{errors.city}</p>}
                   </div>
                 </div>
 
@@ -145,11 +224,15 @@ export default function BecomeADealerPage() {
                   <label className="text-xs font-bold uppercase text-ink-950">GSTIN Number (Optional)</label>
                   <input
                     type="text"
+                    name="gstin"
                     value={formData.gstin}
-                    onChange={e => setFormData({ ...formData, gstin: e.target.value })}
-                    placeholder=""
-                    className="w-full bg-parchment-50 border border-parchment-300 text-xs p-2.5 rounded-[6px] focus:outline-none focus:border-ember-500 text-ink-950 uppercase"
+                    onChange={handleChange}
+                    placeholder="e.g. 07AAAAA0000A1Z5"
+                    className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 uppercase ${
+                      errors.gstin ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
+                    }`}
                   />
+                  {errors.gstin && <p className="text-[11px] text-red-600 font-semibold mt-0.5">{errors.gstin}</p>}
                 </div>
 
                 <div className="pt-2">
@@ -168,3 +251,4 @@ export default function BecomeADealerPage() {
     </div>
   );
 }
+

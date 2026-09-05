@@ -1,8 +1,11 @@
 import React from 'react';
-import { TESTIMONIALS } from '@/lib/mock-data';
+import { TESTIMONIALS } from '@/lib/constants';
 import { Star, Store, MapPin } from 'lucide-react';
 
 export const TestimonialsSection: React.FC = () => {
+  if (!TESTIMONIALS || TESTIMONIALS.length === 0) {
+    return null;
+  }
   return (
     <section className="bg-parchment-50 py-16 border-b border-parchment-300">
       <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16">

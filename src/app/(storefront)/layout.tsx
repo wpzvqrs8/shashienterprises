@@ -5,6 +5,7 @@ import { Navbar } from '@/components/storefront/navbar';
 import { Footer } from '@/components/storefront/footer';
 import { CartDrawer } from '@/components/storefront/cart-drawer';
 import { FloatingWhatsapp } from '@/components/storefront/floating-whatsapp';
+import { FloatingAdmin } from '@/components/storefront/floating-admin';
 
 export default function StorefrontLayout({
   children,
@@ -20,6 +21,7 @@ export default function StorefrontLayout({
         <Footer />
         <CartDrawer />
         <FloatingWhatsapp />
+        <FloatingAdmin />
       </div>
     </CartProvider>
   );

@@ -18,7 +18,8 @@ export default function CartPage() {
     minimumOrderValue
   } = useCart();
 
-  const progressPercent = Math.min(100, Math.round((subtotal / minimumOrderValue) * 100));
+  const totalPcs = items.reduce((sum, item) => sum + item.quantity, 0);
+  const progressPercent = Math.min(100, Math.round((totalPcs / 50) * 100));
 
   return (
     <div className="bg-parchment-50 min-h-screen py-10 border-b border-parchment-300">
@@ -50,12 +51,12 @@ export default function CartPage() {
             {/* Left Column: Line Items Table */}
             <div className="lg:col-span-8 space-y-4">
               
-              {/* MOV Progress Bar */}
+              {/* MOQ Progress Bar */}
               <div className="bg-parchment-100 border border-parchment-300 rounded-[10px] p-4">
                 <div className="flex justify-between items-center text-xs font-bold mb-2">
-                  <span>Minimum Order Value (MOV) Threshold</span>
+                  <span>Minimum Order Quantity (MOQ) Threshold</span>
                   <span className={isMovMet ? 'text-jade-600 font-bold' : 'text-ember-600 font-bold'}>
-                    {isMovMet ? 'MOV Met (₹15,000 Unlocked) ✓' : `₹${movRemaining.toLocaleString('en-IN')} remaining to unlock checkout`}
+                    {isMovMet ? 'MOQ Met (50 Pcs Unlocked) ✓' : `${movRemaining} pcs remaining to unlock checkout`}
                   </span>
                 </div>
                 <div className="w-full h-3 bg-parchment-300 rounded-full overflow-hidden">
@@ -172,7 +173,7 @@ export default function CartPage() {
                 {!isMovMet && (
                   <div className="bg-ember-500/10 border border-ember-500/30 text-ember-500 p-3 rounded text-xs leading-relaxed flex items-start gap-2">
                     <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
-                    <span>Minimum order value is ₹15,000. Add ₹{movRemaining.toLocaleString('en-IN')} more to unlock checkout.</span>
+                    <span>Minimum order quantity is 50 pcs. Add {movRemaining} more pcs to unlock checkout.</span>
                   </div>
                 )}
 

@@ -1,16 +1,50 @@
 'use client';
 
 import React, { useState } from 'react';
-import { INITIAL_STORE_SETTINGS } from '@/lib/mock-data';
+import { INITIAL_STORE_SETTINGS } from '@/lib/constants';
 import { Button } from '@/components/ui/button';
-import { MessageSquare, Mail, MapPin, Send, CheckCircle2 } from 'lucide-react';
+import { validateName, validatePhone, validateEmail } from '@/lib/validation';
+import { MessageSquare, Mail, MapPin, Send, CheckCircle2, AlertTriangle } from 'lucide-react';
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({ name: '', phone: '', email: '', message: '' });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    if (errors[name]) {
+      setErrors(prev => {
+        const next = { ...prev };
+        delete next[name];
+        return next;
+      });
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const newErrors: Record<string, string> = {};
+    const nErr = validateName(formData.name, 'Name / Business Name', 2);
+    if (nErr) newErrors.name = nErr;
+
+    const pErr = validatePhone(formData.phone);
+    if (pErr) newErrors.phone = pErr;
+
+    const eErr = validateEmail(formData.email);
+    if (eErr) newErrors.email = eErr;
+
+    if (!formData.message.trim() || formData.message.trim().length < 5) {
+      newErrors.message = 'Inquiry message must be at least 5 characters long.';
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
     setSubmitted(true);
   };
 
@@ -100,15 +134,31 @@ export default function ContactPage() {
                   Send a Trade Message
                 </h3>
 
+                {Object.keys(errors).length > 0 && (
+                  <div className="bg-red-50 border border-red-300 text-red-900 p-3 rounded text-xs space-y-0.5 font-bold">
+                    <div className="flex items-center gap-1.5 text-red-950">
+                      <AlertTriangle className="w-4 h-4 text-red-600 shrink-0" />
+                      <span>Please fix the validation errors:</span>
+                    </div>
+                    {Object.values(errors).map((err, i) => (
+                      <div key={i} className="text-[11px] font-normal text-red-700 pl-5">• {err}</div>
+                    ))}
+                  </div>
+                )}
+
                 <div className="space-y-1">
                   <label className="text-xs font-bold uppercase text-ink-950">Name / Business Name *</label>
                   <input
                     type="text"
                     required
+                    name="name"
                     value={formData.name}
-                    onChange={e => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-parchment-50 border border-parchment-300 text-xs p-2.5 rounded-[6px] focus:outline-none focus:border-ember-500 text-ink-950"
+                    onChange={handleChange}
+                    className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 ${
+                      errors.name ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
+                    }`}
                   />
+                  {errors.name && <p className="text-[11px] text-red-600 font-semibold mt-0.5">{errors.name}</p>}
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
@@ -117,20 +167,30 @@ export default function ContactPage() {
                     <input
                       type="tel"
                       required
+                      name="phone"
                       value={formData.phone}
-                      onChange={e => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full bg-parchment-50 border border-parchment-300 text-xs p-2.5 rounded-[6px] focus:outline-none focus:border-ember-500 text-ink-950"
+                      onChange={handleChange}
+                      placeholder="9876543210"
+                      className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 ${
+                        errors.phone ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
+                      }`}
                     />
+                    {errors.phone && <p className="text-[11px] text-red-600 font-semibold mt-0.5">{errors.phone}</p>}
                   </div>
                   <div className="space-y-1">
                     <label className="text-xs font-bold uppercase text-ink-950">Email Address *</label>
                     <input
                       type="email"
                       required
+                      name="email"
                       value={formData.email}
-                      onChange={e => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full bg-parchment-50 border border-parchment-300 text-xs p-2.5 rounded-[6px] focus:outline-none focus:border-ember-500 text-ink-950"
+                      onChange={handleChange}
+                      placeholder="trade@yourshop.com"
+                      className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 ${
+                        errors.email ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
+                      }`}
                     />
+                    {errors.email && <p className="text-[11px] text-red-600 font-semibold mt-0.5">{errors.email}</p>}
                   </div>
                 </div>
 
@@ -139,11 +199,15 @@ export default function ContactPage() {
                   <textarea
                     required
                     rows={4}
+                    name="message"
                     value={formData.message}
-                    onChange={e => setFormData({ ...formData, message: e.target.value })}
+                    onChange={handleChange}
                     placeholder="Details about SKUs, container shipments, or trade accounts..."
-                    className="w-full bg-parchment-50 border border-parchment-300 text-xs p-2.5 rounded-[6px] focus:outline-none focus:border-ember-500 text-ink-950"
+                    className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 ${
+                      errors.message ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
+                    }`}
                   />
+                  {errors.message && <p className="text-[11px] text-red-600 font-semibold mt-0.5">{errors.message}</p>}
                 </div>
 
                 <Button type="submit" variant="ember" size="md" className="gap-2">
@@ -160,3 +224,4 @@ export default function ContactPage() {
     </div>
   );
 }
+

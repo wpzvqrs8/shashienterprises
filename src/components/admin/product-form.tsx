@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Product, PriceTier } from '@/lib/types';
 import { addProduct, updateProduct } from '@/lib/catalog-store';
-import { CATEGORIES } from '@/lib/mock-data';
+import { CATEGORIES } from '@/lib/constants';
 import { Button } from '@/components/ui/button';
 import { Plus, Trash2, Save, ArrowLeft, Image as ImageIcon, Sparkles } from 'lucide-react';
 
@@ -76,8 +76,24 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.category || !formData.wholesalePrice) {
-      alert('Please fill in required fields (Name, Category, Wholesale Price).');
+    if (!formData.name?.trim() || formData.name.trim().length < 3) {
+      alert('Product Title is required and must be at least 3 characters long.');
+      return;
+    }
+    if (!formData.category) {
+      alert('Please select a Category Type.');
+      return;
+    }
+    if (!formData.wholesalePrice || Number(formData.wholesalePrice) <= 0) {
+      alert('Base Wholesale Rate (₹) must be greater than 0.');
+      return;
+    }
+    if (formData.stockQty === undefined || Number(formData.stockQty) < 0) {
+      alert('Stock Quantity must be 0 or greater.');
+      return;
+    }
+    if (!formData.moq || Number(formData.moq) < 1) {
+      alert('Minimum Order Quantity (MOQ) must be at least 1 pc.');
       return;
     }
 

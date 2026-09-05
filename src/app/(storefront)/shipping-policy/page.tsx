@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { INITIAL_STORE_SETTINGS } from '@/lib/mock-data';
+import { INITIAL_STORE_SETTINGS } from '@/lib/constants';
 import { Truck, Clock, ShieldCheck, FileText, PackageCheck, MessageSquare } from 'lucide-react';
 
 export default function ShippingPolicyPage() {

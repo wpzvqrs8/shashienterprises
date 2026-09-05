@@ -1,17 +1,29 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/lib/cart-store';
+import { useAuth } from '@/components/providers/auth-provider';
 import { addOrder } from '@/lib/catalog-store';
+import {
+  validateBusinessName,
+  validateName,
+  validatePhone,
+  validateEmail,
+  validateGSTIN,
+  validateAddress,
+  validateCity,
+  validatePincode
+} from '@/lib/validation';
 import { Button } from '@/components/ui/button';
-import { CheckCircle2, ShieldCheck, ArrowRight, ArrowLeft } from 'lucide-react';
+import { CheckCircle2, ShieldCheck, ArrowLeft, Lock, LogIn, Send, AlertTriangle } from 'lucide-react';
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const { items, subtotal, clearCart, isMovMet } = useCart();
+  const { items, subtotal, clearCart } = useCart();
+  const { user, openLoginModal } = useAuth();
 
-  const [step, setStep] = useState<1 | 2 | 3>(1);
+  const [step, setStep] = useState<1 | 2>(1);
   const [submitting, setSubmitting] = useState(false);
 
   // Form Fields
@@ -24,57 +36,137 @@ export default function CheckoutPage() {
     address: '',
     city: '',
     pincode: '',
-    paymentPreference: 'UPI',
+    paymentPreference: 'Quote Billing',
     agreeTerms: false
   });
+
+  // Validation errors state
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  // Pre-fill user data when user changes
+  useEffect(() => {
+    if (user) {
+      setFormData(prev => ({
+        ...prev,
+        email: prev.email || user.email || '',
+        contactPerson: prev.contactPerson || user.user_metadata?.full_name || user.user_metadata?.name || '',
+      }));
+    }
+  }, [user]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const target = e.target;
     const value = target.type === 'checkbox' ? (target as HTMLInputElement).checked : target.value;
-    setFormData(prev => ({ ...prev, [target.name]: value }));
+    const name = target.name;
+
+    setFormData(prev => ({ ...prev, [name]: value }));
+
+    // Clear error on change if field becomes valid
+    if (errors[name]) {
+      setErrors(prev => {
+        const next = { ...prev };
+        delete next[name];
+        return next;
+      });
+    }
+  };
+
+  const validateStep1 = (): boolean => {
+    const newErrors: Record<string, string> = {};
+
+    const bErr = validateBusinessName(formData.businessName);
+    if (bErr) newErrors.businessName = bErr;
+
+    const cErr = validateName(formData.contactPerson, 'Contact Person Name');
+    if (cErr) newErrors.contactPerson = cErr;
+
+    const pErr = validatePhone(formData.phone);
+    if (pErr) newErrors.phone = pErr;
+
+    const eErr = validateEmail(formData.email || user?.email || '');
+    if (eErr) newErrors.email = eErr;
+
+    const gErr = validateGSTIN(formData.gstin);
+    if (gErr) newErrors.gstin = gErr;
+
+    const aErr = validateAddress(formData.address);
+    if (aErr) newErrors.address = aErr;
+
+    const ciErr = validateCity(formData.city);
+    if (ciErr) newErrors.city = ciErr;
+
+    const pinErr = validatePincode(formData.pincode);
+    if (pinErr) newErrors.pincode = pinErr;
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleNextStep = (e: React.FormEvent) => {
     e.preventDefault();
-    if (step === 1) {
-      if (!formData.businessName || !formData.contactPerson || !formData.phone || !formData.address) {
-        alert('Please fill out all required business and address fields.');
-        return;
-      }
-      setStep(2);
-    } else if (step === 2) {
-      setStep(3);
+    if (!user) {
+      openLoginModal('Please sign in with your Google Account to proceed with wholesale checkout.');
+      return;
     }
+
+    if (!validateStep1()) {
+      return;
+    }
+
+    setStep(2);
   };
 
   const handleSubmitOrder = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!user) {
+      alert('Authentication required. Please sign in with your Google account to submit a quote request.');
+      openLoginModal();
+      return;
+    }
+
+    if (!validateStep1()) {
+      setStep(1);
+      return;
+    }
+
     if (!formData.agreeTerms) {
-      alert('Please accept the wholesale trade terms.');
+      setErrors(prev => ({ ...prev, agreeTerms: 'Please accept the wholesale trade terms to proceed.' }));
       return;
     }
 
     setSubmitting(true);
     try {
-      const order = await addOrder({
-        businessName: formData.businessName,
-        contactPerson: formData.contactPerson,
-        phone: formData.phone,
-        email: formData.email,
-        gstin: formData.gstin,
-        address: formData.address,
-        city: formData.city,
-        pincode: formData.pincode,
-        paymentPreference: formData.paymentPreference,
-        items,
-        subtotal
+      const res = await fetch('/api/orders/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          businessName: formData.businessName.trim(),
+          contactPerson: formData.contactPerson.trim(),
+          phone: formData.phone.trim(),
+          email: (formData.email || user.email || '').trim(),
+          gstin: formData.gstin.trim(),
+          address: formData.address.trim(),
+          city: formData.city.trim(),
+          pincode: formData.pincode.trim(),
+          paymentPreference: formData.paymentPreference,
+          items,
+        }),
       });
 
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || 'Failed to process checkout request.');
+      }
+
+      if (data.order) {
+        await addOrder(data.order);
+      }
+
       clearCart();
-      router.push(`/order-confirmation/${order.id}`);
-    } catch (err) {
+      router.push(`/track/${data.orderNumber || data.order.orderNumber}`);
+    } catch (err: any) {
       console.error(err);
-      alert('Failed to submit quote request. Please try again.');
+      alert(err.message || 'Failed to submit quote request. Please try again.');
       setSubmitting(false);
     }
   };
@@ -108,27 +200,53 @@ export default function CheckoutPage() {
           </p>
         </div>
 
-        {/* 3-Step Indicator Bar */}
+        {/* Authentication Notice Banner if not logged in */}
+        {!user && (
+          <div className="mb-8 bg-amber-50 border border-amber-300 rounded-[10px] p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3 text-amber-900 text-xs">
+              <Lock className="w-5 h-5 text-amber-600 shrink-0" />
+              <div>
+                <strong>Google Account Required for Checkout:</strong> You can add items to your cart freely, but placing a wholesale quote request requires a verified Google sign-in.
+              </div>
+            </div>
+            <Button variant="ember" size="sm" onClick={() => openLoginModal()} className="shrink-0 gap-2 text-xs">
+              <LogIn className="w-4 h-4" />
+              <span>Sign In with Google</span>
+            </Button>
+          </div>
+        )}
+
+        {/* 2-Step Indicator Bar */}
         <div className="flex items-center justify-between mb-8 bg-parchment-100 p-3 rounded-[10px] border border-parchment-300">
           <div className={`flex items-center gap-2 text-xs font-bold uppercase ${step >= 1 ? 'text-ember-600' : 'text-muted'}`}>
             <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs ${step >= 1 ? 'bg-ember-500 text-white' : 'bg-parchment-300 text-ink-950'}`}>1</span>
             <span>Business Details</span>
           </div>
-          <div className="h-[2px] flex-1 mx-3 bg-parchment-300" />
+          <div className="h-[2px] flex-1 mx-4 bg-parchment-300" />
           <div className={`flex items-center gap-2 text-xs font-bold uppercase ${step >= 2 ? 'text-ember-600' : 'text-muted'}`}>
             <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs ${step >= 2 ? 'bg-ember-500 text-white' : 'bg-parchment-300 text-ink-950'}`}>2</span>
-            <span>Review Order</span>
-          </div>
-          <div className="h-[2px] flex-1 mx-3 bg-parchment-300" />
-          <div className={`flex items-center gap-2 text-xs font-bold uppercase ${step >= 3 ? 'text-ember-600' : 'text-muted'}`}>
-            <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs ${step >= 3 ? 'bg-ember-500 text-white' : 'bg-parchment-300 text-ink-950'}`}>3</span>
-            <span>Submit Request</span>
+            <span>Review & Submit Order Request</span>
           </div>
         </div>
 
         {/* Step Forms Container */}
         <div className="bg-parchment-100 border border-parchment-300 rounded-[12px] p-6 shadow-sm">
           
+          {/* Validation Error Summary Box */}
+          {Object.keys(errors).length > 0 && (
+            <div className="mb-6 bg-red-50 border border-red-300 text-red-900 p-4 rounded-[8px] text-xs space-y-1">
+              <div className="font-bold flex items-center gap-2 text-red-950 text-sm">
+                <AlertTriangle className="w-4 h-4 text-red-600" />
+                <span>Please correct the invalid fields below before proceeding:</span>
+              </div>
+              <ul className="list-disc list-inside space-y-0.5 text-[11px] pt-1">
+                {Object.values(errors).map((err, i) => (
+                  <li key={i}>{err}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           {/* STEP 1: Business Details */}
           {step === 1 && (
             <form onSubmit={handleNextStep} className="space-y-4">
@@ -146,8 +264,11 @@ export default function CheckoutPage() {
                     value={formData.businessName}
                     onChange={handleChange}
                     placeholder="e.g. Toy World Karol Bagh"
-                    className="w-full bg-parchment-50 border border-parchment-300 text-xs p-2.5 rounded-[6px] focus:outline-none focus:border-ember-500 text-ink-950"
+                    className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 ${
+                      errors.businessName ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
+                    }`}
                   />
+                  {errors.businessName && <p className="text-[11px] text-red-600 font-semibold mt-0.5">{errors.businessName}</p>}
                 </div>
 
                 <div className="space-y-1">
@@ -159,8 +280,11 @@ export default function CheckoutPage() {
                     value={formData.contactPerson}
                     onChange={handleChange}
                     placeholder="Full Name"
-                    className="w-full bg-parchment-50 border border-parchment-300 text-xs p-2.5 rounded-[6px] focus:outline-none focus:border-ember-500 text-ink-950"
+                    className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 ${
+                      errors.contactPerson ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
+                    }`}
                   />
+                  {errors.contactPerson && <p className="text-[11px] text-red-600 font-semibold mt-0.5">{errors.contactPerson}</p>}
                 </div>
 
                 <div className="space-y-1">
@@ -171,22 +295,34 @@ export default function CheckoutPage() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    placeholder="+91 9876543210"
-                    className="w-full bg-parchment-50 border border-parchment-300 text-xs p-2.5 rounded-[6px] focus:outline-none focus:border-ember-500 text-ink-950"
+                    placeholder="9876543210"
+                    className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 ${
+                      errors.phone ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
+                    }`}
                   />
+                  {errors.phone && <p className="text-[11px] text-red-600 font-semibold mt-0.5">{errors.phone}</p>}
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-xs font-bold uppercase text-ink-950">Email Address *</label>
+                  <label className="text-xs font-bold uppercase text-ink-950">Verified Email Address *</label>
                   <input
                     type="email"
                     required
                     name="email"
+                    readOnly={!!user}
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="trade@yourshop.com"
-                    className="w-full bg-parchment-50 border border-parchment-300 text-xs p-2.5 rounded-[6px] focus:outline-none focus:border-ember-500 text-ink-950"
+                    className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 ${
+                      errors.email ? 'bg-red-50 border-2 border-red-500' : user ? 'bg-parchment-200/70 border border-parchment-300 cursor-not-allowed font-medium' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
+                    }`}
                   />
+                  {errors.email && <p className="text-[11px] text-red-600 font-semibold mt-0.5">{errors.email}</p>}
+                  {user && !errors.email && (
+                    <span className="text-[10px] text-jade-700 font-semibold flex items-center gap-1 mt-0.5">
+                      <ShieldCheck className="w-3 h-3" /> Signed in via Google ({user.email})
+                    </span>
+                  )}
                 </div>
               </div>
 
@@ -197,9 +333,12 @@ export default function CheckoutPage() {
                   name="gstin"
                   value={formData.gstin}
                   onChange={handleChange}
-                  placeholder="e.g. 079988D0GBSQ1HJ"
-                  className="w-full bg-parchment-50 border border-parchment-300 text-xs p-2.5 rounded-[6px] focus:outline-none focus:border-ember-500 text-ink-950 uppercase"
+                  placeholder="e.g. 07AAAAA0000A1Z5"
+                  className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 uppercase ${
+                    errors.gstin ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
+                  }`}
                 />
+                {errors.gstin && <p className="text-[11px] text-red-600 font-semibold mt-0.5">{errors.gstin}</p>}
               </div>
 
               <div className="space-y-1">
@@ -210,9 +349,12 @@ export default function CheckoutPage() {
                   name="address"
                   value={formData.address}
                   onChange={handleChange}
-                  placeholder="Shop number, building name, street..."
-                  className="w-full bg-parchment-50 border border-parchment-300 text-xs p-2.5 rounded-[6px] focus:outline-none focus:border-ember-500 text-ink-950"
+                  placeholder="Shop number, building name, street address..."
+                  className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 ${
+                    errors.address ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
+                  }`}
                 />
+                {errors.address && <p className="text-[11px] text-red-600 font-semibold mt-0.5">{errors.address}</p>}
               </div>
 
               <div className="grid grid-cols-2 gap-4">
@@ -225,8 +367,11 @@ export default function CheckoutPage() {
                     value={formData.city}
                     onChange={handleChange}
                     placeholder="e.g. Delhi"
-                    className="w-full bg-parchment-50 border border-parchment-300 text-xs p-2.5 rounded-[6px] focus:outline-none focus:border-ember-500 text-ink-950"
+                    className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 ${
+                      errors.city ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
+                    }`}
                   />
+                  {errors.city && <p className="text-[11px] text-red-600 font-semibold mt-0.5">{errors.city}</p>}
                 </div>
                 <div className="space-y-1">
                   <label className="text-xs font-bold uppercase text-ink-950">Pincode *</label>
@@ -237,25 +382,28 @@ export default function CheckoutPage() {
                     value={formData.pincode}
                     onChange={handleChange}
                     placeholder="110005"
-                    className="w-full bg-parchment-50 border border-parchment-300 text-xs p-2.5 rounded-[6px] focus:outline-none focus:border-ember-500 text-ink-950"
+                    className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 ${
+                      errors.pincode ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
+                    }`}
                   />
+                  {errors.pincode && <p className="text-[11px] text-red-600 font-semibold mt-0.5">{errors.pincode}</p>}
                 </div>
               </div>
 
               <div className="pt-4 flex justify-end">
                 <Button type="submit" variant="ember" size="md" className="gap-2">
                   <span>Continue to Order Review</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <Send className="w-4 h-4" />
                 </Button>
               </div>
             </form>
           )}
 
-          {/* STEP 2: Review Order */}
+          {/* STEP 2: Review Purchase Items & Submit */}
           {step === 2 && (
-            <div className="space-y-4">
+            <form onSubmit={handleSubmitOrder} className="space-y-4">
               <h3 className="font-display text-xl text-ink-950 border-b border-parchment-300 pb-2">
-                Step 2: Review Purchase Items & Terms
+                Step 2: Review Purchase Items & Submit Request
               </h3>
 
               <div className="bg-parchment-50 p-3 rounded border border-parchment-300 text-xs space-y-1">
@@ -286,50 +434,7 @@ export default function CheckoutPage() {
                 ℹ️ <strong>Note:</strong> Final total including packing & freight will be calculated and shared with you on WhatsApp ({formData.phone}) within 24 hours for your confirmation prior to payment.
               </p>
 
-              <div className="pt-4 flex justify-between">
-                <Button variant="outline" size="md" onClick={() => setStep(1)} className="gap-2">
-                  <ArrowLeft className="w-4 h-4" />
-                  <span>Back to Business Info</span>
-                </Button>
-                <Button variant="ember" size="md" onClick={() => setStep(3)} className="gap-2">
-                  <span>Continue to Payment Selection</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Button>
-              </div>
-            </div>
-          )}
-
-          {/* STEP 3: Payment Preference & Submit */}
-          {step === 3 && (
-            <form onSubmit={handleSubmitOrder} className="space-y-4">
-              <h3 className="font-display text-xl text-ink-950 border-b border-parchment-300 pb-2">
-                Step 3: Preferred Payment Method & Submit
-              </h3>
-
-              <div className="space-y-2">
-                <label className="text-xs font-bold uppercase text-ink-950">Preferred Payment Mode (Selected on Invoice)</label>
-                <div className="space-y-2 text-xs">
-                  {[
-                    { id: 'UPI', label: 'UPI / QR Code (Instant Confirmation)' },
-                    { id: 'Bank Transfer', label: 'NEFT / RTGS / IMPS Bank Transfer' },
-                    { id: 'Cash on Pickup', label: 'Cash on Collection (Delhi Warehouse Pickup)' },
-                  ].map(m => (
-                    <label key={m.id} className="flex items-center gap-3 p-3 bg-parchment-50 border border-parchment-300 rounded cursor-pointer hover:border-ember-500">
-                      <input
-                        type="radio"
-                        name="paymentPreference"
-                        value={m.id}
-                        checked={formData.paymentPreference === m.id}
-                        onChange={handleChange}
-                        className="accent-ember-500"
-                      />
-                      <span className="font-bold text-ink-950">{m.label}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              <div className="pt-2 border-t border-parchment-300">
+              <div className="pt-2 border-t border-parchment-300 space-y-1">
                 <label className="flex items-start gap-2.5 text-xs text-ink-text/90 cursor-pointer">
                   <input
                     type="checkbox"
@@ -342,11 +447,13 @@ export default function CheckoutPage() {
                     I confirm that I am purchasing as a business/reseller and agree to the <strong>Wholesale B2B Terms of Trade</strong>.
                   </span>
                 </label>
+                {errors.agreeTerms && <p className="text-[11px] text-red-600 font-semibold">{errors.agreeTerms}</p>}
               </div>
 
               <div className="pt-4 flex justify-between">
-                <Button variant="outline" size="md" onClick={() => setStep(2)}>
-                  Back
+                <Button variant="outline" size="md" onClick={() => setStep(1)} className="gap-2">
+                  <ArrowLeft className="w-4 h-4" />
+                  <span>Back to Business Info</span>
                 </Button>
                 <Button
                   type="submit"
@@ -368,3 +475,6 @@ export default function CheckoutPage() {
     </div>
   );
 }
+
+
+

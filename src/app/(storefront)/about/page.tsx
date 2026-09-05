@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { INITIAL_STORE_SETTINGS } from '@/lib/mock-data';
+import { INITIAL_STORE_SETTINGS } from '@/lib/constants';
 import { TestimonialsSection } from '@/components/storefront/testimonials-section';
 import { Button } from '@/components/ui/button';
 import { ShieldCheck, MapPin, Award, Building, ArrowRight, CheckCircle2, Package, Users, Truck } from 'lucide-react';

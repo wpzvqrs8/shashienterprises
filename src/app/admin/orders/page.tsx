@@ -2,9 +2,9 @@
 
 import React, { useEffect, useState } from 'react';
 import { QuoteOrder } from '@/lib/types';
-import { getOrders, updateOrderStatus } from '@/lib/catalog-store';
+import { getOrders, updateOrderStatus, deleteOrder, clearAllOrders } from '@/lib/catalog-store';
 import { Button } from '@/components/ui/button';
-import { ShoppingBag, CheckCircle2, Clock, Send, ShieldCheck, ChevronRight } from 'lucide-react';
+import { ShoppingBag, CheckCircle2, Clock, Send, ShieldCheck, ChevronRight, Trash2 } from 'lucide-react';
 
 export default function AdminOrdersPage() {
   const [orders, setOrders] = useState<QuoteOrder[]>([]);
@@ -23,10 +23,42 @@ export default function AdminOrdersPage() {
   }, []);
 
   const handleStatusChange = async (id: string, newStatus: QuoteOrder['status']) => {
-    const updated = await updateOrderStatus(id, newStatus);
-    setOrders(prev => prev.map(o => o.id === id ? updated : o));
-    if (selectedOrder?.id === id) {
-      setSelectedOrder(updated);
+    try {
+      const res = await fetch('/api/orders/update-status', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ orderId: id, status: newStatus }),
+      });
+      const data = await res.json();
+      if (data.success && data.order) {
+        setOrders(prev => prev.map(o => o.id === id ? data.order : o));
+        if (selectedOrder?.id === id) {
+          setSelectedOrder(data.order);
+        }
+      } else {
+        const updated = await updateOrderStatus(id, newStatus);
+        setOrders(prev => prev.map(o => o.id === id ? updated : o));
+        if (selectedOrder?.id === id) {
+          setSelectedOrder(updated);
+        }
+      }
+    } catch (err) {
+      console.error('Failed to update status via API:', err);
+      const updated = await updateOrderStatus(id, newStatus);
+      setOrders(prev => prev.map(o => o.id === id ? updated : o));
+      if (selectedOrder?.id === id) {
+        setSelectedOrder(updated);
+      }
+    }
+  };
+
+  const handleDeleteOrder = async (id: string, orderNumber: string) => {
+    if (confirm(`Are you sure you want to delete order #${orderNumber}?`)) {
+      await deleteOrder(id);
+      setOrders(prev => prev.filter(o => o.id !== id && o.orderNumber !== id));
+      if (selectedOrder?.id === id) {
+        setSelectedOrder(null);
+      }
     }
   };
 
@@ -74,7 +106,7 @@ export default function AdminOrdersPage() {
                 </div>
               </div>
 
-              {/* Bottom Actions: Status Dropdown + Inspect Button */}
+              {/* Bottom Actions: Status Dropdown + Inspect + Delete Button */}
               <div className="flex items-center justify-between gap-2 pt-2 border-t border-parchment-300/80">
                 <select
                   value={ord.status}
@@ -92,14 +124,23 @@ export default function AdminOrdersPage() {
                   <option value="Delivered">Delivered</option>
                 </select>
 
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setSelectedOrder(ord)}
-                  className="text-xs"
-                >
-                  Inspect Order →
-                </Button>
+                <div className="flex items-center gap-1.5">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setSelectedOrder(ord)}
+                    className="text-xs"
+                  >
+                    Inspect
+                  </Button>
+                  <button
+                    onClick={() => handleDeleteOrder(ord.id, ord.orderNumber)}
+                    className="p-1.5 text-danger hover:bg-danger/10 rounded transition-colors"
+                    title="Delete Order"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
             </div>
           ))
@@ -123,6 +164,8 @@ export default function AdminOrdersPage() {
             <tbody className="divide-y divide-parchment-300">
               {loading ? (
                 <tr><td colSpan={6} className="p-6 text-center text-muted">Loading orders...</td></tr>
+              ) : orders.length === 0 ? (
+                <tr><td colSpan={6} className="p-8 text-center text-muted">No quote order requests found.</td></tr>
               ) : orders.map(ord => (
                 <tr key={ord.id} className="hover:bg-parchment-50">
                   <td className="py-3.5 px-4 font-mono font-bold text-ink-950">
@@ -161,14 +204,23 @@ export default function AdminOrdersPage() {
                   </td>
 
                   <td className="py-3.5 px-4 text-right">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setSelectedOrder(ord)}
-                      className="text-xs"
-                    >
-                      Inspect
-                    </Button>
+                    <div className="flex items-center justify-end gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setSelectedOrder(ord)}
+                        className="text-xs"
+                      >
+                        Inspect
+                      </Button>
+                      <button
+                        onClick={() => handleDeleteOrder(ord.id, ord.orderNumber)}
+                        className="p-1.5 text-danger hover:bg-danger/10 rounded transition-colors"
+                        title="Delete Order"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -218,8 +270,17 @@ export default function AdminOrdersPage() {
               </div>
             </div>
 
-            <div className="pt-4 border-t border-parchment-300">
-              <Button variant="ember" size="md" fullWidth onClick={() => setSelectedOrder(null)}>
+            <div className="pt-4 border-t border-parchment-300 flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="md"
+                onClick={() => handleDeleteOrder(selectedOrder.id, selectedOrder.orderNumber)}
+                className="text-xs text-danger border-danger/30 hover:bg-danger/10 gap-1.5"
+              >
+                <Trash2 className="w-4 h-4" />
+                <span>Delete Order</span>
+              </Button>
+              <Button variant="ember" size="md" className="flex-1" onClick={() => setSelectedOrder(null)}>
                 Close Drawer
               </Button>
             </div>

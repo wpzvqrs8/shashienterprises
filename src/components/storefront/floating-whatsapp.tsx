@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { INITIAL_STORE_SETTINGS } from '@/lib/mock-data';
+import { INITIAL_STORE_SETTINGS } from '@/lib/constants';
 
 export const FloatingWhatsapp: React.FC = () => {
   const whatsappUrl = `https://wa.me/${INITIAL_STORE_SETTINGS.whatsapp.replace(/[^0-9]/g, '')}?text=Hello%20Shashi%20Enterprises%2C%20I%20would%20like%20to%20inquire%20about%20bulk%20pricing.`;

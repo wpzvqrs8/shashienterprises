@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { CATEGORIES } from '@/lib/mock-data';
+import { CATEGORIES } from '@/lib/constants';
 
 export const CategoryStrip: React.FC = () => {
   const [startIndex, setStartIndex] = useState(0);
@@ -26,7 +26,7 @@ export const CategoryStrip: React.FC = () => {
     { size: 'w-14 h-14 sm:w-16 sm:h-16', scale: 'scale-90 opacity-60', text: 'text-xs font-medium' },       // 0 (Outer Left)
     { size: 'w-16 h-16 sm:w-20 sm:h-20', scale: 'scale-100 opacity-80', text: 'text-xs font-semibold' },    // 1 (Mid Left)
     { size: 'w-20 h-20 sm:w-24 sm:h-24', scale: 'scale-110 opacity-95', text: 'text-sm font-bold' },        // 2 (Inner Left)
-    { size: 'w-24 h-24 sm:w-32 sm:h-32', scale: 'scale-125 opacity-100 z-30 ring-4 ring-ember-500 shadow-2xl', text: 'text-sm sm:text-base font-extrabold text-ember-500' }, // 3 (CENTER - BIGGEST)
+    { size: 'w-24 h-24 sm:w-32 sm:h-32', scale: 'scale-125 opacity-100 z-30 shadow-xl', text: 'text-sm sm:text-base font-extrabold text-ember-500' }, // 3 (CENTER - BIGGEST)
     { size: 'w-20 h-20 sm:w-24 sm:h-24', scale: 'scale-110 opacity-95', text: 'text-sm font-bold' },        // 4 (Inner Right)
     { size: 'w-16 h-16 sm:w-20 sm:h-20', scale: 'scale-100 opacity-80', text: 'text-xs font-semibold' },    // 5 (Mid Right)
     { size: 'w-14 h-14 sm:w-16 sm:h-16', scale: 'scale-90 opacity-60', text: 'text-xs font-medium' },       // 6 (Outer Right)
@@ -61,16 +61,22 @@ export const CategoryStrip: React.FC = () => {
                 className={`${isMobileVisible ? 'flex' : 'hidden sm:flex'} flex-col items-center shrink-0 group text-center transition-all duration-700 ease-in-out cursor-pointer ${style.scale}`}
               >
                 <div
-                  className={`relative ${style.size} rounded-full bg-ink-950 p-1 border-2 border-ink-800 group-hover:border-ember-500 transition-all duration-500 shadow-md overflow-hidden mb-3`}
+                  className={`relative ${style.size} rounded-full bg-ink-950 p-1 transition-all duration-500 shadow-md overflow-hidden mb-3`}
                 >
-                  <div className="relative w-full h-full rounded-full overflow-hidden">
-                    <Image
-                      src={category.image}
-                      alt={category.name}
-                      fill
-                      sizes="128px"
-                      className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
+                  <div className="relative w-full h-full rounded-full overflow-hidden bg-ink-950 flex items-center justify-center">
+                    {category.image ? (
+                      <Image
+                        src={category.image}
+                        alt={category.name}
+                        fill
+                        sizes="128px"
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                    ) : (
+                      <span className="font-display text-xs text-ember-500 uppercase font-bold p-1">
+                        {category.name.slice(0, 3)}
+                      </span>
+                    )}
                   </div>
                 </div>
 

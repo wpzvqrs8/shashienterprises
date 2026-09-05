@@ -4,9 +4,10 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { CATEGORIES, INITIAL_STORE_SETTINGS } from '@/lib/mock-data';
+import { CATEGORIES, INITIAL_STORE_SETTINGS, MARQUEE_TEXT } from '@/lib/constants';
 
 import { useCart } from '@/lib/cart-store';
+import { useAuth } from '@/components/providers/auth-provider';
 import {
   Search,
   ShoppingBag,
@@ -14,29 +15,36 @@ import {
   Menu,
   X,
   ChevronDown,
-  Sparkles
+  Sparkles,
+  LogOut,
+  ShieldCheck,
+  Package
 } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const router = useRouter();
-  const { itemCount, setIsCartOpen } = useCart();
+  const { itemCount, setIsCartOpen, activeTab, setActiveTab, openOrders } = useCart();
+  const { user, isAdmin, signOut, openLoginModal } = useAuth();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
+  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
+  const userDropdownRef = React.useRef<HTMLDivElement>(null);
 
-  // Auto-hide navbar logic on scroll
+  // Auto-hide navbar & close dropdowns logic on scroll / click outside
   const [isVisible, setIsVisible] = useState(true);
-  const [isAdmin, setIsAdmin] = useState(true);
   const lastScrollYRef = React.useRef(0);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      localStorage.setItem('shashi_admin_logged_in', 'true');
       lastScrollYRef.current = window.scrollY;
     }
 
     const handleScroll = () => {
+      // Auto-close user dropdown on scroll
+      setIsUserDropdownOpen(false);
+
       const currentScrollY = window.scrollY;
       const prevScrollY = lastScrollYRef.current;
       const diff = currentScrollY - prevScrollY;
@@ -54,8 +62,19 @@ export const Navbar: React.FC = () => {
       lastScrollYRef.current = currentScrollY;
     };
 
+    const handleClickOutside = (event: MouseEvent) => {
+      if (userDropdownRef.current && !userDropdownRef.current.contains(event.target as Node)) {
+        setIsUserDropdownOpen(false);
+      }
+    };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
   const seriesCategories = CATEGORIES.filter(c => c.type === 'series');
@@ -69,16 +88,32 @@ export const Navbar: React.FC = () => {
     }
   };
 
+  const getUserInitials = (email?: string, name?: string): string => {
+    if (name && name.trim()) {
+      const parts = name.trim().split(/\s+/);
+      if (parts.length >= 2) {
+        return (parts[0][0] + parts[1][0]).toUpperCase();
+      }
+      return parts[0].slice(0, 2).toUpperCase();
+    }
+    if (email && email.trim()) {
+      const username = email.split('@')[0];
+      return username.slice(0, 2).toUpperCase();
+    }
+    return 'SE';
+  };
+
   return (
     <header
-      className={`sticky top-0 z-40 bg-ink-950 text-parchment-text border-b border-ink-800 shadow-md transition-transform duration-300 ease-in-out ${
-        isVisible || isMobileMenuOpen ? 'translate-y-0' : '-translate-y-full'
-      }`}
+      className={`sticky top-0 z-50 bg-ink-950 border-b border-ink-800 text-parchment-text shadow-xl transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}
+      style={{ backgroundColor: '#141218' }}
     >
+
+      {/* Main Navbar */}
       <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16 sm:h-20">
           
-          {/* Official Logo */}
+          {/* Left: Brand Logo & Navigation */}
           <div className="flex items-center gap-8">
             <Link href="/" className="flex items-center gap-3 group">
               <div className="relative h-12 w-52 group-hover:scale-105 transition-transform">
@@ -93,7 +128,7 @@ export const Navbar: React.FC = () => {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-7 text-sm sm:text-base font-semibold uppercase tracking-wide">
+            <nav className="hidden lg:flex items-center space-x-7 text-sm font-semibold uppercase tracking-wide">
               <Link href="/" className="hover:text-ember-500 transition-colors">
                 Home
               </Link>
@@ -115,48 +150,34 @@ export const Navbar: React.FC = () => {
                 {/* Mega Menu Dropdown */}
                 {isMegaMenuOpen && (
                   <div className="absolute top-full left-0 w-[680px] bg-ink-900 border border-ink-800 shadow-warm-lg p-6 grid grid-cols-3 gap-6 z-50 rounded-b-[10px]">
-                    
-                    {/* Series Column */}
                     <div>
                       <h4 className="font-display text-base text-ember-500 mb-3 border-b border-ink-800 pb-1 flex items-center gap-1.5">
                         <Sparkles className="w-4 h-4" /> Shop by Series
                       </h4>
-                      <ul className="space-y-2 text-xs sm:text-sm normal-case text-parchment-text/80 tracking-wide">
-                        {seriesCategories.slice(0, 7).map(cat => (
+                      <ul className="space-y-2 text-sm normal-case text-parchment-text/80 tracking-wide">
+                        {seriesCategories.map(cat => (
                           <li key={cat.id}>
-                            <Link
-                              href={`/shop/${cat.slug}`}
-                              className="hover:text-ember-500 transition-colors block py-0.5"
-                              onClick={() => setIsMegaMenuOpen(false)}
-                            >
+                            <Link href={`/shop/${cat.slug}`} className="hover:text-ember-500 transition-colors block py-0.5" onClick={() => setIsMegaMenuOpen(false)}>
                               {cat.name}
                             </Link>
                           </li>
                         ))}
                       </ul>
                     </div>
-
-                    {/* Category Type Column */}
                     <div>
                       <h4 className="font-display text-base text-gold-500 mb-3 border-b border-ink-800 pb-1">
                         Shop by Type
                       </h4>
-                      <ul className="space-y-2 text-xs sm:text-sm normal-case text-parchment-text/80 tracking-wide">
+                      <ul className="space-y-2 text-sm normal-case text-parchment-text/80 tracking-wide">
                         {typeCategories.map(cat => (
                           <li key={cat.id}>
-                            <Link
-                              href={`/shop/${cat.slug}`}
-                              className="hover:text-ember-500 transition-colors block py-0.5"
-                              onClick={() => setIsMegaMenuOpen(false)}
-                            >
+                            <Link href={`/shop/${cat.slug}`} className="hover:text-ember-500 transition-colors block py-0.5" onClick={() => setIsMegaMenuOpen(false)}>
                               {cat.name}
                             </Link>
                           </li>
                         ))}
                       </ul>
                     </div>
-
-                    {/* Featured Tile */}
                     <div className="bg-ink-950 p-4 rounded-[8px] border border-ink-800 flex flex-col justify-between">
                       <div>
                         <span className="text-[10px] bg-ember-500 text-white font-bold px-2 py-0.5 rounded uppercase tracking-wider">
@@ -165,59 +186,42 @@ export const Navbar: React.FC = () => {
                         <h5 className="font-display text-base text-parchment-50 mt-2">
                           Tiered Discounts Up To 45% OFF
                         </h5>
-                        <p className="text-xs text-muted mt-1 normal-case leading-relaxed">
-                          GST invoices on all bulk anime statue dispatch from Shashi Enterprises.
-                        </p>
                       </div>
-                      <Link
-                        href="/shop"
-                        onClick={() => setIsMegaMenuOpen(false)}
-                        className="text-xs sm:text-sm text-ember-500 font-bold hover:underline mt-4 block"
-                      >
+                      <Link href="/shop" onClick={() => setIsMegaMenuOpen(false)} className="text-sm text-ember-500 font-bold hover:underline mt-4 block">
                         Explore All Products →
                       </Link>
                     </div>
-
                   </div>
                 )}
               </div>
 
-              <Link href="/about" className="hover:text-ember-500 transition-colors">
-                About
-              </Link>
-              <Link href="/become-a-dealer" className="hover:text-ember-500 transition-colors">
-                Become a Dealer
-              </Link>
-              <Link href="/contact" className="hover:text-ember-500 transition-colors">
-                Contact 
-              </Link>
+              {!isAdmin && (
+                <>
+                  <Link href="/become-a-dealer" className="hover:text-ember-500 transition-colors">
+                    Become a Dealer
+                  </Link>
+                  <Link href="/contact" className="hover:text-ember-500 transition-colors">
+                    Contact
+                  </Link>
+                </>
+              )}
             </nav>
-
           </div>
 
-          {/* Right Action Icons */}
-          <div className="flex items-center space-x-3 sm:space-x-5">
-            {/* Conditional Admin Quick Console Button */}
-            {isAdmin && (
-              <Link
-                href="/admin"
-                className="hidden sm:flex items-center gap-1.5 bg-gold-500 hover:bg-gold-600 text-ink-950 text-xs font-bold px-3.5 py-1.5 rounded-[6px] transition-all shadow-md uppercase tracking-wider mr-4 sm:mr-6 ml-2 sm:ml-4"
-              >
-                <span>Admin Portal</span>
-              </Link>
-            )}
-
-            {/* Desktop Only Search Icon / Form */}
-            <div className="hidden lg:block">
+          {/* Right Action Icons: Search, Cart, Account */}
+          <div className="flex items-center space-x-4 sm:space-x-6">
+            
+            {/* Search Input Toggle */}
+            <div className="relative">
               {isSearchOpen ? (
-                <form onSubmit={handleSearchSubmit} className="relative flex items-center">
+                <form onSubmit={handleSearchSubmit} className="flex items-center">
                   <input
                     type="text"
                     placeholder="Search SKU, series, product..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
+                    className="bg-ink-900 border border-ink-800 text-parchment-50 text-xs px-3 py-1.5 rounded-l-[6px] w-48 sm:w-64 focus:outline-none focus:border-ember-500"
                     autoFocus
-                    className="bg-ink-900 border border-ember-500 text-parchment-50 text-xs sm:text-sm px-3.5 py-1.5 rounded-l-[6px] focus:outline-none w-48 sm:w-72 tracking-wide"
                   />
                   <button
                     type="submit"
@@ -225,37 +229,96 @@ export const Navbar: React.FC = () => {
                   >
                     <Search className="w-4 h-4" />
                   </button>
-                  <button
-                    type="button"
-                    onClick={() => setIsSearchOpen(false)}
-                    className="ml-2 text-muted hover:text-white"
-                  >
+                  <button type="button" onClick={() => setIsSearchOpen(false)} className="ml-2 text-muted hover:text-white">
                     <X className="w-4 h-4" />
                   </button>
                 </form>
               ) : (
-                <button
-                  onClick={() => setIsSearchOpen(true)}
-                  aria-label="Search"
-                  className="p-2 text-parchment-text hover:text-ember-500 transition-colors"
-                >
+                <button onClick={() => setIsSearchOpen(true)} aria-label="Search" className="p-2 text-parchment-text hover:text-ember-500 transition-colors">
                   <Search className="w-5 h-5 sm:w-6 sm:h-6" />
                 </button>
               )}
             </div>
 
-            {/* Desktop Only Account Icon */}
-            <Link
-              href="/login"
-              aria-label="Account"
-              className="hidden lg:flex p-2 text-parchment-text hover:text-ember-500 transition-colors"
-            >
-              <User className="w-5 h-5 sm:w-6 sm:h-6" />
-            </Link>
+            {/* Direct Admin Panel Button in Navbar for Admin Users */}
+            {user && isAdmin && (
+              <Link
+                href="/admin"
+                className="hidden lg:flex items-center gap-1.5 bg-gold-500 hover:bg-gold-600 text-ink-950 text-xs font-extrabold px-3 py-1.5 rounded-[6px] transition-all shadow-md uppercase tracking-wider shrink-0"
+              >
+                <ShieldCheck className="w-4 h-4 text-ink-950" />
+                <span>Admin Panel</span>
+              </Link>
+            )}
 
-            {/* Desktop Only Cart Icon & Counter */}
+            {/* Desktop Account / Sign In State */}
+            {user ? (
+              <div ref={userDropdownRef} className="relative hidden lg:block">
+                <button
+                  onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
+                  className="flex items-center gap-2 bg-ink-900 hover:bg-ink-800 border border-ink-800 text-xs font-bold px-3 py-1.5 rounded-[6px] transition-all text-parchment-50"
+                >
+                  <div className="w-5 h-5 rounded-full bg-ember-500 text-white font-bold text-[10px] flex items-center justify-center shrink-0 uppercase tracking-tight shadow-sm">
+                    {getUserInitials(user.email, user.user_metadata?.full_name)}
+                  </div>
+                  <span className="max-w-[120px] truncate">{user.user_metadata?.full_name || user.email}</span>
+                  <ChevronDown className="w-3.5 h-3.5 text-muted" />
+                </button>
+
+                {isUserDropdownOpen && (
+                  <div className="absolute right-0 top-full mt-2 w-56 bg-ink-900 border border-ink-800 rounded-[8px] p-2 shadow-2xl z-50 text-xs space-y-1">
+                    <div className="px-3 py-2 border-b border-ink-800">
+                      <div className="font-bold text-parchment-50 truncate">{user.user_metadata?.full_name || 'Dealer Account'}</div>
+                      <div className="text-[11px] text-muted truncate">{user.email}</div>
+                    </div>
+                    {isAdmin && (
+                      <Link
+                        href="/admin"
+                        onClick={() => setIsUserDropdownOpen(false)}
+                        className="flex items-center gap-2 px-3 py-2 hover:bg-ink-800 text-gold-500 font-bold rounded"
+                      >
+                        <ShieldCheck className="w-4 h-4" />
+                        <span>Admin Console</span>
+                      </Link>
+                    )}
+                    <button
+                      onClick={() => {
+                        setIsUserDropdownOpen(false);
+                        signOut();
+                      }}
+                      className="w-full flex items-center gap-2 px-3 py-2 hover:bg-ink-800 text-danger font-bold rounded text-left"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      <span>Sign Out</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <button
+                onClick={() => openLoginModal('Sign in with your Google Account to place wholesale quote orders and track dispatch updates.')}
+                className="hidden lg:flex items-center gap-2 bg-ember-500 hover:bg-ember-600 text-white text-xs font-bold px-3.5 py-1.5 rounded-[6px] transition-all shadow-md uppercase tracking-wider"
+              >
+                <User className="w-4 h-4" />
+                <span>Sign In</span>
+              </button>
+            )}
+
+            {/* Desktop Only My Orders & Cart Icon */}
             <button
-              onClick={() => setIsCartOpen(true)}
+              onClick={openOrders}
+              aria-label="My Orders"
+              className="hidden lg:flex items-center gap-1.5 p-2 text-parchment-text hover:text-gold-500 transition-colors cursor-pointer text-xs font-bold"
+            >
+              <Package className="w-5 h-5 sm:w-6 sm:h-6 text-gold-500" />
+              <span>My Orders</span>
+            </button>
+
+            <button
+              onClick={() => {
+                setActiveTab('cart');
+                setIsCartOpen(true);
+              }}
               aria-label="Cart"
               className="hidden lg:flex relative p-2 text-parchment-text hover:text-ember-500 transition-colors cursor-pointer"
             >
@@ -294,11 +357,12 @@ export const Navbar: React.FC = () => {
       {/* Streamlined Mobile Navigation Drawer */}
       {isMobileMenuOpen && (
         <div className="lg:hidden bg-ink-900 border-b border-ink-800 px-4 pt-3.5 pb-5 space-y-3.5 shadow-2xl animate-in slide-in-from-top-2 duration-200">
-          {/* Quick Cart & Account bar for Mobile */}
+          {/* Quick Cart & My Orders bar for Mobile */}
           <div className="grid grid-cols-2 gap-2">
             <button
               onClick={() => {
                 setIsMobileMenuOpen(false);
+                setActiveTab('cart');
                 setIsCartOpen(true);
               }}
               className="flex items-center justify-center gap-2 bg-ember-500/10 border border-ember-500/30 text-ember-400 py-2 px-3 rounded-md text-xs font-semibold hover:bg-ember-500/20"
@@ -306,14 +370,17 @@ export const Navbar: React.FC = () => {
               <ShoppingBag className="w-4 h-4" />
               <span>Cart ({itemCount})</span>
             </button>
-            <Link
-              href="/login"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center justify-center gap-2 bg-ink-950 border border-ink-800 text-parchment-200 py-2 px-3 rounded-md text-xs font-semibold hover:border-ember-500/40"
+
+            <button
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                openOrders();
+              }}
+              className="flex items-center justify-center gap-2 bg-gold-500/10 border border-gold-500/30 text-gold-500 py-2 px-3 rounded-md text-xs font-semibold hover:bg-gold-500/20"
             >
-              <User className="w-4 h-4" />
-              <span>Account</span>
-            </Link>
+              <Package className="w-4 h-4" />
+              <span>My Orders</span>
+            </button>
           </div>
 
           {/* Mobile Search Bar */}
@@ -346,7 +413,6 @@ export const Navbar: React.FC = () => {
               className="py-1.5 border-b border-ink-800/80 flex items-center justify-between text-parchment-100 hover:text-ember-500"
             >
               <span>Shop Catalog</span>
-              <span className="text-[10px] bg-ember-500/20 text-ember-400 px-2 py-0.5 rounded font-mono">21 SKUs</span>
             </Link>
 
             {/* Popular Series (Top 4) */}
@@ -368,31 +434,37 @@ export const Navbar: React.FC = () => {
               </div>
             </div>
 
-            <Link
-              href="/become-a-dealer"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="py-1.5 border-b border-ink-800/80 text-parchment-100 hover:text-ember-500"
-            >
-              Become a Dealer
-            </Link>
+            {!isAdmin && (
+              <>
+                <Link
+                  href="/become-a-dealer"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="py-1.5 border-b border-ink-800/80 text-parchment-100 hover:text-ember-500"
+                >
+                  Become a Dealer
+                </Link>
 
-            <Link
-              href="/contact"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="py-1.5 border-b border-ink-800/80 text-parchment-100 hover:text-ember-500"
-            >
-              Contact Us
-            </Link>
+                <Link
+                  href="/contact"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="py-1.5 border-b border-ink-800/80 text-parchment-100 hover:text-ember-500"
+                >
+                  Contact Us
+                </Link>
+              </>
+            )}
 
-            {/* Admin Console Shortcut */}
-            <Link
-              href="/admin"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="py-2 px-3 mt-1 text-ink-950 bg-gold-500 hover:bg-gold-600 rounded font-bold text-xs uppercase tracking-wider flex items-center justify-between shadow-sm"
-            >
-              <span>Admin Portal</span>
-              <span>→</span>
-            </Link>
+            {/* Admin Console Shortcut strictly for Admin email */}
+            {isAdmin && (
+              <Link
+                href="/admin"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="py-2 px-3 mt-1 text-ink-950 bg-gold-500 hover:bg-gold-600 rounded font-bold text-xs uppercase tracking-wider flex items-center justify-between shadow-sm"
+              >
+                <span>Admin Portal</span>
+                <span>→</span>
+              </Link>
+            )}
           </nav>
         </div>
       )}

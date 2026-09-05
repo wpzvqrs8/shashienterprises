@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { FAQ_ITEMS } from '@/lib/mock-data';
+import { FAQ_ITEMS } from '@/lib/constants';
 import { ChevronDown, HelpCircle } from 'lucide-react';
 
 export const FaqAccordion: React.FC = () => {

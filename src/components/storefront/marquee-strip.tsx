@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { MARQUEE_TEXT } from '@/lib/mock-data';
+import { MARQUEE_TEXT } from '@/lib/constants';
 import { X } from 'lucide-react';
 
 export const MarqueeStrip: React.FC = () => {

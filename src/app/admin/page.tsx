@@ -35,7 +35,7 @@ export default function AdminDashboardPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <h1 className="font-display text-2xl sm:text-3xl text-ink-950 font-bold">Administrative Overview</h1>
-          <p className="text-xs text-muted">Real-time mock analytics for inventory, wholesale orders, and catalog value.</p>
+          <p className="text-xs text-muted">Real-time analytics for inventory, wholesale orders, and catalog value.</p>
         </div>
         <Link href="/admin/catalog/new">
           <Button variant="ember" size="sm" className="w-full sm:w-auto gap-2 text-xs">

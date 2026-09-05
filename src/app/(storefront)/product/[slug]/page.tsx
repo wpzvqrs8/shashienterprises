@@ -11,7 +11,7 @@ import { PriceTierTable } from '@/components/storefront/price-tier-table';
 import { ProductCard } from '@/components/storefront/product-card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { INITIAL_STORE_SETTINGS } from '@/lib/mock-data';
+import { INITIAL_STORE_SETTINGS } from '@/lib/constants';
 import {
   ShoppingBag,
   MessageSquare,
@@ -47,7 +47,7 @@ export default function ProductDetailPage() {
       setProduct(data);
       if (data) {
         setActiveImage(data.image);
-        setQty(data.moq || 5);
+        setQty(data.moq || 50);
         const related = await getProducts({ category: data.category });
         setRelatedProducts(related.filter(r => r.id !== data.id).slice(0, 4));
       }
@@ -141,28 +141,27 @@ export default function ProductDetailPage() {
               )}
             </div>
 
-            {/* Thumbnail Rail */}
-            <div className="flex space-x-3 overflow-x-auto pb-2">
-              <button
-                onClick={() => setActiveImage(product.image)}
-                className={`relative w-20 h-20 rounded-[8px] overflow-hidden border-2 shrink-0 ${
-                  activeImage === product.image ? 'border-ember-500' : 'border-parchment-300'
-                }`}
-              >
-                <Image src={product.image} alt="Thumb" fill className="object-cover" />
-              </button>
-              {product.gallery && product.gallery.map((img, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setActiveImage(img)}
-                  className={`relative w-20 h-20 rounded-[8px] overflow-hidden border-2 shrink-0 ${
-                    activeImage === img ? 'border-ember-500' : 'border-parchment-300'
-                  }`}
-                >
-                  <Image src={img} alt={`Thumb ${idx}`} fill className="object-cover" />
-                </button>
-              ))}
-            </div>
+            {/* Deduplicated Thumbnail Rail */}
+            {(() => {
+              const uniqueImages = Array.from(new Set([product.image, ...(product.gallery || [])])).filter(Boolean);
+              if (uniqueImages.length <= 1) return null;
+
+              return (
+                <div className="flex space-x-3 overflow-x-auto pb-2">
+                  {uniqueImages.map((img, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setActiveImage(img)}
+                      className={`relative w-20 h-20 rounded-[8px] overflow-hidden border-2 shrink-0 transition-all ${
+                        (activeImage || product.image) === img ? 'border-ember-500 ring-2 ring-ember-500/30' : 'border-parchment-300 opacity-70 hover:opacity-100'
+                      }`}
+                    >
+                      <Image src={img} alt={`Thumbnail ${idx + 1}`} fill className="object-cover" />
+                    </button>
+                  ))}
+                </div>
+              );
+            })()}
           </div>
 
           {/* Right Column: Info Panel */}
