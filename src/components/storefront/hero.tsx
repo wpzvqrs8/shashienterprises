@@ -24,7 +24,7 @@ export const Hero: React.FC = () => {
             </h1>
 
             {/* Subcopy */}
-            <p className="text-sm sm:text-base lg:text-lg text-parchment-text/80 max-w-2xl leading-relaxed">
+            <p className="hidden sm:block text-sm sm:text-base lg:text-lg text-parchment-text/80 max-w-2xl leading-relaxed">
               Bulk supply of high-demand Dragon Ball statues, One Piece figures, Demon Slayer katanas, and limited resin imports. Built for shop owners, comic stores, and online resellers.
             </p>
 
@@ -37,7 +37,7 @@ export const Hero: React.FC = () => {
                 </Button>
               </Link>
               <Link href="/become-a-dealer">
-                <Button variant="dark" size="lg" className="w-full sm:w-auto !text-white border-parchment-300/50 hover:border-ember-500 hover:bg-ember-500/10 hover:!text-ember-500 font-bold transition-all shadow-sm">
+                <Button variant="dark" size="lg" className="w-full sm:w-auto !text-white !border !border-white hover:!border-ember-500 hover:bg-ember-500/10 hover:!text-ember-500 font-bold transition-all shadow-sm">
                   Become a Dealer
                 </Button>
               </Link>

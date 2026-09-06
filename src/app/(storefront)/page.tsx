@@ -123,9 +123,7 @@ export default function HomePage() {
                 sizes="(max-width: 768px) 100vw, 400px"
                 className="object-contain object-center"
               />
-              <div className="absolute top-3 left-3 bg-ink-950/90 text-ember-500 border border-ember-500/30 backdrop-blur-sm font-bold text-xs px-3 py-1 rounded uppercase shadow-md z-10">
-                40% Margin Potential
-              </div>
+              
             </div>
 
           </div>
