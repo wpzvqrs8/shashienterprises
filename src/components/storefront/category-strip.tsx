@@ -23,27 +23,24 @@ export const CategoryStrip: React.FC = () => {
 
   // Size and style definitions for 7 symmetrical 3D Action Figure slots
   const slotStyles = [
-    { size: 'w-16 h-24 sm:w-20 sm:h-28', scale: 'scale-75 opacity-40 blur-[0.5px]', text: 'text-[11px] font-medium text-parchment-text/60' }, // 0 (Outer Left)
-    { size: 'w-20 h-28 sm:w-24 sm:h-36', scale: 'scale-90 opacity-75', text: 'text-xs font-semibold text-parchment-text/80' },           // 1 (Mid Left)
-    { size: 'w-24 h-36 sm:w-32 sm:h-44', scale: 'scale-100 opacity-95', text: 'text-xs sm:text-sm font-bold text-parchment-text' },      // 2 (Inner Left)
-    { size: 'w-32 h-44 sm:w-44 sm:h-60', scale: 'scale-125 opacity-100 z-30 drop-shadow-[0_20px_20px_rgba(0,0,0,0.8)]', text: 'text-xs sm:text-base font-black text-ember-500 bg-ink-950/80 px-3 py-1 rounded-full border border-ember-500/40 shadow-lg' }, // 3 (CENTER SPOTLIGHT)
-    { size: 'w-24 h-36 sm:w-32 sm:h-44', scale: 'scale-100 opacity-95', text: 'text-xs sm:text-sm font-bold text-parchment-text' },      // 4 (Inner Right)
-    { size: 'w-20 h-28 sm:w-24 sm:h-36', scale: 'scale-90 opacity-75', text: 'text-xs font-semibold text-parchment-text/80' },           // 5 (Mid Right)
-    { size: 'w-16 h-24 sm:w-20 sm:h-28', scale: 'scale-75 opacity-40 blur-[0.5px]', text: 'text-[11px] font-medium text-parchment-text/60' }, // 6 (Outer Right)
+    { size: 'w-16 h-24 sm:w-20 sm:h-28', scale: 'scale-75 opacity-40 blur-[0.5px]', text: 'text-[10px] font-semibold text-white/50' }, // 0 (Outer Left)
+    { size: 'w-20 h-28 sm:w-24 sm:h-36', scale: 'scale-90 opacity-75', text: 'text-[11px] font-bold text-white/80' },            // 1 (Mid Left)
+    { size: 'w-24 h-36 sm:w-32 sm:h-44', scale: 'scale-100 opacity-95', text: 'text-xs font-bold text-white' },                    // 2 (Inner Left)
+    { size: 'w-32 h-44 sm:w-44 sm:h-60', scale: 'scale-125 opacity-100 z-30 drop-shadow-[0_20px_20px_rgba(0,0,0,0.9)]', text: 'text-xs sm:text-sm font-extrabold text-white bg-ink-950/90 px-3.5 py-1 rounded-full border border-white/30 shadow-xl tracking-wider' }, // 3 (CENTER SPOTLIGHT)
+    { size: 'w-24 h-36 sm:w-32 sm:h-44', scale: 'scale-100 opacity-95', text: 'text-xs font-bold text-white' },                    // 4 (Inner Right)
+    { size: 'w-20 h-28 sm:w-24 sm:h-36', scale: 'scale-90 opacity-75', text: 'text-[11px] font-bold text-white/80' },            // 5 (Mid Right)
+    { size: 'w-16 h-24 sm:w-20 sm:h-28', scale: 'scale-75 opacity-40 blur-[0.5px]', text: 'text-[10px] font-semibold text-white/50' }, // 6 (Outer Right)
   ];
 
   return (
-    <section className="bg-gradient-to-b from-ink-950 via-ink-900 to-ink-950 border-b border-ink-800 py-12 sm:py-16 overflow-hidden relative">
-      {/* Stage ambient lighting background */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-32 bg-ember-500/10 blur-3xl pointer-events-none rounded-full" />
-
+    <section className="bg-ink-950 border-b border-ink-800 py-12 sm:py-16 overflow-hidden relative">
       <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 relative z-10">
         <div className="flex items-center justify-between mb-8">
-          <h3 className="font-display text-lg sm:text-xl uppercase tracking-wider text-white flex items-center gap-2 font-bold">
-            <span className="w-3 h-3 rounded-full bg-ember-500 animate-pulse" />
+          <h3 className="font-display text-lg sm:text-xl uppercase tracking-wider text-white flex items-center gap-2.5 font-bold">
+            <span className="w-2.5 h-2.5 rounded-full bg-white animate-pulse" />
             <span>Explore Taxonomies</span>
           </h3>
-          <Link href="/shop" className="text-xs sm:text-sm text-ember-500 font-bold hover:underline">
+          <Link href="/shop" className="text-xs sm:text-sm text-white/90 font-bold hover:text-white hover:underline transition-colors">
             View All Categories →
           </Link>
         </div>
@@ -61,27 +58,27 @@ export const CategoryStrip: React.FC = () => {
                 href={`/shop/${category.slug}`}
                 className={`${isMobileVisible ? 'flex' : 'hidden sm:flex'} flex-col items-center shrink-0 group text-center transition-all duration-700 ease-in-out cursor-pointer relative ${style.scale}`}
               >
-                {/* 3D Standing Figure Container - NO Circle Border */}
+                {/* 3D Standing Figure Container - Pure Cutout Figure, No Circle Border */}
                 <div className={`relative ${style.size} flex items-end justify-center mb-3 transition-transform duration-500 group-hover:-translate-y-2`}>
-                  {/* Standing 3D Figure Image */}
+                  {/* Standing 3D Figure Image with Transparent Background */}
                   <Image
                     src={category.image}
                     alt={category.name}
                     fill
                     sizes="(max-width: 768px) 150px, 240px"
-                    className="object-contain object-bottom drop-shadow-[0_15px_15px_rgba(0,0,0,0.7)] group-hover:drop-shadow-[0_20px_25px_rgba(226,99,43,0.5)] transition-all duration-500"
+                    className="object-contain object-bottom drop-shadow-[0_15px_15px_rgba(0,0,0,0.85)] group-hover:drop-shadow-[0_20px_25px_rgba(255,255,255,0.25)] transition-all duration-500"
                   />
 
-                  {/* 3D Floor Shadow / Spotlight Pedestal */}
+                  {/* 3D Floor Shadow */}
                   <div className={`absolute -bottom-2 left-1/2 -translate-x-1/2 rounded-[100%] transition-all duration-500 ${
                     isCenter 
-                      ? 'w-4/5 h-4 bg-ember-500/30 blur-md shadow-[0_0_20px_#E2632B]' 
-                      : 'w-2/3 h-2.5 bg-black/60 blur-sm'
+                      ? 'w-4/5 h-3 bg-black/90 blur-sm shadow-[0_4px_12px_rgba(255,255,255,0.15)]' 
+                      : 'w-2/3 h-2 bg-black/80 blur-xs'
                   }`} />
                 </div>
 
-                {/* Category Name Label */}
-                <span className={`transition-colors duration-300 line-clamp-1 ${style.text}`}>
+                {/* Small White Text Category Label */}
+                <span className={`uppercase tracking-wider transition-colors duration-300 line-clamp-1 ${style.text}`}>
                   {category.name}
                 </span>
               </Link>
@@ -92,4 +89,5 @@ export const CategoryStrip: React.FC = () => {
     </section>
   );
 };
+
 
