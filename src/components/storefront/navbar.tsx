@@ -466,6 +466,52 @@ export const Navbar: React.FC = () => {
               </Link>
             )}
           </nav>
+
+          {/* Mobile User Authentication / Account Section */}
+          <div className="pt-2 border-t border-ink-800">
+            {user ? (
+              <div className="bg-ink-950 p-3 rounded-[8px] border border-ink-800 space-y-2.5">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-ember-500 text-white font-bold text-xs flex items-center justify-center shrink-0 uppercase tracking-tight shadow-sm">
+                    {getUserInitials(user.email, user.user_metadata?.full_name)}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="font-bold text-xs text-parchment-50 truncate">
+                      {user.user_metadata?.full_name || 'Dealer Account'}
+                    </div>
+                    <div className="text-[11px] text-muted truncate">{user.email}</div>
+                  </div>
+                  {isAdmin && (
+                    <span className="text-[10px] bg-gold-500/20 text-gold-500 border border-gold-500/40 px-2 py-0.5 rounded font-extrabold uppercase">
+                      Admin
+                    </span>
+                  )}
+                </div>
+
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    signOut();
+                  }}
+                  className="w-full flex items-center justify-center gap-2 bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 py-2 px-3 rounded-md font-bold text-xs uppercase tracking-wider transition-colors"
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span>Sign Out ({user.email ? user.email.split('@')[0] : 'Account'})</span>
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  openLoginModal('Sign in with your Google Account to place wholesale quote orders and track dispatch updates.');
+                }}
+                className="w-full flex items-center justify-center gap-2 bg-ember-500 hover:bg-ember-600 text-white py-2.5 px-4 rounded-md font-extrabold text-xs uppercase tracking-wider shadow-md transition-colors"
+              >
+                <User className="w-4 h-4" />
+                <span>Sign In with Google</span>
+              </button>
+            )}
+          </div>
         </div>
       )}
     </header>
