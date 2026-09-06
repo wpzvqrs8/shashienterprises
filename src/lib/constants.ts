@@ -24,23 +24,23 @@ export const MARQUEE_TEXT = "NEW WHOLESALE DROPS WEEKLY  •  GST INVOICE ON EVE
 
 export const CATEGORIES: CategoryItem[] = [
   // Shop by Series
-  { id: 'cat-db', name: 'Dragon Ball', slug: 'dragon-ball', type: 'series', image: '/hero-featured/cat-dragon-ball.jpeg' },
-  { id: 'cat-op', name: 'One Piece', slug: 'one-piece', type: 'series', image: '/hero-featured/cat-one-piece.jpeg' },
-  { id: 'cat-naruto', name: 'Naruto', slug: 'naruto', type: 'series', image: '/hero-featured/cat-naruto.jpeg' },
-  { id: 'cat-ds', name: 'Demon Slayer', slug: 'demon-slayer', type: 'series', image: '/hero-featured/cat-demon-slayer.jpeg' },
-  { id: 'cat-jjk', name: 'Jujutsu Kaisen', slug: 'jujutsu-kaisen', type: 'series', image: '/hero-featured/cat-jujutsu-kaisen.jpeg' },
-  { id: 'cat-solo', name: 'Solo Leveling', slug: 'solo-leveling', type: 'series', image: '/hero-featured/cat-solo-leveling.jpeg' },
-  { id: 'cat-aot', name: 'Attack on Titan', slug: 'attack-on-titan', type: 'series', image: '/hero-featured/cat-attack-on-titan.jpeg' },
-  { id: 'cat-hxh', name: 'Hunter x Hunter', slug: 'hunter-x-hunter', type: 'series', image: '/hero-featured/cat-hunter-x-hunter.jpeg' },
-  { id: 'cat-tj', name: 'Tom & Jerry', slug: 'tom-jerry', type: 'series', image: '/hero-featured/cat-tom-jerry.jpeg' },
-  { id: 'cat-pop', name: 'Pop Culture', slug: 'pop-culture', type: 'series', image: '/hero-featured/cat-pop-culture.jpeg' },
+  { id: 'cat-db', name: 'Dragon Ball', slug: 'dragon-ball', type: 'series', image: '/category-figures/fig-dragon-ball.png' },
+  { id: 'cat-op', name: 'One Piece', slug: 'one-piece', type: 'series', image: '/category-figures/fig-one-piece.png' },
+  { id: 'cat-naruto', name: 'Naruto', slug: 'naruto', type: 'series', image: '/category-figures/fig-naruto.png' },
+  { id: 'cat-ds', name: 'Demon Slayer', slug: 'demon-slayer', type: 'series', image: '/category-figures/fig-demon-slayer.png' },
+  { id: 'cat-jjk', name: 'Jujutsu Kaisen', slug: 'jujutsu-kaisen', type: 'series', image: '/category-figures/fig-jujutsu-kaisen.png' },
+  { id: 'cat-solo', name: 'Solo Leveling', slug: 'solo-leveling', type: 'series', image: '/category-figures/fig-solo-leveling.png' },
+  { id: 'cat-aot', name: 'Attack on Titan', slug: 'attack-on-titan', type: 'series', image: '/category-figures/fig-attack-on-titan.png' },
+  { id: 'cat-hxh', name: 'Hunter x Hunter', slug: 'hunter-x-hunter', type: 'series', image: '/category-figures/fig-hunter-x-hunter.png' },
+  { id: 'cat-tj', name: 'Tom & Jerry', slug: 'tom-jerry', type: 'series', image: '/category-figures/fig-naruto.png' },
+  { id: 'cat-pop', name: 'Pop Culture', slug: 'pop-culture', type: 'series', image: '/category-figures/fig-one-piece.png' },
 
   // Shop by Type
-  { id: 'cat-figures', name: 'Action Figures', slug: 'action-figures', type: 'type', image: '/hero-featured/cat-action-figures.jpeg' },
-  { id: 'cat-statues', name: 'Limited Statues', slug: 'limited-statues', type: 'type', image: '/hero-featured/hero-resin.jpeg' },
-  { id: 'cat-resin', name: 'Premium Resin Statues', slug: 'premium-resin-statues', type: 'type', image: '/hero-featured/hero-resin.jpeg' },
-  { id: 'cat-imports', name: 'Rare Imports', slug: 'rare-imports', type: 'type', image: '/hero-featured/cat-rare-imports.jpeg' },
-  { id: 'cat-weapons', name: 'Katanas & Weapons', slug: 'katanas-weapons', type: 'type', image: '/hero-featured/cat-katanas-weapons.jpeg' },
+  { id: 'cat-figures', name: 'Action Figures', slug: 'action-figures', type: 'type', image: '/category-figures/fig-dragon-ball.png' },
+  { id: 'cat-statues', name: 'Limited Statues', slug: 'limited-statues', type: 'type', image: '/category-figures/fig-demon-slayer.png' },
+  { id: 'cat-resin', name: 'Premium Resin Statues', slug: 'premium-resin-statues', type: 'type', image: '/category-figures/fig-jujutsu-kaisen.png' },
+  { id: 'cat-imports', name: 'Rare Imports', slug: 'rare-imports', type: 'type', image: '/category-figures/fig-solo-leveling.png' },
+  { id: 'cat-weapons', name: 'Katanas & Weapons', slug: 'katanas-weapons', type: 'type', image: '/category-figures/fig-katanas-weapons.png' },
 ];
 
 export interface Testimonial {
