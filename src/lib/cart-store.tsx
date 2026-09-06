@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Product, CartItem } from './types';
 import { DEFAULT_STORE_SETTINGS } from './constants';
+import { getStoreSettings } from './catalog-store';
 
 interface CartContextType {
   items: CartItem[];
@@ -53,8 +54,23 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'cart' | 'orders'>('cart');
   const [isLoaded, setIsLoaded] = useState(false);
+  const [minimumOrderValue, setMinimumOrderValue] = useState<number>(6000);
 
-  const minimumOrderValue = 0;
+  useEffect(() => {
+    async function fetchMOV() {
+      try {
+        const settings = await getStoreSettings();
+        if (settings && typeof settings.minimumOrderValue === 'number' && settings.minimumOrderValue > 0) {
+          setMinimumOrderValue(settings.minimumOrderValue);
+        } else {
+          setMinimumOrderValue(6000);
+        }
+      } catch (e) {
+        setMinimumOrderValue(6000);
+      }
+    }
+    fetchMOV();
+  }, [isCartOpen]);
 
   const openOrders = () => {
     setActiveTab('orders');
@@ -153,8 +169,8 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const subtotal = items.reduce((sum, item) => sum + item.lineTotal, 0);
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
-  const isMovMet = itemCount >= 50 || subtotal > 0;
-  const movRemaining = Math.max(0, 50 - itemCount);
+  const isMovMet = items.length > 0 && subtotal >= minimumOrderValue;
+  const movRemaining = Math.max(0, minimumOrderValue - subtotal);
 
   return (
     <CartContext.Provider

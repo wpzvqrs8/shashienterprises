@@ -21,6 +21,7 @@ export const CartDrawer: React.FC = () => {
     subtotal,
     isMovMet,
     movRemaining,
+    minimumOrderValue,
     isCartOpen,
     setIsCartOpen,
     activeTab,
@@ -45,8 +46,8 @@ export const CartDrawer: React.FC = () => {
 
   if (!isCartOpen) return null;
 
-  const totalPcs = items.reduce((sum, item) => sum + item.quantity, 0);
-  const progressPercent = Math.min(100, Math.round((totalPcs / 50) * 100));
+  const targetMOV = minimumOrderValue || 6000;
+  const progressPercent = Math.min(100, Math.round((subtotal / targetMOV) * 100));
 
   return (
     <div className="fixed inset-0 z-50 overflow-hidden">
@@ -102,12 +103,12 @@ export const CartDrawer: React.FC = () => {
 
           {activeTab === 'cart' ? (
             <>
-              {/* Minimum Order Quantity (MOQ) Progress Bar */}
+              {/* Minimum Order Value (MOV) Progress Bar */}
               <div className="p-3 bg-parchment-100 border-b border-parchment-300">
                 <div className="flex justify-between items-center text-xs font-semibold mb-1">
-                  <span>Wholesale MOQ Progress (50 Pcs Min)</span>
+                  <span>Minimum Order Value (₹{targetMOV.toLocaleString('en-IN')})</span>
                   <span className={isMovMet ? 'text-jade-600 font-bold' : 'text-ember-600 font-bold'}>
-                    {isMovMet ? 'MOQ Unlocked ✓' : `Need ${movRemaining} pcs more`}
+                    {isMovMet ? 'MOV Unlocked ✓' : `Need ₹${movRemaining.toLocaleString('en-IN')} more`}
                   </span>
                 </div>
                 <div className="w-full h-2.5 bg-parchment-300 rounded-full overflow-hidden">
@@ -119,7 +120,7 @@ export const CartDrawer: React.FC = () => {
                 {!isMovMet && (
                   <p className="text-[11px] text-muted mt-1.5 flex items-center gap-1">
                     <AlertTriangle className="w-3 h-3 text-ember-600 shrink-0" />
-                    <span>Add {movRemaining} more pcs of SKUs to enable checkout.</span>
+                    <span>Add ₹{movRemaining.toLocaleString('en-IN')} more worth of SKUs to enable checkout.</span>
                   </p>
                 )}
               </div>

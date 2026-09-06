@@ -105,7 +105,7 @@ export default function BecomeADealerPage() {
                 <ul className="space-y-3 text-xs text-ink-text/90">
                   <li className="flex items-start gap-2">
                     <ShieldCheck className="w-4 h-4 text-jade-600 shrink-0 mt-0.5" />
-                    <span>Minimum 50 pcs per purchase order threshold.</span>
+                    <span>Minimum Order Value (MOV) of ₹6,000 per order threshold.</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <FileText className="w-4 h-4 text-ember-500 shrink-0 mt-0.5" />
@@ -113,7 +113,7 @@ export default function BecomeADealerPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-gold-500 shrink-0 mt-0.5" />
-                    <span>50 pcs minimum order quantity per order.</span>
+                    <span>5 pcs minimum order quantity per SKU.</span>
                   </li>
                 </ul>
               </div>

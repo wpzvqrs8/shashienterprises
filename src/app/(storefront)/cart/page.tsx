@@ -18,8 +18,8 @@ export default function CartPage() {
     minimumOrderValue
   } = useCart();
 
-  const totalPcs = items.reduce((sum, item) => sum + item.quantity, 0);
-  const progressPercent = Math.min(100, Math.round((totalPcs / 50) * 100));
+  const targetMOV = minimumOrderValue || 6000;
+  const progressPercent = Math.min(100, Math.round((subtotal / targetMOV) * 100));
 
   return (
     <div className="bg-parchment-50 min-h-screen py-10 border-b border-parchment-300">
@@ -51,12 +51,12 @@ export default function CartPage() {
             {/* Left Column: Line Items Table */}
             <div className="lg:col-span-8 space-y-4">
               
-              {/* MOQ Progress Bar */}
+              {/* MOV Progress Bar */}
               <div className="bg-parchment-100 border border-parchment-300 rounded-[10px] p-4">
                 <div className="flex justify-between items-center text-xs font-bold mb-2">
-                  <span>Minimum Order Quantity (MOQ) Threshold</span>
+                  <span>Minimum Order Value (MOV) Threshold (₹{targetMOV.toLocaleString('en-IN')})</span>
                   <span className={isMovMet ? 'text-jade-600 font-bold' : 'text-ember-600 font-bold'}>
-                    {isMovMet ? 'MOQ Met (50 Pcs Unlocked) ✓' : `${movRemaining} pcs remaining to unlock checkout`}
+                    {isMovMet ? 'MOV Met (₹6,000 Unlocked) ✓' : `Need ₹${movRemaining.toLocaleString('en-IN')} more to unlock checkout`}
                   </span>
                 </div>
                 <div className="w-full h-3 bg-parchment-300 rounded-full overflow-hidden">
@@ -173,7 +173,7 @@ export default function CartPage() {
                 {!isMovMet && (
                   <div className="bg-ember-500/10 border border-ember-500/30 text-ember-500 p-3 rounded text-xs leading-relaxed flex items-start gap-2">
                     <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
-                    <span>Minimum order quantity is 50 pcs. Add {movRemaining} more pcs to unlock checkout.</span>
+                    <span>Minimum Order Value is ₹{targetMOV.toLocaleString('en-IN')}. Add ₹{movRemaining.toLocaleString('en-IN')} more worth of products to unlock checkout.</span>
                   </div>
                 )}
 
