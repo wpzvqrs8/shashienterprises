@@ -2,14 +2,16 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useAuth } from '@/components/providers/auth-provider';
 import { ShoppingBag, ArrowRight } from 'lucide-react';
 
 export const FloatingExplore: React.FC = () => {
+  const pathname = usePathname();
   const { isAdmin } = useAuth();
 
-  // If the user is an Admin, do not show the Shop Now floating button (keep usual Admin floating button)
-  if (isAdmin) return null;
+  // Only show button on the landing page ('/') and for non-admin users
+  if (pathname !== '/' || isAdmin) return null;
 
   return (
     <Link
