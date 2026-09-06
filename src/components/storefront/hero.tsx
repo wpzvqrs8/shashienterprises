@@ -16,9 +16,8 @@ export const Hero: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           
           {/* Left Content Column */}
-          <div className="lg:col-span-7 space-y-6">
+          <div className="lg:col-span-6 space-y-6">
             
-
 
             {/* Main ZCOOL Display Heading */}
             <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl text-parchment-50 leading-[1.05] tracking-tight">
@@ -65,16 +64,16 @@ export const Hero: React.FC = () => {
           </div>
 
           {/* Right Product Showcase Tile */}
-          <div className="lg:col-span-5 relative">
-            <div className="relative aspect-square max-w-md mx-auto rounded-[14px] bg-ink-900 border border-ink-800 p-4 shadow-warm-lg overflow-hidden group">
+          <div className="lg:col-span-6 relative w-full flex justify-center">
+            <div className="relative w-full aspect-[4/3] sm:aspect-square max-w-xl lg:max-w-2xl mx-auto rounded-[14px] bg-ink-900 border border-ink-800 p-3 sm:p-4 shadow-warm-lg overflow-hidden group">
               <Image
                 src="/hero-featured/hero-goku.jpeg"
                 alt="Ultra Instinct Goku Hero Showcase"
                 fill
                 priority
-                className="object-cover rounded-[10px] group-hover:scale-105 transition-transform duration-500"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-contain object-center rounded-[10px] group-hover:scale-105 transition-transform duration-500"
               />
-
             </div>
           </div>
 
