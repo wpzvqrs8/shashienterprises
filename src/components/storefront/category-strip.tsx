@@ -23,24 +23,24 @@ export const CategoryStrip: React.FC = () => {
 
   // Size and style definitions for 7 symmetrical 3D Action Figure slots
   const slotStyles = [
-    { size: 'w-16 h-24 sm:w-20 sm:h-28', scale: 'scale-75 opacity-40 blur-[0.5px]', text: 'text-[10px] font-semibold text-white/50' }, // 0 (Outer Left)
+    { size: 'w-16 h-24 sm:w-20 sm:h-28', scale: 'scale-75 opacity-40 blur-[0.5px]', text: 'text-[10px] font-semibold text-white/60' }, // 0 (Outer Left)
     { size: 'w-20 h-28 sm:w-24 sm:h-36', scale: 'scale-90 opacity-75', text: 'text-[11px] font-bold text-white/80' },            // 1 (Mid Left)
     { size: 'w-24 h-36 sm:w-32 sm:h-44', scale: 'scale-100 opacity-95', text: 'text-xs font-bold text-white' },                    // 2 (Inner Left)
-    { size: 'w-32 h-44 sm:w-44 sm:h-60', scale: 'scale-125 opacity-100 z-30 drop-shadow-[0_20px_20px_rgba(0,0,0,0.9)]', text: 'text-xs sm:text-sm font-extrabold text-white bg-ink-950/90 px-3.5 py-1 rounded-full border border-white/30 shadow-xl tracking-wider' }, // 3 (CENTER SPOTLIGHT)
+    { size: 'w-32 h-44 sm:w-44 sm:h-60', scale: 'scale-125 opacity-100 z-30 drop-shadow-[0_20px_20px_rgba(0,0,0,0.9)]', text: 'text-xs sm:text-sm font-black text-white tracking-widest drop-shadow-lg' }, // 3 (CENTER SPOTLIGHT - NO CAPSULE BORDER)
     { size: 'w-24 h-36 sm:w-32 sm:h-44', scale: 'scale-100 opacity-95', text: 'text-xs font-bold text-white' },                    // 4 (Inner Right)
     { size: 'w-20 h-28 sm:w-24 sm:h-36', scale: 'scale-90 opacity-75', text: 'text-[11px] font-bold text-white/80' },            // 5 (Mid Right)
-    { size: 'w-16 h-24 sm:w-20 sm:h-28', scale: 'scale-75 opacity-40 blur-[0.5px]', text: 'text-[10px] font-semibold text-white/50' }, // 6 (Outer Right)
+    { size: 'w-16 h-24 sm:w-20 sm:h-28', scale: 'scale-75 opacity-40 blur-[0.5px]', text: 'text-[10px] font-semibold text-white/60' }, // 6 (Outer Right)
   ];
 
   return (
     <section className="bg-ink-950 border-b border-ink-800 py-12 sm:py-16 overflow-hidden relative">
       <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 relative z-10">
         <div className="flex items-center justify-between mb-8">
-          <h3 className="font-display text-lg sm:text-xl uppercase tracking-wider text-white flex items-center gap-2.5 font-bold">
-            <span className="w-2.5 h-2.5 rounded-full bg-white animate-pulse" />
+          <h3 className="font-display text-lg sm:text-xl uppercase tracking-wider text-white flex items-center gap-2 font-bold">
+            <span className="w-3 h-3 rounded-full bg-ember-500 animate-pulse" />
             <span>Explore Taxonomies</span>
           </h3>
-          <Link href="/shop" className="text-xs sm:text-sm text-white/90 font-bold hover:text-white hover:underline transition-colors">
+          <Link href="/shop" className="text-xs sm:text-sm text-ember-500 font-bold hover:underline">
             View All Categories →
           </Link>
         </div>
@@ -77,8 +77,8 @@ export const CategoryStrip: React.FC = () => {
                   }`} />
                 </div>
 
-                {/* Small White Text Category Label */}
-                <span className={`uppercase tracking-wider transition-colors duration-300 line-clamp-1 ${style.text}`}>
+                {/* Small White Text Category Label - No Capsule Border, No Text Clipping */}
+                <span className={`uppercase tracking-wider transition-colors duration-300 text-center ${style.text} mt-1 block`}>
                   {category.name}
                 </span>
               </Link>
@@ -89,5 +89,6 @@ export const CategoryStrip: React.FC = () => {
     </section>
   );
 };
+
 
 

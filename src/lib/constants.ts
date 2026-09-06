@@ -32,14 +32,14 @@ export const CATEGORIES: CategoryItem[] = [
   { id: 'cat-solo', name: 'Solo Leveling', slug: 'solo-leveling', type: 'series', image: '/category-figures/fig-solo-leveling.png' },
   { id: 'cat-aot', name: 'Attack on Titan', slug: 'attack-on-titan', type: 'series', image: '/category-figures/fig-attack-on-titan.png' },
   { id: 'cat-hxh', name: 'Hunter x Hunter', slug: 'hunter-x-hunter', type: 'series', image: '/category-figures/fig-hunter-x-hunter.png' },
-  { id: 'cat-tj', name: 'Tom & Jerry', slug: 'tom-jerry', type: 'series', image: '/category-figures/fig-naruto.png' },
-  { id: 'cat-pop', name: 'Pop Culture', slug: 'pop-culture', type: 'series', image: '/category-figures/fig-one-piece.png' },
+  { id: 'cat-tj', name: 'Tom & Jerry', slug: 'tom-jerry', type: 'series', image: '/category-figures/fig-tom-jerry.png' },
+  { id: 'cat-pop', name: 'Pop Culture', slug: 'pop-culture', type: 'series', image: '/category-figures/fig-pop-culture.png' },
 
   // Shop by Type
-  { id: 'cat-figures', name: 'Action Figures', slug: 'action-figures', type: 'type', image: '/category-figures/fig-dragon-ball.png' },
-  { id: 'cat-statues', name: 'Limited Statues', slug: 'limited-statues', type: 'type', image: '/category-figures/fig-demon-slayer.png' },
-  { id: 'cat-resin', name: 'Premium Resin Statues', slug: 'premium-resin-statues', type: 'type', image: '/category-figures/fig-jujutsu-kaisen.png' },
-  { id: 'cat-imports', name: 'Rare Imports', slug: 'rare-imports', type: 'type', image: '/category-figures/fig-solo-leveling.png' },
+  { id: 'cat-figures', name: 'Action Figures', slug: 'action-figures', type: 'type', image: '/category-figures/fig-action-figures.png' },
+  { id: 'cat-statues', name: 'Limited Statues', slug: 'limited-statues', type: 'type', image: '/category-figures/fig-limited-statues.png' },
+  { id: 'cat-resin', name: 'Premium Resin Statues', slug: 'premium-resin-statues', type: 'type', image: '/category-figures/fig-limited-statues.png' },
+  { id: 'cat-imports', name: 'Rare Imports', slug: 'rare-imports', type: 'type', image: '/category-figures/fig-pop-culture.png' },
   { id: 'cat-weapons', name: 'Katanas & Weapons', slug: 'katanas-weapons', type: 'type', image: '/category-figures/fig-katanas-weapons.png' },
 ];
 
