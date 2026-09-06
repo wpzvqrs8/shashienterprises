@@ -7,7 +7,6 @@ import Image from 'next/image';
 import { Product } from '@/lib/types';
 import { getProductBySlug, getProducts } from '@/lib/catalog-store';
 import { useCart, calculateTierPrice } from '@/lib/cart-store';
-import { PriceTierTable } from '@/components/storefront/price-tier-table';
 import { ProductCard } from '@/components/storefront/product-card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -196,31 +195,21 @@ export default function ProductDetailPage() {
               </div>
             </div>
 
-            {/* Tiered Price Table */}
-            <PriceTierTable
-              retailPrice={product.retailSalePrice}
-              wholesalePrice={product.wholesalePrice}
-              tiers={product.wholesaleTiers}
-              currentQty={qty}
-              showOldPrice={product.showOldPrice !== false}
-            />
-
-
-            {/* Stepper + Dynamic Line Total */}
-            <div className="bg-parchment-100 border border-parchment-300 p-4 rounded-[10px] space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            {/* Stepper + Dynamic Line Total Box */}
+            <div className="bg-parchment-100 border border-parchment-300 p-4 rounded-[10px] space-y-3 shadow-sm">
+              <div className="flex flex-row items-center justify-between gap-3">
                 
                 {/* Quantity Stepper */}
                 <div className="space-y-1">
-                  <label className="text-xs font-bold uppercase text-ink-950 flex items-center gap-1">
+                  <label className="text-xs font-bold uppercase text-ink-950 flex flex-wrap items-center gap-1">
                     <span>Order Quantity</span>
-                    <span className="text-muted font-normal">(MOQ: {product.moq} pcs)</span>
+                    <span className="text-muted font-normal text-[11px]">(MOQ: {product.moq} pcs)</span>
                   </label>
                   <div className="flex items-center border border-parchment-300 rounded-[6px] bg-parchment-50 w-fit">
                     <button
                       onClick={handleDecrement}
                       disabled={qty <= product.moq}
-                      className="px-3 py-2 text-ink-950 hover:bg-parchment-100 disabled:opacity-30 cursor-pointer"
+                      className="px-2.5 py-1.5 text-ink-950 hover:bg-parchment-100 disabled:opacity-30 cursor-pointer"
                     >
                       <Minus className="w-4 h-4" />
                     </button>
@@ -231,11 +220,11 @@ export default function ProductDetailPage() {
                         const val = parseInt(e.target.value) || product.moq;
                         setQty(Math.max(product.moq, val));
                       }}
-                      className="w-16 text-center font-mono font-bold text-sm bg-transparent border-x border-parchment-300 py-1.5 focus:outline-none"
+                      className="w-12 sm:w-16 text-center font-mono font-bold text-sm bg-transparent border-x border-parchment-300 py-1 focus:outline-none"
                     />
                     <button
                       onClick={handleIncrement}
-                      className="px-3 py-2 text-ink-950 hover:bg-parchment-100 cursor-pointer"
+                      className="px-2.5 py-1.5 text-ink-950 hover:bg-parchment-100 cursor-pointer"
                     >
                       <Plus className="w-4 h-4" />
                     </button>
@@ -243,12 +232,12 @@ export default function ProductDetailPage() {
                 </div>
 
                 {/* Line Total */}
-                <div className="text-right">
-                  <div className="text-xs text-muted uppercase font-semibold">Line Total Subtotal</div>
-                  <div className="font-display text-2xl text-ember-600 font-bold">
+                <div className="text-right shrink-0">
+                  <div className="text-[11px] sm:text-xs text-muted uppercase font-bold tracking-wider">Line Total Subtotal</div>
+                  <div className="font-display text-xl sm:text-2xl text-ember-600 font-bold leading-tight">
                     ₹{lineTotal.toLocaleString('en-IN')}
                   </div>
-                  <div className="text-[11px] text-muted">
+                  <div className="text-[10px] sm:text-[11px] text-muted font-medium">
                     Applied Rate: ₹{unitRate.toLocaleString('en-IN')} /pc
                   </div>
                 </div>
