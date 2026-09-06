@@ -6,6 +6,7 @@ import { Footer } from '@/components/storefront/footer';
 import { CartDrawer } from '@/components/storefront/cart-drawer';
 import { FloatingWhatsapp } from '@/components/storefront/floating-whatsapp';
 import { FloatingAdmin } from '@/components/storefront/floating-admin';
+import { FloatingExplore } from '@/components/storefront/floating-explore';
 
 export default function StorefrontLayout({
   children,
@@ -22,6 +23,7 @@ export default function StorefrontLayout({
         <CartDrawer />
         <FloatingWhatsapp />
         <FloatingAdmin />
+        <FloatingExplore />
       </div>
     </CartProvider>
   );
