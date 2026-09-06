@@ -168,14 +168,41 @@ export async function getProductById(id: string): Promise<Product | null> {
   return products.find(p => p.id === id) || null;
 }
 
+export async function generateNextMaterialCode(): Promise<string> {
+  let highestNum = 100;
+  try {
+    const products = await getProducts();
+    for (const p of products) {
+      if (p.sku) {
+        const match = p.sku.match(/SE-ANM-(\d+)/i) || p.sku.match(/(\d+)/);
+        if (match && match[1]) {
+          const num = parseInt(match[1], 10);
+          if (!isNaN(num) && num > highestNum && num < 99999) {
+            highestNum = num;
+          }
+        }
+      }
+    }
+  } catch (err) {
+    console.warn('Error computing next material code:', err);
+  }
+
+  const candidateCode = `SE-ANM-${highestNum + 1}`;
+  return candidateCode;
+}
+
 export async function addProduct(productData: Partial<Product>): Promise<Product> {
+  const generatedSKU = (productData.sku && productData.sku.trim() !== '' && !productData.sku.includes('Auto-generated'))
+    ? productData.sku.trim()
+    : await generateNextMaterialCode();
+
   const slug = productData.slug || (productData.name ? productData.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : `product-${Date.now()}`);
 
   try {
     const { data, error } = await supabase
       .from('se_products')
       .insert({
-        sku: productData.sku || `SE-WH-${Math.floor(1000 + Math.random() * 9000)}`,
+        sku: generatedSKU,
         name: productData.name || 'Untitled Product',
         slug,
         series: productData.series || 'Dragon Ball',
@@ -251,7 +278,7 @@ export async function addProduct(productData: Partial<Product>): Promise<Product
     id,
     name: productData.name || 'Untitled Product',
     slug,
-    sku: productData.sku || `SE-WH-${Math.floor(1000 + Math.random() * 9000)}`,
+    sku: generatedSKU,
     category: productData.category || 'Action Figures',
     series: productData.series || 'Dragon Ball',
     retailRegPrice: Number(productData.retailRegPrice) || 1999,
@@ -304,22 +331,33 @@ export async function updateProduct(id: string, updates: Partial<Product>): Prom
 
 export async function deleteProduct(id: string): Promise<boolean> {
   try {
+    // 1. Delete associated tier prices first
+    await supabase.from('se_product_price_tiers').delete().eq('product_id', id);
+
+    // 2. Delete full product row from se_products DB table by id and by sku
     await supabase.from('se_products').delete().eq('id', id);
-  } catch (e) {}
+    await supabase.from('se_products').delete().eq('sku', id);
+  } catch (e) {
+    console.warn('Supabase deleteProduct error:', e);
+  }
 
   const products = getStoredProducts();
-  const filtered = products.filter(p => p.id !== id);
+  const filtered = products.filter(p => p.id !== id && p.sku !== id);
   setStoredProducts(filtered);
   return true;
 }
 
 export async function bulkDeleteProducts(ids: string[]): Promise<boolean> {
   try {
+    await supabase.from('se_product_price_tiers').delete().in('product_id', ids);
     await supabase.from('se_products').delete().in('id', ids);
-  } catch (e) {}
+    await supabase.from('se_products').delete().in('sku', ids);
+  } catch (e) {
+    console.warn('Supabase bulkDeleteProducts error:', e);
+  }
 
   const products = getStoredProducts();
-  const filtered = products.filter(p => !ids.includes(p.id));
+  const filtered = products.filter(p => !ids.includes(p.id) && !ids.includes(p.sku));
   setStoredProducts(filtered);
   return true;
 }

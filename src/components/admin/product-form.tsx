@@ -155,14 +155,14 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
           </div>
 
           <div className="space-y-1">
-            <label className="text-xs font-bold uppercase text-ink-950">SKU Code</label>
+            <label className="text-xs font-bold uppercase text-ink-950">Material / SKU Code (Auto-Generated)</label>
             <input
               type="text"
-              value={formData.sku}
-              onChange={e => handleFieldChange('sku', e.target.value)}
-              placeholder="e.g. SE-DBZ-0142"
-              className="w-full bg-parchment-50 border border-parchment-300 text-xs p-2.5 rounded-[6px] focus:outline-none focus:border-ember-500 text-ink-950 font-mono"
+              readOnly
+              value={formData.sku || 'Auto-generated: SE-ANM-101+'}
+              className="w-full bg-parchment-200/70 border border-parchment-300 text-xs p-2.5 rounded-[6px] text-ink-950 font-mono font-bold cursor-not-allowed"
             />
+            <span className="text-[10px] text-muted block">System automatically assigns non-clashing code (e.g. SE-ANM-101, SE-ANM-102)</span>
           </div>
         </div>
 
