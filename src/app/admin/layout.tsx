@@ -32,7 +32,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               Admin Access Restricted
             </h1>
             <p className="text-xs text-muted leading-relaxed">
-              Access to the Shashi Enterprises management portal is strictly locked. Only authorized administrator accounts (<strong>wpzvqrs8@gmail.com</strong> / <strong>enterprisesshashi5@gmail.com</strong>) are permitted.
+              Access to the Shashi Enterprises management portal is strictly locked. Only authorized administrator Google accounts are permitted.
             </p>
           </div>
 

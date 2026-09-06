@@ -44,7 +44,7 @@ export default function AdminLoginPage() {
         {/* Security Rule Warning */}
         <div className="bg-ink-950 p-3 rounded-[6px] border border-ink-800 text-[11px] text-gold-500 font-mono flex items-center gap-2">
           <ShieldAlert className="w-4 h-4 shrink-0" />
-          <span>Restricted Portal: Only <strong>{adminEmail}</strong> has administrative access.</span>
+          <span>Restricted Portal: Authorized Shashi Enterprises Admin Credentials Required.</span>
         </div>
 
         {loading ? (
@@ -62,7 +62,7 @@ export default function AdminLoginPage() {
                 </div>
               ) : (
                 <div className="text-red-400 text-xs font-bold">
-                  Access Denied: This email does not match {adminEmail}
+                  Access Denied: This account is not authorized for Admin Access.
                 </div>
               )}
             </div>

@@ -114,9 +114,9 @@ export const Navbar: React.FC = () => {
         <div className="flex items-center justify-between h-16 sm:h-20">
           
           {/* Left: Brand Logo & Navigation */}
-          <div className="flex items-center gap-8">
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative h-12 w-52 group-hover:scale-105 transition-transform">
+          <div className="flex items-center gap-4 sm:gap-8">
+            <Link href="/" className="flex items-center gap-3 group shrink-0">
+              <div className="relative h-10 sm:h-12 w-36 sm:w-52 group-hover:scale-105 transition-transform">
                 <Image
                   src="/logo_black_bg.png"
                   alt="Shashi Enterprises B2B Anime Collectibles"
@@ -149,7 +149,7 @@ export const Navbar: React.FC = () => {
 
                 {/* Mega Menu Dropdown */}
                 {isMegaMenuOpen && (
-                  <div className="absolute top-full left-0 w-[680px] bg-ink-900 border border-ink-800 shadow-warm-lg p-6 grid grid-cols-3 gap-6 z-50 rounded-b-[10px]">
+                  <div className="absolute top-full left-0 w-[680px] max-w-[calc(100vw-32px)] bg-ink-900 border border-ink-800 shadow-warm-lg p-6 grid grid-cols-1 sm:grid-cols-3 gap-6 z-50 rounded-b-[10px]">
                     <div>
                       <h4 className="font-display text-base text-ember-500 mb-3 border-b border-ink-800 pb-1 flex items-center gap-1.5">
                         <Sparkles className="w-4 h-4" /> Shop by Series
@@ -209,27 +209,27 @@ export const Navbar: React.FC = () => {
           </div>
 
           {/* Right Action Icons: Search, Cart, Account */}
-          <div className="flex items-center space-x-4 sm:space-x-6">
+          <div className="flex items-center space-x-2 sm:space-x-6 shrink-0">
             
             {/* Search Input Toggle */}
             <div className="relative">
               {isSearchOpen ? (
-                <form onSubmit={handleSearchSubmit} className="flex items-center">
+                <form onSubmit={handleSearchSubmit} className="flex items-center max-w-[calc(100vw-80px)]">
                   <input
                     type="text"
                     placeholder="Search SKU, series, product..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="bg-ink-900 border border-ink-800 text-parchment-50 text-xs px-3 py-1.5 rounded-l-[6px] w-48 sm:w-64 focus:outline-none focus:border-ember-500"
+                    className="bg-ink-900 border border-ink-800 text-parchment-50 text-xs px-2.5 py-1.5 rounded-l-[6px] w-32 xs:w-40 sm:w-64 focus:outline-none focus:border-ember-500 min-w-0"
                     autoFocus
                   />
                   <button
                     type="submit"
-                    className="bg-ember-500 text-white px-3.5 py-1.5 rounded-r-[6px] hover:bg-ember-600"
+                    className="bg-ember-500 text-white px-3 py-1.5 rounded-r-[6px] hover:bg-ember-600 shrink-0"
                   >
                     <Search className="w-4 h-4" />
                   </button>
-                  <button type="button" onClick={() => setIsSearchOpen(false)} className="ml-2 text-muted hover:text-white">
+                  <button type="button" onClick={() => setIsSearchOpen(false)} className="ml-1.5 text-muted hover:text-white shrink-0">
                     <X className="w-4 h-4" />
                   </button>
                 </form>
