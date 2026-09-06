@@ -85,7 +85,7 @@ export const Footer: React.FC = () => {
               rel="noopener noreferrer"
               className="block text-center bg-jade-600 hover:bg-jade-600/90 text-white font-bold text-xs sm:text-sm py-2.5 px-4 rounded-[6px] transition-colors uppercase tracking-wider"
             >
-              Request Quick Quote on WhatsApp
+              Contact Us on WhatsApp
             </a>
           </div>
 

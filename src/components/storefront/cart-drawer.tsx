@@ -242,7 +242,7 @@ export const CartDrawer: React.FC = () => {
                         }}
                         className="gap-1.5"
                       >
-                        <span>Request Quote</span>
+                        <span>Check Out</span>
                         <ArrowRight className="w-4 h-4" />
                       </Button>
                     </div>

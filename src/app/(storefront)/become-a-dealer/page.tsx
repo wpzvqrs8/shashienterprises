@@ -10,7 +10,9 @@ import {
   validateCity,
   validateGSTIN
 } from '@/lib/validation';
-import { CheckCircle2, ShieldCheck, FileText, Send, AlertTriangle } from 'lucide-react';
+import { CheckCircle2, ShieldCheck, FileText, Send, AlertTriangle, Mail, ExternalLink, RefreshCw } from 'lucide-react';
+
+const COMPANY_EMAIL = 'enterprisesshashi5@gmail.com';
 
 export default function BecomeADealerPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -25,6 +27,8 @@ export default function BecomeADealerPage() {
     comments: ''
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [mailtoLink, setMailtoLink] = useState('');
+  const [gmailWebLink, setGmailWebLink] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -66,7 +70,41 @@ export default function BecomeADealerPage() {
       return;
     }
 
+    const emailSubject = `B2B Dealer Application - ${formData.storeName.trim()}`;
+    const emailBody = `Dear Shashi Enterprises Team,
+
+I would like to apply for a B2B Verified Dealer Account on your platform. Here are my verified application details:
+
+--------------------------------------------------
+DEALER APPLICATION DETAILS
+--------------------------------------------------
+Store / Business Name : ${formData.storeName.trim()}
+Proprietor Name       : ${formData.ownerName.trim()}
+WhatsApp Mobile       : ${formData.phone.trim()}
+Business Email        : ${formData.email.trim()}
+City / Location       : ${formData.city.trim()}
+GSTIN Number          : ${formData.gstin.trim() || 'N/A'}
+Store Type            : ${formData.storeType}
+Additional Comments   : ${formData.comments.trim() || 'N/A'}
+--------------------------------------------------
+
+Please process my dealer application and reach out to me on WhatsApp/Email.
+
+Thank you,
+${formData.ownerName.trim()}
+${formData.storeName.trim()}`;
+
+    const mailto = `mailto:${COMPANY_EMAIL}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+    const gmailWeb = `https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=${COMPANY_EMAIL}&su=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+
+    setMailtoLink(mailto);
+    setGmailWebLink(gmailWeb);
     setSubmitted(true);
+
+    // Trigger redirection to device email client / mobile mail app
+    if (typeof window !== 'undefined') {
+      window.location.href = mailto;
+    }
   };
 
   return (
@@ -86,12 +124,58 @@ export default function BecomeADealerPage() {
         </div>
 
         {submitted ? (
-          <div className="bg-jade-100 border border-jade-600/30 text-jade-600 p-8 rounded-[12px] text-center space-y-4 shadow-sm">
-            <CheckCircle2 className="w-12 h-12 mx-auto" />
-            <h2 className="font-display text-2xl">Dealer Application Submitted!</h2>
-            <p className="text-xs max-w-md mx-auto leading-relaxed text-ink-text/90">
-              Our trade onboarding desk will verify your store credentials and contact you via WhatsApp ({formData.phone}) within 12 business hours.
-            </p>
+          <div className="bg-parchment-100 border border-parchment-300 rounded-[12px] p-8 text-center space-y-6 shadow-md max-w-2xl mx-auto">
+            <div className="w-16 h-16 bg-jade-100 border border-jade-600/30 text-jade-600 rounded-full flex items-center justify-center mx-auto">
+              <CheckCircle2 className="w-10 h-10" />
+            </div>
+            
+            <div className="space-y-2">
+              <h2 className="font-display text-2xl text-ink-950 font-bold">Opening Email Application...</h2>
+              <p className="text-xs text-muted max-w-lg mx-auto leading-relaxed">
+                Your dealer application formatted data has been generated for <strong className="text-ink-950">{COMPANY_EMAIL}</strong>. If your email application did not open automatically, please click below to send:
+              </p>
+            </div>
+
+            <div className="bg-parchment-50 p-4 rounded-[8px] border border-parchment-300 text-left text-xs space-y-1 font-mono text-ink-text/90">
+              <div className="font-sans font-bold text-ink-950 mb-1 flex items-center gap-1.5">
+                <Mail className="w-4 h-4 text-ember-500" />
+                <span>Email Summary Prepared:</span>
+              </div>
+              <div><strong>To:</strong> {COMPANY_EMAIL}</div>
+              <div><strong>Business:</strong> {formData.storeName} ({formData.ownerName})</div>
+              <div><strong>Contact:</strong> {formData.phone} | {formData.email}</div>
+              <div><strong>City & GSTIN:</strong> {formData.city} | {formData.gstin || 'N/A'}</div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+              <a
+                href={mailtoLink}
+                className="inline-flex items-center justify-center gap-2 bg-ember-600 hover:bg-ember-700 text-white font-bold text-xs py-3 px-6 rounded-[6px] transition-colors shadow-sm"
+              >
+                <Mail className="w-4 h-4" />
+                <span>Open Mobile / Desktop Mail App</span>
+              </a>
+
+              <a
+                href={gmailWebLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 bg-ink-950 hover:bg-ink-900 text-parchment-text font-bold text-xs py-3 px-6 rounded-[6px] transition-colors border border-ink-800 shadow-sm"
+              >
+                <ExternalLink className="w-4 h-4 text-gold-500" />
+                <span>Open in Gmail Web</span>
+              </a>
+            </div>
+
+            <div className="pt-4 border-t border-parchment-300/60">
+              <button
+                onClick={() => setSubmitted(false)}
+                className="text-xs text-muted hover:text-ink-950 font-bold inline-flex items-center gap-1.5 cursor-pointer"
+              >
+                <RefreshCw className="w-3.5 h-3.5" />
+                <span>Edit Application Details</span>
+              </button>
+            </div>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
@@ -116,6 +200,13 @@ export default function BecomeADealerPage() {
                     <span>5 pcs minimum order quantity per SKU.</span>
                   </li>
                 </ul>
+              </div>
+
+              <div className="bg-ink-950 text-parchment-text p-5 rounded-[10px] border border-ink-800 space-y-2">
+                <h4 className="font-display text-base text-gold-500 font-bold">Direct Company Email</h4>
+                <p className="text-xs text-muted leading-relaxed">
+                  Submitting this form redirects directly to your email app/Gmail with formatted details to send to <strong className="text-parchment-50">{COMPANY_EMAIL}</strong>.
+                </p>
               </div>
             </div>
 
@@ -220,25 +311,55 @@ export default function BecomeADealerPage() {
                   </div>
                 </div>
 
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold uppercase text-ink-950">Store Type</label>
+                    <select
+                      name="storeType"
+                      value={formData.storeType}
+                      onChange={handleChange}
+                      className="w-full text-xs p-2.5 rounded-[6px] bg-parchment-50 border border-parchment-300 text-ink-950 focus:outline-none focus:border-ember-500"
+                    >
+                      <option value="Physical Retail Shop">Physical Retail Shop</option>
+                      <option value="Online E-commerce Store">Online E-commerce Store</option>
+                      <option value="Comic & Hobby Store">Comic & Hobby Store</option>
+                      <option value="Social Media Reseller (Instagram/FB)">Social Media Reseller</option>
+                      <option value="Wholesale Distributor">Wholesale Distributor</option>
+                    </select>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold uppercase text-ink-950">GSTIN Number (Optional)</label>
+                    <input
+                      type="text"
+                      name="gstin"
+                      value={formData.gstin}
+                      onChange={handleChange}
+                      placeholder="e.g. 07AAAAA0000A1Z5"
+                      className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 uppercase ${
+                        errors.gstin ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
+                      }`}
+                    />
+                    {errors.gstin && <p className="text-[11px] text-red-600 font-semibold mt-0.5">{errors.gstin}</p>}
+                  </div>
+                </div>
+
                 <div className="space-y-1">
-                  <label className="text-xs font-bold uppercase text-ink-950">GSTIN Number (Optional)</label>
-                  <input
-                    type="text"
-                    name="gstin"
-                    value={formData.gstin}
+                  <label className="text-xs font-bold uppercase text-ink-950">Additional Comments / Notes (Optional)</label>
+                  <textarea
+                    name="comments"
+                    rows={2}
+                    value={formData.comments}
                     onChange={handleChange}
-                    placeholder="e.g. 07AAAAA0000A1Z5"
-                    className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 uppercase ${
-                      errors.gstin ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
-                    }`}
+                    placeholder="Describe your expected monthly volume or product categories of interest..."
+                    className="w-full text-xs p-2.5 rounded-[6px] bg-parchment-50 border border-parchment-300 text-ink-950 focus:outline-none focus:border-ember-500"
                   />
-                  {errors.gstin && <p className="text-[11px] text-red-600 font-semibold mt-0.5">{errors.gstin}</p>}
                 </div>
 
                 <div className="pt-2">
-                  <Button type="submit" variant="ember" size="md" fullWidth className="gap-2">
+                  <Button type="submit" variant="ember" size="md" fullWidth className="gap-2 font-bold uppercase">
                     <Send className="w-4 h-4" />
-                    <span>Submit Dealer Application</span>
+                    <span>Submit & Open Email Application</span>
                   </Button>
                 </div>
               </form>
