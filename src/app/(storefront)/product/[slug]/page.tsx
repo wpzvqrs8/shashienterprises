@@ -263,27 +263,17 @@ export default function ProductDetailPage() {
               )}
             </div>
 
-            {/* Action Buttons: Add to Cart & WhatsApp Link */}
+            {/* Action Buttons: Add to Wholesale Cart */}
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <Button
                 onClick={handleAddToCart}
                 variant="ember"
                 size="lg"
-                className="flex-1 gap-2"
+                className="w-full gap-2"
               >
                 <ShoppingBag className="w-5 h-5" />
                 <span>Add to Wholesale Cart</span>
               </Button>
-
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center bg-jade-600 hover:bg-jade-600/90 text-white font-bold text-sm px-6 py-3.5 rounded-[6px] transition-all gap-2 uppercase tracking-wider shadow-warm"
-              >
-                <MessageSquare className="w-5 h-5" />
-                <span>WhatsApp Quote</span>
-              </a>
             </div>
 
             {/* Product Specifications Grid */}
