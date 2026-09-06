@@ -74,10 +74,9 @@ export default function BuyerAccountPage() {
                     <div className="flex items-center gap-2">
                       <span className="font-mono font-bold text-sm text-ink-950">{ord.orderNumber}</span>
                       <span className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded ${
-                        ord.status === 'Confirmed' ? 'bg-jade-100 text-jade-600' :
-                        ord.status === 'Quoted' ? 'bg-gold-500/10 text-gold-500' : 'bg-ember-100 text-ember-600'
+                        ord.status === 'Confirmed' ? 'bg-jade-100 text-jade-600 border border-jade-600/30' : 'bg-amber-100 text-amber-700 border border-amber-300'
                       }`}>
-                        {ord.status}
+                        {ord.status === 'Confirmed' ? 'Confirmed' : 'Pending Approval'}
                       </span>
                     </div>
                     <div className="text-xs text-muted mt-1">

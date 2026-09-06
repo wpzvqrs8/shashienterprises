@@ -25,7 +25,7 @@ export default function AdminDashboardPage() {
 
   const totalProducts = products.length;
   const lowStockCount = products.filter(p => p.stockQty < 50 || p.status === 'out-of-stock').length;
-  const pendingOrdersCount = orders.filter(o => o.status === 'New' || o.status === 'Quoted').length;
+  const pendingOrdersCount = orders.filter(o => o.status === 'New').length;
   const totalCatalogValue = products.reduce((sum, p) => sum + (p.wholesalePrice * p.stockQty), 0);
 
   return (
