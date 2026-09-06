@@ -49,7 +49,7 @@ export const Hero: React.FC = () => {
           <div className="lg:col-span-6 relative w-full flex justify-center">
             <div className="relative w-full h-[300px] sm:h-[380px] lg:h-[460px] max-h-[calc(100vh-200px)] rounded-[14px] bg-ink-900 border border-ink-800 p-3 sm:p-4 shadow-warm-lg overflow-hidden group">
               <Image
-                src="/hero-featured/hero-goku.jpeg"
+                src="/hero-goku.jpg"
                 alt="Ultra Instinct Goku Hero Showcase"
                 fill
                 priority

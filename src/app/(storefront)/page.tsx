@@ -116,7 +116,7 @@ export default function HomePage() {
 
             <div className="lg:col-span-5 relative aspect-square max-w-xs sm:max-w-sm w-full mx-auto rounded-[10px] bg-ink-950 overflow-hidden border border-ink-800 p-2">
               <Image
-                src="/hero-featured/hero-resin.jpeg"
+                src="/hero-resin.jpg"
                 alt="Limited Resin Statues Batch"
                 fill
                 priority

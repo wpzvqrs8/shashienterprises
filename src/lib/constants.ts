@@ -38,7 +38,7 @@ export const CATEGORIES: CategoryItem[] = [
   // Shop by Type
   { id: 'cat-figures', name: 'Action Figures', slug: 'action-figures', type: 'type', image: '/category-figures/fig-action-figures.png' },
   { id: 'cat-statues', name: 'Limited Statues', slug: 'limited-statues', type: 'type', image: '/category-figures/fig-limited-statues.png' },
-  { id: 'cat-resin', name: 'Premium Resin Statues', slug: 'premium-resin-statues', type: 'type', image: '/category-figures/fig-limited-statues.png' },
+  { id: 'cat-resin', name: 'Premium Resin Statues', slug: 'premium-resin-statues', type: 'type', image: '/category-figures/fig-premium-resin.png' },
   { id: 'cat-imports', name: 'Rare Imports', slug: 'rare-imports', type: 'type', image: '/category-figures/fig-pop-culture.png' },
   { id: 'cat-weapons', name: 'Katanas & Weapons', slug: 'katanas-weapons', type: 'type', image: '/category-figures/fig-katanas-weapons.png' },
 ];
