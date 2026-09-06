@@ -32,7 +32,7 @@ export const CATEGORIES: CategoryItem[] = [
   { id: 'cat-solo', name: 'Solo Leveling', slug: 'solo-leveling', type: 'series', image: '/category-figures/fig-solo-leveling.png' },
   { id: 'cat-aot', name: 'Attack on Titan', slug: 'attack-on-titan', type: 'series', image: '/category-figures/fig-attack-on-titan.png' },
   { id: 'cat-hxh', name: 'Hunter x Hunter', slug: 'hunter-x-hunter', type: 'series', image: '/category-figures/fig-hunter-x-hunter.png' },
-  { id: 'cat-tj', name: 'Tom & Jerry', slug: 'tom-jerry', type: 'series', image: '/category-figures/fig-tom-jerry.png' },
+  { id: 'cat-marvel', name: 'Marvel', slug: 'marvel', type: 'series', image: '/category-figures/fig-marvel.png' },
   { id: 'cat-pop', name: 'Pop Culture', slug: 'pop-culture', type: 'series', image: '/category-figures/fig-pop-culture.png' },
 
   // Shop by Type
