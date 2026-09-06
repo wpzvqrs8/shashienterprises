@@ -52,11 +52,8 @@ export default function OrderTrackingPage({ params }: TrackPageProps) {
     isAdmin || (user && order && user.email?.toLowerCase() === order.email.toLowerCase());
 
   const trackingSteps = [
-    { key: 'New', label: 'Order Received', desc: 'Quote request registered in system' },
-    { key: 'Quoted', label: 'Quote Reviewed', desc: 'Wholesale pricing & stock verified' },
-    { key: 'Confirmed', label: 'Confirmed & Invoiced', desc: 'GST invoice generated' },
-    { key: 'Dispatched', label: 'Freight Dispatched', desc: 'Insured transit in progress' },
-    { key: 'Delivered', label: 'Delivered', desc: 'Successfully delivered to warehouse' },
+    { key: 'New', label: 'Order Request Submitted', desc: 'Pending Admin review & approval' },
+    { key: 'Confirmed', label: 'Approved & Confirmed', desc: 'Approved by admin! You will be contacted via WhatsApp' },
   ];
 
   const currentStepIdx = order ? trackingSteps.findIndex(s => s.key === order.status) : 0;
@@ -212,6 +209,30 @@ export default function OrderTrackingPage({ params }: TrackPageProps) {
                 </div>
               </div>
             </div>
+
+            {/* Status Notification Banner */}
+            {order.status === 'Confirmed' ? (
+              <div className="bg-emerald-50 border-2 border-emerald-500 rounded-[10px] p-5 shadow-sm space-y-2">
+                <div className="flex items-center gap-2 text-emerald-900 font-extrabold text-base font-display">
+                  <CheckCircle2 className="w-6 h-6 text-emerald-600 shrink-0" />
+                  <span>Order Approved & Confirmed!</span>
+                </div>
+                <p className="text-xs text-emerald-800 leading-relaxed font-medium">
+                  Your order request <strong>#{order.orderNumber}</strong> has been officially approved by Shashi Enterprises Admin.
+                  You will be contacted soon from our official WhatsApp number for payment details & freight dispatch confirmation.
+                </p>
+              </div>
+            ) : (
+              <div className="bg-amber-50 border border-amber-300 rounded-[10px] p-5 shadow-sm space-y-2">
+                <div className="flex items-center gap-2 text-amber-900 font-bold text-sm font-display">
+                  <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0" />
+                  <span>Order Request Submitted & Pending Admin Approval</span>
+                </div>
+                <p className="text-xs text-amber-800 leading-relaxed font-medium">
+                  Your order request <strong>#{order.orderNumber}</strong> has been submitted! Once approved by Shashi Enterprises Admin, your order status will be updated to <strong>Confirmed</strong> and you will be contacted soon from our WhatsApp number.
+                </p>
+              </div>
+            )}
 
             {/* Tracking Progress Pipeline */}
             <div className="bg-parchment-100 border border-parchment-300 rounded-[10px] p-6 space-y-6 shadow-sm">

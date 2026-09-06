@@ -112,16 +112,11 @@ export default function AdminOrdersPage() {
                   value={ord.status}
                   onChange={e => handleStatusChange(ord.id, e.target.value as any)}
                   className={`text-[11px] px-2.5 py-1 rounded font-bold uppercase border focus:outline-none ${
-                    ord.status === 'Confirmed' ? 'bg-jade-100 text-jade-600 border-jade-600/30' :
-                    ord.status === 'Dispatched' ? 'bg-ember-100 text-ember-600 border-ember-500/30' :
-                    'bg-parchment-50 text-ink-950 border-parchment-300'
+                    ord.status === 'Confirmed' ? 'bg-jade-100 text-jade-600 border-jade-600/30' : 'bg-gold-500/10 text-gold-500 border-gold-500/30'
                   }`}
                 >
-                  <option value="New">New Request</option>
-                  <option value="Quoted">Quoted</option>
-                  <option value="Confirmed">Confirmed</option>
-                  <option value="Dispatched">Dispatched</option>
-                  <option value="Delivered">Delivered</option>
+                  <option value="New">Pending Request</option>
+                  <option value="Confirmed">Approved & Confirmed</option>
                 </select>
 
                 <div className="flex items-center gap-1.5">
@@ -190,16 +185,11 @@ export default function AdminOrdersPage() {
                       value={ord.status}
                       onChange={e => handleStatusChange(ord.id, e.target.value as any)}
                       className={`text-xs px-2.5 py-1 rounded font-bold uppercase border focus:outline-none ${
-                        ord.status === 'Confirmed' ? 'bg-jade-100 text-jade-600 border-jade-600/30' :
-                        ord.status === 'Dispatched' ? 'bg-ember-100 text-ember-600 border-ember-500/30' :
-                        'bg-parchment-50 text-ink-950 border-parchment-300'
+                        ord.status === 'Confirmed' ? 'bg-jade-100 text-jade-600 border-jade-600/30' : 'bg-gold-500/10 text-gold-500 border-gold-500/30'
                       }`}
                     >
-                      <option value="New">New Request</option>
-                      <option value="Quoted">Quoted</option>
-                      <option value="Confirmed">Confirmed</option>
-                      <option value="Dispatched">Dispatched</option>
-                      <option value="Delivered">Delivered</option>
+                      <option value="New">Pending Request</option>
+                      <option value="Confirmed">Approved & Confirmed</option>
                     </select>
                   </td>
 

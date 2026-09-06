@@ -383,7 +383,7 @@ export async function getOrders(): Promise<QuoteOrder[]> {
           lineTotal: Number(item.line_total)
         })),
         subtotal: Number(o.subtotal),
-        status: o.status === 'NEW_REQUEST' ? 'New' : o.status === 'CONFIRMED' ? 'Confirmed' : o.status === 'QUOTED' ? 'Quoted' : o.status === 'DISPATCHED' ? 'Dispatched' : 'Delivered',
+        status: o.status === 'CONFIRMED' ? 'Confirmed' : 'New',
         createdAt: o.created_at,
         notes: o.admin_notes || ''
       }));
@@ -498,7 +498,7 @@ export async function addOrder(orderData: Partial<QuoteOrder>): Promise<QuoteOrd
 }
 
 export async function updateOrderStatus(id: string, status: QuoteOrder['status']): Promise<QuoteOrder> {
-  const dbStatus = status === 'New' ? 'NEW_REQUEST' : status === 'Confirmed' ? 'CONFIRMED' : status === 'Quoted' ? 'QUOTED' : status === 'Dispatched' ? 'DISPATCHED' : 'DELIVERED';
+  const dbStatus = status === 'Confirmed' ? 'CONFIRMED' : 'NEW_REQUEST';
   try {
     await supabase.from('se_orders').update({ status: dbStatus }).eq('id', id);
   } catch (e) {}

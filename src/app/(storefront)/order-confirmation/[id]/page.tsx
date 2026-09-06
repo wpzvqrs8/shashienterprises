@@ -68,23 +68,23 @@ export default function OrderConfirmationPage() {
           <h3 className="font-display text-lg text-ink-950 border-b border-parchment-300 pb-2">
             What Happens Next?
           </h3>
-          <div className="space-y-3 text-xs text-ink-text/90 leading-relaxed">
+          <div className="space-y-3 text-xs sm:text-sm text-ink-text/90 leading-relaxed">
             <div className="flex items-start gap-3">
               <span className="w-6 h-6 rounded-full bg-ember-500 text-white font-bold flex items-center justify-center shrink-0">1</span>
               <div>
-                <strong className="text-ink-950">Stock Allocation:</strong> Our warehouse desk locks your requested SKU quantities.
+                <strong className="text-ink-950">Admin Order Approval:</strong> Your order request has been submitted to the Shashi Enterprises Admin Desk with status <strong>Pending</strong>.
               </div>
             </div>
             <div className="flex items-start gap-3">
               <span className="w-6 h-6 rounded-full bg-ember-500 text-white font-bold flex items-center justify-center shrink-0">2</span>
               <div>
-                <strong className="text-ink-950">Formal Tax Invoice & Freight Quote:</strong> We calculate exact shipping weight/packing and send a detailed GST invoice to your WhatsApp ({order?.phone || 'provided phone'}) within 24 hours.
+                <strong className="text-ink-950">Status Update to Confirmed:</strong> Once the admin approves your request, your order status will update to <strong>Confirmed</strong> on your tracking page.
               </div>
             </div>
             <div className="flex items-start gap-3">
               <span className="w-6 h-6 rounded-full bg-ember-500 text-white font-bold flex items-center justify-center shrink-0">3</span>
               <div>
-                <strong className="text-ink-950">Payment & Pan-India Dispatch:</strong> Upon invoice confirmation, payment is collected via {order?.paymentPreference || 'your selected method'} and packed for express transport.
+                <strong className="text-ink-950">WhatsApp Contact:</strong> You will be contacted soon directly from our WhatsApp number ({INITIAL_STORE_SETTINGS.whatsapp}) for dispatch and tax invoice confirmation.
               </div>
             </div>
           </div>
