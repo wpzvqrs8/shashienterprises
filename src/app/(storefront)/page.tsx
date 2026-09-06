@@ -116,8 +116,8 @@ export default function HomePage() {
 
             <div className="lg:col-span-5 relative aspect-square max-w-xs sm:max-w-sm mx-auto rounded-[10px] bg-ink-950 overflow-hidden border border-ink-800">
               <Image
-                src="/hero-featured/promo-shanks.jpeg"
-                alt="Shanks 72cm Statue Promo"
+                src="/hero-featured/hero-resin.jpeg"
+                alt="Limited Resin Statues Batch"
                 fill
                 className="object-cover"
               />
