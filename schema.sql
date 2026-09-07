@@ -168,18 +168,18 @@ CREATE TABLE shashi_enterprise.se_store_settings (
   logo_mark_url TEXT DEFAULT '/logo_black_bg.png' NOT NULL,
   address TEXT DEFAULT 'Delhi, India' NOT NULL,
   whatsapp TEXT DEFAULT '+91-8796138389' NOT NULL,
-  email TEXT DEFAULT 'enterprisesshashi5@gmail.com' NOT NULL,
+  email TEXT DEFAULT 'enterprisesshashi95@gmail.com' NOT NULL,
   gstin TEXT DEFAULT '',
   facebook TEXT DEFAULT 'https://www.facebook.com/profile.php?id=61589057115880',
   instagram TEXT DEFAULT 'https://www.instagram.com/shashienterprises5',
   minimum_order_value NUMERIC(10,2) DEFAULT 15000 NOT NULL,
   minimum_order_note TEXT DEFAULT '₹15,000 minimum per wholesale order · 5 pcs minimum per SKU' NOT NULL,
   payment_methods JSONB DEFAULT '["UPI", "Bank Transfer", "Cash on Pickup"]'::jsonb NOT NULL,
-  admin_email TEXT DEFAULT 'wpzvqrs8@gmail.com' NOT NULL,
+  admin_email TEXT DEFAULT 'enterprisesshashi95@gmail.com' NOT NULL,
   updated_at TIMESTAMPTZ DEFAULT NOW() NOT NULL
 );
 
-INSERT INTO shashi_enterprise.se_store_settings (id, admin_email) VALUES (1, 'wpzvqrs8@gmail.com');
+INSERT INTO shashi_enterprise.se_store_settings (id, admin_email) VALUES (1, 'enterprisesshashi95@gmail.com');
 
 -- ====================================================================
 -- AUTOMATIC ALPHANUMERIC ORDER NUMBER GENERATOR TRIGGER
@@ -225,7 +225,7 @@ BEGIN
     NEW.raw_user_meta_data->>'avatar_url',
     COALESCE(NEW.raw_app_meta_data->>'provider', 'google'),
     TRUE,
-    CASE WHEN NEW.email IN ('enterprisesshashi5@gmail.com', 'wpzvqrs8@gmail.com') THEN 'ADMIN'::shashi_enterprise.user_role ELSE 'CUSTOMER'::shashi_enterprise.user_role END
+    CASE WHEN NEW.email IN ('enterprisesshashi95@gmail.com', 'wpzvqrs8@gmail.com') THEN 'ADMIN'::shashi_enterprise.user_role ELSE 'CUSTOMER'::shashi_enterprise.user_role END
   ) ON CONFLICT (id) DO UPDATE SET last_login_at = NOW(), updated_at = NOW();
   RETURN NEW;
 END;

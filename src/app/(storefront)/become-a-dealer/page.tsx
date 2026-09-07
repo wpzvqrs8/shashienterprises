@@ -12,7 +12,7 @@ import {
 } from '@/lib/validation';
 import { CheckCircle2, ShieldCheck, FileText, Send, AlertTriangle, Mail, ExternalLink, RefreshCw } from 'lucide-react';
 
-const COMPANY_EMAIL = 'enterprisesshashi5@gmail.com';
+const COMPANY_EMAIL = 'enterprisesshashi95@gmail.com';
 
 export default function BecomeADealerPage() {
   const [submitted, setSubmitted] = useState(false);

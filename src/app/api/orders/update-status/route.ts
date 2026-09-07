@@ -13,10 +13,12 @@ export async function POST(req: NextRequest) {
 
     const updatedOrder = await updateOrderStatus(orderId, status as QuoteOrder['status']);
 
+    const normalizedStatus = String(status).trim().toLowerCase();
+
     // Trigger notification based on new status
-    if (status === 'Confirmed') {
+    if (normalizedStatus === 'confirmed') {
       await sendOrderConfirmationNotification(updatedOrder);
-    } else if (status === 'Dispatched') {
+    } else if (normalizedStatus === 'dispatched') {
       await sendOrderDispatchNotification(updatedOrder, courier, trackingNo);
     }
 

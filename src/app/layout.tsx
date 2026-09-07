@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { AuthProvider } from '@/components/providers/auth-provider';
+import { LoginModal } from '@/components/auth/login-modal';
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata: Metadata = {
   title: 'Shashi Enterprises — India\'s Trade Source for Premium Anime Collectibles',
@@ -11,10 +14,6 @@ export const metadata: Metadata = {
     apple: '/logo_black_bg.png',
   },
 };
-
-
-import { AuthProvider } from '@/components/providers/auth-provider';
-import { LoginModal } from '@/components/auth/login-modal';
 
 export default function RootLayout({
   children,
@@ -32,6 +31,7 @@ export default function RootLayout({
         <AuthProvider>
           {children}
           <LoginModal />
+          <Analytics />
         </AuthProvider>
       </body>
     </html>

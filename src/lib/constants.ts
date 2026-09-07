@@ -8,7 +8,7 @@ export const DEFAULT_STORE_SETTINGS: StoreSettings = {
   logoMarkUrl: "/logo_black_bg.png",
   address: "Delhi, India",
   whatsapp: "+91-8796138389",
-  email: "enterprisesshashi5@gmail.com",
+  email: "enterprisesshashi95@gmail.com",
   gstin: "",
   facebook: "https://www.facebook.com/profile.php?id=61589057115880",
   instagram: "https://www.instagram.com/shashienterprises5",
@@ -39,7 +39,6 @@ export const CATEGORIES: CategoryItem[] = [
   { id: 'cat-figures', name: 'Action Figures', slug: 'action-figures', type: 'type', image: '/category-figures/fig-action-figures.png' },
   { id: 'cat-statues', name: 'Limited Statues', slug: 'limited-statues', type: 'type', image: '/category-figures/fig-limited-statues.png' },
   { id: 'cat-resin', name: 'Premium Resin Statues', slug: 'premium-resin-statues', type: 'type', image: '/category-figures/fig-premium-resin.png' },
-  { id: 'cat-imports', name: 'Rare Imports', slug: 'rare-imports', type: 'type', image: '/category-figures/fig-rare-imports.png' },
   { id: 'cat-weapons', name: 'Katanas & Weapons', slug: 'katanas-weapons', type: 'type', image: '/category-figures/fig-katanas-weapons.png' },
 ];
 

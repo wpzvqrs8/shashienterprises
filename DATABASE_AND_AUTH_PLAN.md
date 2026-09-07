@@ -244,7 +244,7 @@ To protect customer privacy and restrict catalog modifications to Admins:
    - Attach `<GoogleSignInButton />` on `/login` and `/checkout`.
 
 2. **Admin Email Whitelisting**:
-   - Defined via environment variable `ADMIN_EMAILS="enterprisesshashi5@gmail.com"`.
+   - Defined via environment variable `ADMIN_EMAILS="enterprisesshashi95@gmail.com"`.
    - On user login, database trigger checks if `new.email IN (ADMIN_EMAILS)`. If true, automatically sets `profiles.role = 'ADMIN'`.
 
 3. **Admin Panel Access**:

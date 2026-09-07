@@ -11,7 +11,7 @@ export default function AdminLoginPage() {
   const router = useRouter();
   const { user, isAdmin, signInWithGoogle, signOut, loading } = useAuth();
 
-  const adminEmail = process.env.NEXT_PUBLIC_ADMIN_GMAIL || 'enterprisesshashi5@gmail.com';
+  const adminEmail = process.env.NEXT_PUBLIC_ADMIN_GMAIL || 'enterprisesshashi95@gmail.com';
 
   useEffect(() => {
     if (!loading && user && isAdmin) {

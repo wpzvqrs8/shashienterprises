@@ -7,7 +7,7 @@ import { createClient } from '@/lib/supabase/client';
 export const ADMIN_EMAILS = (
   process.env.NEXT_PUBLIC_ADMIN_GMAIL ||
   process.env.NEXT_PUBLIC_ADMIN_EMAIL ||
-  'enterprisesshashi5@gmail.com,wpzvqrs8@gmail.com'
+  'enterprisesshashi95@gmail.com,wpzvqrs8@gmail.com'
 )
   .toLowerCase()
   .split(',')

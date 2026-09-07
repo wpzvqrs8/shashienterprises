@@ -321,7 +321,7 @@ distinct image.
   "logoMarkUrl": "https://placehold.co/80x80/141218/E2632B?text=SE",
   "address": "Delhi, India",
   "whatsapp": "+91-8796138389",
-  "email": "enterprisesshashi5@gmail.com",
+  "email": "enterprisesshashi95@gmail.com",
   
   "facebook": "https://www.facebook.com/profile.php?id=61589057115880",
   "instagram": "https://www.instagram.com/shashienterprises5",
