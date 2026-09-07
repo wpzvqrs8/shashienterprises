@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { INITIAL_STORE_SETTINGS, CATEGORIES } from '@/lib/constants';
-import { ShieldCheck, MessageSquare, Mail, MapPin, ExternalLink } from 'lucide-react';
+import { ShieldCheck, MessageSquare, Mail, MapPin, ExternalLink, Instagram, Facebook } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
@@ -10,7 +10,7 @@ export const Footer: React.FC = () => {
       <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           
-          {/* Col 1: Brand Info */}
+          {/* Col 1: Brand Info & Social Icons */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="relative h-12 w-52">
@@ -26,6 +26,27 @@ export const Footer: React.FC = () => {
               {INITIAL_STORE_SETTINGS.tagline}. Direct B2B supplier for verified comic shops, anime retail stores, and figure resellers across India.
             </p>
             
+            {/* Social Media Links */}
+            <div className="flex items-center gap-3 pt-2">
+              <a
+                href={INITIAL_STORE_SETTINGS.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow Shashi Enterprises on Instagram"
+                className="w-9 h-9 rounded-full bg-ink-900 border border-ink-800 flex items-center justify-center text-parchment-text/80 hover:text-pink-500 hover:border-pink-500/50 hover:bg-pink-500/10 transition-all duration-300 shadow-sm group"
+              >
+                <Instagram className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              </a>
+              <a
+                href={INITIAL_STORE_SETTINGS.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow Shashi Enterprises on Facebook"
+                className="w-9 h-9 rounded-full bg-ink-900 border border-ink-800 flex items-center justify-center text-parchment-text/80 hover:text-blue-500 hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-300 shadow-sm group"
+              >
+                <Facebook className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              </a>
+            </div>
           </div>
 
           {/* Col 2: Shop Taxonomy */}
@@ -76,6 +97,14 @@ export const Footer: React.FC = () => {
               <div className="flex items-center gap-2.5">
                 <MessageSquare className="w-4 h-4 text-jade-600 shrink-0" />
                 <a href={`https://wa.me/${INITIAL_STORE_SETTINGS.whatsapp.replace(/[^0-9]/g, '')}`} target="_blank" rel="noreferrer" className="text-jade-500 hover:text-jade-400 hover:underline transition-colors duration-200 font-bold">{INITIAL_STORE_SETTINGS.whatsapp}</a>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Instagram className="w-4 h-4 text-pink-500 shrink-0" />
+                <a href={INITIAL_STORE_SETTINGS.instagram} target="_blank" rel="noreferrer" className="text-parchment-text/80 hover:text-pink-400 hover:underline transition-colors duration-200 font-medium">@shashienterprises5</a>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Facebook className="w-4 h-4 text-blue-500 shrink-0" />
+                <a href={INITIAL_STORE_SETTINGS.facebook} target="_blank" rel="noreferrer" className="text-parchment-text/80 hover:text-blue-400 hover:underline transition-colors duration-200 font-medium">Shashi Enterprises Facebook</a>
               </div>
             </div>
 
