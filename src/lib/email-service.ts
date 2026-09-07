@@ -5,7 +5,7 @@ const resendApiKey = process.env.RESEND_API_KEY || 're_UwTng35u_CrFrviEeT2gqvNYT
 const resend = new Resend(resendApiKey);
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.shashienterprises.store';
-const FROM_EMAIL = 'Shashi Enterprises <onboarding@resend.dev>';
+const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || 'Shashi Enterprises <orders@shashienterprises.store>';
 const SUPPORT_PHONE = '+91-8796138389';
 const SUPPORT_EMAIL = 'enterprisesshashi95@gmail.com';
 const INSTAGRAM_URL = 'https://www.instagram.com/shashienterprises5';
