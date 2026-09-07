@@ -114,16 +114,15 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="lg:col-span-5 relative aspect-square max-w-xs sm:max-w-sm w-full mx-auto rounded-[10px] bg-ink-950 overflow-hidden border border-ink-800 p-2">
+            <div className="lg:col-span-5 relative aspect-square max-w-xs sm:max-w-sm w-full mx-auto rounded-[12px] bg-ink-950 overflow-hidden border-2 border-ink-800 p-0 shadow-warm-lg">
               <Image
                 src="/hero-resin.jpg"
                 alt="Limited Resin Statues Batch"
                 fill
                 priority
                 sizes="(max-width: 768px) 100vw, 400px"
-                className="object-contain object-center"
+                className="object-cover object-center rounded-[10px]"
               />
-              
             </div>
 
           </div>
