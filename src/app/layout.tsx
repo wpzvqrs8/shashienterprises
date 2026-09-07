@@ -5,7 +5,10 @@ import { LoginModal } from '@/components/auth/login-modal';
 import { Analytics } from '@vercel/analytics/next';
 import { OrganizationJsonLd } from '@/components/seo/json-ld';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.shashienterprises.store';
+const envUrl = process.env.NEXT_PUBLIC_SITE_URL;
+const siteUrl = (envUrl && !envUrl.includes('vercel.app'))
+  ? envUrl
+  : 'https://www.shashienterprises.store';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
