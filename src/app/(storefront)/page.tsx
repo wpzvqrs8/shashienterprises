@@ -174,39 +174,7 @@ export default function HomePage() {
       {/* 8. FAQ Accordion */}
       <FaqAccordion />
 
-      {/* 9. Newsletter / Dealer Updates Signup */}
-      <section className="bg-parchment-100 py-14 border-b border-parchment-300">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
-          <h3 className="font-display text-2xl sm:text-3xl text-ink-950">
-            Get Weekly Wholesale Stock Drops & Container Arrival Alerts
-          </h3>
-          <p className="text-xs sm:text-sm text-muted max-w-xl mx-auto">
-            Subscribe to our trade alert list. Be the first to receive notifications on rare anime import container unboxings and wholesale pricing drops.
-          </p>
 
-          {subscribed ? (
-            <div className="bg-jade-100 text-jade-600 border border-jade-600/30 p-4 rounded-[8px] inline-flex items-center gap-2 text-sm font-bold">
-              <CheckCircle2 className="w-5 h-5" />
-              <span>Thank you! You're subscribed to Shashi Enterprises Trade Alerts.</span>
-            </div>
-          ) : (
-            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto pt-2">
-              <input
-                type="email"
-                required
-                placeholder="Enter your shop / business email..."
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="bg-parchment-50 border border-parchment-300 text-ink-950 text-xs sm:text-sm px-4 py-3 rounded-[6px] focus:outline-none focus:border-ember-500 flex-1"
-              />
-              <Button type="submit" variant="ember" size="md" className="gap-1.5 shrink-0">
-                <span>Subscribe</span>
-                <Send className="w-4 h-4" />
-              </Button>
-            </form>
-          )}
-        </div>
-      </section>
 
     </div>
   );
