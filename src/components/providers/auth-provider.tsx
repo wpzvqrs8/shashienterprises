@@ -29,9 +29,45 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+const DEVICE_USER_KEY = 'shashi_device_user_v2';
+
+const saveDeviceUser = (u: User | null) => {
+  if (typeof window === 'undefined') return;
+  if (u) {
+    try {
+      const payload = {
+        id: u.id,
+        email: u.email,
+        user_metadata: u.user_metadata || {},
+        app_metadata: u.app_metadata || {},
+        aud: u.aud || 'authenticated',
+        created_at: u.created_at || new Date().toISOString()
+      };
+      localStorage.setItem(DEVICE_USER_KEY, JSON.stringify(payload));
+    } catch (e) {}
+  } else {
+    try {
+      localStorage.removeItem(DEVICE_USER_KEY);
+    } catch (e) {}
+  }
+};
+
+const loadDeviceUser = (): User | null => {
+  if (typeof window === 'undefined') return null;
+  try {
+    const raw = localStorage.getItem(DEVICE_USER_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (parsed && parsed.email) {
+      return parsed as User;
+    }
+  } catch (e) {}
+  return null;
+};
+
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [supabase] = useState(() => createClient());
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(() => loadDeviceUser());
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -43,12 +79,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const isAdmin = Boolean(user && user.email && ADMIN_EMAILS.includes(user.email.toLowerCase()));
 
   useEffect(() => {
-    // 1. Fetch initial session
+    // Restore persistent user from device storage immediately
+    const savedUser = loadDeviceUser();
+    if (savedUser) {
+      setUser(savedUser);
+    }
+
+    // 1. Fetch initial live Supabase auth session
     async function getInitialSession() {
       try {
         const { data: { session: initSession } } = await supabase.auth.getSession();
         setSession(initSession);
-        setUser(initSession?.user ?? null);
+        if (initSession?.user) {
+          setUser(initSession.user);
+          saveDeviceUser(initSession.user);
+        } else if (!savedUser) {
+          setUser(null);
+        }
       } catch (err) {
         console.error('Error fetching auth session:', err);
       } finally {
@@ -59,9 +106,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     getInitialSession();
 
     // 2. Listen for auth state changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, currentSession) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, currentSession) => {
       setSession(currentSession);
-      setUser(currentSession?.user ?? null);
+      if (currentSession?.user) {
+        setUser(currentSession.user);
+        saveDeviceUser(currentSession.user);
+      } else if (event === 'SIGNED_OUT') {
+        setUser(null);
+        saveDeviceUser(null);
+      }
       setLoading(false);
     });
 
@@ -81,7 +134,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         redirectTo: redirectUrl,
         queryParams: {
           access_type: 'offline',
-          prompt: 'consent',
+          prompt: 'select_account',
         },
       },
     });
@@ -95,14 +148,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const signOut = async () => {
     try {
       await supabase.auth.signOut();
+    } catch (err) {
+      console.error('Sign out error:', err);
+    } finally {
       setUser(null);
       setSession(null);
+      saveDeviceUser(null);
       if (typeof window !== 'undefined') {
         localStorage.removeItem('shashi_buyer_logged_in');
         localStorage.removeItem('shashi_admin_logged_in');
+        localStorage.removeItem(DEVICE_USER_KEY);
       }
-    } catch (err) {
-      console.error('Sign out error:', err);
     }
   };
 

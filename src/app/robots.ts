@@ -4,10 +4,7 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export default function robots(): MetadataRoute.Robots {
-  const envUrl = process.env.NEXT_PUBLIC_SITE_URL;
-  const baseUrl = (envUrl && !envUrl.includes('vercel.app'))
-    ? envUrl
-    : 'https://www.shashienterprises.store';
+  const baseUrl = 'https://shashienterprises.store';
 
   return {
     rules: [

@@ -16,7 +16,7 @@ import {
   validatePincode
 } from '@/lib/validation';
 import { Button } from '@/components/ui/button';
-import { CheckCircle2, ShieldCheck, ArrowLeft, Lock, LogIn, Send, AlertTriangle } from 'lucide-react';
+import { CheckCircle2, ShieldCheck, ArrowLeft, Lock, LogIn, Send, AlertTriangle, Loader2, Mail } from 'lucide-react';
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -430,6 +430,29 @@ export default function CheckoutPage() {
                 <span className="text-ember-500 text-base">₹{subtotal.toLocaleString('en-IN')}</span>
               </div>
 
+              {/* 2-EMAILS MANDATE NOTICE BOX */}
+              <div className="bg-blue-50 border border-blue-300 rounded-[8px] p-4 text-blue-950 text-xs space-y-2 shadow-sm">
+                <div className="font-bold text-xs uppercase tracking-wider flex items-center gap-2 text-blue-900">
+                  <Mail className="w-4 h-4 text-blue-600 shrink-0" />
+                  <span>Important: You Will Receive 2 Emails</span>
+                </div>
+                <p className="text-[11.5px] leading-relaxed">
+                  Please check your inbox ({formData.email || user?.email}) for <strong>two automated emails</strong>:
+                </p>
+                <div className="bg-white/80 p-2.5 rounded border border-blue-200 text-[11px] space-y-1.5 text-blue-900">
+                  <div>
+                    <strong className="text-blue-950">1st Email (Order Received):</strong> Sent immediately after you click <em>Submit Order Request</em> to acknowledge your submission.
+                  </div>
+                  <div>
+                    <strong className="text-blue-950">2nd Email (Order Confirmation):</strong> Sent once your request is reviewed & approved by Shashi Enterprises Admin.
+                  </div>
+                  <div className="pt-1.5 border-t border-blue-200/80 text-[11px] text-amber-900 font-bold flex items-center gap-1.5">
+                    <AlertTriangle className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                    <span>If you don't see the email in your main inbox, please check your <u>Spam / Junk folder</u> and mark as "Not Spam".</span>
+                  </div>
+                </div>
+              </div>
+
               <p className="text-xs text-muted leading-relaxed bg-ember-100/50 p-3 rounded border border-ember-500/20">
                 ℹ️ <strong>Note:</strong> Final total including packing & freight will be calculated and shared with you on WhatsApp ({formData.phone}) within 24 hours for your confirmation prior to payment.
               </p>
@@ -451,7 +474,7 @@ export default function CheckoutPage() {
               </div>
 
               <div className="pt-4 flex justify-between">
-                <Button variant="outline" size="md" onClick={() => setStep(1)} className="gap-2">
+                <Button variant="outline" size="md" onClick={() => setStep(1)} className="gap-2" disabled={submitting}>
                   <ArrowLeft className="w-4 h-4" />
                   <span>Back to Business Info</span>
                 </Button>
@@ -460,10 +483,19 @@ export default function CheckoutPage() {
                   variant="ember"
                   size="lg"
                   disabled={submitting || !formData.agreeTerms}
-                  className="gap-2"
+                  className="gap-2 min-w-[220px]"
                 >
-                  <CheckCircle2 className="w-5 h-5" />
-                  <span>{submitting ? 'Submitting Order Request...' : 'Submit Order Request'}</span>
+                  {submitting ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin text-white" />
+                      <span>Submitting Order Request...</span>
+                    </>
+                  ) : (
+                    <>
+                      <CheckCircle2 className="w-5 h-5" />
+                      <span>Submit Order Request</span>
+                    </>
+                  )}
                 </Button>
               </div>
             </form>

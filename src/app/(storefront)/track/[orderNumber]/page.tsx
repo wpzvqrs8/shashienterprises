@@ -14,7 +14,8 @@ import {
   Search,
   ArrowRight,
   AlertTriangle,
-  LogOut
+  LogOut,
+  Mail
 } from 'lucide-react';
 
 interface TrackPageProps {
@@ -215,24 +216,58 @@ export default function OrderTrackingPage({ params }: TrackPageProps) {
               <div className="bg-emerald-50 border-2 border-emerald-500 rounded-[10px] p-5 shadow-sm space-y-2">
                 <div className="flex items-center gap-2 text-emerald-900 font-extrabold text-base font-display">
                   <CheckCircle2 className="w-6 h-6 text-emerald-600 shrink-0" />
-                  <span>Order Approved & Confirmed!</span>
+                  <span>Order Approved & Confirmed! (Email 2 of 2 Dispatched)</span>
                 </div>
                 <p className="text-xs text-emerald-800 leading-relaxed font-medium">
                   Your order request <strong>#{order.orderNumber}</strong> has been officially approved by Shashi Enterprises Admin.
-                  You will be contacted soon from our official WhatsApp number for payment details & freight dispatch confirmation.
+                  Your <strong>2nd Email (Order Confirmation & Invoice)</strong> has been sent to <strong>{order.email}</strong>. You will also be contacted soon from our official WhatsApp number ({order.phone}) for payment details & freight dispatch confirmation.
                 </p>
               </div>
             ) : (
               <div className="bg-amber-50 border border-amber-300 rounded-[10px] p-5 shadow-sm space-y-2">
                 <div className="flex items-center gap-2 text-amber-900 font-bold text-sm font-display">
                   <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0" />
-                  <span>Order Request Submitted & Pending Admin Approval</span>
+                  <span>Order Request Submitted & Pending Admin Approval (Email 1 of 2 Dispatched)</span>
                 </div>
                 <p className="text-xs text-amber-800 leading-relaxed font-medium">
-                  Your order request <strong>#{order.orderNumber}</strong> has been submitted! Once approved by Shashi Enterprises Admin, your order status will be updated to <strong>Confirmed</strong> and you will be contacted soon from our WhatsApp number.
+                  Your order request <strong>#{order.orderNumber}</strong> has been submitted! Your <strong>1st Email (Order Received)</strong> has been sent to <strong>{order.email}</strong>. Once approved by Shashi Enterprises Admin, your status will be updated to <strong>Confirmed</strong> and your <strong>2nd Email (Order Confirmation)</strong> will be dispatched.
                 </p>
               </div>
             )}
+
+            {/* 2-EMAILS INFOGRAPHIC BOX */}
+            <div className="bg-blue-50 border border-blue-300 rounded-[10px] p-4 text-blue-950 text-xs space-y-2 shadow-sm">
+              <div className="font-bold text-xs uppercase tracking-wider flex items-center gap-2 text-blue-900">
+                <Mail className="w-4 h-4 text-blue-600 shrink-0" />
+                <span>Automated Email Workflow (2 Emails Total)</span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                <div className={`p-3 rounded border ${order.status === 'New' ? 'bg-white border-blue-400 ring-2 ring-blue-400/30' : 'bg-white/60 border-blue-200'}`}>
+                  <div className="font-bold text-blue-950 text-xs flex items-center gap-1.5">
+                    <span className="w-5 h-5 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px]">1</span>
+                    <span>1st Email: Order Received</span>
+                  </div>
+                  <p className="text-[11px] text-blue-900 mt-1 leading-snug">
+                    Dispatched immediately upon submitting request to confirm receipt by system.
+                  </p>
+                </div>
+
+                <div className={`p-3 rounded border ${order.status === 'Confirmed' ? 'bg-white border-emerald-500 ring-2 ring-emerald-500/30' : 'bg-white/60 border-blue-200'}`}>
+                  <div className="font-bold text-blue-950 text-xs flex items-center gap-1.5">
+                    <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] ${order.status === 'Confirmed' ? 'bg-emerald-600 text-white' : 'bg-parchment-400 text-ink-950'}`}>2</span>
+                    <span>2nd Email: Order Confirmation</span>
+                  </div>
+                  <p className="text-[11px] text-blue-900 mt-1 leading-snug">
+                    Dispatched when Admin verifies stock allocation and approves your quote request.
+                  </p>
+                </div>
+              </div>
+
+              <div className="pt-2 border-t border-blue-200/80 text-[11px] text-amber-900 font-bold flex items-center gap-1.5">
+                <AlertTriangle className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                <span>Note: If you do not see the emails in your main inbox, please check your <u>Spam / Junk folder</u> and mark as "Not Spam".</span>
+              </div>
+            </div>
 
             {/* Tracking Progress Pipeline */}
             <div className="bg-parchment-100 border border-parchment-300 rounded-[10px] p-6 space-y-6 shadow-sm">

@@ -7,10 +7,7 @@ interface OrganizationJsonLdProps {
 }
 
 export const OrganizationJsonLd: React.FC<OrganizationJsonLdProps> = ({ settings = DEFAULT_STORE_SETTINGS }) => {
-  const envUrl = process.env.NEXT_PUBLIC_SITE_URL;
-  const siteUrl = (envUrl && !envUrl.includes('vercel.app'))
-    ? envUrl
-    : 'https://www.shashienterprises.store';
+  const siteUrl = 'https://shashienterprises.store';
 
   const schema = {
     '@context': 'https://schema.org',
@@ -57,10 +54,7 @@ interface ProductJsonLdProps {
 }
 
 export const ProductJsonLd: React.FC<ProductJsonLdProps> = ({ product }) => {
-  const envUrl = process.env.NEXT_PUBLIC_SITE_URL;
-  const siteUrl = (envUrl && !envUrl.includes('vercel.app'))
-    ? envUrl
-    : 'https://www.shashienterprises.store';
+  const siteUrl = 'https://shashienterprises.store';
   const productUrl = `${siteUrl}/product/${product.slug}`;
 
   const schema = {
@@ -112,10 +106,7 @@ interface BreadcrumbItem {
 }
 
 export const BreadcrumbJsonLd: React.FC<{ items: BreadcrumbItem[] }> = ({ items }) => {
-  const envUrl = process.env.NEXT_PUBLIC_SITE_URL;
-  const siteUrl = (envUrl && !envUrl.includes('vercel.app'))
-    ? envUrl
-    : 'https://www.shashienterprises.store';
+  const siteUrl = 'https://shashienterprises.store';
 
   const schema = {
     '@context': 'https://schema.org',

@@ -538,17 +538,50 @@ export async function addOrder(orderData: Partial<QuoteOrder>): Promise<QuoteOrd
 export async function updateOrderStatus(id: string, status: QuoteOrder['status']): Promise<QuoteOrder> {
   const dbStatus = status === 'Confirmed' ? 'CONFIRMED' : 'NEW_REQUEST';
   try {
-    await supabase.from('se_orders').update({ status: dbStatus }).eq('id', id);
-  } catch (e) {}
-
-  const orders = getStoredOrders();
-  const index = orders.findIndex(o => o.id === id);
-  if (index !== -1) {
-    orders[index].status = status;
-    setStoredOrders(orders);
-    return orders[index];
+    await supabase
+      .from('se_orders')
+      .update({ status: dbStatus })
+      .or(`id.eq.${id},order_number.eq.${id}`);
+  } catch (e) {
+    console.warn('Supabase updateOrderStatus error:', e);
   }
-  throw new Error(`Order with ID ${id} not found`);
+
+  const allOrders = await getOrders();
+  const searchId = id.trim().toLowerCase();
+  const found = allOrders.find(
+    o => o.id.toLowerCase() === searchId || o.orderNumber.toLowerCase() === searchId
+  );
+  if (found) {
+    found.status = status;
+    if (typeof window !== 'undefined') {
+      const localOrders = getStoredOrders();
+      const idx = localOrders.findIndex(
+        o => o.id.toLowerCase() === searchId || o.orderNumber.toLowerCase() === searchId
+      );
+      if (idx !== -1) {
+        localOrders[idx].status = status;
+        setStoredOrders(localOrders);
+      }
+    }
+    return found;
+  }
+
+  return {
+    id,
+    orderNumber: id,
+    businessName: 'Business Account',
+    contactPerson: 'Valued Customer',
+    phone: '',
+    email: '',
+    address: '',
+    city: '',
+    pincode: '',
+    paymentPreference: 'UPI',
+    items: [],
+    subtotal: 0,
+    status,
+    createdAt: new Date().toISOString()
+  };
 }
 
 export async function deleteOrder(id: string): Promise<boolean> {

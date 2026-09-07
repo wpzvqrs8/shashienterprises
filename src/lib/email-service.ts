@@ -4,7 +4,7 @@ import { QuoteOrder } from './types';
 const resendApiKey = process.env.RESEND_API_KEY || 're_UwTng35u_CrFrviEeT2gqvNYTZCArzuj9';
 const resend = new Resend(resendApiKey);
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.shashienterprises.store';
+const SITE_URL = 'https://shashienterprises.store';
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || 'Shashi Enterprises <orders@shashienterprises.store>';
 const SUPPORT_PHONE = '+91-8796138389';
 const SUPPORT_EMAIL = 'enterprisesshashi95@gmail.com';
@@ -88,6 +88,71 @@ function getEmailLayout(title: string, contentHtml: string): string {
 }
 
 /**
+ * Helper to dispatch emails via Resend with automatic fallback
+ * Primary sender: orders@shashienterprises.store
+ * Fallback sender: onboarding@resend.dev (for unverified domains during domain setup)
+ */
+async function sendEmailWithResend(toEmail: string, subject: string, htmlContent: string): Promise<boolean> {
+  const fromPrimary = process.env.RESEND_FROM_EMAIL || 'Shashi Enterprises <orders@shashienterprises.store>';
+  const fromFallback = 'Shashi Enterprises <onboarding@resend.dev>';
+  const recipient = (toEmail && toEmail.includes('@')) ? toEmail.trim() : SUPPORT_EMAIL;
+
+  // Attempt 1: Primary domain sender to recipient
+  try {
+    const res1 = await resend.emails.send({
+      from: fromPrimary,
+      to: [recipient],
+      subject,
+      html: htmlContent
+    });
+    if (!res1.error) {
+      console.log('[RESEND SUCCESS (Primary Domain)]:', res1);
+      return true;
+    }
+    console.warn('[RESEND NOTICE (Primary Domain Error)]:', res1.error);
+  } catch (e1) {
+    console.warn('[RESEND CATCH (Primary Domain Error)]:', e1);
+  }
+
+  // Attempt 2: Fallback onboarding sender to recipient
+  try {
+    const res2 = await resend.emails.send({
+      from: fromFallback,
+      to: [recipient],
+      subject,
+      html: htmlContent
+    });
+    if (!res2.error) {
+      console.log('[RESEND SUCCESS (Fallback Onboarding Domain)]:', res2);
+      return true;
+    }
+    console.warn('[RESEND NOTICE (Fallback Domain Error)]:', res2.error);
+  } catch (e2) {
+    console.warn('[RESEND CATCH (Fallback Domain Error)]:', e2);
+  }
+
+  // Attempt 3: Deliver to owner account enterprisesshashi95@gmail.com
+  if (recipient !== SUPPORT_EMAIL) {
+    try {
+      const res3 = await resend.emails.send({
+        from: fromFallback,
+        to: [SUPPORT_EMAIL],
+        subject: `[For: ${recipient}] ${subject}`,
+        html: htmlContent
+      });
+      if (!res3.error) {
+        console.log('[RESEND SUCCESS (Owner Account Fallback)]:', res3);
+        return true;
+      }
+    } catch (e3) {
+      console.error('[RESEND ERROR (Owner Account Fallback Error)]:', e3);
+    }
+  }
+
+  return false;
+}
+
+/**
  * Send Email #1: Order Created / Received Email
  */
 export async function sendOrderCreatedEmail(order: QuoteOrder): Promise<boolean> {
@@ -96,7 +161,7 @@ export async function sendOrderCreatedEmail(order: QuoteOrder): Promise<boolean>
   const content = `
     <div style="text-align: center; margin-bottom: 24px;">
       <span style="display: inline-block; background-color: #fff4ee; color: #E2632B; border: 1px solid #ffd0b8; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">
-        ⌛ Order Awaiting Confirmation
+        ⌛ Email 1 of 2: Order Received (Awaiting Confirmation)
       </span>
     </div>
 
@@ -112,11 +177,15 @@ export async function sendOrderCreatedEmail(order: QuoteOrder): Promise<boolean>
       Thank you for placing your order with <strong>Shashi Enterprises</strong>. Your order is currently undergoing review by our stock allocation team.
     </p>
 
-    <!-- WAIT NOTICE BOX -->
-    <div style="background-color: #fffdf5; border-left: 4px solid #C79A2E; padding: 16px 20px; border-radius: 6px; margin: 0 0 24px 0;">
-      <p style="margin: 0; color: #856404; font-size: 14px; line-height: 1.5; font-weight: 600;">
-        ⚠️ Please wait as your order <strong>#${order.orderNumber}</strong> is currently going for confirmation. Our account manager will verify inventory and update your status shortly.
+    <!-- 2 EMAILS EXPLANATION NOTICE BOX -->
+    <div style="background-color: #eef6ff; border-left: 4px solid #0066cc; padding: 16px 20px; border-radius: 6px; margin: 0 0 24px 0;">
+      <p style="margin: 0 0 8px 0; color: #004085; font-size: 14px; line-height: 1.5; font-weight: 700;">
+        📬 You will receive 2 emails for this wholesale request:
       </p>
+      <ul style="margin: 0; padding-left: 20px; color: #004085; font-size: 13px; line-height: 1.6;">
+        <li><strong>Email 1 (This Email):</strong> Confirms your order request has been received.</li>
+        <li><strong>Email 2 (Order Confirmed):</strong> Will be sent once our team approves your request and confirms stock allocation.</li>
+      </ul>
     </div>
 
     <!-- ORDER OVERVIEW CARD -->
@@ -158,49 +227,11 @@ export async function sendOrderCreatedEmail(order: QuoteOrder): Promise<boolean>
   `;
 
   const htmlContent = getEmailLayout(`Order #${order.orderNumber} Received`, content);
-
-  // Target recipient email (fallback to owner email if test mode unverified domain)
-  const recipient = (order.email && order.email.includes('@')) ? order.email : SUPPORT_EMAIL;
-
-  try {
-    const res = await resend.emails.send({
-      from: FROM_EMAIL,
-      to: [recipient],
-      subject: `Order Received: #${order.orderNumber} — Shashi Enterprises`,
-      html: htmlContent
-    });
-
-    if (res.error) {
-      console.warn('[RESEND API NOTICE]: Direct send returned error, attempting fallback to owner email:', res.error);
-      // In Resend testing mode, send to verified account owner email enterprisesshashi95@gmail.com
-      if (recipient !== SUPPORT_EMAIL) {
-        await resend.emails.send({
-          from: FROM_EMAIL,
-          to: [SUPPORT_EMAIL],
-          subject: `[Order Received Notification] #${order.orderNumber} (For: ${order.email})`,
-          html: htmlContent
-        });
-      }
-    } else {
-      console.log('[RESEND API SUCCESS - ORDER CREATED EMAIL]:', res);
-    }
-    return true;
-  } catch (error: any) {
-    console.error('[RESEND API CATCH - ORDER CREATED EMAIL]:', error);
-    // Fallback send to support email if test environment error occurs
-    try {
-      await resend.emails.send({
-        from: FROM_EMAIL,
-        to: [SUPPORT_EMAIL],
-        subject: `[Order Received Notification] #${order.orderNumber} (For: ${order.email})`,
-        html: htmlContent
-      });
-      return true;
-    } catch (e) {
-      console.error('[RESEND API FALLBACK ERROR]:', e);
-      return false;
-    }
-  }
+  return await sendEmailWithResend(
+    order.email,
+    `Order Received: #${order.orderNumber} — Shashi Enterprises`,
+    htmlContent
+  );
 }
 
 /**
@@ -234,7 +265,7 @@ export async function sendOrderConfirmedEmail(order: QuoteOrder): Promise<boolea
   const content = `
     <div style="text-align: center; margin-bottom: 20px;">
       <span style="display: inline-block; background-color: #e6f4ea; color: #137333; border: 1px solid #ceead6; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">
-        🎉 Order Confirmed
+        🎉 Email 2 of 2: Order Confirmed!
       </span>
     </div>
 
@@ -305,43 +336,9 @@ export async function sendOrderConfirmedEmail(order: QuoteOrder): Promise<boolea
   `;
 
   const htmlContent = getEmailLayout(`Order #${order.orderNumber} Confirmed`, content);
-  const recipient = (order.email && order.email.includes('@')) ? order.email : SUPPORT_EMAIL;
-
-  try {
-    const res = await resend.emails.send({
-      from: FROM_EMAIL,
-      to: [recipient],
-      subject: `Order Confirmed: #${order.orderNumber} — Shashi Enterprises`,
-      html: htmlContent
-    });
-
-    if (res.error) {
-      console.warn('[RESEND API NOTICE]: Direct send returned error, attempting fallback to owner email:', res.error);
-      if (recipient !== SUPPORT_EMAIL) {
-        await resend.emails.send({
-          from: FROM_EMAIL,
-          to: [SUPPORT_EMAIL],
-          subject: `[Order Confirmed Notification] #${order.orderNumber} (For: ${order.email})`,
-          html: htmlContent
-        });
-      }
-    } else {
-      console.log('[RESEND API SUCCESS - ORDER CONFIRMED EMAIL]:', res);
-    }
-    return true;
-  } catch (error: any) {
-    console.error('[RESEND API CATCH - ORDER CONFIRMED EMAIL]:', error);
-    try {
-      await resend.emails.send({
-        from: FROM_EMAIL,
-        to: [SUPPORT_EMAIL],
-        subject: `[Order Confirmed Notification] #${order.orderNumber} (For: ${order.email})`,
-        html: htmlContent
-      });
-      return true;
-    } catch (e) {
-      console.error('[RESEND API FALLBACK ERROR]:', e);
-      return false;
-    }
-  }
+  return await sendEmailWithResend(
+    order.email,
+    `Order Confirmed: #${order.orderNumber} — Shashi Enterprises`,
+    htmlContent
+  );
 }
