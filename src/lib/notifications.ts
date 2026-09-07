@@ -11,7 +11,7 @@ export interface NotificationResult {
  * Triggers Email & WhatsApp Notification upon Initial Checkout Submission
  */
 export async function sendOrderReceiptNotification(order: QuoteOrder): Promise<NotificationResult> {
-  const trackingUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://shashienterprise.vercel.app'}/track/${order.orderNumber}`;
+  const trackingUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.shashienterprises.store'}/track/${order.orderNumber}`;
   
   // Send Resend Auto Email
   const emailSent = await sendOrderCreatedEmail(order);
@@ -31,7 +31,7 @@ export async function sendOrderReceiptNotification(order: QuoteOrder): Promise<N
  * Triggers Email & WhatsApp Notification when Admin Confirms Order
  */
 export async function sendOrderConfirmationNotification(order: QuoteOrder): Promise<NotificationResult> {
-  const trackingUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://shashienterprise.vercel.app'}/track/${order.orderNumber}`;
+  const trackingUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.shashienterprises.store'}/track/${order.orderNumber}`;
 
   // Send Resend Auto Email
   const emailSent = await sendOrderConfirmedEmail(order);
@@ -51,7 +51,7 @@ export async function sendOrderConfirmationNotification(order: QuoteOrder): Prom
  * Triggers Email & WhatsApp Notification when Order is Dispatched
  */
 export async function sendOrderDispatchNotification(order: QuoteOrder, courier?: string, trackingNo?: string): Promise<NotificationResult> {
-  const trackingUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://shashienterprise.vercel.app'}/track/${order.orderNumber}`;
+  const trackingUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.shashienterprises.store'}/track/${order.orderNumber}`;
 
   const emailPayload = {
     to: order.email,

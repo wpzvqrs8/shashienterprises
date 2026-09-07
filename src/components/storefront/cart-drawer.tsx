@@ -150,7 +150,7 @@ export const CartDrawer: React.FC = () => {
                           src={item.product.image}
                           alt={item.product.name}
                           fill
-                          className="object-cover"
+                          className="object-contain p-1"
                         />
                       </div>
 

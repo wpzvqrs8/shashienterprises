@@ -71,7 +71,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           alt={product.name}
           fill
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-          className="object-cover object-center group-hover:scale-105 transition-transform duration-400 ease-out"
+          className="object-contain object-center p-1.5 group-hover:scale-105 transition-transform duration-400 ease-out"
         />
 
         {/* Quick Add Bar Slide-up on Desktop Hover with Solid Pure White Background */}

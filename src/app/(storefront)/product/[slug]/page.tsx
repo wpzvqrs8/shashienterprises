@@ -23,6 +23,7 @@ import {
   Check,
   AlertCircle
 } from 'lucide-react';
+import { ProductJsonLd, BreadcrumbJsonLd } from '@/components/seo/json-ld';
 
 export default function ProductDetailPage() {
   const params = useParams();
@@ -98,6 +99,15 @@ export default function ProductDetailPage() {
 
   return (
     <div className="bg-parchment-50 min-h-screen py-10 border-b border-parchment-300">
+      <ProductJsonLd product={product} />
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Home', url: '/' },
+          { name: 'Shop', url: '/shop' },
+          { name: product.category, url: `/shop/${product.category.toLowerCase().replace(/\s+/g, '-')}` },
+          { name: product.name, url: `/product/${product.slug}` },
+        ]}
+      />
       <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16">
 
         
@@ -131,7 +141,7 @@ export default function ProductDetailPage() {
                 alt={product.name}
                 fill
                 priority
-                className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                className="object-contain object-center p-2 sm:p-4 group-hover:scale-105 transition-transform duration-300"
               />
               {product.badges && product.badges.length > 0 && (
                 <div className="absolute top-4 left-4 z-10">
@@ -151,11 +161,11 @@ export default function ProductDetailPage() {
                     <button
                       key={idx}
                       onClick={() => setActiveImage(img)}
-                      className={`relative w-20 h-20 rounded-[8px] overflow-hidden border-2 shrink-0 transition-all ${
+                      className={`relative w-20 h-20 rounded-[8px] overflow-hidden border-2 shrink-0 transition-all bg-parchment-100 ${
                         (activeImage || product.image) === img ? 'border-ember-500 ring-2 ring-ember-500/30' : 'border-parchment-300 opacity-70 hover:opacity-100'
                       }`}
                     >
-                      <Image src={img} alt={`Thumbnail ${idx + 1}`} fill className="object-cover" />
+                      <Image src={img} alt={`Thumbnail ${idx + 1}`} fill className="object-contain p-1" />
                     </button>
                   ))}
                 </div>

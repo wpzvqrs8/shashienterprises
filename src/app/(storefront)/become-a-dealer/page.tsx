@@ -11,6 +11,8 @@ import {
   validateGSTIN
 } from '@/lib/validation';
 import { CheckCircle2, ShieldCheck, FileText, Send, AlertTriangle, Mail, ExternalLink, RefreshCw } from 'lucide-react';
+import { FaqJsonLd } from '@/components/seo/json-ld';
+import { FAQ_ITEMS } from '@/lib/constants';
 
 const COMPANY_EMAIL = 'enterprisesshashi95@gmail.com';
 
@@ -109,6 +111,7 @@ ${formData.storeName.trim()}`;
 
   return (
     <div className="bg-parchment-50 min-h-screen py-12 border-b border-parchment-300">
+      <FaqJsonLd faqs={FAQ_ITEMS} />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center mb-10 space-y-2">

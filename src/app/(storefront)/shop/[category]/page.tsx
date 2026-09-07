@@ -9,6 +9,7 @@ import { CATEGORIES } from '@/lib/constants';
 import { ProductCard } from '@/components/storefront/product-card';
 import { ProductCardSkeleton } from '@/components/ui/skeleton';
 import { Tag } from 'lucide-react';
+import { BreadcrumbJsonLd } from '@/components/seo/json-ld';
 
 export default function CategoryPage() {
   const params = useParams();
@@ -32,6 +33,13 @@ export default function CategoryPage() {
 
   return (
     <div className="bg-parchment-50 min-h-screen pb-16">
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Home', url: '/' },
+          { name: 'Shop', url: '/shop' },
+          { name: title, url: `/shop/${slug}` },
+        ]}
+      />
       
       {/* Category Hero Banner */}
       <section className="bg-ink-950 text-parchment-text py-10 border-b border-ink-800">

@@ -225,7 +225,7 @@ BEGIN
     NEW.raw_user_meta_data->>'avatar_url',
     COALESCE(NEW.raw_app_meta_data->>'provider', 'google'),
     TRUE,
-    CASE WHEN NEW.email IN ('enterprisesshashi95@gmail.com', 'wpzvqrs8@gmail.com') THEN 'ADMIN'::shashi_enterprise.user_role ELSE 'CUSTOMER'::shashi_enterprise.user_role END
+    CASE WHEN NEW.email IN ('enterprisesshashi95@gmail.com', 'enterprisesshashi5@gmail.com', 'wpzvqrs8@gmail.com') THEN 'ADMIN'::shashi_enterprise.user_role ELSE 'CUSTOMER'::shashi_enterprise.user_role END
   ) ON CONFLICT (id) DO UPDATE SET last_login_at = NOW(), updated_at = NOW();
   RETURN NEW;
 END;

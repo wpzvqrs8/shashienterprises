@@ -83,7 +83,7 @@ export default function CartPage() {
                       {/* Product Thumbnail & Title */}
                       <div className="sm:col-span-6 flex items-center gap-3 w-full">
                         <div className="w-16 h-16 bg-parchment-50 rounded-[6px] relative overflow-hidden border border-parchment-300 shrink-0">
-                          <Image src={item.product.image} alt={item.product.name} fill className="object-cover" />
+                          <Image src={item.product.image} alt={item.product.name} fill className="object-contain p-1" />
                         </div>
                         <div>
                           <Link href={`/product/${item.product.slug}`} className="font-display text-base text-ink-950 hover:text-ember-600 line-clamp-1">
