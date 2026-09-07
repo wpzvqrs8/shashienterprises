@@ -114,14 +114,14 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="lg:col-span-5 relative w-full h-[280px] sm:h-[360px] lg:h-[420px] rounded-[12px] bg-ink-950 overflow-hidden border-2 border-ink-800 p-0 shadow-warm-lg group">
+            <div className="lg:col-span-5 relative w-full aspect-[3/2] rounded-[12px] bg-ink-950 overflow-hidden border-2 border-ink-800 p-0 shadow-warm-lg group">
               <Image
                 src="/hero-resin.jpg"
                 alt="Limited Resin Statues Batch"
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 40vw"
-                className="object-cover object-center rounded-[10px] group-hover:scale-105 transition-transform duration-500"
+                className="object-contain object-center rounded-[10px] group-hover:scale-105 transition-transform duration-500"
               />
             </div>
 
