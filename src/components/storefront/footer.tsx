@@ -2,7 +2,21 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { INITIAL_STORE_SETTINGS, CATEGORIES } from '@/lib/constants';
-import { ShieldCheck, MessageSquare, Mail, MapPin, ExternalLink, Instagram, Facebook } from 'lucide-react';
+import { ShieldCheck, MessageSquare, Mail, MapPin, ExternalLink } from 'lucide-react';
+
+const InstagramIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+  </svg>
+);
+
+const FacebookIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  </svg>
+);
 
 export const Footer: React.FC = () => {
   return (
@@ -35,7 +49,7 @@ export const Footer: React.FC = () => {
                 aria-label="Follow Shashi Enterprises on Instagram"
                 className="w-9 h-9 rounded-full bg-ink-900 border border-ink-800 flex items-center justify-center text-parchment-text/80 hover:text-pink-500 hover:border-pink-500/50 hover:bg-pink-500/10 transition-all duration-300 shadow-sm group"
               >
-                <Instagram className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                <InstagramIcon className="w-4 h-4 group-hover:scale-110 transition-transform" />
               </a>
               <a
                 href={INITIAL_STORE_SETTINGS.facebook}
@@ -44,7 +58,7 @@ export const Footer: React.FC = () => {
                 aria-label="Follow Shashi Enterprises on Facebook"
                 className="w-9 h-9 rounded-full bg-ink-900 border border-ink-800 flex items-center justify-center text-parchment-text/80 hover:text-blue-500 hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-300 shadow-sm group"
               >
-                <Facebook className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                <FacebookIcon className="w-4 h-4 group-hover:scale-110 transition-transform" />
               </a>
             </div>
           </div>
@@ -99,11 +113,11 @@ export const Footer: React.FC = () => {
                 <a href={`https://wa.me/${INITIAL_STORE_SETTINGS.whatsapp.replace(/[^0-9]/g, '')}`} target="_blank" rel="noreferrer" className="text-jade-500 hover:text-jade-400 hover:underline transition-colors duration-200 font-bold">{INITIAL_STORE_SETTINGS.whatsapp}</a>
               </div>
               <div className="flex items-center gap-2.5">
-                <Instagram className="w-4 h-4 text-pink-500 shrink-0" />
+                <InstagramIcon className="w-4 h-4 text-pink-500 shrink-0" />
                 <a href={INITIAL_STORE_SETTINGS.instagram} target="_blank" rel="noreferrer" className="text-parchment-text/80 hover:text-pink-400 hover:underline transition-colors duration-200 font-medium">@shashienterprises5</a>
               </div>
               <div className="flex items-center gap-2.5">
-                <Facebook className="w-4 h-4 text-blue-500 shrink-0" />
+                <FacebookIcon className="w-4 h-4 text-blue-500 shrink-0" />
                 <a href={INITIAL_STORE_SETTINGS.facebook} target="_blank" rel="noreferrer" className="text-parchment-text/80 hover:text-blue-400 hover:underline transition-colors duration-200 font-medium">Shashi Enterprises Facebook</a>
               </div>
             </div>
