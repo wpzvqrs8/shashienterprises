@@ -113,8 +113,8 @@ export const Navbar: React.FC = () => {
       <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
         <div className="flex items-center justify-between h-16 sm:h-20 gap-2 sm:gap-4 lg:gap-6">
           
-          {/* Left: Brand Logo & Navigation */}
-          <div className="flex items-center gap-3 lg:gap-5 xl:gap-8 min-w-0">
+          {/* Left: Brand Logo & Navigation / Search Bar */}
+          <div className="flex items-center gap-3 lg:gap-5 xl:gap-8 min-w-0 flex-1">
             <Link href="/" className="flex items-center gap-2 group shrink-0">
               <div className="relative h-9 sm:h-11 w-32 sm:w-44 xl:w-52 group-hover:scale-105 transition-transform">
                 <Image
@@ -127,118 +127,148 @@ export const Navbar: React.FC = () => {
               </div>
             </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-3.5 xl:gap-6 text-[11px] xl:text-xs font-bold uppercase tracking-wider">
-              <Link href="/" className="hover:text-ember-500 transition-colors whitespace-nowrap py-2">
-                Home
-              </Link>
-
-              {/* Shop Mega Menu Trigger */}
-              <div
-                className="relative py-2"
-                onMouseEnter={() => setIsMegaMenuOpen(true)}
-                onMouseLeave={() => setIsMegaMenuOpen(false)}
-              >
-                <Link
-                  href="/shop"
-                  className="flex items-center gap-1 hover:text-ember-500 transition-colors whitespace-nowrap"
-                >
-                  <span>Shop Catalog</span>
-                  <ChevronDown className="w-3.5 h-3.5" />
-                </Link>
-
-                {/* Mega Menu Dropdown */}
-                {isMegaMenuOpen && (
-                  <div className="absolute top-full left-0 w-[680px] max-w-[calc(100vw-32px)] bg-ink-900 border border-ink-800 shadow-warm-lg p-6 grid grid-cols-1 sm:grid-cols-3 gap-6 z-50 rounded-b-[10px]">
-                    <div>
-                      <h4 className="font-display text-base text-ember-500 mb-3 border-b border-ink-800 pb-1 flex items-center gap-1.5">
-                        <Sparkles className="w-4 h-4" /> Shop by Series
-                      </h4>
-                      <ul className="space-y-2 text-sm normal-case text-parchment-text/80 tracking-wide">
-                        {seriesCategories.map(cat => (
-                          <li key={cat.id}>
-                            <Link href={`/shop/${cat.slug}`} className="hover:text-ember-500 transition-colors block py-0.5" onClick={() => setIsMegaMenuOpen(false)}>
-                              {cat.name}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <h4 className="font-display text-base text-gold-500 mb-3 border-b border-ink-800 pb-1">
-                        Shop by Type
-                      </h4>
-                      <ul className="space-y-2 text-sm normal-case text-parchment-text/80 tracking-wide">
-                        {typeCategories.map(cat => (
-                          <li key={cat.id}>
-                            <Link href={`/shop/${cat.slug}`} className="hover:text-ember-500 transition-colors block py-0.5" onClick={() => setIsMegaMenuOpen(false)}>
-                              {cat.name}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="bg-ink-950 p-4 rounded-[8px] border border-ink-800 flex flex-col justify-between">
-                      <div>
-                        <span className="text-[10px] bg-ember-500 text-white font-bold px-2 py-0.5 rounded uppercase tracking-wider">
-                          Bulk Special
-                        </span>
-                        <h5 className="font-display text-base text-parchment-50 mt-2">
-                          Tiered Discounts Up To 45% OFF
-                        </h5>
-                      </div>
-                      <Link href="/shop" onClick={() => setIsMegaMenuOpen(false)} className="text-sm text-ember-500 font-bold hover:underline mt-4 block">
-                        Explore All Products →
-                      </Link>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {!isAdmin && (
-                <>
-                  <Link href="/become-a-dealer" className="hover:text-ember-500 transition-colors whitespace-nowrap py-2">
-                    Become a Dealer
-                  </Link>
-                  <Link href="/contact" className="hover:text-ember-500 transition-colors whitespace-nowrap py-2">
-                    Contact
-                  </Link>
-                </>
-              )}
-            </nav>
-          </div>
-
-          {/* Right Action Icons: Search, Cart, Account */}
-          <div className="flex items-center gap-2 sm:gap-3 xl:gap-5 shrink-0">
-            
-            {/* Search Input Toggle */}
-            <div className="relative">
-              {isSearchOpen ? (
-                <form onSubmit={handleSearchSubmit} className="flex items-center max-w-[calc(100vw-80px)]">
+            {/* If Search is open, replace left navbar links with full-width Search Bar */}
+            {isSearchOpen ? (
+              <form onSubmit={handleSearchSubmit} className="flex items-center flex-1 max-w-xl animate-in fade-in duration-200">
+                <div className="relative flex-1 flex items-center">
                   <input
                     type="text"
                     placeholder="Search SKU, series, product..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="bg-ink-900 border border-ink-800 text-parchment-50 text-xs px-2.5 py-1.5 rounded-l-[6px] w-32 xs:w-40 sm:w-64 focus:outline-none focus:border-ember-500 min-w-0"
+                    className="w-full bg-ink-900 border border-ink-700 text-parchment-50 text-xs sm:text-sm pl-9 pr-8 py-1.5 sm:py-2 rounded-lg focus:outline-none focus:border-ember-500 focus:ring-1 focus:ring-ember-500"
                     autoFocus
                   />
-                  <button
-                    type="submit"
-                    className="bg-ember-500 text-white px-3 py-1.5 rounded-r-[6px] hover:bg-ember-600 shrink-0"
-                  >
-                    <Search className="w-4 h-4" />
-                  </button>
-                  <button type="button" onClick={() => setIsSearchOpen(false)} className="ml-1.5 text-muted hover:text-white shrink-0">
-                    <X className="w-4 h-4" />
-                  </button>
-                </form>
-              ) : (
-                <button onClick={() => setIsSearchOpen(true)} aria-label="Search" className="p-1.5 sm:p-2 text-parchment-text hover:text-ember-500 transition-colors">
-                  <Search className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <Search className="w-4 h-4 text-muted absolute left-3 top-1/2 -translate-y-1/2" />
+                  {searchQuery && (
+                    <button
+                      type="button"
+                      onClick={() => setSearchQuery('')}
+                      className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted hover:text-white"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+                </div>
+                <button
+                  type="submit"
+                  className="bg-ember-500 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg hover:bg-ember-600 font-bold text-xs uppercase tracking-wider ml-2 shrink-0 hidden xs:block"
+                >
+                  Search
                 </button>
-              )}
-            </div>
+                <button
+                  type="button"
+                  onClick={() => setIsSearchOpen(false)}
+                  className="ml-1.5 sm:ml-2 p-1.5 text-muted hover:text-white shrink-0 rounded-lg hover:bg-ink-800 transition-colors flex items-center gap-1 text-xs font-semibold"
+                  title="Close Search"
+                >
+                  <X className="w-4 h-4" />
+                  <span className="hidden sm:inline">Close</span>
+                </button>
+              </form>
+            ) : (
+              /* Desktop Navigation */
+              <nav className="hidden lg:flex items-center gap-3.5 xl:gap-6 text-[11px] xl:text-xs font-bold uppercase tracking-wider">
+                <Link href="/" className="hover:text-ember-500 transition-colors whitespace-nowrap py-2">
+                  Home
+                </Link>
+
+                {/* Shop Mega Menu Trigger */}
+                <div
+                  className="relative py-2"
+                  onMouseEnter={() => setIsMegaMenuOpen(true)}
+                  onMouseLeave={() => setIsMegaMenuOpen(false)}
+                >
+                  <Link
+                    href="/shop"
+                    className="flex items-center gap-1 hover:text-ember-500 transition-colors whitespace-nowrap"
+                  >
+                    <span>Shop Catalog</span>
+                    <ChevronDown className="w-3.5 h-3.5" />
+                  </Link>
+
+                  {/* Mega Menu Dropdown */}
+                  {isMegaMenuOpen && (
+                    <div className="absolute top-full left-0 w-[680px] max-w-[calc(100vw-32px)] bg-ink-900 border border-ink-800 shadow-warm-lg p-6 grid grid-cols-1 sm:grid-cols-3 gap-6 z-50 rounded-b-[10px]">
+                      <div>
+                        <h4 className="font-display text-base text-ember-500 mb-3 border-b border-ink-800 pb-1 flex items-center gap-1.5">
+                          <Sparkles className="w-4 h-4" /> Shop by Series
+                        </h4>
+                        <ul className="space-y-2 text-sm normal-case text-parchment-text/80 tracking-wide">
+                          {seriesCategories.map(cat => (
+                            <li key={cat.id}>
+                              <Link href={`/shop/${cat.slug}`} className="hover:text-ember-500 transition-colors block py-0.5" onClick={() => setIsMegaMenuOpen(false)}>
+                                {cat.name}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="font-display text-base text-gold-500 mb-3 border-b border-ink-800 pb-1">
+                          Shop by Type
+                        </h4>
+                        <ul className="space-y-2 text-sm normal-case text-parchment-text/80 tracking-wide">
+                          {typeCategories.map(cat => (
+                            <li key={cat.id}>
+                              <Link href={`/shop/${cat.slug}`} className="hover:text-ember-500 transition-colors block py-0.5" onClick={() => setIsMegaMenuOpen(false)}>
+                                {cat.name}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="bg-ink-950 p-4 rounded-[8px] border border-ink-800 flex flex-col justify-between">
+                        <div>
+                          <span className="text-[10px] bg-ember-500 text-white font-bold px-2 py-0.5 rounded uppercase tracking-wider">
+                            Bulk Special
+                          </span>
+                          <h5 className="font-display text-base text-parchment-50 mt-2">
+                            Tiered Discounts Up To 45% OFF
+                          </h5>
+                        </div>
+
+                        {/* Figure Image in open space above Explore link */}
+                        <div className="relative h-24 w-full my-2 rounded-md overflow-hidden bg-ink-900/70 border border-ink-800/80 group">
+                          <Image
+                            src="/category-figures/fig-action-figures.png"
+                            alt="Wholesale Anime Action Figures"
+                            fill
+                            className="object-contain p-1.5 group-hover:scale-105 transition-transform duration-300"
+                          />
+                        </div>
+
+                        <Link href="/shop" onClick={() => setIsMegaMenuOpen(false)} className="text-sm text-ember-500 font-bold hover:underline block">
+                          Explore All Products →
+                        </Link>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {!isAdmin && (
+                  <>
+                    <Link href="/become-a-dealer" className="hover:text-ember-500 transition-colors whitespace-nowrap py-2">
+                      Become a Dealer
+                    </Link>
+                    <Link href="/contact" className="hover:text-ember-500 transition-colors whitespace-nowrap py-2">
+                      Contact
+                    </Link>
+                  </>
+                )}
+              </nav>
+            )}
+          </div>
+
+          {/* Right Action Icons: Search, Cart, Account */}
+          <div className="flex items-center gap-2 sm:gap-3 xl:gap-5 shrink-0">
+            
+            {/* Search Input Toggle (shown when search is not open) */}
+            {!isSearchOpen && (
+              <button onClick={() => setIsSearchOpen(true)} aria-label="Search" className="p-1.5 sm:p-2 text-parchment-text hover:text-ember-500 transition-colors">
+                <Search className="w-4 h-4 sm:w-5 sm:h-5" />
+              </button>
+            )}
 
             {/* Direct Admin Panel Button in Navbar for Admin Users */}
             {user && isAdmin && (
