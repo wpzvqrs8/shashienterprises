@@ -136,7 +136,7 @@ export const Navbar: React.FC = () => {
                     placeholder="Search SKU, series, product..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full bg-ink-900 border border-ink-700 text-parchment-50 text-xs sm:text-sm pl-9 pr-8 py-1.5 sm:py-2 rounded-lg focus:outline-none focus:border-ember-500 focus:ring-1 focus:ring-ember-500"
+                    className="w-full bg-ink-900 border border-ink-700 text-parchment-50 text-xs sm:text-sm pl-9 pr-8 py-1.5 sm:py-2 rounded-lg focus:outline-none focus:border-ember-500 focus:ring-1 focus:ring-ember-500 placeholder:text-parchment-text/60 font-medium"
                     autoFocus
                   />
                   <Search className="w-4 h-4 text-muted absolute left-3 top-1/2 -translate-y-1/2" />

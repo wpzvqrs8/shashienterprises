@@ -78,75 +78,11 @@ function ShopContent() {
           </h1>
         </div>
 
-        {/* Eye-Catching & Accessible Banner Search Bar */}
-        <div className="bg-gradient-to-r from-ink-950 via-ink-900 to-ink-950 rounded-2xl p-5 sm:p-7 mb-6 text-parchment-text shadow-xl border border-ink-800 relative overflow-hidden">
-          {/* Decorative Ember Ambient Glow */}
-          <div className="absolute top-0 right-0 w-80 h-80 bg-ember-500/10 rounded-full blur-3xl pointer-events-none" />
+        {/* Top Control Bar with Integrated Eye-Catching Search Bar */}
+        <div className="bg-parchment-100 border border-parchment-300 rounded-[12px] p-3.5 sm:p-4 mb-4 flex flex-col lg:flex-row justify-between items-stretch lg:items-center gap-3.5 sm:gap-4 shadow-sm">
           
-          <div className="relative z-10 max-w-3xl mx-auto text-center space-y-3.5">
-            <h2 className="font-display text-xl sm:text-2xl text-parchment-50 tracking-tight flex items-center justify-center gap-2">
-              <Search className="w-5 h-5 text-ember-500" />
-              <span>Search Wholesale Catalog</span>
-            </h2>
-
-            {/* Primary High-Visibility Search Form */}
-            <form onSubmit={(e) => e.preventDefault()} className="relative flex items-center shadow-2xl rounded-xl overflow-hidden bg-ink-900 border-2 border-ember-500/70 focus-within:border-ember-500 focus-within:ring-4 focus-within:ring-ember-500/25 transition-all">
-              <Search className="w-5 h-5 text-ember-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-              <input
-                type="text"
-                placeholder="Search SKU (e.g. DBZ-001), series, character name, figure type..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-transparent text-parchment-50 text-xs sm:text-sm py-3 pl-11 pr-20 focus:outline-none placeholder:text-parchment-text/50 font-medium"
-              />
-              {searchQuery && (
-                <button
-                  type="button"
-                  onClick={() => setSearchQuery('')}
-                  className="absolute right-24 sm:right-28 top-1/2 -translate-y-1/2 text-muted hover:text-white p-1 transition-colors"
-                  title="Clear search"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              )}
-              <button
-                type="submit"
-                className="bg-ember-500 hover:bg-ember-600 text-white font-extrabold text-xs px-4 sm:px-6 py-3 uppercase tracking-wider transition-colors shrink-0"
-              >
-                Search
-              </button>
-            </form>
-
-            {/* Quick-Search Filter Pills */}
-            <div className="flex flex-wrap items-center justify-center gap-1.5 text-xs pt-1">
-              <span className="text-parchment-text/60 font-semibold mr-1">Popular:</span>
-              {['Dragon Ball', 'One Piece', 'Naruto', 'Demon Slayer', 'Action Figures', 'Limited Statues'].map((term) => (
-                <button
-                  key={term}
-                  onClick={() => {
-                    if (['Dragon Ball', 'One Piece', 'Naruto', 'Demon Slayer'].includes(term)) {
-                      setSelectedSeries(selectedSeries === term ? '' : term);
-                    } else {
-                      setSelectedCategory(selectedCategory === term ? '' : term);
-                    }
-                  }}
-                  className={`px-2.5 py-0.5 rounded-full text-[11px] sm:text-xs font-semibold border transition-all ${
-                    selectedSeries === term || selectedCategory === term
-                      ? 'bg-ember-500 text-white border-ember-500 shadow-md'
-                      : 'bg-ink-900/90 text-parchment-text/80 border-ink-700 hover:border-ember-500/60 hover:text-ember-400'
-                  }`}
-                >
-                  {term}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Top Control Bar */}
-        <div className="bg-parchment-100 border border-parchment-300 rounded-[10px] p-4 mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-          
-          <div className="flex flex-wrap items-center gap-3 w-full md:w-auto flex-1">
+          {/* Left: Filter Toggle & SKU Count */}
+          <div className="flex items-center justify-between sm:justify-start gap-3 shrink-0">
             <button
               onClick={() => setIsMobileFilterOpen(!isMobileFilterOpen)}
               className="lg:hidden flex items-center gap-2 bg-ink-950 text-parchment-text px-3 py-2 rounded-[6px] text-xs font-bold uppercase shrink-0"
@@ -155,13 +91,62 @@ function ShopContent() {
               <span>Filters</span>
             </button>
 
-            <span className="text-xs text-ink-text font-semibold shrink-0">
-              Showing <strong className="text-ember-600 font-bold text-sm">{products.length}</strong> Wholesale SKUs
+            <span className="text-xs sm:text-sm text-ink-950 font-semibold shrink-0">
+              Showing <strong className="text-ember-600 font-bold text-base sm:text-lg">{products.length}</strong> Wholesale SKUs
             </span>
           </div>
 
-          {/* Active Filter Chips */}
-          <div className="flex flex-wrap items-center gap-2 flex-1">
+          {/* Center: Eye-Catching Integrated Search Bar */}
+          <div className="flex-1 max-w-xl mx-0 lg:mx-4">
+            <form onSubmit={(e) => e.preventDefault()} className="relative flex items-stretch h-10 sm:h-11 rounded-lg overflow-hidden bg-white border-2 border-ember-500 shadow-sm focus-within:ring-2 focus-within:ring-ember-500/20 transition-all">
+              <Search className="w-4 h-4 sm:w-5 sm:h-5 text-ember-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none z-10" />
+              <input
+                type="text"
+                placeholder="Search SKU, series, character, figure name..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full h-full bg-transparent text-ink-950 text-xs sm:text-sm pl-9 sm:pl-10 pr-9 focus:outline-none placeholder:text-gray-500 font-medium"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-20 sm:right-24 top-1/2 -translate-y-1/2 text-muted hover:text-ink-950 p-1 z-10"
+                  title="Clear search"
+                >
+                  <X className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                </button>
+              )}
+              <button
+                type="submit"
+                className="h-full bg-ember-500 hover:bg-ember-600 text-white font-extrabold text-xs px-4 sm:px-5 uppercase tracking-wider transition-colors shrink-0 flex items-center justify-center gap-1.5 self-stretch border-l border-ember-600 cursor-pointer"
+              >
+                <span>Search</span>
+              </button>
+            </form>
+          </div>
+
+          {/* Right: Sort By Dropdown */}
+          <div className="flex items-center gap-2 justify-between sm:justify-end shrink-0">
+            <span className="text-xs font-bold text-muted uppercase shrink-0">Sort By:</span>
+            <select
+              value={sortBy}
+              onChange={(e: any) => setSortBy(e.target.value)}
+              className="bg-white border border-parchment-300 text-ink-950 text-xs px-3 py-2 rounded-[6px] focus:outline-none focus:border-ember-500 font-bold shadow-sm"
+            >
+              <option value="recommended">Recommended (Best Selling)</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="newest">Newest Arrivals</option>
+            </select>
+          </div>
+
+        </div>
+
+        {/* Active Filter Chips Bar */}
+        {(selectedCategory || selectedSeries || selectedBadge || searchQuery || inStockOnly) && (
+          <div className="flex flex-wrap items-center gap-2 mb-6 p-3 bg-parchment-100/80 border border-parchment-300/80 rounded-lg shadow-2xs">
+            <span className="text-xs font-bold text-muted uppercase shrink-0">Active Filters:</span>
             {selectedCategory && (
               <span className="inline-flex items-center gap-1 bg-ember-100 text-ember-600 text-xs px-2.5 py-1 rounded-full font-bold border border-ember-500/20">
                 Category: {selectedCategory}
@@ -193,32 +178,14 @@ function ShopContent() {
               </span>
             )}
 
-            {(selectedCategory || selectedSeries || selectedBadge || searchQuery || inStockOnly) && (
-              <button
-                onClick={clearAllFilters}
-                className="text-xs text-ember-600 font-bold hover:underline ml-2"
-              >
-                Clear All
-              </button>
-            )}
-          </div>
-
-          {/* Sort Dropdown */}
-          <div className="flex items-center gap-2 w-full md:w-auto justify-end">
-            <span className="text-xs font-bold text-muted uppercase shrink-0">Sort By:</span>
-            <select
-              value={sortBy}
-              onChange={(e: any) => setSortBy(e.target.value)}
-              className="bg-parchment-50 border border-parchment-300 text-ink-950 text-xs px-3 py-2 rounded-[6px] focus:outline-none focus:border-ember-500 font-bold"
+            <button
+              onClick={clearAllFilters}
+              className="text-xs text-ember-600 font-bold hover:underline ml-auto"
             >
-              <option value="recommended">Recommended (Best Selling)</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
-              <option value="newest">Newest Arrivals</option>
-            </select>
+              Clear All
+            </button>
           </div>
-
-        </div>
+        )}
 
         {/* Main Grid & Sidebar Container */}
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
