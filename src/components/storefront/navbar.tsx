@@ -200,9 +200,6 @@ export const Navbar: React.FC = () => {
                   <Link href="/become-a-dealer" className="hover:text-ember-500 transition-colors">
                     Become a Dealer
                   </Link>
-                  <Link href="/blog" className="hover:text-ember-500 transition-colors">
-                    Trade Blog
-                  </Link>
                   <Link href="/contact" className="hover:text-ember-500 transition-colors">
                     Contact
                   </Link>
