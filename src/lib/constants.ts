@@ -5,7 +5,7 @@ export const DEFAULT_STORE_SETTINGS: StoreSettings = {
   legalName: "Shashi Enterprises",
   tagline: "India's Trade Source for Premium Anime Collectibles",
   logoUrl: "/logo_black_bg.png",
-  logoMarkUrl: "/logo_black_bg.png",
+  logoMarkUrl: "/favicon.png",
   address: "Delhi, India",
   whatsapp: "+91-8796138389",
   email: "enterprisesshashi95@gmail.com",

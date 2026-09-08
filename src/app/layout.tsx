@@ -28,9 +28,16 @@ export const metadata: Metadata = {
   creator: 'Shashi Enterprises',
   publisher: 'Shashi Enterprises',
   icons: {
-    icon: '/logo_black_bg.png',
-    shortcut: '/logo_black_bg.png',
-    apple: '/logo_black_bg.png',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-48.png', sizes: '48x48', type: 'image/png' },
+      { url: '/favicon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/favicon.png', sizes: '512x512', type: 'image/png' },
+    ],
+    shortcut: '/favicon.png',
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
   },
   openGraph: {
     type: 'website',
@@ -78,6 +85,10 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
+        <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
         <OrganizationJsonLd />
       </head>
       <body className="antialiased bg-parchment-50 text-ink-text selection:bg-ember-500 selection:text-white min-h-screen flex flex-col overflow-x-clip w-full max-w-full">

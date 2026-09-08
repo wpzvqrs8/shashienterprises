@@ -9,6 +9,14 @@ export const CategoryStrip: React.FC = () => {
   const [startIndex, setStartIndex] = useState(0);
 
   useEffect(() => {
+    // Preload ALL category figure images into browser cache immediately on mount
+    CATEGORIES.forEach((cat) => {
+      if (cat.image && typeof window !== 'undefined') {
+        const img = new window.Image();
+        img.src = cat.image;
+      }
+    });
+
     const timer = setInterval(() => {
       setStartIndex((prev) => (prev + 1) % CATEGORIES.length);
     }, 2200);
@@ -34,6 +42,13 @@ export const CategoryStrip: React.FC = () => {
 
   return (
     <section className="bg-ink-950 border-b border-ink-800 py-12 sm:py-16 overflow-hidden relative">
+      {/* Hidden preloader container to ensure browser caches all category images upfront */}
+      <div className="hidden aria-hidden pointer-events-none" aria-hidden="true">
+        {CATEGORIES.map((cat) => (
+          <img key={`preload-${cat.id}`} src={cat.image} alt="" decoding="async" />
+        ))}
+      </div>
+
       <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 relative z-10">
         <div className="flex items-center justify-between mb-8">
           <h3 className="font-display text-lg sm:text-xl uppercase tracking-wider text-white flex items-center gap-2 font-bold">
@@ -65,6 +80,7 @@ export const CategoryStrip: React.FC = () => {
                     src={category.image}
                     alt={category.name}
                     fill
+                    priority
                     sizes="(max-width: 768px) 150px, 240px"
                     className="object-contain object-bottom drop-shadow-[0_15px_15px_rgba(0,0,0,0.85)] group-hover:drop-shadow-[0_20px_25px_rgba(255,255,255,0.25)] transition-all duration-500"
                   />
