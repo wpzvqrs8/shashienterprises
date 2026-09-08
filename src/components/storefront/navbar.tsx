@@ -110,13 +110,13 @@ export const Navbar: React.FC = () => {
     >
 
       {/* Main Navbar */}
-      <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16">
-        <div className="flex items-center justify-between h-16 sm:h-20">
+      <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="flex items-center justify-between h-16 sm:h-20 gap-2 sm:gap-4 lg:gap-6">
           
           {/* Left: Brand Logo & Navigation */}
-          <div className="flex items-center gap-4 sm:gap-8">
-            <Link href="/" className="flex items-center gap-3 group shrink-0">
-              <div className="relative h-10 sm:h-12 w-36 sm:w-52 group-hover:scale-105 transition-transform">
+          <div className="flex items-center gap-3 lg:gap-5 xl:gap-8 min-w-0">
+            <Link href="/" className="flex items-center gap-2 group shrink-0">
+              <div className="relative h-9 sm:h-11 w-32 sm:w-44 xl:w-52 group-hover:scale-105 transition-transform">
                 <Image
                   src="/logo_black_bg.png"
                   alt="Shashi Enterprises B2B Anime Collectibles"
@@ -128,23 +128,23 @@ export const Navbar: React.FC = () => {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-7 text-sm font-semibold uppercase tracking-wide">
-              <Link href="/" className="hover:text-ember-500 transition-colors">
+            <nav className="hidden lg:flex items-center gap-3.5 xl:gap-6 text-[11px] xl:text-xs font-bold uppercase tracking-wider">
+              <Link href="/" className="hover:text-ember-500 transition-colors whitespace-nowrap py-2">
                 Home
               </Link>
 
               {/* Shop Mega Menu Trigger */}
               <div
-                className="relative py-6"
+                className="relative py-2"
                 onMouseEnter={() => setIsMegaMenuOpen(true)}
                 onMouseLeave={() => setIsMegaMenuOpen(false)}
               >
                 <Link
                   href="/shop"
-                  className="flex items-center gap-1 hover:text-ember-500 transition-colors"
+                  className="flex items-center gap-1 hover:text-ember-500 transition-colors whitespace-nowrap"
                 >
                   <span>Shop Catalog</span>
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className="w-3.5 h-3.5" />
                 </Link>
 
                 {/* Mega Menu Dropdown */}
@@ -197,10 +197,10 @@ export const Navbar: React.FC = () => {
 
               {!isAdmin && (
                 <>
-                  <Link href="/become-a-dealer" className="hover:text-ember-500 transition-colors">
+                  <Link href="/become-a-dealer" className="hover:text-ember-500 transition-colors whitespace-nowrap py-2">
                     Become a Dealer
                   </Link>
-                  <Link href="/contact" className="hover:text-ember-500 transition-colors">
+                  <Link href="/contact" className="hover:text-ember-500 transition-colors whitespace-nowrap py-2">
                     Contact
                   </Link>
                 </>
@@ -209,7 +209,7 @@ export const Navbar: React.FC = () => {
           </div>
 
           {/* Right Action Icons: Search, Cart, Account */}
-          <div className="flex items-center space-x-2 sm:space-x-6 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3 xl:gap-5 shrink-0">
             
             {/* Search Input Toggle */}
             <div className="relative">
@@ -234,8 +234,8 @@ export const Navbar: React.FC = () => {
                   </button>
                 </form>
               ) : (
-                <button onClick={() => setIsSearchOpen(true)} aria-label="Search" className="p-2 text-parchment-text hover:text-ember-500 transition-colors">
-                  <Search className="w-5 h-5 sm:w-6 sm:h-6" />
+                <button onClick={() => setIsSearchOpen(true)} aria-label="Search" className="p-1.5 sm:p-2 text-parchment-text hover:text-ember-500 transition-colors">
+                  <Search className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
               )}
             </div>
@@ -244,9 +244,9 @@ export const Navbar: React.FC = () => {
             {user && isAdmin && (
               <Link
                 href="/admin"
-                className="hidden lg:flex items-center gap-1.5 bg-gold-500 hover:bg-gold-600 text-ink-950 text-xs font-extrabold px-3 py-1.5 rounded-[6px] transition-all shadow-md uppercase tracking-wider shrink-0"
+                className="hidden lg:flex items-center gap-1.5 bg-gold-500 hover:bg-gold-600 text-ink-950 text-[11px] xl:text-xs font-extrabold px-2.5 xl:px-3 py-1.5 rounded-[6px] transition-all shadow-md uppercase tracking-wider shrink-0"
               >
-                <ShieldCheck className="w-4 h-4 text-ink-950" />
+                <ShieldCheck className="w-3.5 h-3.5 xl:w-4 xl:h-4 text-ink-950" />
                 <span>Admin Panel</span>
               </Link>
             )}
@@ -256,13 +256,13 @@ export const Navbar: React.FC = () => {
               <div ref={userDropdownRef} className="relative hidden lg:block">
                 <button
                   onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
-                  className="flex items-center gap-2 bg-ink-900 hover:bg-ink-800 border border-ink-800 text-xs font-bold px-3 py-1.5 rounded-[6px] transition-all text-parchment-50"
+                  className="flex items-center gap-1.5 bg-ink-900 hover:bg-ink-800 border border-ink-800 text-[11px] xl:text-xs font-bold px-2.5 xl:px-3 py-1.5 rounded-[6px] transition-all text-parchment-50"
                 >
-                  <div className="w-5 h-5 rounded-full bg-ember-500 text-white font-bold text-[10px] flex items-center justify-center shrink-0 uppercase tracking-tight shadow-sm">
+                  <div className="w-4 h-4 xl:w-5 xl:h-5 rounded-full bg-ember-500 text-white font-bold text-[9px] xl:text-[10px] flex items-center justify-center shrink-0 uppercase tracking-tight shadow-sm">
                     {getUserInitials(user.email, user.user_metadata?.full_name)}
                   </div>
-                  <span className="max-w-[120px] truncate">{user.user_metadata?.full_name || user.email}</span>
-                  <ChevronDown className="w-3.5 h-3.5 text-muted" />
+                  <span className="max-w-[100px] xl:max-w-[120px] truncate">{user.user_metadata?.full_name || user.email}</span>
+                  <ChevronDown className="w-3 h-3 xl:w-3.5 xl:h-3.5 text-muted" />
                 </button>
 
                 {isUserDropdownOpen && (
@@ -297,9 +297,9 @@ export const Navbar: React.FC = () => {
             ) : (
               <button
                 onClick={() => openLoginModal('Sign in with your Google Account to place wholesale quote orders and track dispatch updates.')}
-                className="hidden lg:flex items-center gap-2 bg-ember-500 hover:bg-ember-600 text-white text-xs font-bold px-3.5 py-1.5 rounded-[6px] transition-all shadow-md uppercase tracking-wider"
+                className="hidden lg:flex items-center gap-1.5 bg-ember-500 hover:bg-ember-600 text-white text-[11px] xl:text-xs font-bold px-2.5 xl:px-3.5 py-1.5 rounded-[6px] transition-all shadow-md uppercase tracking-wider whitespace-nowrap"
               >
-                <User className="w-4 h-4" />
+                <User className="w-3.5 h-3.5 xl:w-4 xl:h-4" />
                 <span>Sign In</span>
               </button>
             )}
@@ -308,9 +308,9 @@ export const Navbar: React.FC = () => {
             <button
               onClick={openOrders}
               aria-label="My Orders"
-              className="hidden lg:flex items-center gap-1.5 p-2 text-parchment-text hover:text-gold-500 transition-colors cursor-pointer text-xs font-bold"
+              className="hidden lg:flex items-center gap-1.5 p-1.5 text-parchment-text hover:text-gold-500 transition-colors cursor-pointer text-[11px] xl:text-xs font-bold whitespace-nowrap"
             >
-              <Package className="w-5 h-5 sm:w-6 sm:h-6 text-gold-500" />
+              <Package className="w-4 h-4 sm:w-5 sm:h-5 text-gold-500" />
               <span>My Orders</span>
             </button>
 
@@ -320,11 +320,11 @@ export const Navbar: React.FC = () => {
                 setIsCartOpen(true);
               }}
               aria-label="Cart"
-              className="hidden lg:flex relative p-2 text-parchment-text hover:text-ember-500 transition-colors cursor-pointer"
+              className="hidden lg:flex relative p-1.5 text-parchment-text hover:text-ember-500 transition-colors cursor-pointer"
             >
-              <ShoppingBag className="w-5 h-5 sm:w-6 sm:h-6" />
+              <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5" />
               {itemCount > 0 && (
-                <span className="absolute top-0 right-0 bg-ember-500 text-white text-[10px] sm:text-xs font-bold w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center border border-ink-950 animate-pulse">
+                <span className="absolute -top-1 -right-1 bg-ember-500 text-white text-[10px] font-bold w-4 h-4 sm:w-5 sm:h-5 rounded-full flex items-center justify-center border border-ink-950 animate-pulse">
                   {itemCount}
                 </span>
               )}

@@ -357,7 +357,7 @@ export default function CheckoutPage() {
                 {errors.address && <p className="text-[11px] text-red-600 font-semibold mt-0.5">{errors.address}</p>}
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <label className="text-xs font-bold uppercase text-ink-950">City *</label>
                   <input
@@ -391,9 +391,9 @@ export default function CheckoutPage() {
               </div>
 
               <div className="pt-4 flex justify-end">
-                <Button type="submit" variant="ember" size="md" className="gap-2">
+                <Button type="submit" variant="ember" size="md" className="w-full sm:w-auto gap-2 font-bold uppercase text-xs sm:text-sm">
                   <span>Continue to Order Review</span>
-                  <Send className="w-4 h-4" />
+                  <Send className="w-4 h-4 shrink-0" />
                 </Button>
               </div>
             </form>
@@ -473,9 +473,9 @@ export default function CheckoutPage() {
                 {errors.agreeTerms && <p className="text-[11px] text-red-600 font-semibold">{errors.agreeTerms}</p>}
               </div>
 
-              <div className="pt-4 flex justify-between">
-                <Button variant="outline" size="md" onClick={() => setStep(1)} className="gap-2" disabled={submitting}>
-                  <ArrowLeft className="w-4 h-4" />
+              <div className="pt-4 flex flex-col-reverse sm:flex-row justify-between gap-3">
+                <Button variant="outline" size="md" onClick={() => setStep(1)} className="w-full sm:w-auto gap-2" disabled={submitting}>
+                  <ArrowLeft className="w-4 h-4 shrink-0" />
                   <span>Back to Business Info</span>
                 </Button>
                 <Button
@@ -483,16 +483,16 @@ export default function CheckoutPage() {
                   variant="ember"
                   size="lg"
                   disabled={submitting || !formData.agreeTerms}
-                  className="gap-2 min-w-[220px]"
+                  className="w-full sm:w-auto gap-2 text-xs sm:text-sm font-bold uppercase min-w-0"
                 >
                   {submitting ? (
                     <>
-                      <Loader2 className="w-5 h-5 animate-spin text-white" />
+                      <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin text-white shrink-0" />
                       <span>Submitting Order Request...</span>
                     </>
                   ) : (
                     <>
-                      <CheckCircle2 className="w-5 h-5" />
+                      <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
                       <span>Submit Order Request</span>
                     </>
                   )}

@@ -113,7 +113,7 @@ ${formData.storeName.trim()}`;
     <div className="bg-parchment-50 min-h-screen py-12 border-b border-parchment-300">
       <FaqJsonLd faqs={FAQ_ITEMS} />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         <div className="text-center mb-10 space-y-2">
           <span className="text-xs font-bold uppercase tracking-widest text-ember-600 bg-ember-100 px-3 py-1 rounded-full">
             B2B Dealer Onboarding
@@ -131,7 +131,7 @@ ${formData.storeName.trim()}`;
             <div className="w-16 h-16 bg-jade-100 border border-jade-600/30 text-jade-600 rounded-full flex items-center justify-center mx-auto">
               <CheckCircle2 className="w-10 h-10" />
             </div>
-            
+
             <div className="space-y-2">
               <h2 className="font-display text-2xl text-ink-950 font-bold">Opening Email Application...</h2>
               <p className="text-xs text-muted max-w-lg mx-auto leading-relaxed">
@@ -182,7 +182,7 @@ ${formData.storeName.trim()}`;
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-            
+
             {/* Left Column: Requirements & Perks */}
             <div className="md:col-span-5 space-y-6">
               <div className="bg-parchment-100 border border-parchment-300 p-5 rounded-[10px] space-y-4">
@@ -198,7 +198,7 @@ ${formData.storeName.trim()}`;
                     <FileText className="w-4 h-4 text-ember-500 shrink-0 mt-0.5" />
                     <span>Valid GSTIN or business registration proof required.</span>
                   </li>
-                  
+
                 </ul>
               </div>
 
@@ -238,14 +238,13 @@ ${formData.storeName.trim()}`;
                     value={formData.storeName}
                     onChange={handleChange}
                     placeholder="e.g. Collectible Corner"
-                    className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 ${
-                      errors.storeName ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
-                    }`}
+                    className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 ${errors.storeName ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
+                      }`}
                   />
                   {errors.storeName && <p className="text-[11px] text-red-600 font-semibold mt-0.5">{errors.storeName}</p>}
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <label className="text-xs font-bold uppercase text-ink-950">Proprietor Name *</label>
                     <input
@@ -255,9 +254,8 @@ ${formData.storeName.trim()}`;
                       value={formData.ownerName}
                       onChange={handleChange}
                       placeholder="Full Name"
-                      className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 ${
-                        errors.ownerName ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
-                      }`}
+                      className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 ${errors.ownerName ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
+                        }`}
                     />
                     {errors.ownerName && <p className="text-[11px] text-red-600 font-semibold mt-0.5">{errors.ownerName}</p>}
                   </div>
@@ -270,15 +268,14 @@ ${formData.storeName.trim()}`;
                       value={formData.phone}
                       onChange={handleChange}
                       placeholder="9876543210"
-                      className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 ${
-                        errors.phone ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
-                      }`}
+                      className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 ${errors.phone ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
+                        }`}
                     />
                     {errors.phone && <p className="text-[11px] text-red-600 font-semibold mt-0.5">{errors.phone}</p>}
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <label className="text-xs font-bold uppercase text-ink-950">Business Email *</label>
                     <input
@@ -288,9 +285,8 @@ ${formData.storeName.trim()}`;
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="trade@store.com"
-                      className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 ${
-                        errors.email ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
-                      }`}
+                      className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 ${errors.email ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
+                        }`}
                     />
                     {errors.email && <p className="text-[11px] text-red-600 font-semibold mt-0.5">{errors.email}</p>}
                   </div>
@@ -303,15 +299,14 @@ ${formData.storeName.trim()}`;
                       value={formData.city}
                       onChange={handleChange}
                       placeholder="e.g. Pune"
-                      className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 ${
-                        errors.city ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
-                      }`}
+                      className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 ${errors.city ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
+                        }`}
                     />
                     {errors.city && <p className="text-[11px] text-red-600 font-semibold mt-0.5">{errors.city}</p>}
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <label className="text-xs font-bold uppercase text-ink-950">Store Type</label>
                     <select
@@ -336,9 +331,8 @@ ${formData.storeName.trim()}`;
                       value={formData.gstin}
                       onChange={handleChange}
                       placeholder="e.g. 07AAAAA0000A1Z5"
-                      className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 uppercase ${
-                        errors.gstin ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
-                      }`}
+                      className={`w-full text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950 uppercase ${errors.gstin ? 'bg-red-50 border-2 border-red-500' : 'bg-parchment-50 border border-parchment-300 focus:border-ember-500'
+                        }`}
                     />
                     {errors.gstin && <p className="text-[11px] text-red-600 font-semibold mt-0.5">{errors.gstin}</p>}
                   </div>
