@@ -47,14 +47,14 @@ export const Hero: React.FC = () => {
 
           {/* Right Product Showcase Tile */}
           <div className="lg:col-span-6 relative w-full flex justify-center">
-            <div className="relative w-full aspect-[16/10] max-h-[260px] sm:max-h-[320px] lg:max-h-[360px] xl:max-h-[420px] rounded-[14px] bg-ink-900 border-2 border-ink-800 p-0 shadow-warm-lg overflow-hidden group">
+            <div className="relative w-full aspect-[3/2] max-h-[260px] sm:max-h-[320px] lg:max-h-[360px] xl:max-h-[420px] rounded-[14px] bg-ink-900 border-2 border-ink-800 p-0 shadow-warm-lg overflow-hidden group">
               <Image
                 src="/hero-goku.jpg"
                 alt="Ultra Instinct Goku Hero Showcase"
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-contain object-center rounded-[12px] group-hover:scale-105 transition-transform duration-500"
+                className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
               />
             </div>
           </div>
