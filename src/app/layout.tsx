@@ -27,6 +27,9 @@ export const metadata: Metadata = {
   authors: [{ name: 'Shashi Enterprises' }],
   creator: 'Shashi Enterprises',
   publisher: 'Shashi Enterprises',
+  alternates: {
+    canonical: siteUrl,
+  },
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },

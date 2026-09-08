@@ -138,7 +138,7 @@ export default function ProductDetailPage() {
             <div className="relative aspect-square w-full bg-parchment-100 border border-parchment-300 rounded-[12px] overflow-hidden shadow-sm group">
               <Image
                 src={activeImage || product.image}
-                alt={product.name}
+                alt={`${product.name} - wholesale bulk anime figure supplier India`}
                 fill
                 priority
                 className="object-contain object-center p-2 sm:p-4 group-hover:scale-105 transition-transform duration-300"

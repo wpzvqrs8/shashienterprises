@@ -41,7 +41,7 @@ export const CategoryStrip: React.FC = () => {
   ];
 
   return (
-    <section className="bg-ink-950 border-b border-ink-800 py-12 sm:py-16 overflow-hidden relative">
+    <section className="bg-ink-950 border-b border-ink-800 py-8 sm:py-12 overflow-hidden relative">
       {/* Hidden preloader container to ensure browser caches all category images upfront */}
       <div className="hidden aria-hidden pointer-events-none" aria-hidden="true">
         {CATEGORIES.map((cat) => (
@@ -50,7 +50,7 @@ export const CategoryStrip: React.FC = () => {
       </div>
 
       <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 relative z-10">
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center justify-between mb-6">
           <h3 className="font-display text-lg sm:text-xl uppercase tracking-wider text-white flex items-center gap-2 font-bold">
             <span className="w-3 h-3 rounded-full bg-ember-500 animate-pulse" />
             <span>Explore Taxonomies</span>
@@ -61,7 +61,7 @@ export const CategoryStrip: React.FC = () => {
         </div>
 
         {/* 3D Action Figure Showcase Stage */}
-        <div className="flex items-end justify-around sm:justify-between gap-2 sm:gap-4 md:gap-6 pt-4 pb-8 px-1 sm:px-2 min-h-[240px] sm:min-h-[300px] w-full max-w-full overflow-hidden">
+        <div className="flex items-end justify-around sm:justify-between gap-2 sm:gap-4 md:gap-6 pt-2 pb-6 px-1 sm:px-2 min-h-[220px] sm:min-h-[280px] w-full max-w-full overflow-hidden">
           {visibleItems.map((category, slotIdx) => {
             const style = slotStyles[slotIdx];
             const isCenter = slotIdx === 3;

@@ -155,3 +155,36 @@ export const FaqJsonLd: React.FC<{ faqs: FaqItem[] }> = ({ faqs }) => {
     />
   );
 };
+
+export const ArticleJsonLd: React.FC<{ post: any }> = ({ post }) => {
+  const siteUrl = 'https://shashienterprises.store';
+
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.summary,
+    image: post.image.startsWith('http') ? post.image : `${siteUrl}${post.image}`,
+    author: {
+      '@type': 'Organization',
+      name: post.author || 'Shashi Enterprises',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Shashi Enterprises',
+      logo: {
+        '@type': 'ImageObject',
+        url: `${siteUrl}/favicon.png`,
+      },
+    },
+    datePublished: post.publishedAt,
+    mainEntityOfPage: `${siteUrl}/blog/${post.slug}`,
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+};

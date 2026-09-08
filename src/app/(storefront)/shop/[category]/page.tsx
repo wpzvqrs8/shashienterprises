@@ -11,6 +11,18 @@ import { ProductCardSkeleton } from '@/components/ui/skeleton';
 import { Tag } from 'lucide-react';
 import { BreadcrumbJsonLd } from '@/components/seo/json-ld';
 
+const CATEGORY_DESCRIPTIONS: Record<string, string> = {
+  'dragon-ball': 'Explore authentic B2B wholesale Dragon Ball Z and Super statues, S.H.Figuarts scale action figures, and collector busts in India. Direct trade supply for hobby stores, comic shops, and online retailers with tiered bulk volume pricing from Delhi NCR HQ.',
+  'one-piece': 'Source high-demand One Piece wholesale action figures including Gear 5 Luffy, Wano Zoro, Trafalgar Law, and Shanks statues. Pan-India B2B dispatch with 100% compliant GST tax invoices.',
+  'naruto': 'Wholesale Naruto Shippuden action figures and statues in bulk. Sourcing Sage Mode Naruto, Kakashi Hatake, Itachi Uchiha, and Akatsuki dioramas at direct importer trade rates.',
+  'demon-slayer': 'Bulk Demon Slayer action figures, Hashira statues, and replica katanas for Indian retailers. High-turnover SKUs including Tanjiro Kamado, Nezuko, Kyojuro Rengoku, and Tengen Uzui.',
+  'jujutsu-kaisen': 'Wholesale Jujutsu Kaisen statues and figures in India. Premium stock of Satoru Gojo, Ryomen Sukuna, and Yuji Itadori figures for comic stores and social media resellers.',
+  'action-figures': 'Comprehensive B2B catalog of wholesale anime action figures in India. Poseable PVC figures, scale collectibles, and trade stock with low MOQ (5 pcs per SKU).',
+  'limited-statues': 'High-margin limited edition anime dioramas and scale statues for premium hobby shops. Shipped with reinforced wooden crate protection and pan-India express freight.',
+  'premium-resin-statues': 'Direct importer supply of premium 1/6 and 1/4 scale resin anime statues in India. Exclusive collector centerpieces commanding high retail margins.',
+  'katanas-weapons': 'Wholesale anime replica katanas, Nichirin blades, and cosplay props. High-quality steel and bamboo construction with GST tax invoices on every B2B order.',
+};
+
 export default function CategoryPage() {
   const params = useParams();
   const slug = params?.category as string;
@@ -20,6 +32,7 @@ export default function CategoryPage() {
 
   const matchedCategory = CATEGORIES.find(c => c.slug === slug);
   const title = matchedCategory ? matchedCategory.name : slug.replace(/-/g, ' ');
+  const categoryDescription = CATEGORY_DESCRIPTIONS[slug] || `Sourced bulk stock for ${title} collectibles in India. All listings include tiered volume discounts, GST tax invoices, and pan-India insured dispatch from Delhi HQ.`;
 
   useEffect(() => {
     async function loadCategoryProducts() {
@@ -43,20 +56,20 @@ export default function CategoryPage() {
       
       {/* Category Hero Banner */}
       <section className="bg-ink-950 text-parchment-text py-10 border-b border-ink-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-xs text-gold-500 font-bold uppercase tracking-wider mb-2">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-3">
+          <div className="text-xs text-gold-500 font-bold uppercase tracking-wider">
             <Link href="/" className="hover:underline">Home</Link> / <Link href="/shop" className="hover:underline">Shop</Link> / <span className="text-parchment-50">{title}</span>
           </div>
 
           <div className="flex items-center gap-3">
             <Tag className="w-7 h-7 text-ember-500" />
             <h1 className="font-display text-3xl sm:text-5xl text-parchment-50 capitalize">
-              {title} Wholesale Catalog
+              Wholesale {title} Statues & Figures India
             </h1>
           </div>
 
-          <p className="text-sm text-parchment-text/80 mt-2 max-w-2xl">
-            Sourced bulk stock for {title} collectibles. All listings include tiered volume discounts, GST tax invoices, and pan-India insured dispatch.
+          <p className="text-sm text-parchment-text/90 max-w-3xl leading-relaxed">
+            {categoryDescription}
           </p>
         </div>
       </section>

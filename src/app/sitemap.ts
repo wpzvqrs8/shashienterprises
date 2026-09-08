@@ -3,13 +3,15 @@ import { CATEGORIES } from '@/lib/constants';
 import { getProducts } from '@/lib/catalog-store';
 import { Product } from '@/lib/types';
 
+import { BLOG_POSTS } from '@/lib/blog-data';
+
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://shashienterprises.store';
 
-  // 1. Static Pages
+  // 1. Core Static & Landing Pages
   const staticPages: MetadataRoute.Sitemap = [
     {
       url: `${baseUrl}`,
@@ -27,7 +29,37 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}/become-a-dealer`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/blog`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
       priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/about`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/contact`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/shipping-policy`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.4,
+    },
+    {
+      url: `${baseUrl}/refund-policy`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.4,
     },
     {
       url: `${baseUrl}/terms`,
@@ -36,12 +68,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.3,
     },
     {
-      url: `${baseUrl}/privacy`,
+      url: `${baseUrl}/privacy-policy`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.3,
     },
   ];
+
+  // 2. Blog Article Pages
+  const blogPages: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: new Date(post.publishedAt),
+    changeFrequency: 'weekly',
+    priority: 0.75,
+  }));
 
   // 2. Category Pages
   const categoryPages: MetadataRoute.Sitemap = CATEGORIES.map((cat) => ({
@@ -66,5 +106,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.75,
   }));
 
-  return [...staticPages, ...categoryPages, ...productPages];
+  return [...staticPages, ...blogPages, ...categoryPages, ...productPages];
 }

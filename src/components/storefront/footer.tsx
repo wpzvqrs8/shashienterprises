@@ -87,6 +87,7 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2.5 text-xs sm:text-sm">
               <li><Link href="/about" className="text-parchment-text/80 hover:text-gold-500 hover:underline transition-colors duration-200 block font-medium">About Shashi Enterprises</Link></li>
               <li><Link href="/become-a-dealer" className="text-parchment-text/80 hover:text-gold-500 hover:underline transition-colors duration-200 block font-medium">Become a Dealer (B2B Account)</Link></li>
+              <li><Link href="/blog" className="text-parchment-text/80 hover:text-gold-500 hover:underline transition-colors duration-200 block font-medium">B2B Trade Blog & Guides</Link></li>
               <li><Link href="/contact" className="text-parchment-text/80 hover:text-gold-500 hover:underline transition-colors duration-200 block font-medium">Contact & Support</Link></li>
               <li><Link href="/shipping-policy" className="text-parchment-text/80 hover:text-gold-500 hover:underline transition-colors duration-200 block font-medium">Pan-India Shipping Policy</Link></li>
               <li><Link href="/refund-policy" className="text-parchment-text/80 hover:text-gold-500 hover:underline transition-colors duration-200 block font-medium">Damaged Goods & Replacement Policy</Link></li>
