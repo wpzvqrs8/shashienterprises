@@ -21,8 +21,10 @@ export const OrganizationJsonLd: React.FC<OrganizationJsonLdProps> = ({ settings
     description: settings.tagline,
     address: {
       '@type': 'PostalAddress',
+      streetAddress: 'Shop No. 275, New Lajpat Rai Market, Chandni Chowk',
       addressLocality: 'Delhi',
       addressRegion: 'Delhi NCR',
+      postalCode: '110006',
       addressCountry: 'IN',
     },
     telephone: settings.whatsapp,

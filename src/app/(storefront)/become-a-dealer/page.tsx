@@ -198,10 +198,7 @@ ${formData.storeName.trim()}`;
                     <FileText className="w-4 h-4 text-ember-500 shrink-0 mt-0.5" />
                     <span>Valid GSTIN or business registration proof required.</span>
                   </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-gold-500 shrink-0 mt-0.5" />
-                    <span>5 pcs minimum order quantity per SKU.</span>
-                  </li>
+                  
                 </ul>
               </div>
 
