@@ -42,8 +42,10 @@ export const Navbar: React.FC = () => {
     }
 
     const handleScroll = () => {
-      // Auto-close user dropdown on scroll
+      // Auto-close user dropdown, mega menu & mobile drawer on scroll
       setIsUserDropdownOpen(false);
+      setIsMobileMenuOpen(false);
+      setIsMegaMenuOpen(false);
 
       const currentScrollY = window.scrollY;
       const prevScrollY = lastScrollYRef.current;

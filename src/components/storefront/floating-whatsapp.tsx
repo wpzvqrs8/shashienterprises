@@ -2,8 +2,10 @@
 
 import React from 'react';
 import { INITIAL_STORE_SETTINGS } from '@/lib/constants';
+import { useCart } from '@/lib/cart-store';
 
 export const FloatingWhatsapp: React.FC = () => {
+  const { isCartOpen } = useCart();
   const whatsappUrl = `https://wa.me/${INITIAL_STORE_SETTINGS.whatsapp.replace(/[^0-9]/g, '')}?text=Hello%20Shashi%20Enterprises%2C%20I%20would%20like%20to%20inquire%20about%20bulk%20pricing.`;
 
   return (
@@ -12,7 +14,9 @@ export const FloatingWhatsapp: React.FC = () => {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
-      className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#20ba5a] text-white flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 group border-2 border-white/30"
+      className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#20ba5a] text-white flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 group border-2 border-white/30 ${
+        isCartOpen ? 'pointer-events-none opacity-0 translate-y-6 scale-90 invisible' : 'opacity-100 translate-y-0 scale-100 visible'
+      }`}
     >
       <svg
         className="w-8 h-8 fill-current group-hover:rotate-12 transition-transform duration-300"
