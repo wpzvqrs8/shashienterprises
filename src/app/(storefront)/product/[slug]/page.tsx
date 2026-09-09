@@ -203,6 +203,19 @@ export default function ProductDetailPage() {
                   {product.stockQty > 0 ? `In Stock (${product.stockQty} pcs)` : 'Out of Stock'}
                 </span>
               </div>
+
+              {/* Price Row */}
+              <div className="flex items-baseline gap-3 pt-2">
+                <span className="text-3xl font-bold font-display text-ember-600">
+                  ₹{unitRate.toLocaleString('en-IN')}
+                </span>
+                <span className="text-xs text-muted font-bold uppercase">Wholesale Rate /pc</span>
+                {product.retailSalePrice > unitRate && (
+                  <span className="text-sm text-muted line-through ml-2">
+                    MSRP ₹{product.retailSalePrice.toLocaleString('en-IN')}
+                  </span>
+                )}
+              </div>
             </div>
 
             {/* Stepper + Dynamic Line Total Box */}

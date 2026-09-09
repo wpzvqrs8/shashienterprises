@@ -2,9 +2,9 @@ import { Product, ProductFilterParams, QuoteOrder, StoreSettings } from './types
 import { DEFAULT_STORE_SETTINGS } from './constants';
 import { createClient } from '@/lib/supabase/client';
 
-const PRODUCTS_KEY = 'shashi_enterprises_products_v9';
-const ORDERS_KEY = 'shashi_enterprises_orders_v9';
-const SETTINGS_KEY = 'shashi_enterprises_settings_v9';
+const PRODUCTS_KEY = 'shashi_enterprises_products_v10';
+const ORDERS_KEY = 'shashi_enterprises_orders_v10';
+const SETTINGS_KEY = 'shashi_enterprises_settings_v10';
 
 const supabase = createClient();
 
@@ -120,36 +120,53 @@ export async function getProducts(params?: ProductFilterParams): Promise<Product
       .select('*, se_product_price_tiers(*)');
 
     if (!error && dbProducts) {
-      let products: Product[] = dbProducts.map((p: any) => ({
-        id: p.id,
-        sku: p.sku,
-        name: p.name,
-        slug: p.slug,
-        series: p.series,
-        category: p.category,
-        description: p.description || '',
-        shortDesc: p.short_desc || '',
-        image: p.image_url,
-        gallery: p.gallery_urls || [],
-        retailRegPrice: Number(p.retail_reg_price),
-        retailSalePrice: Number(p.retail_sale_price || p.retail_reg_price),
-        wholesalePrice: Number(p.wholesale_price),
-        stockQty: Number(p.stock_qty) || 50,
-        moq: Number(p.moq) || 1,
-        heightCm: p.height_cm ? Number(p.height_cm) : undefined,
-        material: p.material || 'PVC/Resin',
-        badges: p.badges || [],
-        showOldPrice: p.show_old_price,
-        featured: p.featured,
-        status: p.status ? p.status.toLowerCase() : 'active',
-        createdAt: p.created_at,
-        updatedAt: p.updated_at,
-        wholesaleTiers: (p.se_product_price_tiers || []).map((t: any) => ({
-          minQty: t.min_qty,
-          maxQty: t.max_qty || undefined,
-          pricePerPc: Number(t.price_per_pc)
-        }))
-      }));
+      let products: Product[] = dbProducts.map((p: any) => {
+        const wholesalePrice = Number(p.wholesale_price) || 700;
+        const retailRegPrice = Number(p.retail_reg_price) || Math.round(wholesalePrice * 1.8);
+        const retailSalePrice = Number(p.retail_sale_price || p.retail_reg_price) || Math.round(wholesalePrice * 1.5);
+
+        const rawTiers = p.se_product_price_tiers || [];
+        const hasCustomTiers = rawTiers.some((t: any) => Number(t.price_per_pc) > 0 && Number(t.price_per_pc) !== 700);
+
+        const wholesaleTiers = hasCustomTiers
+          ? rawTiers.map((t: any) => ({
+              minQty: t.min_qty,
+              maxQty: t.max_qty || undefined,
+              pricePerPc: Number(t.price_per_pc)
+            }))
+          : [
+              { minQty: 1, maxQty: 19, pricePerPc: wholesalePrice },
+              { minQty: 20, maxQty: 49, pricePerPc: Math.round(wholesalePrice * 0.92) },
+              { minQty: 50, pricePerPc: Math.round(wholesalePrice * 0.85) }
+            ];
+
+        return {
+          id: p.id,
+          sku: p.sku,
+          name: p.name,
+          slug: p.slug,
+          series: p.series,
+          category: p.category,
+          description: p.description || '',
+          shortDesc: p.short_desc || '',
+          image: p.image_url,
+          gallery: p.gallery_urls || [],
+          retailRegPrice,
+          retailSalePrice,
+          wholesalePrice,
+          stockQty: Number(p.stock_qty) || 50,
+          moq: Number(p.moq) || 1,
+          heightCm: p.height_cm ? Number(p.height_cm) : undefined,
+          material: p.material || 'PVC/Resin',
+          badges: p.badges || [],
+          showOldPrice: p.show_old_price,
+          featured: p.featured,
+          status: p.status ? p.status.toLowerCase() : 'active',
+          createdAt: p.created_at,
+          updatedAt: p.updated_at,
+          wholesaleTiers
+        };
+      });
 
       const filteredAndSorted = filterAndSortProductsList(products, params);
       setStoredProducts(filteredAndSorted);

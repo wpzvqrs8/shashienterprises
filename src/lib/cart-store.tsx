@@ -28,20 +28,25 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 const CART_STORAGE_KEY = 'shashi_wholesale_cart_v1';
 
 export function calculateTierPrice(product: Product, quantity: number): number {
+  const basePrice = Number(product.wholesalePrice) || 700;
+
   if (!product.wholesaleTiers || product.wholesaleTiers.length === 0) {
-    return product.wholesalePrice;
+    return basePrice;
   }
 
   const sortedTiers = [...product.wholesaleTiers].sort((a, b) => a.minQty - b.minQty);
-  
-  let applicablePrice = product.wholesalePrice;
+  let applicablePrice = basePrice;
 
   for (const tier of sortedTiers) {
     if (quantity >= tier.minQty) {
-      if (!tier.maxQty || quantity <= tier.maxQty) {
+      if (tier.pricePerPc > 0 && tier.pricePerPc !== 700) {
         applicablePrice = tier.pricePerPc;
-      } else if (quantity > tier.maxQty) {
-        applicablePrice = tier.pricePerPc;
+      } else if (tier.minQty >= 50) {
+        applicablePrice = Math.round(basePrice * 0.85);
+      } else if (tier.minQty >= 20) {
+        applicablePrice = Math.round(basePrice * 0.92);
+      } else {
+        applicablePrice = basePrice;
       }
     }
   }
