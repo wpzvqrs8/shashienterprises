@@ -103,28 +103,6 @@ export const CartDrawer: React.FC = () => {
 
           {activeTab === 'cart' ? (
             <>
-              {/* Minimum Order Value (MOV) Progress Bar */}
-              <div className="p-3 bg-parchment-100 border-b border-parchment-300">
-                <div className="flex justify-between items-center text-xs font-semibold mb-1">
-                  <span>Minimum Order Value (₹{targetMOV.toLocaleString('en-IN')})</span>
-                  <span className={isMovMet ? 'text-jade-600 font-bold' : 'text-ember-600 font-bold'}>
-                    {isMovMet ? 'MOV Unlocked ✓' : `Need ₹${movRemaining.toLocaleString('en-IN')} more`}
-                  </span>
-                </div>
-                <div className="w-full h-2.5 bg-parchment-300 rounded-full overflow-hidden">
-                  <div
-                    className={`h-full transition-all duration-300 ${isMovMet ? 'bg-jade-600' : 'bg-ember-500'}`}
-                    style={{ width: `${progressPercent}%` }}
-                  />
-                </div>
-                {!isMovMet && (
-                  <p className="text-[11px] text-muted mt-1.5 flex items-center gap-1">
-                    <AlertTriangle className="w-3 h-3 text-ember-600 shrink-0" />
-                    <span>Add ₹{movRemaining.toLocaleString('en-IN')} more worth of SKUs to enable checkout.</span>
-                  </p>
-                )}
-              </div>
-
               {/* Cart Line Items */}
               <div className="flex-1 overflow-y-auto p-4 space-y-4">
                 {items.length === 0 ? (

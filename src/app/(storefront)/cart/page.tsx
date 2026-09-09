@@ -51,22 +51,6 @@ export default function CartPage() {
             {/* Left Column: Line Items Table */}
             <div className="lg:col-span-8 space-y-4">
               
-              {/* MOV Progress Bar */}
-              <div className="bg-parchment-100 border border-parchment-300 rounded-[10px] p-4">
-                <div className="flex justify-between items-center text-xs font-bold mb-2">
-                  <span>Minimum Order Value (MOV) Threshold (₹{targetMOV.toLocaleString('en-IN')})</span>
-                  <span className={isMovMet ? 'text-jade-600 font-bold' : 'text-ember-600 font-bold'}>
-                    {isMovMet ? 'MOV Met (₹6,000 Unlocked) ✓' : `Need ₹${movRemaining.toLocaleString('en-IN')} more to unlock checkout`}
-                  </span>
-                </div>
-                <div className="w-full h-3 bg-parchment-300 rounded-full overflow-hidden">
-                  <div
-                    className={`h-full transition-all duration-300 ${isMovMet ? 'bg-jade-600' : 'bg-ember-500'}`}
-                    style={{ width: `${progressPercent}%` }}
-                  />
-                </div>
-              </div>
-
               {/* Items List */}
               <div className="bg-parchment-100 border border-parchment-300 rounded-[10px] overflow-hidden">
                 <div className="hidden sm:grid grid-cols-12 bg-parchment-300/60 p-3 text-xs font-bold uppercase text-ink-950">
@@ -170,23 +154,14 @@ export default function CartPage() {
                   </span>
                 </div>
 
-                {!isMovMet && (
-                  <div className="bg-ember-500/10 border border-ember-500/30 text-ember-500 p-3 rounded text-xs leading-relaxed flex items-start gap-2">
-                    <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
-                    <span>Minimum Order Value is ₹{targetMOV.toLocaleString('en-IN')}. Add ₹{movRemaining.toLocaleString('en-IN')} more worth of products to unlock checkout.</span>
-                  </div>
-                )}
-
                 <Link
-                  href={isMovMet ? "/checkout" : "#"}
-                  onClick={(e) => { if (!isMovMet) e.preventDefault(); }}
+                  href="/checkout"
                   className="block"
                 >
                   <Button
                     variant="ember"
                     size="lg"
                     fullWidth
-                    disabled={!isMovMet}
                     className="gap-2"
                   >
                     <span>Proceed to Checkout</span>

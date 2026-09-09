@@ -192,7 +192,7 @@ ${formData.storeName.trim()}`;
                 <ul className="space-y-3 text-xs text-ink-text/90">
                   <li className="flex items-start gap-2">
                     <ShieldCheck className="w-4 h-4 text-jade-600 shrink-0 mt-0.5" />
-                    <span>Minimum Order Value (MOV) of ₹6,000 per order threshold.</span>
+                    <span>100% B2B Compliant GST Tax Invoice Included.</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <FileText className="w-4 h-4 text-ember-500 shrink-0 mt-0.5" />

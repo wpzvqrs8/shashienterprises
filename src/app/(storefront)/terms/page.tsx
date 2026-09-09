@@ -28,9 +28,9 @@ export default function TermsPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           <div className="bg-parchment-100 border border-parchment-300 p-5 rounded-[10px] space-y-2 shadow-sm">
             <DollarSign className="w-6 h-6 text-ember-500" />
-            <h3 className="font-display text-lg text-ink-950 font-bold">₹6,000 Minimum Order (MOV)</h3>
+            <h3 className="font-display text-lg text-ink-950 font-bold">Direct B2B Pricing</h3>
             <p className="text-xs text-muted leading-relaxed">
-              Minimum Order Value (MOV) of ₹6,000 strictly enforced for wholesale trade pricing.
+              Direct wholesale pricing with 100% compliant B2B GST tax invoices.
             </p>
           </div>
           <div className="bg-parchment-100 border border-parchment-300 p-5 rounded-[10px] space-y-2 shadow-sm">

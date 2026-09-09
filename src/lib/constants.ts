@@ -12,8 +12,8 @@ export const DEFAULT_STORE_SETTINGS: StoreSettings = {
   gstin: "",
   facebook: "https://www.facebook.com/profile.php?id=61589057115880",
   instagram: "https://www.instagram.com/shashienterprises5",
-  minimumOrderValue: 6000,
-  minimumOrderNote: "₹6,000 Minimum Order Value (MOV) · 5 pcs minimum per SKU",
+  minimumOrderValue: 0,
+  minimumOrderNote: "100% B2B Compliant GST Tax Invoice Included",
   paymentMethods: ["UPI", "Bank Transfer", "Cash on Pickup"],
   adminEmail: "admin@shashienterprises.org"
 };
@@ -59,8 +59,8 @@ export interface FaqItem {
 
 export const FAQ_ITEMS: FaqItem[] = [
   {
-    question: "What is the minimum order quantity (MOQ) and Minimum Order Value (MOV)?",
-    answer: "Our minimum order quantity is 5 pcs per SKU, with a Minimum Order Value (MOV) of ₹6,000 per wholesale order."
+    question: "What is the minimum order quantity (MOQ)?",
+    answer: "Our minimum order quantity is specified per product SKU."
   },
   {
     question: "Do you provide a GST invoice?",

@@ -13,15 +13,502 @@ const simulateLatency = (): Promise<void> => {
   return new Promise((resolve) => setTimeout(resolve, 200));
 };
 
+export const DEFAULT_PRODUCTS: Product[] = [
+  {
+    id: "p1",
+    name: "IRON SPIDERMAN 20CM ACTION FIGURE (OPP PACKING) WITH BOX",
+    slug: "iron-spiderman-20cm-action-figure",
+    sku: "SE-ANM-101",
+    category: "Action Figures",
+    series: "Marvel",
+    retailRegPrice: 1499,
+    retailSalePrice: 1100,
+    wholesalePrice: 670,
+    wholesaleTiers: [
+      { minQty: 5, maxQty: 19, pricePerPc: 670 },
+      { minQty: 20, maxQty: 49, pricePerPc: 620 },
+      { minQty: 50, pricePerPc: 580 }
+    ],
+    stockQty: 50,
+    moq: 5,
+    status: "active",
+    image: "/category-figures/fig-dragon-ball.png",
+    description: "Premium Marvel Iron Spiderman 20cm collectible action figure.",
+    shortDesc: "Iron Spiderman 20cm action figure with box packing.",
+    badges: ["bestseller"],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: "p2",
+    name: "IRON SPIDERMAN ON TRUNK 24CM ACTION FIGURE",
+    slug: "iron-spiderman-on-trunk-24cm-action-figure",
+    sku: "SE-ANM-102",
+    category: "Action Figures",
+    series: "Marvel",
+    retailRegPrice: 1399,
+    retailSalePrice: 999,
+    wholesalePrice: 610,
+    wholesaleTiers: [
+      { minQty: 5, maxQty: 19, pricePerPc: 610 },
+      { minQty: 20, maxQty: 49, pricePerPc: 570 },
+      { minQty: 50, pricePerPc: 530 }
+    ],
+    stockQty: 50,
+    moq: 5,
+    status: "active",
+    image: "/category-figures/fig-attack-on-titan.png",
+    description: "Iron Spiderman sitting on trunk 24cm detailed collectible statue.",
+    shortDesc: "Iron Spiderman on trunk 24cm action figure.",
+    badges: ["new"],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: "p3",
+    name: "PAIN STANDING 22CM FIGURE (OPP PACKING)",
+    slug: "pain-standing-22cm-figure",
+    sku: "SE-ANM-103",
+    category: "Action Figures",
+    series: "Naruto",
+    retailRegPrice: 799,
+    retailSalePrice: 599,
+    wholesalePrice: 320,
+    wholesaleTiers: [
+      { minQty: 5, maxQty: 19, pricePerPc: 320 },
+      { minQty: 20, maxQty: 49, pricePerPc: 295 },
+      { minQty: 50, pricePerPc: 275 }
+    ],
+    stockQty: 80,
+    moq: 5,
+    status: "active",
+    image: "/category-figures/fig-one-piece.png",
+    description: "Naruto Shippuden Pain Akatsuki standing 22cm figure.",
+    shortDesc: "Pain standing 22cm figure (OPP packing).",
+    badges: [],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: "p4",
+    name: "DBZ GOKU AND VEGETA 32CM STANDING COMBO FIGURE (BOX PACKING)",
+    slug: "dbz-goku-and-vegeta-32cm-standing-combo-figure",
+    sku: "SE-ANM-104",
+    category: "Limited Statues",
+    series: "Dragon Ball",
+    retailRegPrice: 3999,
+    retailSalePrice: 2999,
+    wholesalePrice: 1800,
+    wholesaleTiers: [
+      { minQty: 5, maxQty: 19, pricePerPc: 1800 },
+      { minQty: 20, maxQty: 49, pricePerPc: 1680 },
+      { minQty: 50, pricePerPc: 1550 }
+    ],
+    stockQty: 30,
+    moq: 3,
+    status: "active",
+    image: "/category-figures/fig-hunter-x-hunter.png",
+    description: "Dragon Ball Z Goku & Vegeta 32cm combo statue with premium box.",
+    shortDesc: "Goku & Vegeta 32cm standing combo figure.",
+    badges: ["bestseller", "limited"],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: "p5",
+    name: "LUFFY GEAR 5 DOUBLE HEAD PREMIUM BIG FIGURE 37CM (WITH BLISTER ONLY)",
+    slug: "luffy-gear-5-double-head-premium-big-figure-37cm",
+    sku: "SE-ANM-105",
+    category: "Premium Resin Statues",
+    series: "One Piece",
+    retailRegPrice: 3499,
+    retailSalePrice: 2699,
+    wholesalePrice: 1600,
+    wholesaleTiers: [
+      { minQty: 5, maxQty: 19, pricePerPc: 1600 },
+      { minQty: 20, maxQty: 49, pricePerPc: 1490 },
+      { minQty: 50, pricePerPc: 1380 }
+    ],
+    stockQty: 25,
+    moq: 3,
+    status: "active",
+    image: "/category-figures/fig-naruto.png",
+    description: "One Piece Luffy Gear 5 37cm large scale figure with double heads.",
+    shortDesc: "Luffy Gear 5 double head 37cm premium figure.",
+    badges: ["new", "bestseller"],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: "p6",
+    name: "ZORO FIGHTING ACTION FIGURE 10CM",
+    slug: "zoro-fighting-action-figure-10cm",
+    sku: "SE-ANM-106",
+    category: "Action Figures",
+    series: "One Piece",
+    retailRegPrice: 599,
+    retailSalePrice: 399,
+    wholesalePrice: 225,
+    wholesaleTiers: [
+      { minQty: 5, maxQty: 19, pricePerPc: 225 },
+      { minQty: 20, maxQty: 49, pricePerPc: 205 },
+      { minQty: 50, pricePerPc: 190 }
+    ],
+    stockQty: 100,
+    moq: 5,
+    status: "active",
+    image: "/category-figures/fig-pop-culture.png",
+    description: "Compact One Piece Roronoa Zoro 10cm fighting pose figure.",
+    shortDesc: "Zoro fighting action figure 10cm.",
+    badges: [],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: "p7",
+    name: "SHANKS STANDING ON STONE 70CM PREMIUM ACTION FIGURE (BOX PACKING)",
+    slug: "shanks-standing-on-stone-70cm-premium-action-figure",
+    sku: "SE-ANM-107",
+    category: "Premium Resin Statues",
+    series: "One Piece",
+    retailRegPrice: 8999,
+    retailSalePrice: 7499,
+    wholesalePrice: 4900,
+    wholesaleTiers: [
+      { minQty: 1, maxQty: 4, pricePerPc: 4900 },
+      { minQty: 5, maxQty: 19, pricePerPc: 4600 },
+      { minQty: 20, pricePerPc: 4300 }
+    ],
+    stockQty: 10,
+    moq: 1,
+    status: "active",
+    image: "/category-figures/fig-demon-slayer.png",
+    description: "Massive 70cm Shanks Red Hair Emperor statue standing on rock base.",
+    shortDesc: "Shanks 70cm premium statue with box packing.",
+    badges: ["limited"],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: "p8",
+    name: "ZORO THREE SWORD ACTION FIGURE 21CM (BLISTER PACKING)",
+    slug: "zoro-three-sword-action-figure-21cm",
+    sku: "SE-ANM-108",
+    category: "Action Figures",
+    series: "One Piece",
+    retailRegPrice: 899,
+    retailSalePrice: 699,
+    wholesalePrice: 390,
+    wholesaleTiers: [
+      { minQty: 5, maxQty: 19, pricePerPc: 390 },
+      { minQty: 20, maxQty: 49, pricePerPc: 360 },
+      { minQty: 50, pricePerPc: 330 }
+    ],
+    stockQty: 60,
+    moq: 5,
+    status: "active",
+    image: "/category-figures/fig-premium-resin.png",
+    description: "Roronoa Zoro three sword style 21cm action figure.",
+    shortDesc: "Zoro three sword action figure 21cm.",
+    badges: ["bestseller"],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: "p9",
+    name: "DEMON SLAYER 6PCS CHARACTER SET 15CM ACTION FIGURE",
+    slug: "demon-slayer-6pcs-character-set-15cm",
+    sku: "SE-ANM-109",
+    category: "Action Figures",
+    series: "Demon Slayer",
+    retailRegPrice: 1599,
+    retailSalePrice: 1199,
+    wholesalePrice: 650,
+    wholesaleTiers: [
+      { minQty: 5, maxQty: 19, pricePerPc: 650 },
+      { minQty: 20, maxQty: 49, pricePerPc: 600 },
+      { minQty: 50, pricePerPc: 560 }
+    ],
+    stockQty: 45,
+    moq: 5,
+    status: "active",
+    image: "/category-figures/fig-jujutsu-kaisen.png",
+    description: "Kimetsu no Yaiba 6-piece full hashira & main character set.",
+    shortDesc: "Demon Slayer 6pcs character set 15cm.",
+    badges: ["new"],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: "p10",
+    name: "WHITE SANJI STANDING 30CM (BLISTER+BOX)",
+    slug: "white-sanji-standing-30cm",
+    sku: "SE-ANM-110",
+    category: "Action Figures",
+    series: "One Piece",
+    retailRegPrice: 899,
+    retailSalePrice: 649,
+    wholesalePrice: 355,
+    wholesaleTiers: [
+      { minQty: 5, maxQty: 19, pricePerPc: 355 },
+      { minQty: 20, maxQty: 49, pricePerPc: 330 },
+      { minQty: 50, pricePerPc: 305 }
+    ],
+    stockQty: 50,
+    moq: 5,
+    status: "active",
+    image: "/category-figures/fig-rare-imports.png",
+    description: "One Piece Vinsmoke Sanji Whole Cake Island white suit 30cm figure.",
+    shortDesc: "White Sanji standing 30cm (blister+box).",
+    badges: [],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: "p11",
+    name: "GOJO STANDING GRAY BLINDFOLD 30CM FIGURE (BLISTER+BOX)",
+    slug: "gojo-standing-gray-blindfold-30cm-figure",
+    sku: "SE-ANM-111",
+    category: "Limited Statues",
+    series: "Jujutsu Kaisen",
+    retailRegPrice: 2299,
+    retailSalePrice: 1799,
+    wholesalePrice: 1050,
+    wholesaleTiers: [
+      { minQty: 5, maxQty: 19, pricePerPc: 1050 },
+      { minQty: 20, maxQty: 49, pricePerPc: 980 },
+      { minQty: 50, pricePerPc: 910 }
+    ],
+    stockQty: 40,
+    moq: 4,
+    status: "active",
+    image: "/category-figures/fig-solo-leveling.png",
+    description: "Jujutsu Kaisen Satoru Gojo gray blindfold 30cm figure.",
+    shortDesc: "Gojo standing gray blindfold 30cm figure.",
+    badges: ["bestseller"],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: "p12",
+    name: "LUFFY GEAR 5 PUNCHING DOWN 13CM ACTION FIGURE",
+    slug: "luffy-gear-5-punching-down-13cm",
+    sku: "SE-ANM-112",
+    category: "Action Figures",
+    series: "One Piece",
+    retailRegPrice: 799,
+    retailSalePrice: 599,
+    wholesalePrice: 350,
+    wholesaleTiers: [
+      { minQty: 5, maxQty: 19, pricePerPc: 350 },
+      { minQty: 20, maxQty: 49, pricePerPc: 325 },
+      { minQty: 50, pricePerPc: 300 }
+    ],
+    stockQty: 75,
+    moq: 5,
+    status: "active",
+    image: "/category-figures/fig-action-figures.png",
+    description: "One Piece Sun God Nika Luffy punching pose 13cm figure.",
+    shortDesc: "Luffy Gear 5 punching down 13cm figure.",
+    badges: ["new"],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: "p13",
+    name: "TRENDING DEADPOOL 3PCS SET ACTION FIGURE",
+    slug: "trending-deadpool-3pcs-set-action-figure",
+    sku: "SE-ANM-113",
+    category: "Action Figures",
+    series: "Marvel",
+    retailRegPrice: 499,
+    retailSalePrice: 299,
+    wholesalePrice: 160,
+    wholesaleTiers: [
+      { minQty: 5, maxQty: 19, pricePerPc: 160 },
+      { minQty: 20, maxQty: 49, pricePerPc: 145 },
+      { minQty: 50, pricePerPc: 135 }
+    ],
+    stockQty: 120,
+    moq: 5,
+    status: "active",
+    image: "/category-figures/fig-marvel.png",
+    description: "Marvel Deadpool 3-piece multi-pose mini action figure set.",
+    shortDesc: "Trending Deadpool 3pcs set action figure.",
+    badges: ["bestseller"],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: "p14",
+    name: "DBZ MAJINBU STANDING 27CM FIGURE",
+    slug: "dbz-majinbu-standing-27cm-figure",
+    sku: "SE-ANM-114",
+    category: "Action Figures",
+    series: "Dragon Ball",
+    retailRegPrice: 1299,
+    retailSalePrice: 899,
+    wholesalePrice: 550,
+    wholesaleTiers: [
+      { minQty: 5, maxQty: 19, pricePerPc: 550 },
+      { minQty: 20, maxQty: 49, pricePerPc: 510 },
+      { minQty: 50, pricePerPc: 470 }
+    ],
+    stockQty: 35,
+    moq: 5,
+    status: "active",
+    image: "/category-figures/fig-limited-statues.png",
+    description: "Dragon Ball Z Majin Buu 27cm standing collectible figure.",
+    shortDesc: "DBZ Majinbu standing 27cm figure.",
+    badges: [],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: "p15",
+    name: "WHOLESALE GOKU 16CM ACTION FIGURE",
+    slug: "wholesale-goku-16cm-action-figure",
+    sku: "SE-ANM-115",
+    category: "Action Figures",
+    series: "Dragon Ball",
+    retailRegPrice: 599,
+    retailSalePrice: 399,
+    wholesalePrice: 225,
+    wholesaleTiers: [
+      { minQty: 5, maxQty: 19, pricePerPc: 225 },
+      { minQty: 20, maxQty: 49, pricePerPc: 205 },
+      { minQty: 50, pricePerPc: 190 }
+    ],
+    stockQty: 90,
+    moq: 5,
+    status: "active",
+    image: "/category-figures/fig-katanas-weapons.png",
+    description: "Dragon Ball Z Son Goku 16cm martial arts pose figure.",
+    shortDesc: "Wholesale Goku 16cm action figure.",
+    badges: [],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: "p16",
+    name: "DBZ GOKU STANDING 21CM ACTION FIGURE",
+    slug: "dbz-goku-standing-21cm-action-figure",
+    sku: "SE-ANM-116",
+    category: "Action Figures",
+    series: "Dragon Ball",
+    retailRegPrice: 499,
+    retailSalePrice: 299,
+    wholesalePrice: 165,
+    wholesaleTiers: [
+      { minQty: 5, maxQty: 19, pricePerPc: 165 },
+      { minQty: 20, maxQty: 49, pricePerPc: 150 },
+      { minQty: 50, pricePerPc: 140 }
+    ],
+    stockQty: 100,
+    moq: 5,
+    status: "active",
+    image: "/category-figures/fig-dragon-ball.png",
+    description: "Dragon Ball Z Goku SSJ standing 21cm figure.",
+    shortDesc: "DBZ Goku standing 21cm action figure.",
+    badges: [],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: "p17",
+    name: "NARUTO 6 CHARACTER SET 17CM ACTION FIGURE",
+    slug: "naruto-6-character-set-17cm-action-figure",
+    sku: "SE-ANM-117",
+    category: "Action Figures",
+    series: "Naruto",
+    retailRegPrice: 1799,
+    retailSalePrice: 1299,
+    wholesalePrice: 750,
+    wholesaleTiers: [
+      { minQty: 5, maxQty: 19, pricePerPc: 750 },
+      { minQty: 20, maxQty: 49, pricePerPc: 700 },
+      { minQty: 50, pricePerPc: 650 }
+    ],
+    stockQty: 40,
+    moq: 5,
+    status: "active",
+    image: "/category-figures/fig-naruto.png",
+    description: "Naruto Shippuden 6-piece full character team figure set.",
+    shortDesc: "Naruto 6 character set 17cm action figure.",
+    badges: ["bestseller"],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: "p18",
+    name: "NEON WOODEN KATANA 104CM",
+    slug: "neon-wooden-katana-104cm",
+    sku: "SE-ANM-118",
+    category: "Katanas & Weapons",
+    series: "Pop Culture",
+    retailRegPrice: 2499,
+    retailSalePrice: 1899,
+    wholesalePrice: 1185,
+    wholesaleTiers: [
+      { minQty: 5, maxQty: 19, pricePerPc: 1185 },
+      { minQty: 20, maxQty: 49, pricePerPc: 1100 },
+      { minQty: 50, pricePerPc: 1020 }
+    ],
+    stockQty: 30,
+    moq: 5,
+    status: "active",
+    image: "/category-figures/fig-katanas-weapons.png",
+    description: "104cm full size wooden cosplay katana with neon edge detail.",
+    shortDesc: "Neon wooden katana 104cm.",
+    badges: ["new"],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: "p19",
+    name: "ASSEMBLED WOODEN KATANA 104CM",
+    slug: "assembled-wooden-katana-104cm",
+    sku: "SE-ANM-119",
+    category: "Katanas & Weapons",
+    series: "Pop Culture",
+    retailRegPrice: 1499,
+    retailSalePrice: 1099,
+    wholesalePrice: 700,
+    wholesaleTiers: [
+      { minQty: 5, maxQty: 19, pricePerPc: 700 },
+      { minQty: 20, maxQty: 49, pricePerPc: 650 },
+      { minQty: 50, pricePerPc: 600 }
+    ],
+    stockQty: 50,
+    moq: 5,
+    status: "active",
+    image: "/category-figures/fig-katanas-weapons.png",
+    description: "104cm full size assembled wooden katana replica.",
+    shortDesc: "Assembled wooden katana 104cm.",
+    badges: [],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: "p20",
+    name: "GOD OF WAR KRATOS 19CM ACTION FIGURE (SET OF 4PCS)",
+    slug: "god-of-war-kratos-19cm-action-figure",
+    sku: "SE-ANM-120",
+    category: "Action Figures",
+    series: "Pop Culture",
+    retailRegPrice: 2999,
+    retailSalePrice: 2199,
+    wholesalePrice: 1350,
+    wholesaleTiers: [
+      { minQty: 5, maxQty: 19, pricePerPc: 1350 },
+      { minQty: 20, maxQty: 49, pricePerPc: 1250 },
+      { minQty: 50, pricePerPc: 1150 }
+    ],
+    stockQty: 25,
+    moq: 4,
+    status: "active",
+    image: "/category-figures/fig-pop-culture.png",
+    description: "God of War Kratos 19cm action figure 4-piece set.",
+    shortDesc: "God of War Kratos 19cm action figure (Set of 4pcs).",
+    badges: ["limited"],
+    createdAt: new Date().toISOString()
+  }
+];
+
 // LocalStorage helpers
 const getStoredProducts = (): Product[] => {
-  if (typeof window === 'undefined') return [];
+  if (typeof window === 'undefined') return DEFAULT_PRODUCTS;
   try {
     const item = localStorage.getItem(PRODUCTS_KEY);
-    if (!item) return [];
-    return JSON.parse(item);
+    if (!item) {
+      localStorage.setItem(PRODUCTS_KEY, JSON.stringify(DEFAULT_PRODUCTS));
+      return DEFAULT_PRODUCTS;
+    }
+    const parsed = JSON.parse(item);
+    return (parsed && parsed.length > 0) ? parsed : DEFAULT_PRODUCTS;
   } catch (e) {
-    return [];
+    return DEFAULT_PRODUCTS;
   }
 };
 

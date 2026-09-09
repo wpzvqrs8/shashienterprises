@@ -54,19 +54,19 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'cart' | 'orders'>('cart');
   const [isLoaded, setIsLoaded] = useState(false);
-  const [minimumOrderValue, setMinimumOrderValue] = useState<number>(6000);
+  const [minimumOrderValue, setMinimumOrderValue] = useState<number>(0);
 
   useEffect(() => {
     async function fetchMOV() {
       try {
         const settings = await getStoreSettings();
-        if (settings && typeof settings.minimumOrderValue === 'number' && settings.minimumOrderValue > 0) {
+        if (settings && typeof settings.minimumOrderValue === 'number') {
           setMinimumOrderValue(settings.minimumOrderValue);
         } else {
-          setMinimumOrderValue(6000);
+          setMinimumOrderValue(0);
         }
       } catch (e) {
-        setMinimumOrderValue(6000);
+        setMinimumOrderValue(0);
       }
     }
     fetchMOV();
@@ -169,8 +169,8 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const subtotal = items.reduce((sum, item) => sum + item.lineTotal, 0);
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
-  const isMovMet = items.length > 0 && subtotal >= minimumOrderValue;
-  const movRemaining = Math.max(0, minimumOrderValue - subtotal);
+  const isMovMet = items.length > 0;
+  const movRemaining = 0;
 
   return (
     <CartContext.Provider
