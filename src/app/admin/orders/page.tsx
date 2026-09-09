@@ -2,15 +2,17 @@
 
 import React, { useEffect, useState } from 'react';
 import { QuoteOrder } from '@/lib/types';
-import { getOrders, updateOrderStatus, deleteOrder } from '@/lib/catalog-store';
+import { getOrders, updateOrderStatus, deleteOrder, getStoreSettings } from '@/lib/catalog-store';
+import { generateOrderPdf } from '@/lib/pdf-generator';
 import { Button } from '@/components/ui/button';
-import { CheckCircle2, Clock, Trash2, Loader2, MailCheck } from 'lucide-react';
+import { CheckCircle2, Clock, Trash2, Loader2, MailCheck, Download } from 'lucide-react';
 
 export default function AdminOrdersPage() {
   const [orders, setOrders] = useState<QuoteOrder[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedOrder, setSelectedOrder] = useState<QuoteOrder | null>(null);
   const [updatingOrderIds, setUpdatingOrderIds] = useState<Record<string, boolean>>({});
+  const [downloadingOrderIds, setDownloadingOrderIds] = useState<Record<string, boolean>>({});
 
   const fetchOrders = async () => {
     setLoading(true);
@@ -22,6 +24,19 @@ export default function AdminOrdersPage() {
   useEffect(() => {
     fetchOrders();
   }, []);
+
+  const handleDownloadPdf = async (ord: QuoteOrder) => {
+    setDownloadingOrderIds(prev => ({ ...prev, [ord.id]: true }));
+    try {
+      const settings = await getStoreSettings();
+      await generateOrderPdf(ord, { settings, download: true });
+    } catch (err) {
+      console.error('Failed to generate order PDF:', err);
+      alert('Failed to generate PDF. Please try again.');
+    } finally {
+      setDownloadingOrderIds(prev => ({ ...prev, [ord.id]: false }));
+    }
+  };
 
   const handleStatusChange = async (id: string, newStatus: QuoteOrder['status']) => {
     setUpdatingOrderIds(prev => ({ ...prev, [id]: true }));
@@ -135,6 +150,25 @@ export default function AdminOrdersPage() {
                   )}
 
                   <div className="flex items-center gap-1.5">
+                    <button
+                      onClick={() => handleDownloadPdf(ord)}
+                      disabled={downloadingOrderIds[ord.id]}
+                      className={`p-1.5 rounded transition-all flex items-center gap-1 ${
+                        downloadingOrderIds[ord.id]
+                          ? 'bg-ember-100 text-ember-600 border border-ember-300 animate-pulse cursor-wait'
+                          : 'text-ember-600 hover:bg-ember-500/10 hover:scale-105'
+                      }`}
+                      title={downloadingOrderIds[ord.id] ? "Generating Invoice PDF..." : "Download Invoice PDF"}
+                    >
+                      {downloadingOrderIds[ord.id] ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin text-ember-600" />
+                          <span className="text-[10px] font-bold uppercase">Generating...</span>
+                        </>
+                      ) : (
+                        <Download className="w-4 h-4" />
+                      )}
+                    </button>
                     <Button
                       variant="outline"
                       size="sm"
@@ -222,6 +256,25 @@ export default function AdminOrdersPage() {
 
                     <td className="py-3.5 px-4 text-right">
                       <div className="flex items-center justify-end gap-2">
+                        <button
+                          onClick={() => handleDownloadPdf(ord)}
+                          disabled={downloadingOrderIds[ord.id]}
+                          className={`p-1.5 rounded transition-all flex items-center gap-1 ${
+                            downloadingOrderIds[ord.id]
+                              ? 'bg-ember-100 text-ember-600 border border-ember-300 animate-pulse cursor-wait'
+                              : 'text-ember-600 hover:bg-ember-500/10 hover:scale-105'
+                          }`}
+                          title={downloadingOrderIds[ord.id] ? "Generating Invoice PDF..." : "Download Invoice PDF"}
+                        >
+                          {downloadingOrderIds[ord.id] ? (
+                            <>
+                              <Loader2 className="w-4 h-4 animate-spin text-ember-600" />
+                              <span className="text-[10px] font-bold uppercase">Generating...</span>
+                            </>
+                          ) : (
+                            <Download className="w-4 h-4" />
+                          )}
+                        </button>
                         <Button
                           variant="outline"
                           size="sm"
@@ -328,6 +381,25 @@ export default function AdminOrdersPage() {
                 )}
 
                 <div className="flex items-center gap-2">
+                  <Button
+                    variant="outline"
+                    size="md"
+                    disabled={downloadingOrderIds[selectedOrder.id]}
+                    onClick={() => handleDownloadPdf(selectedOrder)}
+                    className="text-xs text-ember-600 border-ember-300 hover:bg-ember-50 gap-1.5"
+                  >
+                    {downloadingOrderIds[selectedOrder.id] ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin text-ember-600" />
+                        <span>Generating PDF...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Download className="w-4 h-4" />
+                        <span>Download Invoice PDF</span>
+                      </>
+                    )}
+                  </Button>
                   <Button
                     variant="outline"
                     size="md"
