@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useCart } from '@/lib/cart-store';
 import { Button } from '@/components/ui/button';
-import { Trash2, Plus, Minus, AlertTriangle, ArrowRight, ShieldCheck, ShoppingBag } from 'lucide-react';
+import { Trash2, Plus, Minus, AlertTriangle, ArrowRight, ShieldCheck, ShoppingBag, Check } from 'lucide-react';
 
 export default function CartPage() {
   const {
@@ -51,6 +51,36 @@ export default function CartPage() {
             {/* Left Column: Line Items Table */}
             <div className="lg:col-span-8 space-y-4">
               
+              {/* MOV Banner & Progress Line */}
+              <div className="bg-parchment-100 border border-parchment-300 p-4 rounded-[10px] space-y-2.5">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    {isMovMet ? (
+                      <Check className="w-5 h-5 shrink-0 text-emerald-600 font-bold" />
+                    ) : (
+                      <AlertTriangle className="w-5 h-5 shrink-0 text-amber-600" />
+                    )}
+                    <div>
+                      <div className="text-xs font-bold uppercase tracking-wider text-ink-950">
+                        {isMovMet ? `Minimum Order Value (₹${targetMOV.toLocaleString('en-IN')}) Reached!` : `Minimum Order Value: ₹${targetMOV.toLocaleString('en-IN')}`}
+                      </div>
+                      <div className="text-xs text-muted">
+                        {isMovMet ? 'Your wholesale order meets the minimum requirement for quote submission.' : `Add ₹${movRemaining.toLocaleString('en-IN')} more worth of products to enable checkout.`}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-xs font-bold shrink-0 text-ink-950">{progressPercent}% Met</div>
+                </div>
+
+                {/* Progress Bar Line */}
+                <div className="w-full bg-parchment-200 h-2.5 rounded-full overflow-hidden border border-parchment-300">
+                  <div
+                    className={`h-full transition-all duration-300 ${isMovMet ? 'bg-emerald-500' : 'bg-amber-500'}`}
+                    style={{ width: `${progressPercent}%` }}
+                  />
+                </div>
+              </div>
+
               {/* Items List */}
               <div className="bg-parchment-100 border border-parchment-300 rounded-[10px] overflow-hidden">
                 <div className="hidden sm:grid grid-cols-12 bg-parchment-300/60 p-3 text-xs font-bold uppercase text-ink-950">
@@ -74,7 +104,7 @@ export default function CartPage() {
                             {item.product.name}
                           </Link>
                           <div className="text-xs text-muted">
-                            SKU: {item.product.sku} • MOQ: {item.product.moq} pcs
+                            SKU: {item.product.sku}
                           </div>
                         </div>
                       </div>
@@ -90,7 +120,7 @@ export default function CartPage() {
                         <div className="flex items-center border border-parchment-300 rounded bg-parchment-50">
                           <button
                             onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
-                            disabled={item.quantity <= item.product.moq}
+                            disabled={item.quantity <= 1}
                             className="px-2 py-1 text-ink-950 disabled:opacity-30"
                           >
                             <Minus className="w-3.5 h-3.5" />
@@ -155,13 +185,17 @@ export default function CartPage() {
                 </div>
 
                 <Link
-                  href="/checkout"
+                  href={isMovMet ? "/checkout" : "#"}
                   className="block"
+                  onClick={(e) => {
+                    if (!isMovMet) e.preventDefault();
+                  }}
                 >
                   <Button
                     variant="ember"
                     size="lg"
                     fullWidth
+                    disabled={!isMovMet}
                     className="gap-2"
                   >
                     <span>Proceed to Checkout</span>

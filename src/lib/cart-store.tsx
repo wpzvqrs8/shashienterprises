@@ -54,19 +54,19 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'cart' | 'orders'>('cart');
   const [isLoaded, setIsLoaded] = useState(false);
-  const [minimumOrderValue, setMinimumOrderValue] = useState<number>(0);
+  const [minimumOrderValue, setMinimumOrderValue] = useState<number>(6000);
 
   useEffect(() => {
     async function fetchMOV() {
       try {
         const settings = await getStoreSettings();
-        if (settings && typeof settings.minimumOrderValue === 'number') {
+        if (settings && typeof settings.minimumOrderValue === 'number' && settings.minimumOrderValue > 0) {
           setMinimumOrderValue(settings.minimumOrderValue);
         } else {
-          setMinimumOrderValue(0);
+          setMinimumOrderValue(6000);
         }
       } catch (e) {
-        setMinimumOrderValue(0);
+        setMinimumOrderValue(6000);
       }
     }
     fetchMOV();
@@ -100,7 +100,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [items, isLoaded]);
 
   const addItem = (product: Product, qtyToAdd?: number) => {
-    const minQty = qtyToAdd && qtyToAdd >= product.moq ? qtyToAdd : product.moq;
+    const minQty = qtyToAdd && qtyToAdd >= 1 ? qtyToAdd : (product.moq || 1);
     
     setItems((prevItems) => {
       const existingIndex = prevItems.findIndex(i => i.product.id === product.id);
@@ -142,7 +142,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return prevItems.filter(i => i.product.id !== productId);
       }
 
-      const effectiveQty = Math.max(newQty, existing.product.moq);
+      const effectiveQty = Math.max(newQty, 1);
       const tierPrice = calculateTierPrice(existing.product, effectiveQty);
 
       return prevItems.map(item => {
@@ -169,8 +169,9 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const subtotal = items.reduce((sum, item) => sum + item.lineTotal, 0);
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
-  const isMovMet = items.length > 0;
-  const movRemaining = 0;
+  const targetMOV = minimumOrderValue || 6000;
+  const isMovMet = subtotal >= targetMOV;
+  const movRemaining = Math.max(0, targetMOV - subtotal);
 
   return (
     <CartContext.Provider

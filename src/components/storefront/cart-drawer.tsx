@@ -157,7 +157,7 @@ export const CartDrawer: React.FC = () => {
                           <div className="flex items-center border border-parchment-300 rounded bg-parchment-50">
                             <button
                               onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
-                              disabled={item.quantity <= item.product.moq}
+                              disabled={item.quantity <= 1}
                               className="px-1.5 py-0.5 text-ink-950 disabled:opacity-30 cursor-pointer"
                             >
                               <Minus className="w-3 h-3" />
@@ -183,14 +183,38 @@ export const CartDrawer: React.FC = () => {
               {/* Footer Summary & Checkout CTA */}
               {items.length > 0 && (
                 <div className="p-4 bg-ink-950 text-parchment-text border-t border-ink-800 space-y-3">
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-muted uppercase tracking-wider font-bold">Subtotal (Excl. Freight)</span>
+                  {/* MOV Progress Bar */}
+                  <div className="bg-ink-900 border border-ink-800 rounded-lg p-2.5 space-y-1.5">
+                    <div className="flex justify-between items-center text-xs">
+                      <span className="text-parchment-text font-medium">
+                        {isMovMet ? (
+                          <span className="text-jade-400 font-bold flex items-center gap-1">
+                            ✓ Minimum Order Value (₹{targetMOV.toLocaleString('en-IN')}) Reached!
+                          </span>
+                        ) : (
+                          <span>
+                            Add <strong className="text-ember-400">₹{movRemaining.toLocaleString('en-IN')}</strong> more for MOV
+                          </span>
+                        )}
+                      </span>
+                      <span className="text-xs text-muted font-bold">{progressPercent}%</span>
+                    </div>
+                    <div className="w-full bg-ink-950 h-2.5 rounded-full overflow-hidden border border-ink-800">
+                      <div
+                        className={`h-full transition-all duration-300 ${isMovMet ? 'bg-emerald-500' : 'bg-ember-500'}`}
+                        style={{ width: `${progressPercent}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex justify-between items-center text-sm pt-1">
+                    <span className="text-muted uppercase tracking-wider font-bold">Subtotal</span>
                     <span className="font-display text-xl text-ember-500 font-bold">
                       ₹{subtotal.toLocaleString('en-IN')}
                     </span>
                   </div>
                   <p className="text-[11px] text-muted leading-tight">
-                    Packing, insurance & freight will be calculated upon quote submission. GST invoice included.
+                    Minimum Wholesale Order Value ₹{targetMOV.toLocaleString('en-IN')}. GST invoice included.
                   </p>
                   
                   <div className="flex gap-2 pt-1">

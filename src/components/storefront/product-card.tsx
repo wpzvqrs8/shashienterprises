@@ -134,8 +134,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
           </div>
 
-          <div className="flex justify-between items-center mt-1 text-[11px] text-muted border-t border-parchment-300/60 pt-2">
-            <span>MOQ: <strong className="text-ink-950 font-bold">{minOrderQty} {minOrderQty === 1 ? 'pc' : 'pcs'}</strong></span>
+          <div className="flex justify-end items-center mt-1 text-[11px] text-muted border-t border-parchment-300/60 pt-2">
             <span className={product.stockQty > 0 ? 'text-jade-600 font-semibold' : 'text-danger font-semibold'}>
               {product.stockQty > 0 ? `${product.stockQty} in stock` : 'Out of Stock'}
             </span>

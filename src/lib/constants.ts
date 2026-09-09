@@ -12,8 +12,8 @@ export const DEFAULT_STORE_SETTINGS: StoreSettings = {
   gstin: "",
   facebook: "https://www.facebook.com/profile.php?id=61589057115880",
   instagram: "https://www.instagram.com/shashienterprises5",
-  minimumOrderValue: 0,
-  minimumOrderNote: "100% B2B Compliant GST Tax Invoice Included",
+  minimumOrderValue: 6000,
+  minimumOrderNote: "Minimum Wholesale Order Value ₹6,000 | 100% B2B Compliant GST Tax Invoice Included",
   paymentMethods: ["UPI", "Bank Transfer", "Cash on Pickup"],
   adminEmail: "admin@shashienterprises.org"
 };

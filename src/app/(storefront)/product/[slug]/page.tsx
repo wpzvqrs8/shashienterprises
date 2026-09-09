@@ -36,7 +36,7 @@ export default function ProductDetailPage() {
   const [loading, setLoading] = useState(true);
 
   const [activeImage, setActiveImage] = useState<string>('');
-  const [qty, setQty] = useState<number>(5);
+  const [qty, setQty] = useState<number>(1);
   const [activeTab, setActiveTab] = useState<'description' | 'shipping' | 'bulk'>('description');
   const [addedToast, setAddedToast] = useState(false);
 
@@ -47,7 +47,7 @@ export default function ProductDetailPage() {
       setProduct(data);
       if (data) {
         setActiveImage(data.image);
-        setQty(data.moq || 50);
+        setQty(1);
         const related = await getProducts({ category: data.category });
         setRelatedProducts(related.filter(r => r.id !== data.id).slice(0, 4));
       }
@@ -213,12 +213,11 @@ export default function ProductDetailPage() {
                 <div className="space-y-1">
                   <label className="text-xs font-bold uppercase text-ink-950 flex flex-wrap items-center gap-1">
                     <span>Order Quantity</span>
-                    <span className="text-muted font-normal text-[11px]">(MOQ: {product.moq} pcs)</span>
                   </label>
                   <div className="flex items-center border border-parchment-300 rounded-[6px] bg-parchment-50 w-fit">
                     <button
                       onClick={handleDecrement}
-                      disabled={qty <= product.moq}
+                      disabled={qty <= 1}
                       className="px-2.5 py-1.5 text-ink-950 hover:bg-parchment-100 disabled:opacity-30 cursor-pointer"
                     >
                       <Minus className="w-4 h-4" />
@@ -227,8 +226,8 @@ export default function ProductDetailPage() {
                       type="number"
                       value={qty}
                       onChange={(e) => {
-                        const val = parseInt(e.target.value) || product.moq;
-                        setQty(Math.max(product.moq, val));
+                        const val = parseInt(e.target.value) || 1;
+                        setQty(Math.max(1, val));
                       }}
                       className="w-12 sm:w-16 text-center font-mono font-bold text-sm bg-transparent border-x border-parchment-300 py-1 focus:outline-none"
                     />
@@ -253,13 +252,6 @@ export default function ProductDetailPage() {
                 </div>
 
               </div>
-
-              {qty < product.moq && (
-                <div className="text-xs text-danger flex items-center gap-1 font-bold">
-                  <AlertCircle className="w-4 h-4" />
-                  <span>Minimum Order Quantity for this SKU is {product.moq} pcs.</span>
-                </div>
-              )}
             </div>
 
             {/* Action Buttons: Add to Wholesale Cart */}
