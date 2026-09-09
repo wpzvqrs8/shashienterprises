@@ -36,42 +36,10 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
     shortDesc: initialProduct?.shortDesc || '',
     badges: initialProduct?.badges || ['new'],
     featured: initialProduct?.featured || false,
-    wholesaleTiers: initialProduct?.wholesaleTiers || [
-      { minQty: 5, maxQty: 19, pricePerPc: 750 },
-      { minQty: 20, maxQty: 49, pricePerPc: 680 },
-      { minQty: 50, pricePerPc: 620 },
-    ],
   });
 
   const handleFieldChange = (field: keyof Product, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
-  };
-
-  // Tier operations
-  const handleTierChange = (index: number, field: keyof PriceTier, value: any) => {
-    const updatedTiers = [...(formData.wholesaleTiers || [])];
-    updatedTiers[index] = { ...updatedTiers[index], [field]: Number(value) };
-    setFormData(prev => ({ ...prev, wholesaleTiers: updatedTiers }));
-  };
-
-  const addTierRow = () => {
-    const current = formData.wholesaleTiers || [];
-    const lastTier = current[current.length - 1];
-    const newMin = lastTier ? (lastTier.maxQty ? lastTier.maxQty + 1 : lastTier.minQty + 20) : 5;
-    const newPrice = lastTier ? Math.round(lastTier.pricePerPc * 0.9) : 700;
-
-    setFormData(prev => ({
-      ...prev,
-      wholesaleTiers: [...current, { minQty: newMin, pricePerPc: newPrice }]
-    }));
-  };
-
-  const removeTierRow = (index: number) => {
-    const current = formData.wholesaleTiers || [];
-    setFormData(prev => ({
-      ...prev,
-      wholesaleTiers: current.filter((_, idx) => idx !== index)
-    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -90,10 +58,6 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
     }
     if (formData.stockQty === undefined || Number(formData.stockQty) < 0) {
       alert('Stock Quantity must be 0 or greater.');
-      return;
-    }
-    if (!formData.moq || Number(formData.moq) < 1) {
-      alert('Minimum Order Quantity (MOQ) must be at least 1 pc.');
       return;
     }
 
@@ -125,7 +89,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
             <h1 className="font-display text-2xl sm:text-3xl text-ink-950">
               {isEdit ? `Edit Product: ${initialProduct?.name}` : 'Add New Wholesale Product'}
             </h1>
-            <p className="text-xs text-muted">Configure product specifications, wholesale price tiers, and inventory.</p>
+            <p className="text-xs text-muted">Configure product specifications, wholesale pricing, and inventory.</p>
           </div>
         </div>
 
@@ -256,28 +220,15 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="space-y-1">
-            <label className="text-xs font-bold uppercase text-ink-950">Stock Quantity (pcs) *</label>
-            <input
-              type="number"
-              required
-              value={formData.stockQty}
-              onChange={e => handleFieldChange('stockQty', Number(e.target.value))}
-              className="w-full bg-parchment-50 border border-parchment-300 text-xs p-2.5 rounded-[6px] focus:outline-none font-bold text-ink-950"
-            />
-          </div>
-
-          <div className="space-y-1">
-            <label className="text-xs font-bold uppercase text-ink-950">Minimum Order Quantity (MOQ) *</label>
-            <input
-              type="number"
-              required
-              value={formData.moq}
-              onChange={e => handleFieldChange('moq', Number(e.target.value))}
-              className="w-full bg-parchment-50 border border-parchment-300 text-xs p-2.5 rounded-[6px] focus:outline-none font-bold text-ink-950"
-            />
-          </div>
+        <div className="space-y-1">
+          <label className="text-xs font-bold uppercase text-ink-950">Stock Quantity (pcs) *</label>
+          <input
+            type="number"
+            required
+            value={formData.stockQty}
+            onChange={e => handleFieldChange('stockQty', Number(e.target.value))}
+            className="w-full bg-parchment-50 border border-parchment-300 text-xs p-2.5 rounded-[6px] focus:outline-none font-bold text-ink-950"
+          />
         </div>
 
         {/* Show Strikethrough Old Price Toggle */}
@@ -296,73 +247,10 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
 
       </div>
 
-      {/* Section 3: Wholesale Tier Builder (Mobile Friendly Stacked/Flex Layout) */}
-      <div className="bg-parchment-100 border border-parchment-300 rounded-[10px] p-4 sm:p-6 space-y-4 shadow-sm">
-        <div className="flex flex-row justify-between items-center border-b border-parchment-300 pb-2">
-          <h3 className="font-display text-lg sm:text-xl text-ink-950">
-            3. Wholesale Volume Pricing Tiers
-          </h3>
-          <Button type="button" variant="outline" size="sm" onClick={addTierRow} className="gap-1 text-xs shrink-0">
-            <Plus className="w-3.5 h-3.5" />
-            <span>Add Tier</span>
-          </Button>
-        </div>
-
-        <div className="space-y-3">
-          {formData.wholesaleTiers?.map((tier, idx) => (
-            <div key={idx} className="flex flex-col sm:flex-row sm:items-center gap-2.5 bg-parchment-50 p-3 rounded-[6px] border border-parchment-300">
-              <div className="grid grid-cols-2 sm:flex sm:items-center gap-2 text-xs font-bold flex-1">
-                <div className="flex items-center gap-1.5">
-                  <span className="text-muted text-[11px] shrink-0">Min Qty:</span>
-                  <input
-                    type="number"
-                    value={tier.minQty}
-                    onChange={e => handleTierChange(idx, 'minQty', e.target.value)}
-                    className="w-full sm:w-20 bg-parchment-100 border border-parchment-300 p-1.5 rounded font-mono text-center"
-                  />
-                </div>
-
-                <div className="flex items-center gap-1.5">
-                  <span className="text-muted text-[11px] shrink-0">Max Qty:</span>
-                  <input
-                    type="number"
-                    value={tier.maxQty || ''}
-                    placeholder="∞"
-                    onChange={e => handleTierChange(idx, 'maxQty', e.target.value)}
-                    className="w-full sm:w-20 bg-parchment-100 border border-parchment-300 p-1.5 rounded font-mono text-center"
-                  />
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between sm:justify-start gap-2 text-xs font-bold pt-1 sm:pt-0 border-t sm:border-0 border-parchment-300/60">
-                <div className="flex items-center gap-1.5">
-                  <span className="text-muted text-[11px] shrink-0">Rate/pc (₹):</span>
-                  <input
-                    type="number"
-                    value={tier.pricePerPc}
-                    onChange={e => handleTierChange(idx, 'pricePerPc', e.target.value)}
-                    className="w-28 bg-parchment-100 border border-parchment-300 p-1.5 rounded font-mono text-ember-600 font-bold"
-                  />
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => removeTierRow(idx)}
-                  className="text-muted hover:text-danger p-1.5 rounded bg-parchment-200/60 sm:bg-transparent"
-                  title="Remove tier row"
-                >
-                  <Trash2 className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Section 4: Image Media & Status Badges */}
+      {/* Section 3: Image Media & Status Badges */}
       <div className="bg-parchment-100 border border-parchment-300 rounded-[10px] p-4 sm:p-6 space-y-4 shadow-sm">
         <h3 className="font-display text-lg sm:text-xl text-ink-950 border-b border-parchment-300 pb-2">
-          4. Image Media, Status & Badges
+          3. Image Media, Status & Badges
         </h3>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

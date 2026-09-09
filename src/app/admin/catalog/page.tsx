@@ -159,7 +159,7 @@ export default function AdminCatalogPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="font-display text-3xl text-ink-950">Wholesale Catalog Manager</h1>
-          <p className="text-xs text-muted">Manage product prices, MOQ tiers, inventory stock, and status badges.</p>
+          <p className="text-xs text-muted">Manage product prices, inventory stock, and status badges.</p>
         </div>
 
         <Link href="/admin/catalog/new">
@@ -364,10 +364,6 @@ export default function AdminCatalogPage() {
                       </strong>
                     </div>
                     <div>
-                      <span className="text-muted block">MOQ Tier:</span>
-                      <strong className="text-ink-950">{product.moq} pcs</strong>
-                    </div>
-                    <div>
                       <span className="text-muted block">Status:</span>
                       <Badge
                         variant={
@@ -456,7 +452,7 @@ export default function AdminCatalogPage() {
                           {product.name}
                         </Link>
                         <div className="text-[11px] font-mono text-muted">
-                          SKU: {product.sku} • MOQ: {product.moq} pcs
+                          SKU: {product.sku}
                         </div>
                       </td>
 
