@@ -238,6 +238,8 @@ export default function ProductDetailPage() {
                     <input
                       type="number"
                       value={qty}
+                      placeholder="1"
+                      min={1}
                       onChange={(e) => {
                         const val = parseInt(e.target.value) || 1;
                         setQty(Math.max(1, val));

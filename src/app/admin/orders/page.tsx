@@ -175,7 +175,7 @@ export default function AdminOrdersPage() {
                       onClick={() => setSelectedOrder(ord)}
                       className="text-xs"
                     >
-                      Inspect
+                      Open
                     </Button>
                     <button
                       onClick={() => handleDeleteOrder(ord.id, ord.orderNumber)}
@@ -281,7 +281,7 @@ export default function AdminOrdersPage() {
                           onClick={() => setSelectedOrder(ord)}
                           className="text-xs"
                         >
-                          Inspect
+                          Open
                         </Button>
                         <button
                           onClick={() => handleDeleteOrder(ord.id, ord.orderNumber)}
@@ -307,10 +307,10 @@ export default function AdminOrdersPage() {
         return (
           <div className="fixed inset-0 z-50 overflow-hidden flex justify-end">
             <div className="fixed inset-0 bg-ink-950/50" onClick={() => setSelectedOrder(null)} />
-            <div className="relative bg-parchment-50 w-full max-w-lg border-l border-ink-800 p-6 flex flex-col justify-between shadow-2xl z-10">
+            <div className="relative bg-parchment-50 w-full max-w-lg h-full max-h-screen border-l border-ink-800 p-6 flex flex-col justify-between shadow-2xl z-10">
               
-              <div className="space-y-6">
-                <div className="flex justify-between items-center border-b border-parchment-300 pb-3">
+              <div className="space-y-6 overflow-y-auto flex-1 pr-1 pb-4">
+                <div className="flex justify-between items-center border-b border-parchment-300 pb-3 sticky top-0 bg-parchment-50 z-10 pt-1">
                   <div>
                     <h3 className="font-display text-xl text-ink-950">Order #{selectedOrder.orderNumber}</h3>
                     <div className="mt-1">
@@ -338,7 +338,7 @@ export default function AdminOrdersPage() {
 
                 <div className="space-y-2">
                   <h4 className="font-display text-sm text-ink-950 uppercase border-b border-parchment-300 pb-1">Requested Line Items</h4>
-                  <div className="divide-y divide-parchment-300 max-h-56 overflow-y-auto">
+                  <div className="divide-y divide-parchment-300">
                     {selectedOrder.items.map((item, idx) => (
                       <div key={idx} className="py-2 flex justify-between text-xs">
                         <div>
@@ -357,7 +357,7 @@ export default function AdminOrdersPage() {
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-parchment-300 flex flex-col gap-2">
+              <div className="pt-4 border-t border-parchment-300 flex flex-col gap-2 shrink-0">
                 {selectedOrder.status !== 'Confirmed' && (
                   <Button
                     variant="ember"

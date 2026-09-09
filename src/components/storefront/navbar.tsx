@@ -42,9 +42,8 @@ export const Navbar: React.FC = () => {
     }
 
     const handleScroll = () => {
-      // Auto-close user dropdown, mega menu & mobile drawer on scroll
+      // Auto-close user dropdown & mega menu on scroll
       setIsUserDropdownOpen(false);
-      setIsMobileMenuOpen(false);
       setIsMegaMenuOpen(false);
 
       const currentScrollY = window.scrollY;
@@ -53,11 +52,12 @@ export const Navbar: React.FC = () => {
 
       if (currentScrollY <= 60) {
         setIsVisible(true);
-      } else if (diff > 4) {
-        // User scrolling down the page -> hide navbar
+      } else if (diff > 8) {
+        // User scrolling down the page -> hide navbar & close mobile menu
         setIsVisible(false);
-      } else if (diff < -4) {
-        // User scrolling up the page -> drop navbar down from top of screen
+        setIsMobileMenuOpen(false);
+      } else if (diff < -8) {
+        // User scrolling up the page -> show navbar from top of screen
         setIsVisible(true);
       }
 
@@ -107,7 +107,7 @@ export const Navbar: React.FC = () => {
 
   return (
     <header
-      className={`sticky top-0 z-50 bg-ink-950 border-b border-ink-800 text-parchment-text shadow-xl transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}
+      className={`sticky top-0 z-50 bg-ink-950 border-b border-ink-800 text-parchment-text shadow-xl transition-transform duration-300 ${isVisible || isMobileMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}
       style={{ backgroundColor: '#141218' }}
     >
 

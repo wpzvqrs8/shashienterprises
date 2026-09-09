@@ -14,8 +14,8 @@ interface ProductCardProps {
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addItem } = useCart();
-  const minOrderQty = product.moq || 1;
-  const [qty, setQty] = useState(minOrderQty);
+  const minOrderQty = 1;
+  const [qty, setQty] = useState(1);
   const [isLiked, setIsLiked] = useState(false);
 
   const activeBadge = product.badges && product.badges.length > 0 ? product.badges[0] : null;
@@ -29,7 +29,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   const handleDecrement = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (qty > minOrderQty) {
+    if (qty > 1) {
       setQty(prev => prev - 1);
     }
   };
