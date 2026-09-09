@@ -95,9 +95,7 @@ export default function HomePage() {
           <div className="bg-ink-900 border border-ink-800 rounded-[14px] p-8 md:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center shadow-warm-lg">
             
             <div className="lg:col-span-7 space-y-4">
-              <span className="text-xs bg-gold-500/10 text-gold-500 font-bold px-3 py-1 rounded-full uppercase tracking-widest border border-gold-500/30">
-                Limited Resin Statues Batch
-              </span>
+             
               <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-parchment-50 leading-tight">
                 High-Margin Collector Statues — <span className="text-ember-500">Order Before Sold Out</span>
               </h2>

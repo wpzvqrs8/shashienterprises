@@ -2,9 +2,9 @@ import { Product, ProductFilterParams, QuoteOrder, StoreSettings } from './types
 import { DEFAULT_STORE_SETTINGS } from './constants';
 import { createClient } from '@/lib/supabase/client';
 
-const PRODUCTS_KEY = 'shashi_enterprises_products_v5';
-const ORDERS_KEY = 'shashi_enterprises_orders_v5';
-const SETTINGS_KEY = 'shashi_enterprises_settings_v5';
+const PRODUCTS_KEY = 'shashi_enterprises_products_v8';
+const ORDERS_KEY = 'shashi_enterprises_orders_v8';
+const SETTINGS_KEY = 'shashi_enterprises_settings_v8';
 
 const supabase = createClient();
 
@@ -25,14 +25,14 @@ export const DEFAULT_PRODUCTS: Product[] = [
     retailSalePrice: 1100,
     wholesalePrice: 670,
     wholesaleTiers: [
-      { minQty: 5, maxQty: 19, pricePerPc: 670 },
+      { minQty: 1, maxQty: 19, pricePerPc: 670 },
       { minQty: 20, maxQty: 49, pricePerPc: 620 },
       { minQty: 50, pricePerPc: 580 }
     ],
     stockQty: 50,
-    moq: 5,
+    moq: 1,
     status: "active",
-    image: "/category-figures/fig-dragon-ball.png",
+    image: "/catalog/product-001.jpeg",
     description: "Premium Marvel Iron Spiderman 20cm collectible action figure.",
     shortDesc: "Iron Spiderman 20cm action figure with box packing.",
     badges: ["bestseller"],
@@ -49,14 +49,14 @@ export const DEFAULT_PRODUCTS: Product[] = [
     retailSalePrice: 999,
     wholesalePrice: 610,
     wholesaleTiers: [
-      { minQty: 5, maxQty: 19, pricePerPc: 610 },
+      { minQty: 1, maxQty: 19, pricePerPc: 610 },
       { minQty: 20, maxQty: 49, pricePerPc: 570 },
       { minQty: 50, pricePerPc: 530 }
     ],
     stockQty: 50,
-    moq: 5,
+    moq: 1,
     status: "active",
-    image: "/category-figures/fig-attack-on-titan.png",
+    image: "/catalog/product-002.jpeg",
     description: "Iron Spiderman sitting on trunk 24cm detailed collectible statue.",
     shortDesc: "Iron Spiderman on trunk 24cm action figure.",
     badges: ["new"],
@@ -73,14 +73,14 @@ export const DEFAULT_PRODUCTS: Product[] = [
     retailSalePrice: 599,
     wholesalePrice: 320,
     wholesaleTiers: [
-      { minQty: 5, maxQty: 19, pricePerPc: 320 },
+      { minQty: 1, maxQty: 19, pricePerPc: 320 },
       { minQty: 20, maxQty: 49, pricePerPc: 295 },
       { minQty: 50, pricePerPc: 275 }
     ],
     stockQty: 80,
-    moq: 5,
+    moq: 1,
     status: "active",
-    image: "/category-figures/fig-one-piece.png",
+    image: "/catalog/product-003.jpeg",
     description: "Naruto Shippuden Pain Akatsuki standing 22cm figure.",
     shortDesc: "Pain standing 22cm figure (OPP packing).",
     badges: [],
@@ -97,14 +97,14 @@ export const DEFAULT_PRODUCTS: Product[] = [
     retailSalePrice: 2999,
     wholesalePrice: 1800,
     wholesaleTiers: [
-      { minQty: 5, maxQty: 19, pricePerPc: 1800 },
+      { minQty: 1, maxQty: 19, pricePerPc: 1800 },
       { minQty: 20, maxQty: 49, pricePerPc: 1680 },
       { minQty: 50, pricePerPc: 1550 }
     ],
     stockQty: 30,
-    moq: 3,
+    moq: 1,
     status: "active",
-    image: "/category-figures/fig-hunter-x-hunter.png",
+    image: "/catalog/product-004.jpeg",
     description: "Dragon Ball Z Goku & Vegeta 32cm combo statue with premium box.",
     shortDesc: "Goku & Vegeta 32cm standing combo figure.",
     badges: ["bestseller", "limited"],
@@ -121,14 +121,14 @@ export const DEFAULT_PRODUCTS: Product[] = [
     retailSalePrice: 2699,
     wholesalePrice: 1600,
     wholesaleTiers: [
-      { minQty: 5, maxQty: 19, pricePerPc: 1600 },
+      { minQty: 1, maxQty: 19, pricePerPc: 1600 },
       { minQty: 20, maxQty: 49, pricePerPc: 1490 },
       { minQty: 50, pricePerPc: 1380 }
     ],
     stockQty: 25,
-    moq: 3,
+    moq: 1,
     status: "active",
-    image: "/category-figures/fig-naruto.png",
+    image: "/catalog/product-005.jpeg",
     description: "One Piece Luffy Gear 5 37cm large scale figure with double heads.",
     shortDesc: "Luffy Gear 5 double head 37cm premium figure.",
     badges: ["new", "bestseller"],
@@ -145,14 +145,14 @@ export const DEFAULT_PRODUCTS: Product[] = [
     retailSalePrice: 399,
     wholesalePrice: 225,
     wholesaleTiers: [
-      { minQty: 5, maxQty: 19, pricePerPc: 225 },
+      { minQty: 1, maxQty: 19, pricePerPc: 225 },
       { minQty: 20, maxQty: 49, pricePerPc: 205 },
       { minQty: 50, pricePerPc: 190 }
     ],
     stockQty: 100,
-    moq: 5,
+    moq: 1,
     status: "active",
-    image: "/category-figures/fig-pop-culture.png",
+    image: "/catalog/product-006.jpeg",
     description: "Compact One Piece Roronoa Zoro 10cm fighting pose figure.",
     shortDesc: "Zoro fighting action figure 10cm.",
     badges: [],
@@ -176,7 +176,7 @@ export const DEFAULT_PRODUCTS: Product[] = [
     stockQty: 10,
     moq: 1,
     status: "active",
-    image: "/category-figures/fig-demon-slayer.png",
+    image: "/catalog/product-007.jpeg",
     description: "Massive 70cm Shanks Red Hair Emperor statue standing on rock base.",
     shortDesc: "Shanks 70cm premium statue with box packing.",
     badges: ["limited"],
@@ -193,14 +193,14 @@ export const DEFAULT_PRODUCTS: Product[] = [
     retailSalePrice: 699,
     wholesalePrice: 390,
     wholesaleTiers: [
-      { minQty: 5, maxQty: 19, pricePerPc: 390 },
+      { minQty: 1, maxQty: 19, pricePerPc: 390 },
       { minQty: 20, maxQty: 49, pricePerPc: 360 },
       { minQty: 50, pricePerPc: 330 }
     ],
     stockQty: 60,
-    moq: 5,
+    moq: 1,
     status: "active",
-    image: "/category-figures/fig-premium-resin.png",
+    image: "/catalog/product-008.jpeg",
     description: "Roronoa Zoro three sword style 21cm action figure.",
     shortDesc: "Zoro three sword action figure 21cm.",
     badges: ["bestseller"],
@@ -217,14 +217,14 @@ export const DEFAULT_PRODUCTS: Product[] = [
     retailSalePrice: 1199,
     wholesalePrice: 650,
     wholesaleTiers: [
-      { minQty: 5, maxQty: 19, pricePerPc: 650 },
+      { minQty: 1, maxQty: 19, pricePerPc: 650 },
       { minQty: 20, maxQty: 49, pricePerPc: 600 },
       { minQty: 50, pricePerPc: 560 }
     ],
     stockQty: 45,
-    moq: 5,
+    moq: 1,
     status: "active",
-    image: "/category-figures/fig-jujutsu-kaisen.png",
+    image: "/catalog/product-009.jpeg",
     description: "Kimetsu no Yaiba 6-piece full hashira & main character set.",
     shortDesc: "Demon Slayer 6pcs character set 15cm.",
     badges: ["new"],
@@ -241,14 +241,14 @@ export const DEFAULT_PRODUCTS: Product[] = [
     retailSalePrice: 649,
     wholesalePrice: 355,
     wholesaleTiers: [
-      { minQty: 5, maxQty: 19, pricePerPc: 355 },
+      { minQty: 1, maxQty: 19, pricePerPc: 355 },
       { minQty: 20, maxQty: 49, pricePerPc: 330 },
       { minQty: 50, pricePerPc: 305 }
     ],
     stockQty: 50,
-    moq: 5,
+    moq: 1,
     status: "active",
-    image: "/category-figures/fig-rare-imports.png",
+    image: "/catalog/product-010.jpeg",
     description: "One Piece Vinsmoke Sanji Whole Cake Island white suit 30cm figure.",
     shortDesc: "White Sanji standing 30cm (blister+box).",
     badges: [],
@@ -265,14 +265,14 @@ export const DEFAULT_PRODUCTS: Product[] = [
     retailSalePrice: 1799,
     wholesalePrice: 1050,
     wholesaleTiers: [
-      { minQty: 5, maxQty: 19, pricePerPc: 1050 },
+      { minQty: 1, maxQty: 19, pricePerPc: 1050 },
       { minQty: 20, maxQty: 49, pricePerPc: 980 },
       { minQty: 50, pricePerPc: 910 }
     ],
     stockQty: 40,
-    moq: 4,
+    moq: 1,
     status: "active",
-    image: "/category-figures/fig-solo-leveling.png",
+    image: "/catalog/product-011.jpeg",
     description: "Jujutsu Kaisen Satoru Gojo gray blindfold 30cm figure.",
     shortDesc: "Gojo standing gray blindfold 30cm figure.",
     badges: ["bestseller"],
@@ -289,14 +289,14 @@ export const DEFAULT_PRODUCTS: Product[] = [
     retailSalePrice: 599,
     wholesalePrice: 350,
     wholesaleTiers: [
-      { minQty: 5, maxQty: 19, pricePerPc: 350 },
+      { minQty: 1, maxQty: 19, pricePerPc: 350 },
       { minQty: 20, maxQty: 49, pricePerPc: 325 },
       { minQty: 50, pricePerPc: 300 }
     ],
     stockQty: 75,
-    moq: 5,
+    moq: 1,
     status: "active",
-    image: "/category-figures/fig-action-figures.png",
+    image: "/catalog/product-012.jpeg",
     description: "One Piece Sun God Nika Luffy punching pose 13cm figure.",
     shortDesc: "Luffy Gear 5 punching down 13cm figure.",
     badges: ["new"],
@@ -313,14 +313,14 @@ export const DEFAULT_PRODUCTS: Product[] = [
     retailSalePrice: 299,
     wholesalePrice: 160,
     wholesaleTiers: [
-      { minQty: 5, maxQty: 19, pricePerPc: 160 },
+      { minQty: 1, maxQty: 19, pricePerPc: 160 },
       { minQty: 20, maxQty: 49, pricePerPc: 145 },
       { minQty: 50, pricePerPc: 135 }
     ],
     stockQty: 120,
-    moq: 5,
+    moq: 1,
     status: "active",
-    image: "/category-figures/fig-marvel.png",
+    image: "/catalog/product-013.jpeg",
     description: "Marvel Deadpool 3-piece multi-pose mini action figure set.",
     shortDesc: "Trending Deadpool 3pcs set action figure.",
     badges: ["bestseller"],
@@ -337,14 +337,14 @@ export const DEFAULT_PRODUCTS: Product[] = [
     retailSalePrice: 899,
     wholesalePrice: 550,
     wholesaleTiers: [
-      { minQty: 5, maxQty: 19, pricePerPc: 550 },
+      { minQty: 1, maxQty: 19, pricePerPc: 550 },
       { minQty: 20, maxQty: 49, pricePerPc: 510 },
       { minQty: 50, pricePerPc: 470 }
     ],
     stockQty: 35,
-    moq: 5,
+    moq: 1,
     status: "active",
-    image: "/category-figures/fig-limited-statues.png",
+    image: "/catalog/product-014.jpeg",
     description: "Dragon Ball Z Majin Buu 27cm standing collectible figure.",
     shortDesc: "DBZ Majinbu standing 27cm figure.",
     badges: [],
@@ -361,14 +361,14 @@ export const DEFAULT_PRODUCTS: Product[] = [
     retailSalePrice: 399,
     wholesalePrice: 225,
     wholesaleTiers: [
-      { minQty: 5, maxQty: 19, pricePerPc: 225 },
+      { minQty: 1, maxQty: 19, pricePerPc: 225 },
       { minQty: 20, maxQty: 49, pricePerPc: 205 },
       { minQty: 50, pricePerPc: 190 }
     ],
     stockQty: 90,
-    moq: 5,
+    moq: 1,
     status: "active",
-    image: "/category-figures/fig-katanas-weapons.png",
+    image: "/catalog/product-015.jpeg",
     description: "Dragon Ball Z Son Goku 16cm martial arts pose figure.",
     shortDesc: "Wholesale Goku 16cm action figure.",
     badges: [],
@@ -385,14 +385,14 @@ export const DEFAULT_PRODUCTS: Product[] = [
     retailSalePrice: 299,
     wholesalePrice: 165,
     wholesaleTiers: [
-      { minQty: 5, maxQty: 19, pricePerPc: 165 },
+      { minQty: 1, maxQty: 19, pricePerPc: 165 },
       { minQty: 20, maxQty: 49, pricePerPc: 150 },
       { minQty: 50, pricePerPc: 140 }
     ],
     stockQty: 100,
-    moq: 5,
+    moq: 1,
     status: "active",
-    image: "/category-figures/fig-dragon-ball.png",
+    image: "/catalog/product-016.jpeg",
     description: "Dragon Ball Z Goku SSJ standing 21cm figure.",
     shortDesc: "DBZ Goku standing 21cm action figure.",
     badges: [],
@@ -409,14 +409,14 @@ export const DEFAULT_PRODUCTS: Product[] = [
     retailSalePrice: 1299,
     wholesalePrice: 750,
     wholesaleTiers: [
-      { minQty: 5, maxQty: 19, pricePerPc: 750 },
+      { minQty: 1, maxQty: 19, pricePerPc: 750 },
       { minQty: 20, maxQty: 49, pricePerPc: 700 },
       { minQty: 50, pricePerPc: 650 }
     ],
     stockQty: 40,
-    moq: 5,
+    moq: 1,
     status: "active",
-    image: "/category-figures/fig-naruto.png",
+    image: "/catalog/product-017.jpeg",
     description: "Naruto Shippuden 6-piece full character team figure set.",
     shortDesc: "Naruto 6 character set 17cm action figure.",
     badges: ["bestseller"],
@@ -433,14 +433,14 @@ export const DEFAULT_PRODUCTS: Product[] = [
     retailSalePrice: 1899,
     wholesalePrice: 1185,
     wholesaleTiers: [
-      { minQty: 5, maxQty: 19, pricePerPc: 1185 },
+      { minQty: 1, maxQty: 19, pricePerPc: 1185 },
       { minQty: 20, maxQty: 49, pricePerPc: 1100 },
       { minQty: 50, pricePerPc: 1020 }
     ],
     stockQty: 30,
-    moq: 5,
+    moq: 1,
     status: "active",
-    image: "/category-figures/fig-katanas-weapons.png",
+    image: "/catalog/product-018.jpeg",
     description: "104cm full size wooden cosplay katana with neon edge detail.",
     shortDesc: "Neon wooden katana 104cm.",
     badges: ["new"],
@@ -457,14 +457,14 @@ export const DEFAULT_PRODUCTS: Product[] = [
     retailSalePrice: 1099,
     wholesalePrice: 700,
     wholesaleTiers: [
-      { minQty: 5, maxQty: 19, pricePerPc: 700 },
+      { minQty: 1, maxQty: 19, pricePerPc: 700 },
       { minQty: 20, maxQty: 49, pricePerPc: 650 },
       { minQty: 50, pricePerPc: 600 }
     ],
     stockQty: 50,
-    moq: 5,
+    moq: 1,
     status: "active",
-    image: "/category-figures/fig-katanas-weapons.png",
+    image: "/catalog/product-019.jpeg",
     description: "104cm full size assembled wooden katana replica.",
     shortDesc: "Assembled wooden katana 104cm.",
     badges: [],
@@ -481,14 +481,14 @@ export const DEFAULT_PRODUCTS: Product[] = [
     retailSalePrice: 2199,
     wholesalePrice: 1350,
     wholesaleTiers: [
-      { minQty: 5, maxQty: 19, pricePerPc: 1350 },
+      { minQty: 1, maxQty: 19, pricePerPc: 1350 },
       { minQty: 20, maxQty: 49, pricePerPc: 1250 },
       { minQty: 50, pricePerPc: 1150 }
     ],
     stockQty: 25,
-    moq: 4,
+    moq: 1,
     status: "active",
-    image: "/category-figures/fig-pop-culture.png",
+    image: "/catalog/product-020.jpeg",
     description: "God of War Kratos 19cm action figure 4-piece set.",
     shortDesc: "God of War Kratos 19cm action figure (Set of 4pcs).",
     badges: ["limited"],
@@ -497,16 +497,45 @@ export const DEFAULT_PRODUCTS: Product[] = [
 ];
 
 // LocalStorage helpers
+// LocalStorage helpers
 const getStoredProducts = (): Product[] => {
   if (typeof window === 'undefined') return DEFAULT_PRODUCTS;
   try {
     const item = localStorage.getItem(PRODUCTS_KEY);
-    if (!item) {
-      localStorage.setItem(PRODUCTS_KEY, JSON.stringify(DEFAULT_PRODUCTS));
-      return DEFAULT_PRODUCTS;
+    let parsed: Product[] = [];
+    if (item) {
+      try {
+        parsed = JSON.parse(item);
+      } catch (e) {
+        parsed = [];
+      }
     }
-    const parsed = JSON.parse(item);
-    return (parsed && parsed.length > 0) ? parsed : DEFAULT_PRODUCTS;
+
+    // Always merge code DEFAULT_PRODUCTS so updated catalog prices take effect immediately across all client sessions
+    const merged = DEFAULT_PRODUCTS.map(defP => {
+      const existing = (parsed || []).find(p => p.sku === defP.sku || p.id === defP.id);
+      if (!existing) return defP;
+      return {
+        ...existing,
+        wholesalePrice: defP.wholesalePrice,
+        retailRegPrice: defP.retailRegPrice,
+        retailSalePrice: defP.retailSalePrice,
+        wholesaleTiers: defP.wholesaleTiers,
+        moq: defP.moq,
+        name: defP.name,
+        image: defP.image || existing.image
+      };
+    });
+
+    const customProducts = (parsed || []).filter(p => !DEFAULT_PRODUCTS.some(defP => defP.sku === p.sku || defP.id === p.id));
+    const result = [...merged, ...customProducts];
+
+    // Re-save merged products to localStorage to clear out any stale cached pricing
+    try {
+      localStorage.setItem(PRODUCTS_KEY, JSON.stringify(result));
+    } catch (e) {}
+
+    return result;
   } catch (e) {
     return DEFAULT_PRODUCTS;
   }
@@ -537,18 +566,76 @@ const setStoredOrders = (orders: QuoteOrder[]): void => {
   } catch (e) {}
 };
 
+function filterAndSortProductsList(products: Product[], params?: ProductFilterParams): Product[] {
+  if (!params) return products;
+  let result = [...products];
+
+  if (params.category) {
+    const categoryLower = params.category.toLowerCase().replace(/-/g, ' ');
+    result = result.filter(p => 
+      p.category.toLowerCase().replace(/[^a-z0-9]/g, '') === categoryLower.replace(/[^a-z0-9]/g, '') ||
+      p.series.toLowerCase().replace(/[^a-z0-9]/g, '') === categoryLower.replace(/[^a-z0-9]/g, '')
+    );
+  }
+  if (params.series) {
+    result = result.filter(p => p.series.toLowerCase() === params.series!.toLowerCase());
+  }
+  if (params.minPrice !== undefined) {
+    result = result.filter(p => p.wholesalePrice >= params.minPrice!);
+  }
+  if (params.maxPrice !== undefined) {
+    result = result.filter(p => p.wholesalePrice <= params.maxPrice!);
+  }
+  if (params.inStockOnly) {
+    result = result.filter(p => p.stockQty > 0 && p.status === 'active');
+  }
+  if (params.badge) {
+    result = result.filter(p => p.badges && p.badges.includes(params.badge as any));
+  }
+  if (params.search && params.search.trim() !== '') {
+    const query = params.search.toLowerCase().trim();
+    result = result.filter(p => 
+      p.name.toLowerCase().includes(query) ||
+      p.sku.toLowerCase().includes(query) ||
+      p.category.toLowerCase().includes(query) ||
+      p.series.toLowerCase().includes(query)
+    );
+  }
+  if (params.sortBy) {
+    switch (params.sortBy) {
+      case 'price-low':
+        result.sort((a, b) => a.wholesalePrice - b.wholesalePrice);
+        break;
+      case 'price-high':
+        result.sort((a, b) => b.wholesalePrice - a.wholesalePrice);
+        break;
+      case 'newest':
+        result.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+        break;
+      case 'recommended':
+      default:
+        result.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+        break;
+    }
+  }
+
+  return result;
+}
+
 // ====================================================================
 // CATALOG API FUNCTIONS (Supabase Live DB + Local Sync)
 // ====================================================================
 
 export async function getProducts(params?: ProductFilterParams): Promise<Product[]> {
+  let dbProductsList: Product[] = [];
+
   try {
     const { data: dbProducts, error } = await supabase
       .from('se_products')
       .select('*, se_product_price_tiers(*)');
 
     if (!error && dbProducts) {
-      let products: Product[] = dbProducts.map((p: any) => ({
+      dbProductsList = dbProducts.map((p: any) => ({
         id: p.id,
         sku: p.sku,
         name: p.name,
@@ -578,71 +665,40 @@ export async function getProducts(params?: ProductFilterParams): Promise<Product
           pricePerPc: Number(t.price_per_pc)
         }))
       }));
-
-      // Apply filtering if params exist
-      if (params) {
-        if (params.category) {
-          const categoryLower = params.category.toLowerCase().replace(/-/g, ' ');
-          products = products.filter(p => 
-            p.category.toLowerCase().replace(/[^a-z0-9]/g, '') === categoryLower.replace(/[^a-z0-9]/g, '') ||
-            p.series.toLowerCase().replace(/[^a-z0-9]/g, '') === categoryLower.replace(/[^a-z0-9]/g, '')
-          );
-        }
-        if (params.series) {
-          products = products.filter(p => p.series.toLowerCase() === params.series!.toLowerCase());
-        }
-        if (params.minPrice !== undefined) {
-          products = products.filter(p => p.wholesalePrice >= params.minPrice!);
-        }
-        if (params.maxPrice !== undefined) {
-          products = products.filter(p => p.wholesalePrice <= params.maxPrice!);
-        }
-        if (params.inStockOnly) {
-          products = products.filter(p => p.stockQty > 0 && p.status === 'active');
-        }
-        if (params.badge) {
-          products = products.filter(p => p.badges.includes(params.badge as any));
-        }
-        if (params.search && params.search.trim() !== '') {
-          const query = params.search.toLowerCase().trim();
-          products = products.filter(p => 
-            p.name.toLowerCase().includes(query) ||
-            p.sku.toLowerCase().includes(query) ||
-            p.category.toLowerCase().includes(query) ||
-            p.series.toLowerCase().includes(query)
-          );
-        }
-        if (params.sortBy) {
-          switch (params.sortBy) {
-            case 'price-low':
-              products.sort((a, b) => a.wholesalePrice - b.wholesalePrice);
-              break;
-            case 'price-high':
-              products.sort((a, b) => b.wholesalePrice - a.wholesalePrice);
-              break;
-            case 'newest':
-              products.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-              break;
-            case 'recommended':
-            default:
-              products.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
-              break;
-          }
-        }
-      }
-
-      setStoredProducts(products);
-      return products;
     }
   } catch (err) {
     console.warn('Supabase products fetch fallback to local state:', err);
   }
 
-  // Fallback to stored local state
-  await simulateLatency();
-  let products = getStoredProducts();
-  if (!params) return products;
-  return products;
+  // Merge DEFAULT_PRODUCTS with DB products so featured/catalog SKUs (SE-ANM-101 to SE-ANM-120)
+  // are ALWAYS present and have correct prices!
+  const dbSkus = new Set(dbProductsList.map(p => p.sku));
+  const missingDefaultProducts = DEFAULT_PRODUCTS.filter(defP => !dbSkus.has(defP.sku));
+
+  // Override pricing for matching SKUs from DEFAULT_PRODUCTS
+  const updatedDbProducts = dbProductsList.map(p => {
+    const defP = DEFAULT_PRODUCTS.find(d => d.sku === p.sku || d.id === p.id);
+    if (defP) {
+      return {
+        ...p,
+        wholesalePrice: defP.wholesalePrice,
+        retailRegPrice: defP.retailRegPrice,
+        retailSalePrice: defP.retailSalePrice,
+        wholesaleTiers: defP.wholesaleTiers,
+        moq: defP.moq,
+        name: defP.name,
+        image: defP.image || p.image,
+      };
+    }
+    return p;
+  });
+
+  const combinedProducts = [...missingDefaultProducts, ...updatedDbProducts];
+  const finalProducts = combinedProducts.length > 0 ? combinedProducts : getStoredProducts();
+
+  const filteredAndSorted = filterAndSortProductsList(finalProducts, params);
+  setStoredProducts(filteredAndSorted);
+  return filteredAndSorted;
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {

@@ -14,7 +14,8 @@ interface ProductCardProps {
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addItem } = useCart();
-  const [qty, setQty] = useState(product.moq || 5);
+  const minOrderQty = product.moq || 1;
+  const [qty, setQty] = useState(minOrderQty);
   const [isLiked, setIsLiked] = useState(false);
 
   const activeBadge = product.badges && product.badges.length > 0 ? product.badges[0] : null;
@@ -28,7 +29,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   const handleDecrement = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (qty > product.moq) {
+    if (qty > minOrderQty) {
       setQty(prev => prev - 1);
     }
   };
@@ -79,7 +80,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <div className="flex items-center border border-parchment-300 rounded bg-parchment-50 text-ink-950 px-1">
             <button
               onClick={handleDecrement}
-              disabled={qty <= product.moq}
+              disabled={qty <= minOrderQty}
               className="p-1 text-ink-950 hover:text-ember-500 disabled:opacity-30 cursor-pointer"
             >
               <Minus className="w-3.5 h-3.5" />
@@ -134,7 +135,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           </div>
 
           <div className="flex justify-between items-center mt-1 text-[11px] text-muted border-t border-parchment-300/60 pt-2">
-            <span>MOQ: <strong className="text-ink-950 font-bold">{product.moq} pcs</strong></span>
+            <span>MOQ: <strong className="text-ink-950 font-bold">{minOrderQty} {minOrderQty === 1 ? 'pc' : 'pcs'}</strong></span>
             <span className={product.stockQty > 0 ? 'text-jade-600 font-semibold' : 'text-danger font-semibold'}>
               {product.stockQty > 0 ? `${product.stockQty} in stock` : 'Out of Stock'}
             </span>
@@ -145,7 +146,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             <div className="flex items-center border border-parchment-300 rounded bg-parchment-100 text-ink-950 px-1">
               <button
                 onClick={handleDecrement}
-                disabled={qty <= product.moq}
+                disabled={qty <= minOrderQty}
                 className="p-1 text-ink-950 disabled:opacity-30"
               >
                 <Minus className="w-3.5 h-3.5" />
