@@ -84,9 +84,9 @@ export const QuantityInput: React.FC<QuantityInputProps> = ({
   const sizeStyles = {
     sm: {
       box: 'p-0.5',
-      btn: 'w-6 h-6 flex items-center justify-center shrink-0 p-0',
-      icon: 'w-3.5 h-3.5',
-      input: 'w-10 text-xs py-0.5',
+      btn: 'w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center shrink-0 p-0',
+      icon: 'w-3 h-3 sm:w-3.5 sm:h-3.5',
+      input: 'w-7 sm:w-9 text-[11px] sm:text-xs py-0.5',
     },
     md: {
       box: 'p-0.5',

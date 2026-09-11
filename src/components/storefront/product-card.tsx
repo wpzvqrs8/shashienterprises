@@ -95,21 +95,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             </span>
           </div>
 
-          {/* Stepper with Text Field & Add Button (Responsive mobile stack & desktop inline) */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-1.5 mt-2 pt-2 border-t border-parchment-300">
-            <div className="flex justify-center sm:justify-start">
-              <QuantityInput
-                value={qty}
-                onChange={setQty}
-                stockQty={product.stockQty}
-                size="sm"
-              />
-            </div>
+          {/* Stepper with Text Field & Add Button (Side-by-side on all screens) */}
+          <div className="flex flex-row items-center justify-between gap-1 mt-2 pt-2 border-t border-parchment-300">
+            <QuantityInput
+              value={qty}
+              onChange={setQty}
+              stockQty={product.stockQty}
+              size="sm"
+            />
             <button
               onClick={handleAddToCart}
-              className="flex-1 w-full bg-ember-500 text-white text-xs font-bold py-1.5 px-2 rounded uppercase flex items-center justify-center gap-1 hover:bg-ember-600 active:bg-ember-700 transition-colors cursor-pointer shadow-sm"
+              className="flex-1 bg-ember-500 text-white text-[11px] sm:text-xs font-bold py-1 px-1.5 sm:px-2 rounded uppercase flex items-center justify-center gap-1 hover:bg-ember-600 active:bg-ember-700 transition-colors cursor-pointer shadow-sm min-w-0"
             >
-              <ShoppingBag className="w-3.5 h-3.5" />
+              <ShoppingBag className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
               <span>ADD</span>
             </button>
           </div>
