@@ -215,8 +215,8 @@ export default function ProductDetailPage() {
             </div>
 
             {/* Stepper + Dynamic Line Total Box */}
-            <div className="bg-parchment-100 border border-parchment-300 p-4 rounded-[10px] space-y-3 shadow-sm">
-              <div className="flex flex-row items-center justify-between gap-3">
+            <div className="bg-parchment-100 border border-parchment-300 p-3.5 sm:p-4 rounded-[10px] space-y-3 shadow-sm">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 
                 {/* Quantity Stepper */}
                 <div className="space-y-1 w-fit">

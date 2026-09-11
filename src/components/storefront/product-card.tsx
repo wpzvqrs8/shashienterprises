@@ -95,17 +95,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             </span>
           </div>
 
-          {/* Stepper with Text Field & Add Button (Always Visible on Desktop & Mobile) */}
-          <div className="flex items-center gap-2 mt-2 pt-2 border-t border-parchment-300">
-            <QuantityInput
-              value={qty}
-              onChange={setQty}
-              stockQty={product.stockQty}
-              size="sm"
-            />
+          {/* Stepper with Text Field & Add Button (Responsive mobile stack & desktop inline) */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-1.5 mt-2 pt-2 border-t border-parchment-300">
+            <div className="flex justify-center sm:justify-start">
+              <QuantityInput
+                value={qty}
+                onChange={setQty}
+                stockQty={product.stockQty}
+                size="sm"
+              />
+            </div>
             <button
               onClick={handleAddToCart}
-              className="flex-1 bg-ember-500 text-white text-xs font-bold py-1.5 px-2 rounded uppercase flex items-center justify-center gap-1 hover:bg-ember-600 active:bg-ember-700 transition-colors cursor-pointer shadow-sm"
+              className="flex-1 w-full bg-ember-500 text-white text-xs font-bold py-1.5 px-2 rounded uppercase flex items-center justify-center gap-1 hover:bg-ember-600 active:bg-ember-700 transition-colors cursor-pointer shadow-sm"
             >
               <ShoppingBag className="w-3.5 h-3.5" />
               <span>ADD</span>
