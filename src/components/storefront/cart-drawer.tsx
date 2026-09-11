@@ -9,6 +9,7 @@ import { useAuth } from '@/components/providers/auth-provider';
 import { QuoteOrder } from '@/lib/types';
 import { getOrders } from '@/lib/catalog-store';
 import { Button } from '@/components/ui/button';
+import { QuantityInput } from '@/components/ui/quantity-input';
 import { X, ShoppingBag, Trash2, Plus, Minus, AlertTriangle, ArrowRight, Package, ExternalLink, ShieldCheck, User } from 'lucide-react';
 
 export const CartDrawer: React.FC = () => {
@@ -154,22 +155,12 @@ export const CartDrawer: React.FC = () => {
 
                         {/* Stepper + Line Total */}
                         <div className="flex items-center justify-between mt-2 pt-1 border-t border-parchment-300/60">
-                          <div className="flex items-center border border-parchment-300 rounded bg-parchment-50">
-                            <button
-                              onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
-                              disabled={item.quantity <= 1}
-                              className="px-1.5 py-0.5 text-ink-950 disabled:opacity-30 cursor-pointer"
-                            >
-                              <Minus className="w-3 h-3" />
-                            </button>
-                            <span className="px-2 text-xs font-mono font-bold">{item.quantity}</span>
-                            <button
-                              onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
-                              className="px-1.5 py-0.5 text-ink-950 cursor-pointer"
-                            >
-                              <Plus className="w-3 h-3" />
-                            </button>
-                          </div>
+                          <QuantityInput
+                            value={item.quantity}
+                            onChange={(q) => updateQuantity(item.product.id, q)}
+                            stockQty={item.product.stockQty}
+                            size="sm"
+                          />
                           <span className="font-display text-sm text-ink-950 font-bold">
                             ₹{item.lineTotal.toLocaleString('en-IN')}
                           </span>

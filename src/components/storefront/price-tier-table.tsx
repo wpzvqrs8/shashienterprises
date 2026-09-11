@@ -25,9 +25,6 @@ export const PriceTierTable: React.FC<PriceTierTableProps> = ({
   return (
     <div className="space-y-2 my-4">
       <div className="text-xs text-muted font-medium">
-        {showOldPrice && (
-          <span>Retail Price: <span className="line-through text-ink-950 font-bold">₹{retailPrice.toLocaleString('en-IN')}</span> — </span>
-        )}
         <span className="text-ember-600 font-semibold">Your Wholesale Tier Pricing:</span>
       </div>
 

@@ -10,6 +10,7 @@ import { useCart, calculateTierPrice } from '@/lib/cart-store';
 import { ProductCard } from '@/components/storefront/product-card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { QuantityInput } from '@/components/ui/quantity-input';
 import { INITIAL_STORE_SETTINGS } from '@/lib/constants';
 import {
   ShoppingBag,
@@ -76,7 +77,7 @@ export default function ProductDetailPage() {
     );
   }
 
-  const unitRate = calculateTierPrice(product, qty);
+  const unitRate = Number(product.wholesalePrice) || 700;
   const lineTotal = unitRate * qty;
 
   const handleIncrement = () => setQty(prev => prev + 1);
@@ -210,11 +211,6 @@ export default function ProductDetailPage() {
                   ₹{unitRate.toLocaleString('en-IN')}
                 </span>
                 <span className="text-xs text-muted font-bold uppercase">Wholesale Rate /pc</span>
-                {product.retailSalePrice > unitRate && (
-                  <span className="text-sm text-muted line-through ml-2">
-                    MSRP ₹{product.retailSalePrice.toLocaleString('en-IN')}
-                  </span>
-                )}
               </div>
             </div>
 
@@ -223,36 +219,21 @@ export default function ProductDetailPage() {
               <div className="flex flex-row items-center justify-between gap-3">
                 
                 {/* Quantity Stepper */}
-                <div className="space-y-1">
-                  <label className="text-xs font-bold uppercase text-ink-950 flex flex-wrap items-center gap-1">
+                <div className="space-y-1 w-fit">
+                  <label className="text-xs font-bold uppercase text-ink-950 flex flex-wrap items-center gap-1.5">
                     <span>Order Quantity</span>
+                    {product.stockQty > 0 && (
+                      <span className="text-[11px] font-semibold text-jade-700 bg-jade-100/80 px-2 py-0.5 rounded border border-jade-600/30">
+                        1 - {product.stockQty} instock items
+                      </span>
+                    )}
                   </label>
-                  <div className="flex items-center border border-parchment-300 rounded-[6px] bg-parchment-50 w-fit">
-                    <button
-                      onClick={handleDecrement}
-                      disabled={qty <= 1}
-                      className="px-2.5 py-1.5 text-ink-950 hover:bg-parchment-100 disabled:opacity-30 cursor-pointer"
-                    >
-                      <Minus className="w-4 h-4" />
-                    </button>
-                    <input
-                      type="number"
-                      value={qty}
-                      placeholder="1"
-                      min={1}
-                      onChange={(e) => {
-                        const val = parseInt(e.target.value) || 1;
-                        setQty(Math.max(1, val));
-                      }}
-                      className="w-12 sm:w-16 text-center font-mono font-bold text-sm bg-transparent border-x border-parchment-300 py-1 focus:outline-none"
-                    />
-                    <button
-                      onClick={handleIncrement}
-                      className="px-2.5 py-1.5 text-ink-950 hover:bg-parchment-100 cursor-pointer"
-                    >
-                      <Plus className="w-4 h-4" />
-                    </button>
-                  </div>
+                  <QuantityInput
+                    value={qty}
+                    onChange={setQty}
+                    stockQty={product.stockQty}
+                    size="lg"
+                  />
                 </div>
 
                 {/* Line Total */}

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useCart } from '@/lib/cart-store';
 import { Button } from '@/components/ui/button';
+import { QuantityInput } from '@/components/ui/quantity-input';
 import { Trash2, Plus, Minus, AlertTriangle, ArrowRight, ShieldCheck, ShoppingBag, Check } from 'lucide-react';
 
 export default function CartPage() {
@@ -117,22 +118,12 @@ export default function CartPage() {
 
                       {/* Stepper */}
                       <div className="sm:col-span-2 flex justify-center w-full sm:w-auto">
-                        <div className="flex items-center border border-parchment-300 rounded bg-parchment-50">
-                          <button
-                            onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
-                            disabled={item.quantity <= 1}
-                            className="px-2 py-1 text-ink-950 disabled:opacity-30"
-                          >
-                            <Minus className="w-3.5 h-3.5" />
-                          </button>
-                          <span className="px-3 text-xs font-mono font-bold">{item.quantity}</span>
-                          <button
-                            onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
-                            className="px-2 py-1 text-ink-950"
-                          >
-                            <Plus className="w-3.5 h-3.5" />
-                          </button>
-                        </div>
+                        <QuantityInput
+                          value={item.quantity}
+                          onChange={(q) => updateQuantity(item.product.id, q)}
+                          stockQty={item.product.stockQty}
+                          size="md"
+                        />
                       </div>
 
                       {/* Line Total & Delete */}

@@ -5,8 +5,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Product } from '@/lib/types';
 import { Badge } from '@/components/ui/badge';
-import { useCart, calculateTierPrice } from '@/lib/cart-store';
-import { ShoppingBag, Plus, Minus, Heart } from 'lucide-react';
+import { useCart } from '@/lib/cart-store';
+import { QuantityInput } from '@/components/ui/quantity-input';
+import { ShoppingBag, Heart } from 'lucide-react';
 
 interface ProductCardProps {
   product: Product;
@@ -14,25 +15,13 @@ interface ProductCardProps {
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addItem } = useCart();
-  const minOrderQty = 1;
   const [qty, setQty] = useState(1);
   const [isLiked, setIsLiked] = useState(false);
 
   const activeBadge = product.badges && product.badges.length > 0 ? product.badges[0] : null;
 
-  const currentWholesaleRate = calculateTierPrice(product, qty);
-
-  const handleIncrement = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setQty(prev => prev + 1);
-  };
-
-  const handleDecrement = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (qty > 1) {
-      setQty(prev => prev - 1);
-    }
-  };
+  // Normal wholesale rate - fixed regardless of quantity
+  const wholesaleRate = Number(product.wholesalePrice) || 700;
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -62,7 +51,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         >
           <Heart className={`w-3.5 h-3.5 ${isLiked ? 'fill-red-600 text-red-600' : 'text-red-600 hover:fill-red-600/30'}`} />
         </button>
-
       </div>
 
       {/* Main Image Container */}
@@ -74,33 +62,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           className="object-contain object-center p-1.5 group-hover:scale-105 transition-transform duration-400 ease-out"
         />
-
-        {/* Quick Add Bar Slide-up on Desktop Hover with Solid Pure White Background */}
-        <div className="hidden md:flex absolute bottom-0 left-0 right-0 p-2 bg-white border-t border-parchment-300 shadow-lg text-ink-950 transform translate-y-full group-hover:translate-y-0 transition-transform duration-200 justify-between items-center z-20 gap-1">
-          <div className="flex items-center border border-parchment-300 rounded bg-parchment-50 text-ink-950 px-1">
-            <button
-              onClick={handleDecrement}
-              disabled={qty <= minOrderQty}
-              className="p-1 text-ink-950 hover:text-ember-500 disabled:opacity-30 cursor-pointer"
-            >
-              <Minus className="w-3.5 h-3.5" />
-            </button>
-            <span className="px-2 text-xs font-mono font-bold min-w-[24px] text-center">{qty}</span>
-            <button
-              onClick={handleIncrement}
-              className="p-1 text-ink-950 hover:text-ember-500 cursor-pointer"
-            >
-              <Plus className="w-3.5 h-3.5" />
-            </button>
-          </div>
-          <button
-            onClick={handleAddToCart}
-            className="bg-ember-500 text-white text-xs font-bold px-3.5 py-1.5 rounded hover:bg-ember-600 uppercase flex items-center gap-1.5 transition-colors cursor-pointer shadow-sm"
-          >
-            <ShoppingBag className="w-3.5 h-3.5" />
-            <span>ADD</span>
-          </button>
-        </div>
       </Link>
 
       {/* Details Container */}
@@ -123,44 +84,28 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <div className="pt-3">
           <div className="flex items-baseline gap-2 flex-wrap">
             <span className="text-xl font-bold font-display text-ember-600">
-              ₹{currentWholesaleRate.toLocaleString('en-IN')}
+              ₹{wholesaleRate.toLocaleString('en-IN')}
             </span>
             <span className="text-xs text-muted font-normal">/pc</span>
-            {product.showOldPrice !== false && (
-              <span className="text-xs text-muted line-through">
-                ₹{product.retailSalePrice.toLocaleString('en-IN')}
-              </span>
-            )}
-
           </div>
 
-          <div className="flex justify-end items-center mt-1 text-[11px] text-muted border-t border-parchment-300/60 pt-2">
+          <div className="flex justify-between items-center mt-1 text-[11px] text-muted border-t border-parchment-300/60 pt-2">
             <span className={product.stockQty > 0 ? 'text-jade-600 font-semibold' : 'text-danger font-semibold'}>
-              {product.stockQty > 0 ? `${product.stockQty} in stock` : 'Out of Stock'}
+              {product.stockQty > 0 ? `1 - ${product.stockQty} instock items` : 'Out of Stock'}
             </span>
           </div>
 
-          {/* Touch / Mobile Stepper & Add Button */}
-          <div className="flex md:hidden items-center gap-2 mt-3 pt-2 border-t border-parchment-300">
-            <div className="flex items-center border border-parchment-300 rounded bg-parchment-100 text-ink-950 px-1">
-              <button
-                onClick={handleDecrement}
-                disabled={qty <= minOrderQty}
-                className="p-1 text-ink-950 disabled:opacity-30"
-              >
-                <Minus className="w-3.5 h-3.5" />
-              </button>
-              <span className="px-2 text-xs font-mono font-bold">{qty}</span>
-              <button
-                onClick={handleIncrement}
-                className="p-1 text-ink-950"
-              >
-                <Plus className="w-3.5 h-3.5" />
-              </button>
-            </div>
+          {/* Stepper with Text Field & Add Button (Always Visible on Desktop & Mobile) */}
+          <div className="flex items-center gap-2 mt-2 pt-2 border-t border-parchment-300">
+            <QuantityInput
+              value={qty}
+              onChange={setQty}
+              stockQty={product.stockQty}
+              size="sm"
+            />
             <button
               onClick={handleAddToCart}
-              className="flex-1 bg-ember-500 text-white text-xs font-bold py-1.5 px-2 rounded uppercase flex items-center justify-center gap-1 active:bg-ember-600"
+              className="flex-1 bg-ember-500 text-white text-xs font-bold py-1.5 px-2 rounded uppercase flex items-center justify-center gap-1 hover:bg-ember-600 active:bg-ember-700 transition-colors cursor-pointer shadow-sm"
             >
               <ShoppingBag className="w-3.5 h-3.5" />
               <span>ADD</span>
