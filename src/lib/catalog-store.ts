@@ -194,20 +194,22 @@ export async function getProductById(id: string): Promise<Product | null> {
 export async function generateNextMaterialCode(): Promise<string> {
   let highestNum = 100;
   try {
-    const products = await getProducts();
-    for (const p of products) {
-      if (p.sku) {
-        const match = p.sku.match(/SE-ANM-(\d+)/i) || p.sku.match(/(\d+)/);
-        if (match && match[1]) {
-          const num = parseInt(match[1], 10);
-          if (!isNaN(num) && num > highestNum && num < 99999) {
-            highestNum = num;
-          }
-        }
+    // Always query Supabase directly — never use stale localStorage cache for SKU generation
+    const { data, error } = await supabase
+      .from('se_products')
+      .select('sku')
+      .like('sku', 'SE-ANM-%')
+      .order('sku', { ascending: false })
+      .limit(1);
+
+    if (!error && data && data.length > 0) {
+      const match = data[0].sku.match(/SE-ANM-(\d+)/i);
+      if (match && match[1]) {
+        highestNum = parseInt(match[1], 10);
       }
     }
   } catch (err) {
-    console.warn('Error computing next material code:', err);
+    console.warn('Error computing next material code from Supabase:', err);
   }
 
   const candidateCode = `SE-ANM-${highestNum + 1}`;
