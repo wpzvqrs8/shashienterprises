@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { Product, PriceTier } from '@/lib/types';
 import { addProduct, updateProduct, generateNextMaterialCode } from '@/lib/catalog-store';
@@ -15,6 +15,7 @@ interface ProductFormProps {
 
 export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit = false }) => {
   const router = useRouter();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitStatusMsg, setSubmitStatusMsg] = useState('');
   const [isDragging, setIsDragging] = useState(false);
@@ -368,7 +369,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
               placeholder="Paste image URL or Base64 string..."
               className="w-full bg-parchment-50 border border-parchment-300 text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950"
             />
-            <span className="text-[10px] text-muted block">Image will be previewed immediately below and committed to GitHub when you click "Save Product".</span>
+            <span className="text-[10px] text-muted block">Image will be previewed immediately below and committed to cataloug when you click "Save Product".</span>
           </div>
 
           <div className="space-y-1">
@@ -388,6 +389,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
 
         {/* Drag & Drop Image Upload Zone */}
         <div
+          onClick={() => fileInputRef.current?.click()}
           onDragOver={(e) => {
             e.preventDefault();
             setIsDragging(true);
@@ -404,7 +406,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
               processFilesToDataUrls(droppedFiles);
             }
           }}
-          className={`p-6 rounded-[10px] border-2 border-dashed transition-all text-center flex flex-col items-center justify-center gap-2 cursor-pointer ${
+          className={`relative p-6 rounded-[10px] border-2 border-dashed transition-all text-center flex flex-col items-center justify-center gap-2 cursor-pointer ${
             isDragging
               ? 'border-ember-500 bg-ember-100/40 scale-[1.01]'
               : 'border-parchment-300 bg-parchment-50 hover:border-ember-500/60'
@@ -417,10 +419,11 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
             <p className="text-xs font-bold text-ink-950">
               Drag & Drop product images here, or <span className="text-ember-600 underline">browse files</span>
             </p>
-            <p className="text-[11px] text-muted">Supports PNG, JPG, JPEG, and WEBP. Uploads directly to GitHub catalog on Save.</p>
+            <p className="text-[11px] text-muted">Supports PNG, JPG, JPEG, and WEBP. Uploads directly to  catalog on Save.</p>
           </div>
 
           <input
+            ref={fileInputRef}
             type="file"
             multiple
             accept="image/png, image/jpeg, image/jpg, image/webp"
@@ -431,7 +434,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
               }
               e.target.value = '';
             }}
-            className="absolute opacity-0 cursor-pointer w-full h-full inset-0"
+            className="hidden"
           />
         </div>
 
@@ -471,7 +474,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
                 </p>
                 <span className="text-[11px] text-muted block">
                   {formData.image.startsWith('data:image/')
-                    ? '✨ Staged locally. Will be converted to JPEG/PNG & committed to GitHub when you click Save Product.'
+                    ? ' Will be converted to JPEG/PNG when you click Save Product.'
                     : 'Static Path Ready.'}
                 </span>
               </div>
