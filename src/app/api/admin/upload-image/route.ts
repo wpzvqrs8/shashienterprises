@@ -10,7 +10,8 @@ export async function POST(req: NextRequest) {
   try {
     let buffer: Buffer | null = null;
     let customSku = '';
-    let isGallery = false;
+    let imageIndex = 0;
+    let originalMimeOrExt = '';
 
     const contentType = req.headers.get('content-type') || '';
 
@@ -18,25 +19,34 @@ export async function POST(req: NextRequest) {
       const formData = await req.formData();
       const file = formData.get('file') as File | null;
       customSku = (formData.get('sku') as string | null) || '';
-      isGallery = formData.get('isGallery') === 'true';
+      const idxStr = formData.get('index') || formData.get('imageIndex');
+      if (idxStr !== null && idxStr !== undefined) {
+        imageIndex = parseInt(idxStr.toString(), 10) || 0;
+      }
 
       if (!file) {
         return NextResponse.json({ error: 'No file provided in form data' }, { status: 400 });
       }
 
+      originalMimeOrExt = file.type || file.name;
       const arrayBuffer = await file.arrayBuffer();
       buffer = Buffer.from(arrayBuffer);
     } else if (contentType.includes('application/json')) {
       const json = await req.json();
       const base64Data = json.image || json.base64 || '';
       customSku = json.sku || '';
-      isGallery = json.isGallery === true;
+      imageIndex = Number(json.index || json.imageIndex) || 0;
 
       if (!base64Data) {
         return NextResponse.json({ error: 'No base64 image data provided' }, { status: 400 });
       }
 
-      // Strip data URI prefix if present (e.g. data:image/png;base64,...)
+      // Detect format from data URI if present (e.g. data:image/png;base64,...)
+      const mimeMatch = base64Data.match(/^data:(image\/\w+);base64,/);
+      if (mimeMatch) {
+        originalMimeOrExt = mimeMatch[1];
+      }
+
       const cleanedBase64 = base64Data.replace(/^data:image\/\w+;base64,/, '').trim();
       buffer = Buffer.from(cleanedBase64, 'base64');
     } else {
@@ -47,43 +57,54 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid or empty image buffer' }, { status: 400 });
     }
 
-    // Convert ANY image format (PNG, WEBP, GIF, JPEG, Base64) to JPEG using sharp
-    let jpegBuffer: Buffer;
+    // Determine target format & extension (.png, .webp, or .jpeg)
+    const lowerType = originalMimeOrExt.toLowerCase();
+    let ext = 'jpeg';
+    let outputBuffer: Buffer;
+
     try {
-      jpegBuffer = await sharp(buffer)
-        .jpeg({ quality: 90, force: true })
-        .toBuffer();
-    } catch (sharpError: any) {
-      console.error('Sharp JPEG Conversion Error:', sharpError);
-      return NextResponse.json({ error: `Image conversion failed: ${sharpError?.message || 'Invalid image format'}` }, { status: 400 });
+      if (lowerType.includes('png')) {
+        ext = 'png';
+        outputBuffer = await sharp(buffer).png({ compressionLevel: 8 }).toBuffer();
+      } else if (lowerType.includes('webp')) {
+        ext = 'webp';
+        outputBuffer = await sharp(buffer).webp({ quality: 90 }).toBuffer();
+      } else {
+        ext = 'jpeg';
+        outputBuffer = await sharp(buffer).jpeg({ quality: 90, force: true }).toBuffer();
+      }
+    } catch (sharpErr) {
+      // Fallback to JPEG if specific format conversion fails
+      ext = 'jpeg';
+      outputBuffer = await sharp(buffer).jpeg({ quality: 90, force: true }).toBuffer();
     }
 
-    // Generate clean filename: product-XXX.jpeg
-    const timestamp = Date.now().toString().slice(-6);
+    // Generate SKU-based filename: product-142.png (primary) or product-142-2.png, product-142-3.png (gallery)
     let cleanFilename = '';
+    const skuNumMatch = customSku.match(/(\d+)/);
+    const skuNum = skuNumMatch && skuNumMatch[1] ? skuNumMatch[1].padStart(3, '0') : null;
 
-    if (customSku) {
-      const numMatch = customSku.match(/(\d+)/);
-      if (numMatch && numMatch[1]) {
-        const skuNum = numMatch[1].padStart(3, '0');
-        cleanFilename = isGallery ? `product-${skuNum}-gal-${timestamp}.jpeg` : `product-${skuNum}.jpeg`;
+    if (skuNum) {
+      if (imageIndex === 0) {
+        cleanFilename = `product-${skuNum}.${ext}`;
       } else {
-        const cleanSku = customSku.toLowerCase().replace(/[^a-z0-9]/g, '-');
-        cleanFilename = `product-${cleanSku}-${timestamp}.jpeg`;
+        cleanFilename = `product-${skuNum}-${imageIndex + 1}.${ext}`;
       }
     } else {
-      cleanFilename = `product-${timestamp}.jpeg`;
+      const cleanSku = customSku ? customSku.toLowerCase().replace(/[^a-z0-9]/g, '-') : 'uploaded';
+      const suffix = imageIndex === 0 ? '' : `-${imageIndex + 1}`;
+      const ts = Date.now().toString().slice(-4);
+      cleanFilename = `product-${cleanSku}${suffix}-${ts}.${ext}`;
     }
 
-    // 1. Try local filesystem save (works in local dev, safe fallback on Vercel)
+    // 1. Try local filesystem save for instant dev environment availability
     try {
       const catalogDir = path.join(process.cwd(), 'public', 'catalog');
       if (!fs.existsSync(catalogDir)) {
         fs.mkdirSync(catalogDir, { recursive: true });
       }
-      fs.writeFileSync(path.join(catalogDir, cleanFilename), jpegBuffer);
+      fs.writeFileSync(path.join(catalogDir, cleanFilename), outputBuffer);
     } catch (fsErr) {
-      // Expected on Vercel serverless (read-only filesystem)
       console.warn('Local FS write skipped (serverless mode):', fsErr);
     }
 
@@ -96,7 +117,7 @@ export async function POST(req: NextRequest) {
     if (githubPat) {
       const gitHubFilePath = `public/catalog/${cleanFilename}`;
       const gitHubApiUrl = `https://api.github.com/repos/${githubRepo}/contents/${gitHubFilePath}`;
-      const base64Content = jpegBuffer.toString('base64');
+      const base64Content = outputBuffer.toString('base64');
 
       // Check if file already exists to obtain SHA for overwrite
       let sha: string | undefined = undefined;
@@ -146,10 +167,11 @@ export async function POST(req: NextRequest) {
     }
 
     const publicUrl = `/catalog/${cleanFilename}`;
+    const rawUrl = `https://raw.githubusercontent.com/${githubRepo}/main/public/catalog/${cleanFilename}`;
 
     if (!githubCommitted && !process.env.GITHUB_PAT) {
       return NextResponse.json({
-        error: `GitHub upload failed: GITHUB_PAT is missing in environment variables.`
+        error: `GitHub upload failed: GITHUB_PAT environment variable is missing.`
       }, { status: 500 });
     }
 
@@ -162,9 +184,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({
       success: true,
       url: publicUrl,
+      rawUrl: rawUrl,
       filename: cleanFilename,
       githubCommitted,
-      sizeBytes: jpegBuffer.length
+      sizeBytes: outputBuffer.length
     });
 
   } catch (error: any) {

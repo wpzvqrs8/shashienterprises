@@ -401,11 +401,20 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
               if (validFiles.length > 0) {
                 setUploadingImages(true);
                 try {
+                  const currentGallery = [...(formData.gallery || [])];
+                  let updatedPrimary = formData.image;
+
                   for (let i = 0; i < validFiles.length; i++) {
                     const file = validFiles[i];
                     const uploadData = new FormData();
                     uploadData.append('file', file);
                     if (formData.sku) uploadData.append('sku', formData.sku);
+
+                    // Determine image index: if no primary image set, 0 is primary, rest are gallery
+                    const isFirstPrimary = (!formData.image || formData.image.includes('placehold.co')) && i === 0;
+                    const imageIndex = isFirstPrimary ? 0 : (i + currentGallery.length + (updatedPrimary && !updatedPrimary.includes('placehold.co') ? 1 : 0));
+                    
+                    uploadData.append('index', imageIndex.toString());
 
                     const res = await fetch('/api/admin/upload-image', {
                       method: 'POST',
@@ -415,16 +424,23 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
                     const resJson = await res.json();
 
                     if (res.ok && resJson.url) {
-                      setFormData(prev => {
-                        const currentGallery = prev.gallery || [];
-                        const updatedGallery = [...currentGallery, resJson.url];
-                        const primaryImg = (!prev.image || prev.image.includes('placehold.co')) && i === 0 ? resJson.url : prev.image;
-                        return { ...prev, image: primaryImg, gallery: updatedGallery };
-                      });
+                      const finalUrl = resJson.url;
+                      if (i === 0 && (!updatedPrimary || updatedPrimary.includes('placehold.co'))) {
+                        updatedPrimary = finalUrl;
+                      } else {
+                        currentGallery.push(finalUrl);
+                      }
                     } else {
                       alert(`Upload failed for ${file.name}: ${resJson.error || 'Server error'}`);
                     }
                   }
+
+                  setFormData(prev => ({
+                    ...prev,
+                    image: updatedPrimary,
+                    gallery: currentGallery
+                  }));
+
                 } catch (err: any) {
                   console.error('Image Upload Exception:', err);
                   alert(`Image upload failed: ${err?.message || 'Server error'}`);
@@ -443,24 +459,39 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
             <div className="pt-2">
               <span className="text-xs font-bold text-ink-950 uppercase block mb-2">Uploaded Gallery Images ({formData.gallery.length}):</span>
               <div className="flex flex-wrap gap-2.5">
-                {formData.gallery.map((img, i) => (
-                  <div key={i} className="relative w-16 h-16 sm:w-20 sm:h-20 rounded bg-parchment-100 border border-parchment-300 overflow-hidden group">
-                    <img src={img} alt={`Gallery ${i}`} className="w-full h-full object-cover" />
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setFormData(prev => ({
-                          ...prev,
-                          gallery: (prev.gallery || []).filter((_, gIdx) => gIdx !== i)
-                        }));
-                      }}
-                      className="absolute top-1 right-1 bg-red-600 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
-                      title="Remove image"
-                    >
-                      <Trash2 className="w-3 h-3" />
-                    </button>
-                  </div>
-                ))}
+                {formData.gallery.map((img, i) => {
+                  const rawFallback = img.startsWith('/catalog/') 
+                    ? `https://raw.githubusercontent.com/wpzvqrs8/shashienterprises/main/public${img}`
+                    : img;
+                  return (
+                    <div key={i} className="relative w-16 h-16 sm:w-20 sm:h-20 rounded bg-parchment-100 border border-parchment-300 overflow-hidden group">
+                      <img 
+                        src={img} 
+                        alt={`Gallery ${i}`} 
+                        className="w-full h-full object-cover" 
+                        onError={(e) => {
+                          const target = e.currentTarget;
+                          if (target.src !== rawFallback) {
+                            target.src = rawFallback;
+                          }
+                        }}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setFormData(prev => ({
+                            ...prev,
+                            gallery: (prev.gallery || []).filter((_, gIdx) => gIdx !== i)
+                          }));
+                        }}
+                        className="absolute top-1 right-1 bg-red-600 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                        title="Remove image"
+                      >
+                        <Trash2 className="w-3 h-3" />
+                      </button>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}
@@ -470,9 +501,25 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
         {formData.image && (
           <div className="flex items-center gap-3 pt-2">
             <span className="text-xs text-muted font-bold">Image Preview:</span>
-            <div className="w-16 h-16 rounded bg-parchment-50 border border-parchment-300 relative overflow-hidden">
-              <img src={formData.image} alt="Preview" className="w-full h-full object-cover" />
+            <div className="w-20 h-20 rounded bg-parchment-50 border border-parchment-300 relative overflow-hidden flex items-center justify-center p-1">
+              <img 
+                src={formData.image} 
+                alt="Preview" 
+                className="w-full h-full object-cover rounded" 
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  const rawFallback = formData.image?.startsWith('/catalog/') 
+                    ? `https://raw.githubusercontent.com/wpzvqrs8/shashienterprises/main/public${formData.image}`
+                    : formData.image || '';
+                  if (target.src !== rawFallback) {
+                    target.src = rawFallback;
+                  }
+                }}
+              />
             </div>
+            <span className="text-[11px] font-mono text-muted overflow-hidden text-ellipsis whitespace-nowrap max-w-xs">
+              {formData.image}
+            </span>
           </div>
         )}
 
