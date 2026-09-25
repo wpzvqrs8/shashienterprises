@@ -1,0 +1,722 @@
+[
+  {
+    "id": "2159c27c-ff68-4fef-a6f4-972e9cc332c8",
+    "sku": "SE-ANM-001",
+    "old_name": "K-Pop Idol Chibi Collectibles Set (Pack of 6)",
+    "new_catalog_name": "K-Pop Idol Chibi Collectibles Set (Pack of 6)",
+    "keywords": "",
+    "collage_batch": "collage_batch_01.jpg"
+  },
+  {
+    "id": "08772e93-88b4-4b6c-b96c-12119edd585d",
+    "sku": "SE-ANM-002",
+    "old_name": "Solo Leveling Sung Jinwoo Dual Daggers Figure 21cm",
+    "new_catalog_name": "Solo Leveling Sung Jinwoo Dual Daggers Figure 21cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_01.jpg"
+  },
+  {
+    "id": "7c236cc9-3e2d-449c-a0db-80b70cf2b525",
+    "sku": "SE-ANM-004",
+    "old_name": "Dragon Ball Prince Vegeta Saiyan Armor Statue 27cm",
+    "new_catalog_name": "Dragon Ball Prince Vegeta Saiyan Armor Statue 27cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_01.jpg"
+  },
+  {
+    "id": "d16cbd13-685e-451a-b336-bebb10da4885",
+    "sku": "SE-ANM-005",
+    "old_name": "Dragon Ball Ultra Instinct Goku Aura Base Figure 29cm",
+    "new_catalog_name": "Dragon Ball Ultra Instinct Goku Aura Base Figure 29cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_01.jpg"
+  },
+  {
+    "id": "bb45804a-5357-408a-b43f-a3b78f1d257d",
+    "sku": "SE-ANM-007",
+    "old_name": "One Piece Roronoa Zoro Three-Sword Style Purple Aura Statue 22cm",
+    "new_catalog_name": "One Piece Roronoa Zoro Three-Sword Style Purple Aura Statue 22cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_01.jpg"
+  },
+  {
+    "id": "27b7e08c-c6c9-43b3-ab25-c6033c0f9c3e",
+    "sku": "SE-ANM-008",
+    "old_name": "Naruto Sasuke Uchiha Akatsuki Cloak Figure 28cm",
+    "new_catalog_name": "Naruto Sasuke Uchiha Akatsuki Cloak Figure 28cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_01.jpg"
+  },
+  {
+    "id": "396c5857-8d37-4860-af5f-44bd1db88276",
+    "sku": "SE-ANM-009",
+    "old_name": "Tom Rides a Motorcycle Collectible Figure 12.5cm",
+    "new_catalog_name": "Tom Rides a Motorcycle Collectible Figure 12.5cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_01.jpg"
+  },
+  {
+    "id": "b04881ee-a7b5-4f23-b81c-c159f92b54fa",
+    "sku": "SE-ANM-010",
+    "old_name": "Naruto Itachi Uchiha Reanimation Crow Statue 26cm",
+    "new_catalog_name": "Naruto Itachi Uchiha Reanimation Crow Statue 26cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_01.jpg"
+  },
+  {
+    "id": "0c42fc60-837e-475f-9038-3a3cd278df0c",
+    "sku": "SE-ANM-012",
+    "old_name": "Demon Slayer Giyu Tomioka Water Breathing LED Diorama Figure 10cm",
+    "new_catalog_name": "Demon Slayer Giyu Tomioka Water Breathing LED Diorama Figure 10cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_01.jpg"
+  },
+  {
+    "id": "cea49a93-435a-4e6e-afb0-5cc7b63af893",
+    "sku": "SE-ANM-013",
+    "old_name": "Demon Slayer Kyojuro Rengoku Flame Hashira LED Flame Dragon Statue 14cm",
+    "new_catalog_name": "Demon Slayer Kyojuro Rengoku Flame Hashira LED Flame Dragon Statue 14cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_01.jpg"
+  },
+  {
+    "id": "ef9695dc-c795-4771-93c2-3388906071aa",
+    "sku": "SE-ANM-014",
+    "old_name": "Labubu Plush Bunny Blind Box Collectibles (Set of 6)",
+    "new_catalog_name": "Labubu Plush Bunny Blind Box Collectibles (Set of 6)",
+    "keywords": "",
+    "collage_batch": "collage_batch_02.jpg"
+  },
+  {
+    "id": "4120f24b-dbeb-4063-9bb6-54b48c3d8fbc",
+    "sku": "SE-ANM-015",
+    "old_name": "Hunter x Hunter Killua Zoldyck Godspeed Lightning Aura Statue 24cm",
+    "new_catalog_name": "Hunter x Hunter Killua Zoldyck Godspeed Lightning Aura Statue 24cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_02.jpg"
+  },
+  {
+    "id": "67e805cf-d0b3-4203-a913-ccf89a2cfff9",
+    "sku": "SE-ANM-016",
+    "old_name": "Jerry Rides a Motorcycle Collectible Figure 13cm",
+    "new_catalog_name": "Jerry Rides a Motorcycle Collectible Figure 13cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_02.jpg"
+  },
+  {
+    "id": "616865a8-93a3-44c3-8d77-23de8cf0454c",
+    "sku": "SE-ANM-017",
+    "old_name": "Dragon Ball Giant Super Saiyan Goku Battle Damaged Statue 44cm",
+    "new_catalog_name": "Dragon Ball Giant Super Saiyan Goku Battle Damaged Statue 44cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_02.jpg"
+  },
+  {
+    "id": "5f073435-6ba7-4bfa-8d9c-21e8478a9109",
+    "sku": "SE-ANM-018",
+    "old_name": "Dragon Ball Goku Evolution Shenron Dragon Ball Diorama Figure 18cm",
+    "new_catalog_name": "Dragon Ball Goku Evolution Shenron Dragon Ball Diorama Figure 18cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_02.jpg"
+  },
+  {
+    "id": "c2f284b0-b806-45f1-ace8-35dbe13a8f98",
+    "sku": "SE-ANM-019",
+    "old_name": "Demon Slayer Nezuko Kamado Demon Form Blood Demon Art Figure 16cm",
+    "new_catalog_name": "Demon Slayer Nezuko Kamado Demon Form Blood Demon Art Figure 16cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_02.jpg"
+  },
+  {
+    "id": "048bf2a4-c92d-4a7f-99f0-de49bbb823fb",
+    "sku": "SE-ANM-020",
+    "old_name": "Demon Slayer Tanjiro Kamado Hinokami Kagura Fire Dragon Statue 21cm",
+    "new_catalog_name": "Demon Slayer Tanjiro Kamado Hinokami Kagura Fire Dragon Statue 21cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_02.jpg"
+  },
+  {
+    "id": "49b50cef-6d22-450b-8b13-da519b1933fe",
+    "sku": "SE-ANM-021",
+    "old_name": "One Piece Luffy Gear 5 Sun God Nika Awakening Figure 20cm",
+    "new_catalog_name": "One Piece Luffy Gear 5 Sun God Nika Awakening Figure 20cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_02.jpg"
+  },
+  {
+    "id": "7e6029a2-34b5-48b5-b91c-fd1e9381baf0",
+    "sku": "SE-ANM-023",
+    "old_name": "One Piece Sanji Diable Jambe Flame Strike Figure 22cm",
+    "new_catalog_name": "One Piece Sanji Diable Jambe Flame Strike Figure 22cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_02.jpg"
+  },
+  {
+    "id": "6f76f2c4-e2e1-4ed0-a613-6c40c2ad1fca",
+    "sku": "SE-ANM-024",
+    "old_name": "One Piece Trafalgar D. Water Law Room Spatial Base Statue 25cm",
+    "new_catalog_name": "One Piece Trafalgar D. Water Law Room Spatial Base Statue 25cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_02.jpg"
+  },
+  {
+    "id": "5ed92b6d-aa4a-402d-a5ff-a5b9b84d4b35",
+    "sku": "SE-ANM-025",
+    "old_name": "One Piece Shanks Red Hair Emperors Haki Aura Figure 26cm",
+    "new_catalog_name": "One Piece Shanks Red Hair Emperors Haki Aura Figure 26cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_03.jpg"
+  },
+  {
+    "id": "be953f8b-9d94-45da-8854-1b2f2b5f9d6f",
+    "sku": "SE-ANM-026",
+    "old_name": "Naruto Uzumaki Nine-Tails Chakra Mode Figure 22cm",
+    "new_catalog_name": "Naruto Uzumaki Nine-Tails Chakra Mode Figure 22cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_03.jpg"
+  },
+  {
+    "id": "3a15abc7-0ee0-472b-bb07-29ea22f0a8b5",
+    "sku": "SE-ANM-027",
+    "old_name": "Naruto Kakashi Hatake Lightning Blade Raikiri Statue 24cm",
+    "new_catalog_name": "Naruto Kakashi Hatake Lightning Blade Raikiri Statue 24cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_03.jpg"
+  },
+  {
+    "id": "b92d495e-daea-461c-9428-2a654af9bdd4",
+    "sku": "SE-ANM-029",
+    "old_name": "Naruto Minato Namikaze Yellow Flash Kunai Base Statue 23cm",
+    "new_catalog_name": "Naruto Minato Namikaze Yellow Flash Kunai Base Statue 23cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_03.jpg"
+  },
+  {
+    "id": "0b9cd73d-26bb-4365-ad92-152d89dd0669",
+    "sku": "SE-ANM-030",
+    "old_name": "Naruto Gaara Sand Waterfall Imperial Funeral Figure 21cm",
+    "new_catalog_name": "Naruto Gaara Sand Waterfall Imperial Funeral Figure 21cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_03.jpg"
+  },
+  {
+    "id": "85f602ba-05a0-4772-8da0-210127fc9f84",
+    "sku": "SE-ANM-031",
+    "old_name": "Marvel Gojo Satoru Limitless Void Expansion Statue 28cm",
+    "new_catalog_name": "Marvel Gojo Satoru Limitless Void Expansion Statue 28cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_03.jpg"
+  },
+  {
+    "id": "67983323-7036-4553-9fd6-693c5ba29f2e",
+    "sku": "SE-ANM-032",
+    "old_name": "Jujutsu Kaisen Ryomen Sukuna King of Curses Throne Statue 25cm",
+    "new_catalog_name": "Jujutsu Kaisen Ryomen Sukuna King of Curses Throne Statue 25cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_03.jpg"
+  },
+  {
+    "id": "46000eeb-d966-4041-9b5f-75a2116b9cf2",
+    "sku": "SE-ANM-033",
+    "old_name": "Jujutsu Kaisen Yuji Itadori Black Flash Strike Figure 20cm",
+    "new_catalog_name": "Jujutsu Kaisen Yuji Itadori Black Flash Strike Figure 20cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_03.jpg"
+  },
+  {
+    "id": "296be6ed-377a-49c5-aace-09aa2f28073e",
+    "sku": "SE-ANM-034",
+    "old_name": "Jujutsu Kaisen Megumi Fushiguro Divine Dog Shadow Summon Statue 22cm",
+    "new_catalog_name": "Jujutsu Kaisen Megumi Fushiguro Divine Dog Shadow Summon Statue 22cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_03.jpg"
+  },
+  {
+    "id": "c24e93b8-bf04-466a-a442-ed7f6151264b",
+    "sku": "SE-ANM-035",
+    "old_name": "Jujutsu Kaisen Kento Nanami 7:3 Ratio Blade Action Figure 21cm",
+    "new_catalog_name": "Jujutsu Kaisen Kento Nanami 7:3 Ratio Blade Action Figure 21cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_03.jpg"
+  },
+  {
+    "id": "ddc0fe35-03a3-48d1-8c7d-37cb3730b8fe",
+    "sku": "SE-ANM-036",
+    "old_name": "Attack on Titan Eren Yeager Attack Titan Founding Form Statue 32cm",
+    "new_catalog_name": "Attack on Titan Eren Yeager Attack Titan Founding Form Statue 32cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_04.jpg"
+  },
+  {
+    "id": "8a7cf817-fa6f-4bd2-b637-c46c2e4c7087",
+    "sku": "SE-ANM-037",
+    "old_name": "Attack on Titan Levi Ackerman ODM Gear Steel Blade Figure 26cm",
+    "new_catalog_name": "Attack on Titan Levi Ackerman ODM Gear Steel Blade Figure 26cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_04.jpg"
+  },
+  {
+    "id": "72735938-a185-46e0-81a4-5b673690e715",
+    "sku": "SE-ANM-038",
+    "old_name": "Attack on Titan Mikasa Ackerman Scout Regiment Dual Blade Statue 24cm",
+    "new_catalog_name": "Attack on Titan Mikasa Ackerman Scout Regiment Dual Blade Statue 24cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_04.jpg"
+  },
+  {
+    "id": "0a6ad0c8-e2ab-4a04-abf6-eb55fec7d5b7",
+    "sku": "SE-ANM-039",
+    "old_name": "Attack on Titan Armored Titan Reiner Braun Battle Damage Figure 28cm",
+    "new_catalog_name": "Attack on Titan Armored Titan Reiner Braun Battle Damage Figure 28cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_04.jpg"
+  },
+  {
+    "id": "64ab615b-878e-4c7a-ae5d-56b7c7f292f3",
+    "sku": "SE-ANM-040",
+    "old_name": "Demon Slayer Inosuke Hashibira Beast Breathing Dual Nichirin Figure 20cm",
+    "new_catalog_name": "Demon Slayer Inosuke Hashibira Beast Breathing Dual Nichirin Figure 20cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_04.jpg"
+  },
+  {
+    "id": "e75f5ef8-21a1-421f-9f69-54e67f46721c",
+    "sku": "SE-ANM-041",
+    "old_name": "Demon Slayer Akaza Upper Moon Three Destructive Death Statue 26cm",
+    "new_catalog_name": "Demon Slayer Akaza Upper Moon Three Destructive Death Statue 26cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_04.jpg"
+  },
+  {
+    "id": "fbd8e593-b4c2-4377-9aad-6b8a803d92b8",
+    "sku": "SE-ANM-042",
+    "old_name": "Demon Slayer Kanao Tsuyuri Flower Breathing Final Form Figure 19cm",
+    "new_catalog_name": "Demon Slayer Kanao Tsuyuri Flower Breathing Final Form Figure 19cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_04.jpg"
+  },
+  {
+    "id": "892062e4-4fd2-4de3-8395-e8cdabf1716e",
+    "sku": "SE-ANM-043",
+    "old_name": "Demon Slayer Tengen Uzui Sound Hashira Dual Cleavers Statue 27cm",
+    "new_catalog_name": "Demon Slayer Tengen Uzui Sound Hashira Dual Cleavers Statue 27cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_04.jpg"
+  },
+  {
+    "id": "44eb9c2b-a2f3-402f-a8db-32499ce44d6c",
+    "sku": "SE-ANM-044",
+    "old_name": "Dragon Ball Goku Black Super Saiyan Rosé Kamehameha Figure 28cm",
+    "new_catalog_name": "Dragon Ball Goku Black Super Saiyan Rosé Kamehameha Figure 28cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_04.jpg"
+  },
+  {
+    "id": "3da5b2a3-7aee-42c4-b705-908cc056d64d",
+    "sku": "SE-ANM-045",
+    "old_name": "Dragon Ball Vegeta Blue Evolved Final Flash Aura Statue 30cm",
+    "new_catalog_name": "Dragon Ball Vegeta Blue Evolved Final Flash Aura Statue 30cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_04.jpg"
+  },
+  {
+    "id": "e02570e0-ce8f-46f6-a468-ce9e1be0e72b",
+    "sku": "SE-ANM-046",
+    "old_name": "Dragon Ball Golden Frieza Revenge Blast Figure 22cm",
+    "new_catalog_name": "Dragon Ball Golden Frieza Revenge Blast Figure 22cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_05.jpg"
+  },
+  {
+    "id": "fa9c27c4-3a75-4745-9517-323f3f852268",
+    "sku": "SE-ANM-047",
+    "old_name": "Dragon Ball Future Trunks Sword Slice Android Saga Statue 25cm",
+    "new_catalog_name": "Dragon Ball Future Trunks Sword Slice Android Saga Statue 25cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_05.jpg"
+  },
+  {
+    "id": "98ecefcd-b7e8-4e9d-a463-0d5c17e00bc5",
+    "sku": "SE-ANM-048",
+    "old_name": "Dragon Ball Cell Perfect Form Energy Ball Figure 27cm",
+    "new_catalog_name": "Dragon Ball Cell Perfect Form Energy Ball Figure 27cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_05.jpg"
+  },
+  {
+    "id": "8d01add5-573a-4d19-9bbf-c69687e6282c",
+    "sku": "SE-ANM-049",
+    "old_name": "Dragon Ball Majin Buu Evil Chocolate Transmutation Statue 23cm",
+    "new_catalog_name": "Dragon Ball Majin Buu Evil Chocolate Transmutation Statue 23cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_05.jpg"
+  },
+  {
+    "id": "6ec58a85-98bb-49d9-bd23-831bc11fc38b",
+    "sku": "SE-ANM-050",
+    "old_name": "Dragon Ball Broly Legendary Super Saiyan Wrath Form Figure 34cm",
+    "new_catalog_name": "Dragon Ball Broly Legendary Super Saiyan Wrath Form Figure 34cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_05.jpg"
+  },
+  {
+    "id": "c7b0b4dc-2aa8-446b-9893-7f35ccbce871",
+    "sku": "SE-ANM-051",
+    "old_name": "Marvel Gogeta Blue Ultimate Fusion Kamehameha Statue 31cm",
+    "new_catalog_name": "Marvel Gogeta Blue Ultimate Fusion Kamehameha Statue 31cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_05.jpg"
+  },
+  {
+    "id": "570e146e-e64f-4559-a68b-e427b5a728ce",
+    "sku": "SE-ANM-052",
+    "old_name": "Dragon Ball Vegito Super Saiyan Spirit Sword Strike Figure 29cm",
+    "new_catalog_name": "Dragon Ball Vegito Super Saiyan Spirit Sword Strike Figure 29cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_05.jpg"
+  },
+  {
+    "id": "ecb977fc-0aa2-4b9d-8529-112e19446e1f",
+    "sku": "SE-ANM-054",
+    "old_name": "One Piece Big Mom Charlotte Linlin Prometheus Flame Figure 32cm",
+    "new_catalog_name": "One Piece Big Mom Charlotte Linlin Prometheus Flame Figure 32cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_05.jpg"
+  },
+  {
+    "id": "57d4f890-03e5-4ff4-94c2-1e507c02d0b5",
+    "sku": "SE-ANM-055",
+    "old_name": "One Piece Roronoa Zoro Enma Haki Awakening Statue 28cm",
+    "new_catalog_name": "One Piece Roronoa Zoro Enma Haki Awakening Statue 28cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_05.jpg"
+  },
+  {
+    "id": "a3ae391e-0796-4635-a8ff-edade7e737b3",
+    "sku": "SE-ANM-057",
+    "old_name": "One Piece Nami Clima-Tact Weather Rod Statue 22cm",
+    "new_catalog_name": "One Piece Nami Clima-Tact Weather Rod Statue 22cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_05.jpg"
+  },
+  {
+    "id": "33c12d4e-ade9-4456-8e31-00cf2b749fb3",
+    "sku": "SE-ANM-058",
+    "old_name": "One Piece Nico Robin Cien Fleurs Hands Aura Figure 23cm",
+    "new_catalog_name": "One Piece Nico Robin Cien Fleurs Hands Aura Figure 23cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_06.jpg"
+  },
+  {
+    "id": "3a5e4593-4a02-442d-a5cc-e2d6a08f634e",
+    "sku": "SE-ANM-059",
+    "old_name": "One Piece Usopp Sniper King Sogeking Mask Statue 21cm",
+    "new_catalog_name": "One Piece Usopp Sniper King Sogeking Mask Statue 21cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_06.jpg"
+  },
+  {
+    "id": "774b7f96-5a92-4e62-a67e-3518d25c6f66",
+    "sku": "SE-ANM-060",
+    "old_name": "One Piece Tony Tony Chopper Monster Point Rampage Figure 25cm",
+    "new_catalog_name": "One Piece Tony Tony Chopper Monster Point Rampage Figure 25cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_06.jpg"
+  },
+  {
+    "id": "ea2ea5d5-42aa-4fdb-8038-15f68123491a",
+    "sku": "SE-ANM-061",
+    "old_name": "One Piece Brook Soul King Guitar Concert Statue 26cm",
+    "new_catalog_name": "One Piece Brook Soul King Guitar Concert Statue 26cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_06.jpg"
+  },
+  {
+    "id": "bbe421a0-5874-47b2-9aa1-30b96791653b",
+    "sku": "SE-ANM-064",
+    "old_name": "One Piece Yamato Thunder Bagua Mace Strike Figure 29cm",
+    "new_catalog_name": "One Piece Yamato Thunder Bagua Mace Strike Figure 29cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_06.jpg"
+  },
+  {
+    "id": "d3a621b6-b04e-4e49-95a2-43db3a95e1c0",
+    "sku": "SE-ANM-066",
+    "old_name": "One Piece Crocodile Ground Death Sand Blade Figure 26cm",
+    "new_catalog_name": "One Piece Crocodile Ground Death Sand Blade Figure 26cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_06.jpg"
+  },
+  {
+    "id": "4da3bb65-1d53-4997-a25c-d0f3ff90e63c",
+    "sku": "SE-ANM-068",
+    "old_name": "Marvel Katakuri Mochi Mochi Trident Strike Figure 31cm",
+    "new_catalog_name": "Marvel Katakuri Mochi Mochi Trident Strike Figure 31cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_06.jpg"
+  },
+  {
+    "id": "cc0a30c4-c04c-49a3-a756-cb4952394180",
+    "sku": "SE-ANM-069",
+    "old_name": "Naruto Kurama Link Mode Tailed Beast Statue 29cm",
+    "new_catalog_name": "Naruto Kurama Link Mode Tailed Beast Statue 29cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_06.jpg"
+  },
+  {
+    "id": "8bc4ae04-2a9a-4391-8529-edd6290c67d3",
+    "sku": "SE-ANM-070",
+    "old_name": "Naruto Sasuke Perfect Susanoo Arrow Flight Statue 33cm",
+    "new_catalog_name": "Naruto Sasuke Perfect Susanoo Arrow Flight Statue 33cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_06.jpg"
+  },
+  {
+    "id": "3cddaed2-abb9-475a-b285-341f9974e305",
+    "sku": "SE-ANM-071",
+    "old_name": "Marvel Obito Uchiha Ten-Tails Jinchuriki Staff Figure 28cm",
+    "new_catalog_name": "Marvel Obito Uchiha Ten-Tails Jinchuriki Staff Figure 28cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_06.jpg"
+  },
+  {
+    "id": "495ff3be-ae7a-4876-af51-0c76f4716573",
+    "sku": "SE-ANM-072",
+    "old_name": "Naruto Pain Yahiko Universal Pull Almighty Push Statue 27cm",
+    "new_catalog_name": "Naruto Pain Yahiko Universal Pull Almighty Push Statue 27cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_07.jpg"
+  },
+  {
+    "id": "1dcbb069-0999-4b49-8600-59ef7fd22dfd",
+    "sku": "SE-ANM-073",
+    "old_name": "Marvel Jiraiya Sage Mode Toad Summon Base Figure 25cm",
+    "new_catalog_name": "Marvel Jiraiya Sage Mode Toad Summon Base Figure 25cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_07.jpg"
+  },
+  {
+    "id": "7c1ae40a-1d12-4c9b-8fb0-b7893eec2697",
+    "sku": "SE-ANM-074",
+    "old_name": "Naruto Tsunade Katsuyu Healing Slug Summon Statue 24cm",
+    "new_catalog_name": "Naruto Tsunade Katsuyu Healing Slug Summon Statue 24cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_07.jpg"
+  },
+  {
+    "id": "06b19f46-9893-42f3-ab67-c845d7bd9de7",
+    "sku": "SE-ANM-075",
+    "old_name": "Naruto Orochimaru Eight Branches Serpent Statue 30cm",
+    "new_catalog_name": "Naruto Orochimaru Eight Branches Serpent Statue 30cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_07.jpg"
+  },
+  {
+    "id": "be731bff-57fc-4e5d-801f-689c09b7abe6",
+    "sku": "SE-ANM-076",
+    "old_name": "Demon Slayer Zenitsu LED Nichirin Katana Sword 104CM",
+    "new_catalog_name": "Demon Slayer Zenitsu LED Nichirin Katana Sword 104CM",
+    "keywords": "",
+    "collage_batch": "collage_batch_07.jpg"
+  },
+  {
+    "id": "8b8cd940-18de-463b-9344-0ef512a1d4ad",
+    "sku": "SE-ANM-077",
+    "old_name": "Demon Slayer Tanjiro Water & Sun Breathing Steel Katana 104cm",
+    "new_catalog_name": "Demon Slayer Tanjiro Water & Sun Breathing Steel Katana 104cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_07.jpg"
+  },
+  {
+    "id": "48bcec9e-c2ed-431a-9e8b-cd299a26550a",
+    "sku": "SE-ANM-078",
+    "old_name": "One Piece Roronoa Zoro Shusui Black Blade Steel Katana 104cm",
+    "new_catalog_name": "One Piece Roronoa Zoro Shusui Black Blade Steel Katana 104cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_07.jpg"
+  },
+  {
+    "id": "94f33f75-36c2-4220-aee1-fe742b26c059",
+    "sku": "SE-ANM-079",
+    "old_name": "Marvel Sasuke Kusanagi Chidori Steel Katana 100cm",
+    "new_catalog_name": "Marvel Sasuke Kusanagi Chidori Steel Katana 100cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_07.jpg"
+  },
+  {
+    "id": "b3bb4527-9e02-4b59-821a-1fe6392f04de",
+    "sku": "SE-ANM-080",
+    "old_name": "Jujutsu Kaisen Yuta Okkotsu Cursed Spirit Rika Manifestation Statue 28cm",
+    "new_catalog_name": "Jujutsu Kaisen Yuta Okkotsu Cursed Spirit Rika Manifestation Statue 28cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_07.jpg"
+  },
+  {
+    "id": "3f20ec91-8f76-4352-bfa6-0b32306476d1",
+    "sku": "SE-ANM-081",
+    "old_name": "Jujutsu Kaisen Suguru Geto Cursed Spirit Manipulation Orb Statue 26cm",
+    "new_catalog_name": "Jujutsu Kaisen Suguru Geto Cursed Spirit Manipulation Orb Statue 26cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_07.jpg"
+  },
+  {
+    "id": "c8ee7aff-3031-4275-830f-badd57c2ada5",
+    "sku": "SE-ANM-082",
+    "old_name": "Jujutsu Kaisen Maki Zenin Dragon Bone Cursed Tool Weapon Figure 23cm",
+    "new_catalog_name": "Joker Sitting Figure 23cm",
+    "keywords": "The Dark Knight, Joker, Sitting, Statue, DC Comics",
+    "collage_batch": "collage_batch_08.jpg"
+  },
+  {
+    "id": "56e8d597-b5f9-4c57-b4aa-b487836a6bfc",
+    "sku": "SE-ANM-085",
+    "old_name": "Jujutsu Kaisen Aoi Todo Boogie Woogie Handclap Base Figure 22cm",
+    "new_catalog_name": "Dragon Ball Z Goku Dynamic Pose Figure 22cm",
+    "keywords": "Dragon Ball Z, Goku, Action Figure, Anime, Dynamic Pose",
+    "collage_batch": "collage_batch_08.jpg"
+  },
+  {
+    "id": "a628b17a-0822-4138-b261-92a13475645a",
+    "sku": "SE-ANM-086",
+    "old_name": "Hunter x Hunter Gon Freecss Jajanken Rock Power Unleashed Statue 30cm",
+    "new_catalog_name": "Dragon Ball Z Super Saiyan Goku Figure 30cm",
+    "keywords": "Dragon Ball Z, Goku, Super Saiyan, Action Figure, Anime",
+    "collage_batch": "collage_batch_08.jpg"
+  },
+  {
+    "id": "12268b48-20eb-4e52-9310-cdca5e10afc7",
+    "sku": "SE-ANM-087",
+    "old_name": "Hunter x Hunter Hisoka Morow Bungee Gum Playing Cards Figure 25cm",
+    "new_catalog_name": "Hunter x Hunter Hisoka with Wings Figure 25cm",
+    "keywords": "Hunter x Hunter, Hisoka, Wings, Figure, Anime",
+    "collage_batch": "collage_batch_08.jpg"
+  },
+  {
+    "id": "dcc2bbde-b3a8-4616-ac81-3be9eb2867c9",
+    "sku": "SE-ANM-088",
+    "old_name": "Hunter x Hunter Chrollo Lucilfer Bandit's Secret Book Statue 24cm",
+    "new_catalog_name": "Dragon Ball Z Goku Figures Set 24cm",
+    "keywords": "Dragon Ball Z, Goku, Figures, Anime, Set",
+    "collage_batch": "collage_batch_08.jpg"
+  },
+  {
+    "id": "08c13e2c-77b1-4fe9-8ae4-abe6f0347261",
+    "sku": "SE-ANM-089",
+    "old_name": "Hunter x Hunter Kurapika Emperor Time Judgment Chain Figure 23cm",
+    "new_catalog_name": "Dragon Ball Z Goku Super Saiyan Blue Figure 23cm",
+    "keywords": "Dragon Ball Z, Goku, Super Saiyan Blue, Figure, Anime",
+    "collage_batch": "collage_batch_08.jpg"
+  },
+  {
+    "id": "e477eb9e-52f2-4109-a693-1b0e6cb3874f",
+    "sku": "SE-ANM-090",
+    "old_name": "Marvel Netero 100-Type Guanyin Bodhisattva Statue 36cm",
+    "new_catalog_name": "Dragon Ball Z Goku Figures Set 36cm",
+    "keywords": "Dragon Ball Z, Goku, Figures, Anime, Set",
+    "collage_batch": "collage_batch_08.jpg"
+  },
+  {
+    "id": "f5503a26-76f6-4bf2-83f3-cd5b1a973451",
+    "sku": "SE-ANM-091",
+    "old_name": "Marvel Meruem King of Chimera Ants Throne Statue 32cm",
+    "new_catalog_name": "Marvel Avengers Iron Man Spider-Man Captain America Hulk Figures Set 32cm",
+    "keywords": "Marvel, Iron Man, Spider-Man, Captain America, Hulk, Action Figures, Avengers",
+    "collage_batch": "collage_batch_08.jpg"
+  },
+  {
+    "id": "a02645c0-42fb-49b8-b8b5-29158fb09ea7",
+    "sku": "SE-ANM-092",
+    "old_name": "Saitama One Punch Man Serious Punch Aura Statue 28cm",
+    "new_catalog_name": "Doraemon and Nobita Figures Set 28cm",
+    "keywords": "Doraemon, Nobita, Anime, Figures, Cute, Chibi",
+    "collage_batch": "collage_batch_08.jpg"
+  },
+  {
+    "id": "ee4a3244-6a58-42a6-87a4-ffd46a17aecc",
+    "sku": "SE-ANM-093",
+    "old_name": "Marvel Genos Cyborg Incineration Cannon Blast Figure 27cm",
+    "new_catalog_name": "Marvel Avengers 10 Figure Set 27cm",
+    "keywords": "Marvel, Avengers, Captain America, Thor, Iron Man, Hulk, Black Panther, Action Figures, Set",
+    "collage_batch": "collage_batch_08.jpg"
+  },
+  {
+    "id": "6f7ef540-15ac-4eb8-9c06-1da1743571b8",
+    "sku": "SE-ANM-094",
+    "old_name": "Garou Cosmic Fear Mode Martial Arts Statue 29cm",
+    "new_catalog_name": "Garou Cosmic Fear Mode Martial Arts Statue 29cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_09.jpg"
+  },
+  {
+    "id": "02c41d8f-c94b-443a-b289-5aa0e024e6f5",
+    "sku": "SE-ANM-095",
+    "old_name": "Chainsaw Man Denji Pochita Dual Saw Blade Statue 27cm",
+    "new_catalog_name": "Chainsaw Man Denji Pochita Dual Saw Blade Statue 27cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_09.jpg"
+  },
+  {
+    "id": "70e41da9-226c-4463-ab9d-0948a3331a9d",
+    "sku": "SE-ANM-096",
+    "old_name": "Marvel Makima Control Devil Halo Base Figure 25cm",
+    "new_catalog_name": "Marvel Makima Control Devil Halo Base Figure 25cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_09.jpg"
+  },
+  {
+    "id": "b1253638-2d2d-4d83-bb4b-6a46bc0a2c3c",
+    "sku": "SE-ANM-097",
+    "old_name": "Power Fiend Blood Hammer Strike Statue 24cm",
+    "new_catalog_name": "Power Fiend Blood Hammer Strike Statue 24cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_09.jpg"
+  },
+  {
+    "id": "f5e0717a-065d-4da3-a146-3adf5ea3c4ac",
+    "sku": "SE-ANM-098",
+    "old_name": "Aki Hayakawa Fox Devil Contract Summon Figure 26cm",
+    "new_catalog_name": "Aki Hayakawa Fox Devil Contract Summon Figure 26cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_09.jpg"
+  },
+  {
+    "id": "3c554491-475f-4328-92b1-a56bba189d07",
+    "sku": "SE-ANM-099",
+    "old_name": "Bleach Ichigo Kurosaki Bankai Getsuga Tensho Statue 30cm",
+    "new_catalog_name": "Bleach Ichigo Kurosaki Bankai Getsuga Tensho Statue 30cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_09.jpg"
+  },
+  {
+    "id": "e32086f1-34af-4045-8c54-4bdc59992f44",
+    "sku": "SE-ANM-100",
+    "old_name": "Bleach Sosuke Aizen Hogyoku Transformation Statue 32cm",
+    "new_catalog_name": "Bleach Sosuke Aizen Hogyoku Transformation Statue 32cm",
+    "keywords": "",
+    "collage_batch": "collage_batch_09.jpg"
+  },
+  {
+    "id": "79e88553-617a-4570-a670-6abb6f409de7",
+    "sku": "SE-ANM-101",
+    "old_name": "Dragon Ball Gogeta (Super Saiyan)",
+    "new_catalog_name": "Dragon Ball Gogeta (Super Saiyan)",
+    "keywords": "",
+    "collage_batch": "collage_batch_09.jpg"
+  },
+  {
+    "id": "6e7620ee-7f4e-43a9-9ac8-35020d012298",
+    "sku": "SE-ANM-102",
+    "old_name": "Dragon Ball Legendary Super Saiyan Broly",
+    "new_catalog_name": "Dragon Ball Legendary Super Saiyan Broly",
+    "keywords": "",
+    "collage_batch": "collage_batch_09.jpg"
+  },
+  {
+    "id": "3227a6bf-664c-4780-8284-7849303c09f5",
+    "sku": "SE-ANM-103",
+    "old_name": "Superman ",
+    "new_catalog_name": "Superman",
+    "keywords": "",
+    "collage_batch": "collage_batch_09.jpg"
+  }
+]
