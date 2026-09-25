@@ -3,10 +3,10 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Product, PriceTier } from '@/lib/types';
-import { addProduct, updateProduct } from '@/lib/catalog-store';
+import { addProduct, updateProduct, generateNextMaterialCode } from '@/lib/catalog-store';
 import { CATEGORIES } from '@/lib/constants';
 import { Button } from '@/components/ui/button';
-import { Plus, Trash2, Save, ArrowLeft, Image as ImageIcon, Sparkles } from 'lucide-react';
+import { Plus, Trash2, Save, ArrowLeft, Image as ImageIcon, Sparkles, UploadCloud } from 'lucide-react';
 
 interface ProductFormProps {
   initialProduct?: Product | null;
@@ -16,7 +16,8 @@ interface ProductFormProps {
 export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit = false }) => {
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
-  const [uploadingImages, setUploadingImages] = useState(false);
+  const [submitStatusMsg, setSubmitStatusMsg] = useState('');
+  const [isDragging, setIsDragging] = useState(false);
 
   const [formData, setFormData] = useState<Partial<Product>>({
     name: initialProduct?.name || '',
@@ -30,7 +31,8 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
     stockQty: initialProduct?.stockQty ?? 50,
     moq: initialProduct?.moq ?? 5,
     status: initialProduct?.status || 'active',
-    image: initialProduct?.image || 'https://placehold.co/800x800/1C1A21/E2632B?text=New+Product',
+    image: initialProduct?.image || '',
+    gallery: initialProduct?.gallery || [],
     heightCm: initialProduct?.heightCm || 25,
     material: initialProduct?.material || 'PVC/Resin',
     description: initialProduct?.description || '',
@@ -41,6 +43,45 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
 
   const handleFieldChange = (field: keyof Product, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  // Helper to read Files into Base64 Data URLs for instant local previews
+  const processFilesToDataUrls = (files: File[]) => {
+    const validFiles = files.filter(file => {
+      const type = file.type.toLowerCase();
+      const name = file.name.toLowerCase();
+      return (
+        type.startsWith('image/') ||
+        name.endsWith('.png') ||
+        name.endsWith('.jpg') ||
+        name.endsWith('.jpeg') ||
+        name.endsWith('.webp')
+      );
+    });
+
+    if (validFiles.length < files.length) {
+      alert('Only PNG, JPG, JPEG, and WEBP image formats are supported.');
+    }
+
+    if (validFiles.length === 0) return;
+
+    validFiles.forEach((file) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const result = e.target?.result as string;
+        if (!result) return;
+
+        setFormData(prev => {
+          if (!prev.image || prev.image.trim() === '' || prev.image.includes('placehold.co')) {
+            return { ...prev, image: result };
+          } else {
+            const currentGallery = prev.gallery || [];
+            return { ...prev, gallery: [...currentGallery, result] };
+          }
+        });
+      };
+      reader.readAsDataURL(file);
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -63,45 +104,57 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
     }
 
     setSubmitting(true);
+    setSubmitStatusMsg('Preparing product data...');
+
     try {
       let finalFormData = { ...formData };
 
-      // Helper function to process any base64 image string to JPEG + GitHub upload
-      const convertAndUploadBase64 = async (base64Str: string, sku?: string, isGallery = false): Promise<string> => {
+      // Generate or compute target SKU for filename assignment
+      const targetSku = (finalFormData.sku && finalFormData.sku.trim() !== '' && !finalFormData.sku.includes('Auto-generated'))
+        ? finalFormData.sku.trim()
+        : await generateNextMaterialCode();
+      
+      finalFormData.sku = targetSku;
+
+      // Upload image payload (Base64/File/Data URL) to GitHub API endpoint
+      const uploadImageToGithub = async (imagePayload: string, sku: string, index: number): Promise<string> => {
         const res = await fetch('/api/admin/upload-image', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ image: base64Str, sku, isGallery })
+          body: JSON.stringify({ image: imagePayload, sku, index })
         });
         const json = await res.json();
         if (res.ok && json.url) {
           return json.url;
         }
-        throw new Error(json.error || 'Failed to upload image to GitHub');
+        throw new Error(json.error || 'Failed to upload image to GitHub repository');
       };
 
-      // 1. Convert Primary Image if it's base64 or raw data
+      // 1. Process Primary Image if it's Base64 / Data URL / Raw Payload
       if (finalFormData.image && (finalFormData.image.startsWith('data:image/') || (finalFormData.image.length > 500 && !finalFormData.image.startsWith('http') && !finalFormData.image.startsWith('/')))) {
+        setSubmitStatusMsg(`Committing primary image to GitHub catalog (${targetSku})...`);
         try {
-          const uploadedUrl = await convertAndUploadBase64(finalFormData.image, finalFormData.sku);
-          finalFormData.image = uploadedUrl;
+          const committedUrl = await uploadImageToGithub(finalFormData.image, targetSku, 0);
+          finalFormData.image = committedUrl;
         } catch (uploadErr: any) {
-          alert(`Image upload to GitHub failed: ${uploadErr?.message || 'Server Error'}\n\nPlease check that GITHUB_PAT is set in Vercel Environment Variables.`);
+          alert(`Primary image upload to GitHub failed: ${uploadErr?.message || 'Server Error'}\n\nPlease verify GITHUB_PAT is set in Vercel environment variables.`);
           setSubmitting(false);
           return;
         }
       }
 
-      // 2. Convert Gallery Images if any are base64
+      // 2. Process Gallery Images if any are Base64 / Data URLs
       if (finalFormData.gallery && finalFormData.gallery.length > 0) {
         const updatedGallery: string[] = [];
-        for (const gImg of finalFormData.gallery) {
+        for (let i = 0; i < finalFormData.gallery.length; i++) {
+          const gImg = finalFormData.gallery[i];
           if (gImg.startsWith('data:image/') || (gImg.length > 500 && !gImg.startsWith('http') && !gImg.startsWith('/'))) {
+            setSubmitStatusMsg(`Committing gallery image ${i + 1} to GitHub catalog...`);
             try {
-              const uploadedUrl = await convertAndUploadBase64(gImg, finalFormData.sku, true);
-              updatedGallery.push(uploadedUrl);
+              const committedUrl = await uploadImageToGithub(gImg, targetSku, i + 1);
+              updatedGallery.push(committedUrl);
             } catch (uploadErr: any) {
-              alert(`Gallery image upload to GitHub failed: ${uploadErr?.message || 'Server Error'}`);
+              alert(`Gallery image ${i + 1} upload to GitHub failed: ${uploadErr?.message || 'Server Error'}`);
               setSubmitting(false);
               return;
             }
@@ -112,11 +165,14 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
         finalFormData.gallery = updatedGallery;
       }
 
+      setSubmitStatusMsg('Saving product row to database...');
+
       if (isEdit && initialProduct) {
         await updateProduct(initialProduct.id, finalFormData);
       } else {
         await addProduct(finalFormData);
       }
+
       router.push('/admin/catalog');
     } catch (err) {
       console.error(err);
@@ -144,7 +200,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
 
         <Button type="submit" variant="ember" size="md" disabled={submitting} className="gap-2 shadow-warm w-full sm:w-auto">
           <Save className="w-4 h-4" />
-          <span>{submitting ? 'Saving Product...' : 'Save Product'}</span>
+          <span>{submitting ? (submitStatusMsg || 'Saving Product...') : 'Save Product'}</span>
         </Button>
       </div>
 
@@ -304,44 +360,15 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-1">
-            <label className="text-xs font-bold uppercase text-ink-950">Primary Image URL *</label>
+            <label className="text-xs font-bold uppercase text-ink-950">Primary Image URL / Base64</label>
             <input
               type="text"
-              required
               value={formData.image}
-              onChange={async (e) => {
-                const val = e.target.value;
-                if (val.startsWith('data:image/') || (val.length > 500 && !val.startsWith('http') && !val.startsWith('/'))) {
-                  setUploadingImages(true);
-                  try {
-                    const res = await fetch('/api/admin/upload-image', {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({ image: val, sku: formData.sku })
-                    });
-                    const json = await res.json();
-                    if (res.ok && json.url) {
-                      handleFieldChange('image', json.url);
-                    } else {
-                      handleFieldChange('image', val);
-                    }
-                  } catch (err) {
-                    handleFieldChange('image', val);
-                  } finally {
-                    setUploadingImages(false);
-                  }
-                } else {
-                  handleFieldChange('image', val);
-                }
-              }}
-              placeholder="/catalog/product-142.jpeg or paste base64 image..."
+              onChange={(e) => handleFieldChange('image', e.target.value)}
+              placeholder="Paste image URL or Base64 string..."
               className="w-full bg-parchment-50 border border-parchment-300 text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950"
             />
-            {uploadingImages && (
-              <span className="text-[11px] font-bold text-ember-600 animate-pulse block">
-                ⚡ Converting Base64 image to JPEG & committing to GitHub...
-              </span>
-            )}
+            <span className="text-[10px] text-muted block">Image will be previewed immediately below and committed to GitHub when you click "Save Product".</span>
           </div>
 
           <div className="space-y-1">
@@ -359,167 +386,140 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
           </div>
         </div>
 
-        {/* Device Image File Upload (PNG, JPG, JPEG Only) */}
-        <div className="bg-parchment-50 p-3.5 sm:p-4 rounded-[8px] border border-parchment-300 space-y-3">
-          <div className="flex items-center justify-between">
-            <label className="text-xs font-bold uppercase text-ink-950 block">Upload Product Images From Device (PNG, JPG, JPEG Only)</label>
-            {uploadingImages && (
-              <span className="text-xs font-bold text-ember-600 animate-pulse flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-ember-500 animate-ping"></span>
-                Committing to GitHub Catalog...
-              </span>
-            )}
+        {/* Drag & Drop Image Upload Zone */}
+        <div
+          onDragOver={(e) => {
+            e.preventDefault();
+            setIsDragging(true);
+          }}
+          onDragLeave={(e) => {
+            e.preventDefault();
+            setIsDragging(false);
+          }}
+          onDrop={(e) => {
+            e.preventDefault();
+            setIsDragging(false);
+            const droppedFiles = Array.from(e.dataTransfer.files || []);
+            if (droppedFiles.length > 0) {
+              processFilesToDataUrls(droppedFiles);
+            }
+          }}
+          className={`p-6 rounded-[10px] border-2 border-dashed transition-all text-center flex flex-col items-center justify-center gap-2 cursor-pointer ${
+            isDragging
+              ? 'border-ember-500 bg-ember-100/40 scale-[1.01]'
+              : 'border-parchment-300 bg-parchment-50 hover:border-ember-500/60'
+          }`}
+        >
+          <div className="w-12 h-12 rounded-full bg-ember-100 border border-ember-500/30 flex items-center justify-center text-ember-600">
+            <UploadCloud className="w-6 h-6" />
           </div>
+          <div>
+            <p className="text-xs font-bold text-ink-950">
+              Drag & Drop product images here, or <span className="text-ember-600 underline">browse files</span>
+            </p>
+            <p className="text-[11px] text-muted">Supports PNG, JPG, JPEG, and WEBP. Uploads directly to GitHub catalog on Save.</p>
+          </div>
+
           <input
             type="file"
             multiple
-            disabled={uploadingImages}
             accept="image/png, image/jpeg, image/jpg, image/webp"
-            onChange={async (e) => {
+            onChange={(e) => {
               const files = Array.from(e.target.files || []);
-              if (files.length === 0) return;
-
-              const validFiles = files.filter(file => {
-                const type = file.type.toLowerCase();
-                const name = file.name.toLowerCase();
-                return (
-                  type === 'image/png' ||
-                  type === 'image/jpeg' ||
-                  type === 'image/jpg' ||
-                  type === 'image/webp' ||
-                  name.endsWith('.png') ||
-                  name.endsWith('.jpg') ||
-                  name.endsWith('.jpeg') ||
-                  name.endsWith('.webp')
-                );
-              });
-
-              if (validFiles.length < files.length) {
-                alert('Only PNG, JPG, JPEG, and WEBP image formats are allowed.');
+              if (files.length > 0) {
+                processFilesToDataUrls(files);
               }
-
-              if (validFiles.length > 0) {
-                setUploadingImages(true);
-                try {
-                  const currentGallery = [...(formData.gallery || [])];
-                  let updatedPrimary = formData.image;
-
-                  for (let i = 0; i < validFiles.length; i++) {
-                    const file = validFiles[i];
-                    const uploadData = new FormData();
-                    uploadData.append('file', file);
-                    if (formData.sku) uploadData.append('sku', formData.sku);
-
-                    // Determine image index: if no primary image set, 0 is primary, rest are gallery
-                    const isFirstPrimary = (!formData.image || formData.image.includes('placehold.co')) && i === 0;
-                    const imageIndex = isFirstPrimary ? 0 : (i + currentGallery.length + (updatedPrimary && !updatedPrimary.includes('placehold.co') ? 1 : 0));
-                    
-                    uploadData.append('index', imageIndex.toString());
-
-                    const res = await fetch('/api/admin/upload-image', {
-                      method: 'POST',
-                      body: uploadData
-                    });
-
-                    const resJson = await res.json();
-
-                    if (res.ok && resJson.url) {
-                      const finalUrl = resJson.url;
-                      if (i === 0 && (!updatedPrimary || updatedPrimary.includes('placehold.co'))) {
-                        updatedPrimary = finalUrl;
-                      } else {
-                        currentGallery.push(finalUrl);
-                      }
-                    } else {
-                      alert(`Upload failed for ${file.name}: ${resJson.error || 'Server error'}`);
-                    }
-                  }
-
-                  setFormData(prev => ({
-                    ...prev,
-                    image: updatedPrimary,
-                    gallery: currentGallery
-                  }));
-
-                } catch (err: any) {
-                  console.error('Image Upload Exception:', err);
-                  alert(`Image upload failed: ${err?.message || 'Server error'}`);
-                } finally {
-                  setUploadingImages(false);
-                  e.target.value = '';
-                }
-              }
+              e.target.value = '';
             }}
-            className="w-full text-xs text-ink-950 file:mr-3 file:py-2 file:px-3 file:rounded-[6px] file:border-0 file:text-xs file:font-bold file:bg-ember-500 file:text-white hover:file:bg-ember-600 cursor-pointer disabled:opacity-50"
+            className="absolute opacity-0 cursor-pointer w-full h-full inset-0"
           />
-          <p className="text-[11px] text-muted">Uploads image files directly to GitHub Catalog (`public/catalog/`) & assigns clean static URLs. 0 base64 strings stored in DB.</p>
-
-          {/* Gallery Previews */}
-          {formData.gallery && formData.gallery.length > 0 && (
-            <div className="pt-2">
-              <span className="text-xs font-bold text-ink-950 uppercase block mb-2">Uploaded Gallery Images ({formData.gallery.length}):</span>
-              <div className="flex flex-wrap gap-2.5">
-                {formData.gallery.map((img, i) => {
-                  const rawFallback = img.startsWith('/catalog/') 
-                    ? `https://raw.githubusercontent.com/wpzvqrs8/shashienterprises/main/public${img}`
-                    : img;
-                  return (
-                    <div key={i} className="relative w-16 h-16 sm:w-20 sm:h-20 rounded bg-parchment-100 border border-parchment-300 overflow-hidden group">
-                      <img 
-                        src={img} 
-                        alt={`Gallery ${i}`} 
-                        className="w-full h-full object-cover" 
-                        onError={(e) => {
-                          const target = e.currentTarget;
-                          if (target.src !== rawFallback) {
-                            target.src = rawFallback;
-                          }
-                        }}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setFormData(prev => ({
-                            ...prev,
-                            gallery: (prev.gallery || []).filter((_, gIdx) => gIdx !== i)
-                          }));
-                        }}
-                        className="absolute top-1 right-1 bg-red-600 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
-                        title="Remove image"
-                      >
-                        <Trash2 className="w-3 h-3" />
-                      </button>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
         </div>
 
-        {/* Thumbnail Preview */}
+        {/* Immediate Local Image Preview Box */}
         {formData.image && (
-          <div className="flex items-center gap-3 pt-2">
-            <span className="text-xs text-muted font-bold">Image Preview:</span>
-            <div className="w-20 h-20 rounded bg-parchment-50 border border-parchment-300 relative overflow-hidden flex items-center justify-center p-1">
-              <img 
-                src={formData.image} 
-                alt="Preview" 
-                className="w-full h-full object-cover rounded" 
-                onError={(e) => {
-                  const target = e.currentTarget;
-                  const rawFallback = formData.image?.startsWith('/catalog/') 
-                    ? `https://raw.githubusercontent.com/wpzvqrs8/shashienterprises/main/public${formData.image}`
-                    : formData.image || '';
-                  if (target.src !== rawFallback) {
-                    target.src = rawFallback;
-                  }
-                }}
-              />
+          <div className="bg-parchment-50 p-3 rounded-[8px] border border-parchment-300 space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold uppercase text-ink-950">Primary Image Preview:</span>
+              <button
+                type="button"
+                onClick={() => handleFieldChange('image', '')}
+                className="text-[11px] font-bold text-red-600 hover:underline flex items-center gap-1"
+              >
+                <Trash2 className="w-3 h-3" /> Remove Primary Image
+              </button>
             </div>
-            <span className="text-[11px] font-mono text-muted overflow-hidden text-ellipsis whitespace-nowrap max-w-xs">
-              {formData.image}
+            <div className="flex items-center gap-3">
+              <div className="w-24 h-24 rounded bg-parchment-100 border border-parchment-300 relative overflow-hidden flex items-center justify-center shrink-0">
+                <img
+                  src={formData.image}
+                  alt="Primary Preview"
+                  className="w-full h-full object-cover rounded"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    const rawFallback = formData.image?.startsWith('/catalog/')
+                      ? `https://raw.githubusercontent.com/wpzvqrs8/shashienterprises/main/public${formData.image}`
+                      : formData.image || '';
+                    if (target.src !== rawFallback) {
+                      target.src = rawFallback;
+                    }
+                  }}
+                />
+              </div>
+              <div className="space-y-1 overflow-hidden">
+                <p className="text-xs font-mono font-bold text-ink-950 truncate max-w-md">
+                  {formData.image.startsWith('data:image/') ? '[Local Base64 / File Staged]' : formData.image}
+                </p>
+                <span className="text-[11px] text-muted block">
+                  {formData.image.startsWith('data:image/')
+                    ? '✨ Staged locally. Will be converted to JPEG/PNG & committed to GitHub when you click Save Product.'
+                    : 'Static Path Ready.'}
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Gallery Previews */}
+        {formData.gallery && formData.gallery.length > 0 && (
+          <div className="bg-parchment-50 p-3 rounded-[8px] border border-parchment-300 space-y-2">
+            <span className="text-xs font-bold text-ink-950 uppercase block mb-1">
+              Gallery Images ({formData.gallery.length}):
             </span>
+            <div className="flex flex-wrap gap-2.5">
+              {formData.gallery.map((img, i) => {
+                const rawFallback = img.startsWith('/catalog/')
+                  ? `https://raw.githubusercontent.com/wpzvqrs8/shashienterprises/main/public${img}`
+                  : img;
+                return (
+                  <div key={i} className="relative w-20 h-20 rounded bg-parchment-100 border border-parchment-300 overflow-hidden group">
+                    <img
+                      src={img}
+                      alt={`Gallery ${i}`}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        const target = e.currentTarget;
+                        if (target.src !== rawFallback) {
+                          target.src = rawFallback;
+                        }
+                      }}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setFormData(prev => ({
+                          ...prev,
+                          gallery: (prev.gallery || []).filter((_, gIdx) => gIdx !== i)
+                        }));
+                      }}
+                      className="absolute top-1 right-1 bg-red-600 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                      title="Remove image"
+                    >
+                      <Trash2 className="w-3 h-3" />
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         )}
 
@@ -549,7 +549,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
             ))}
           </div>
 
-          {/* Admin Custom Tag Builder with Color Picker (Mobile Responsive) */}
+          {/* Admin Custom Tag Builder */}
           <div className="bg-parchment-50 p-3 rounded-[6px] border border-parchment-300 space-y-2">
             <span className="text-xs font-bold text-ink-950 uppercase block">Add Custom Tag with Background Color:</span>
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
@@ -611,7 +611,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
         </Button>
         <Button type="submit" variant="ember" size="lg" disabled={submitting} className="gap-2 shadow-warm">
           <Save className="w-5 h-5" />
-          <span>{submitting ? 'Saving Product...' : 'Save Product'}</span>
+          <span>{submitting ? (submitStatusMsg || 'Saving Product...') : 'Save Product'}</span>
         </Button>
       </div>
 

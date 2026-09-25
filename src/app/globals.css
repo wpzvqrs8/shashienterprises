@@ -164,18 +164,19 @@
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 9px;
+  height: 9px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-parchment-100);
+  background: #F4F0E6;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-parchment-300);
-  border-radius: 4px;
+  background: linear-gradient(180deg, #E2632B 0%, #C79A2E 100%);
+  border-radius: 5px;
+  border: 2px solid #F4F0E6;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-muted);
+  background: linear-gradient(180deg, #C34F1E 0%, #A37A20 100%);
 }
 
 @theme inline {
