@@ -64,10 +64,50 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
 
     setSubmitting(true);
     try {
+      let finalFormData = { ...formData };
+
+      // Helper function to process any base64 image string to JPEG + GitHub upload
+      const convertAndUploadBase64 = async (base64Str: string, sku?: string, isGallery = false): Promise<string> => {
+        try {
+          const res = await fetch('/api/admin/upload-image', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ image: base64Str, sku, isGallery })
+          });
+          const json = await res.json();
+          if (res.ok && json.url) {
+            return json.url;
+          }
+        } catch (err) {
+          console.error('Base64 auto-upload error:', err);
+        }
+        return base64Str;
+      };
+
+      // 1. Convert Primary Image if it's base64
+      if (finalFormData.image && (finalFormData.image.startsWith('data:image/') || finalFormData.image.length > 500 && !finalFormData.image.startsWith('http') && !finalFormData.image.startsWith('/'))) {
+        const uploadedUrl = await convertAndUploadBase64(finalFormData.image, finalFormData.sku);
+        finalFormData.image = uploadedUrl;
+      }
+
+      // 2. Convert Gallery Images if any are base64
+      if (finalFormData.gallery && finalFormData.gallery.length > 0) {
+        const updatedGallery: string[] = [];
+        for (const gImg of finalFormData.gallery) {
+          if (gImg.startsWith('data:image/') || (gImg.length > 500 && !gImg.startsWith('http') && !gImg.startsWith('/'))) {
+            const uploadedUrl = await convertAndUploadBase64(gImg, finalFormData.sku, true);
+            updatedGallery.push(uploadedUrl);
+          } else {
+            updatedGallery.push(gImg);
+          }
+        }
+        finalFormData.gallery = updatedGallery;
+      }
+
       if (isEdit && initialProduct) {
-        await updateProduct(initialProduct.id, formData);
+        await updateProduct(initialProduct.id, finalFormData);
       } else {
-        await addProduct(formData);
+        await addProduct(finalFormData);
       }
       router.push('/admin/catalog');
     } catch (err) {
@@ -261,9 +301,39 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
               type="text"
               required
               value={formData.image}
-              onChange={e => handleFieldChange('image', e.target.value)}
+              onChange={async (e) => {
+                const val = e.target.value;
+                if (val.startsWith('data:image/') || (val.length > 500 && !val.startsWith('http') && !val.startsWith('/'))) {
+                  setUploadingImages(true);
+                  try {
+                    const res = await fetch('/api/admin/upload-image', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ image: val, sku: formData.sku })
+                    });
+                    const json = await res.json();
+                    if (res.ok && json.url) {
+                      handleFieldChange('image', json.url);
+                    } else {
+                      handleFieldChange('image', val);
+                    }
+                  } catch (err) {
+                    handleFieldChange('image', val);
+                  } finally {
+                    setUploadingImages(false);
+                  }
+                } else {
+                  handleFieldChange('image', val);
+                }
+              }}
+              placeholder="/catalog/product-142.jpeg or paste base64 image..."
               className="w-full bg-parchment-50 border border-parchment-300 text-xs p-2.5 rounded-[6px] focus:outline-none text-ink-950"
             />
+            {uploadingImages && (
+              <span className="text-[11px] font-bold text-ember-600 animate-pulse block">
+                ⚡ Converting Base64 image to JPEG & committing to GitHub...
+              </span>
+            )}
           </div>
 
           <div className="space-y-1">
