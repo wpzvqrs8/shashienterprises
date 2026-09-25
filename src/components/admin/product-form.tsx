@@ -68,26 +68,28 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
 
       // Helper function to process any base64 image string to JPEG + GitHub upload
       const convertAndUploadBase64 = async (base64Str: string, sku?: string, isGallery = false): Promise<string> => {
-        try {
-          const res = await fetch('/api/admin/upload-image', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ image: base64Str, sku, isGallery })
-          });
-          const json = await res.json();
-          if (res.ok && json.url) {
-            return json.url;
-          }
-        } catch (err) {
-          console.error('Base64 auto-upload error:', err);
+        const res = await fetch('/api/admin/upload-image', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ image: base64Str, sku, isGallery })
+        });
+        const json = await res.json();
+        if (res.ok && json.url) {
+          return json.url;
         }
-        return base64Str;
+        throw new Error(json.error || 'Failed to upload image to GitHub');
       };
 
-      // 1. Convert Primary Image if it's base64
-      if (finalFormData.image && (finalFormData.image.startsWith('data:image/') || finalFormData.image.length > 500 && !finalFormData.image.startsWith('http') && !finalFormData.image.startsWith('/'))) {
-        const uploadedUrl = await convertAndUploadBase64(finalFormData.image, finalFormData.sku);
-        finalFormData.image = uploadedUrl;
+      // 1. Convert Primary Image if it's base64 or raw data
+      if (finalFormData.image && (finalFormData.image.startsWith('data:image/') || (finalFormData.image.length > 500 && !finalFormData.image.startsWith('http') && !finalFormData.image.startsWith('/')))) {
+        try {
+          const uploadedUrl = await convertAndUploadBase64(finalFormData.image, finalFormData.sku);
+          finalFormData.image = uploadedUrl;
+        } catch (uploadErr: any) {
+          alert(`Image upload to GitHub failed: ${uploadErr?.message || 'Server Error'}\n\nPlease check that GITHUB_PAT is set in Vercel Environment Variables.`);
+          setSubmitting(false);
+          return;
+        }
       }
 
       // 2. Convert Gallery Images if any are base64
@@ -95,8 +97,14 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
         const updatedGallery: string[] = [];
         for (const gImg of finalFormData.gallery) {
           if (gImg.startsWith('data:image/') || (gImg.length > 500 && !gImg.startsWith('http') && !gImg.startsWith('/'))) {
-            const uploadedUrl = await convertAndUploadBase64(gImg, finalFormData.sku, true);
-            updatedGallery.push(uploadedUrl);
+            try {
+              const uploadedUrl = await convertAndUploadBase64(gImg, finalFormData.sku, true);
+              updatedGallery.push(uploadedUrl);
+            } catch (uploadErr: any) {
+              alert(`Gallery image upload to GitHub failed: ${uploadErr?.message || 'Server Error'}`);
+              setSubmitting(false);
+              return;
+            }
           } else {
             updatedGallery.push(gImg);
           }

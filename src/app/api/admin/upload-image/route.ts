@@ -3,6 +3,9 @@ import fs from 'fs';
 import path from 'path';
 import sharp from 'sharp';
 
+export const dynamic = 'force-dynamic';
+export const maxDuration = 60;
+
 export async function POST(req: NextRequest) {
   try {
     let buffer: Buffer | null = null;
@@ -18,7 +21,7 @@ export async function POST(req: NextRequest) {
       isGallery = formData.get('isGallery') === 'true';
 
       if (!file) {
-        return NextResponse.json({ error: 'No file provided' }, { status: 400 });
+        return NextResponse.json({ error: 'No file provided in form data' }, { status: 400 });
       }
 
       const arrayBuffer = await file.arrayBuffer();
@@ -34,10 +37,10 @@ export async function POST(req: NextRequest) {
       }
 
       // Strip data URI prefix if present (e.g. data:image/png;base64,...)
-      const cleanedBase64 = base64Data.replace(/^data:image\/\w+;base64,/, '');
+      const cleanedBase64 = base64Data.replace(/^data:image\/\w+;base64,/, '').trim();
       buffer = Buffer.from(cleanedBase64, 'base64');
     } else {
-      return NextResponse.json({ error: 'Unsupported Content-Type' }, { status: 400 });
+      return NextResponse.json({ error: 'Unsupported Content-Type. Use multipart/form-data or application/json' }, { status: 400 });
     }
 
     if (!buffer || buffer.length === 0) {
@@ -52,57 +55,43 @@ export async function POST(req: NextRequest) {
         .toBuffer();
     } catch (sharpError: any) {
       console.error('Sharp JPEG Conversion Error:', sharpError);
-      return NextResponse.json({ error: 'Failed to process and convert image to JPEG format' }, { status: 400 });
+      return NextResponse.json({ error: `Image conversion failed: ${sharpError?.message || 'Invalid image format'}` }, { status: 400 });
     }
 
-    // Determine target catalog directory: public/catalog
-    const catalogDir = path.join(process.cwd(), 'public', 'catalog');
-    if (!fs.existsSync(catalogDir)) {
-      fs.mkdirSync(catalogDir, { recursive: true });
-    }
+    // Generate clean filename: product-XXX.jpeg
+    const timestamp = Date.now().toString().slice(-6);
+    let cleanFilename = '';
 
-    // Format clean filename: product-XXX.jpeg
-    let skuNumber = '';
     if (customSku) {
       const numMatch = customSku.match(/(\d+)/);
-      if (numMatch) {
-        skuNumber = numMatch[1].padStart(3, '0');
-      }
-    }
-
-    let cleanFilename = '';
-    if (skuNumber) {
-      const baseName = `product-${skuNumber}${isGallery ? '-gallery' : ''}`;
-      // Check if file exists, add timestamp suffix if needed to avoid overwriting distinct images
-      const targetPath = path.join(catalogDir, `${baseName}.jpeg`);
-      if (fs.existsSync(targetPath) && isGallery) {
-        cleanFilename = `${baseName}-${Date.now().toString().slice(-4)}.jpeg`;
+      if (numMatch && numMatch[1]) {
+        const skuNum = numMatch[1].padStart(3, '0');
+        cleanFilename = isGallery ? `product-${skuNum}-gal-${timestamp}.jpeg` : `product-${skuNum}.jpeg`;
       } else {
-        cleanFilename = `${baseName}.jpeg`;
+        const cleanSku = customSku.toLowerCase().replace(/[^a-z0-9]/g, '-');
+        cleanFilename = `product-${cleanSku}-${timestamp}.jpeg`;
       }
     } else {
-      // Find highest existing product-XXX number in public/catalog
-      const existingFiles = fs.readdirSync(catalogDir);
-      let highestNum = 0;
-      for (const f of existingFiles) {
-        const match = f.match(/^product-(\d+)/i);
-        if (match && match[1]) {
-          const num = parseInt(match[1], 10);
-          if (num > highestNum) highestNum = num;
-        }
-      }
-      const nextNum = (highestNum + 1).toString().padStart(3, '0');
-      cleanFilename = `product-${nextNum}.jpeg`;
+      cleanFilename = `product-${timestamp}.jpeg`;
     }
 
-    // 1. Save locally to public/catalog for instant availability in local development
-    const localFilePath = path.join(catalogDir, cleanFilename);
-    fs.writeFileSync(localFilePath, jpegBuffer);
+    // 1. Try local filesystem save (works in local dev, safe fallback on Vercel)
+    try {
+      const catalogDir = path.join(process.cwd(), 'public', 'catalog');
+      if (!fs.existsSync(catalogDir)) {
+        fs.mkdirSync(catalogDir, { recursive: true });
+      }
+      fs.writeFileSync(path.join(catalogDir, cleanFilename), jpegBuffer);
+    } catch (fsErr) {
+      // Expected on Vercel serverless (read-only filesystem)
+      console.warn('Local FS write skipped (serverless mode):', fsErr);
+    }
 
     // 2. Commit file to GitHub Repository via GitHub Contents REST API
     const githubPat = process.env.GITHUB_PAT;
     const githubRepo = process.env.GITHUB_REPO || 'wpzvqrs8/shashienterprises';
     let githubCommitted = false;
+    let githubErrorDetail = '';
 
     if (githubPat) {
       const gitHubFilePath = `public/catalog/${cleanFilename}`;
@@ -148,14 +137,27 @@ export async function POST(req: NextRequest) {
         githubCommitted = true;
         console.log(`✅ Successfully committed public/catalog/${cleanFilename} to GitHub (${githubRepo}). Vercel deployment triggered.`);
       } else {
-        const errText = await putRes.text();
-        console.error('❌ GitHub API Upload Error:', errText);
+        githubErrorDetail = await putRes.text();
+        console.error('❌ GitHub API Upload Error:', githubErrorDetail);
       }
     } else {
-      console.warn('⚠️ GITHUB_PAT not found in environment. File saved locally only.');
+      githubErrorDetail = 'GITHUB_PAT environment variable is not configured on Vercel.';
+      console.warn('⚠️ GITHUB_PAT not found in environment variables.');
     }
 
     const publicUrl = `/catalog/${cleanFilename}`;
+
+    if (!githubCommitted && !process.env.GITHUB_PAT) {
+      return NextResponse.json({
+        error: `GitHub upload failed: GITHUB_PAT is missing in environment variables.`
+      }, { status: 500 });
+    }
+
+    if (!githubCommitted && githubErrorDetail) {
+      return NextResponse.json({
+        error: `GitHub API error: ${githubErrorDetail}`
+      }, { status: 500 });
+    }
 
     return NextResponse.json({
       success: true,
@@ -166,7 +168,7 @@ export async function POST(req: NextRequest) {
     });
 
   } catch (error: any) {
-    console.error('Upload Error:', error);
+    console.error('Upload Route Unhandled Error:', error);
     return NextResponse.json({ error: error?.message || 'Server upload failed' }, { status: 500 });
   }
 }
