@@ -16,6 +16,7 @@ interface ProductFormProps {
 export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit = false }) => {
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
+  const [uploadingImages, setUploadingImages] = useState(false);
 
   const [formData, setFormData] = useState<Partial<Product>>({
     name: initialProduct?.name || '',
@@ -282,54 +283,82 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initialProduct, isEdit
 
         {/* Device Image File Upload (PNG, JPG, JPEG Only) */}
         <div className="bg-parchment-50 p-3.5 sm:p-4 rounded-[8px] border border-parchment-300 space-y-3">
-          <label className="text-xs font-bold uppercase text-ink-950 block">Upload Product Images From Device (PNG, JPG, JPEG Only)</label>
+          <div className="flex items-center justify-between">
+            <label className="text-xs font-bold uppercase text-ink-950 block">Upload Product Images From Device (PNG, JPG, JPEG Only)</label>
+            {uploadingImages && (
+              <span className="text-xs font-bold text-ember-600 animate-pulse flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-ember-500 animate-ping"></span>
+                Committing to GitHub Catalog...
+              </span>
+            )}
+          </div>
           <input
             type="file"
             multiple
-            accept="image/png, image/jpeg, image/jpg"
-            onChange={(e) => {
+            disabled={uploadingImages}
+            accept="image/png, image/jpeg, image/jpg, image/webp"
+            onChange={async (e) => {
               const files = Array.from(e.target.files || []);
-              if (files.length > 0) {
-                // Filter strictly for PNG, JPG, JPEG formats
-                const validFiles = files.filter(file => {
-                  const type = file.type.toLowerCase();
-                  const name = file.name.toLowerCase();
-                  return (
-                    type === 'image/png' ||
-                    type === 'image/jpeg' ||
-                    type === 'image/jpg' ||
-                    name.endsWith('.png') ||
-                    name.endsWith('.jpg') ||
-                    name.endsWith('.jpeg')
-                  );
-                });
+              if (files.length === 0) return;
 
-                if (validFiles.length < files.length) {
-                  alert('Only PNG, JPG, and JPEG image formats are allowed.');
-                }
+              const validFiles = files.filter(file => {
+                const type = file.type.toLowerCase();
+                const name = file.name.toLowerCase();
+                return (
+                  type === 'image/png' ||
+                  type === 'image/jpeg' ||
+                  type === 'image/jpg' ||
+                  type === 'image/webp' ||
+                  name.endsWith('.png') ||
+                  name.endsWith('.jpg') ||
+                  name.endsWith('.jpeg') ||
+                  name.endsWith('.webp')
+                );
+              });
 
-                if (validFiles.length > 0) {
-                  validFiles.forEach((file, index) => {
-                    const reader = new FileReader();
-                    reader.onload = (uploadEvent) => {
-                      const result = uploadEvent.target?.result as string;
-                      if (result) {
-                        setFormData(prev => {
-                          const currentGallery = prev.gallery || [];
-                          const updatedGallery = [...currentGallery, result];
-                          const primaryImg = (!prev.image || prev.image.includes('placehold.co')) && index === 0 ? result : prev.image;
-                          return { ...prev, image: primaryImg, gallery: updatedGallery };
-                        });
-                      }
-                    };
-                    reader.readAsDataURL(file);
-                  });
+              if (validFiles.length < files.length) {
+                alert('Only PNG, JPG, JPEG, and WEBP image formats are allowed.');
+              }
+
+              if (validFiles.length > 0) {
+                setUploadingImages(true);
+                try {
+                  for (let i = 0; i < validFiles.length; i++) {
+                    const file = validFiles[i];
+                    const uploadData = new FormData();
+                    uploadData.append('file', file);
+                    if (formData.sku) uploadData.append('sku', formData.sku);
+
+                    const res = await fetch('/api/admin/upload-image', {
+                      method: 'POST',
+                      body: uploadData
+                    });
+
+                    const resJson = await res.json();
+
+                    if (res.ok && resJson.url) {
+                      setFormData(prev => {
+                        const currentGallery = prev.gallery || [];
+                        const updatedGallery = [...currentGallery, resJson.url];
+                        const primaryImg = (!prev.image || prev.image.includes('placehold.co')) && i === 0 ? resJson.url : prev.image;
+                        return { ...prev, image: primaryImg, gallery: updatedGallery };
+                      });
+                    } else {
+                      alert(`Upload failed for ${file.name}: ${resJson.error || 'Server error'}`);
+                    }
+                  }
+                } catch (err: any) {
+                  console.error('Image Upload Exception:', err);
+                  alert(`Image upload failed: ${err?.message || 'Server error'}`);
+                } finally {
+                  setUploadingImages(false);
+                  e.target.value = '';
                 }
               }
             }}
-            className="w-full text-xs text-ink-950 file:mr-3 file:py-2 file:px-3 file:rounded-[6px] file:border-0 file:text-xs file:font-bold file:bg-ember-500 file:text-white hover:file:bg-ember-600 cursor-pointer"
+            className="w-full text-xs text-ink-950 file:mr-3 file:py-2 file:px-3 file:rounded-[6px] file:border-0 file:text-xs file:font-bold file:bg-ember-500 file:text-white hover:file:bg-ember-600 cursor-pointer disabled:opacity-50"
           />
-          <p className="text-[11px] text-muted">Accepts PNG, JPG, and JPEG files only. Uploaded images will populate the main product image and gallery.</p>
+          <p className="text-[11px] text-muted">Uploads image files directly to GitHub Catalog (`public/catalog/`) & assigns clean static URLs. 0 base64 strings stored in DB.</p>
 
           {/* Gallery Previews */}
           {formData.gallery && formData.gallery.length > 0 && (
