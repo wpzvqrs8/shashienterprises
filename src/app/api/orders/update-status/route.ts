@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { updateOrderStatus } from '@/lib/catalog-store';
-import { sendOrderConfirmationNotification, sendOrderDispatchNotification } from '@/lib/notifications';
+import { sendOrderConfirmationNotification, sendOrderCanceledNotification, sendOrderDispatchNotification } from '@/lib/notifications';
 import { QuoteOrder } from '@/lib/types';
 
 export async function POST(req: NextRequest) {
@@ -18,6 +18,8 @@ export async function POST(req: NextRequest) {
     // Trigger notification based on new status
     if (normalizedStatus === 'confirmed') {
       await sendOrderConfirmationNotification(updatedOrder);
+    } else if (normalizedStatus === 'canceled' || normalizedStatus === 'cancelled') {
+      await sendOrderCanceledNotification(updatedOrder);
     } else if (normalizedStatus === 'dispatched') {
       await sendOrderDispatchNotification(updatedOrder, courier, trackingNo);
     }

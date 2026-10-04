@@ -1,5 +1,5 @@
 import { QuoteOrder } from './types';
-import { sendOrderCreatedEmail, sendOrderConfirmedEmail } from './email-service';
+import { sendOrderCreatedEmail, sendOrderConfirmedEmail, sendOrderCanceledEmail } from './email-service';
 
 const SITE_URL = 'https://shashienterprises.store';
 
@@ -46,6 +46,26 @@ export async function sendOrderConfirmationNotification(order: QuoteOrder): Prom
     emailSent,
     whatsappSent: true,
     message: `Confirmation notification sent via Resend for order #${order.orderNumber}`
+  };
+}
+
+/**
+ * Triggers Email & WhatsApp Notification when Admin Cancels Order
+ */
+export async function sendOrderCanceledNotification(order: QuoteOrder): Promise<NotificationResult> {
+  const trackingUrl = `${SITE_URL}/track/${order.orderNumber}`;
+
+  // Send Resend Auto Email
+  const emailSent = await sendOrderCanceledEmail(order);
+
+  const whatsappMessage = `*Shashi Enterprises — Order Canceled*\n\nHi ${order.contactPerson}, your order request *#${order.orderNumber}* for ${order.businessName} has been canceled.\n\nCheck live status: ${trackingUrl}`;
+
+  console.log('[NOTIFICATION LOG - WHATSAPP CANCELLATION]:', { phone: order.phone, message: whatsappMessage });
+
+  return {
+    emailSent,
+    whatsappSent: true,
+    message: `Cancellation notification sent via Resend for order #${order.orderNumber}`
   };
 }
 

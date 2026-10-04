@@ -62,7 +62,7 @@ export interface QuoteOrder {
   paymentPreference: string;
   items: CartItem[];
   subtotal: number;
-  status: 'New' | 'Confirmed';
+  status: 'New' | 'Confirmed' | 'Cancelled';
   createdAt: string;
   notes?: string;
 }

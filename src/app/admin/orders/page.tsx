@@ -141,11 +141,16 @@ export default function AdminOrdersPage() {
                       disabled={isUpdating}
                       onChange={e => handleStatusChange(ord.id, e.target.value as any)}
                       className={`text-[11px] px-2.5 py-1 rounded font-bold uppercase border focus:outline-none cursor-pointer ${
-                        ord.status === 'Confirmed' ? 'bg-jade-100 text-jade-600 border-jade-600/30' : 'bg-gold-500/10 text-gold-500 border-gold-500/30'
+                        ord.status === 'Confirmed'
+                          ? 'bg-jade-100 text-jade-600 border-jade-600/30'
+                          : ord.status === 'Cancelled'
+                          ? 'bg-red-100 text-red-600 border-red-600/30'
+                          : 'bg-gold-500/10 text-gold-500 border-gold-500/30'
                       }`}
                     >
                       <option value="New">Pending Request</option>
                       <option value="Confirmed">Approved & Confirmed</option>
+                      <option value="Cancelled">Order Canceled</option>
                     </select>
                   )}
 
@@ -245,11 +250,16 @@ export default function AdminOrdersPage() {
                           disabled={isUpdating}
                           onChange={e => handleStatusChange(ord.id, e.target.value as any)}
                           className={`text-xs px-2.5 py-1.5 rounded font-bold uppercase border focus:outline-none cursor-pointer transition-all ${
-                            ord.status === 'Confirmed' ? 'bg-jade-100 text-jade-600 border-jade-600/30' : 'bg-gold-500/10 text-gold-500 border-gold-500/30'
+                            ord.status === 'Confirmed'
+                              ? 'bg-jade-100 text-jade-600 border-jade-600/30'
+                              : ord.status === 'Cancelled'
+                              ? 'bg-red-100 text-red-600 border-red-600/30'
+                              : 'bg-gold-500/10 text-gold-500 border-gold-500/30'
                           }`}
                         >
                           <option value="New">Pending Request</option>
                           <option value="Confirmed">Approved & Confirmed</option>
+                          <option value="Cancelled">Order Canceled</option>
                         </select>
                       )}
                     </td>
@@ -318,6 +328,10 @@ export default function AdminOrdersPage() {
                         <span className="inline-flex items-center gap-1 text-[11px] font-bold text-jade-600 bg-jade-100 border border-jade-600/30 px-2 py-0.5 rounded uppercase">
                           <CheckCircle2 className="w-3 h-3" /> Confirmed & Mail Dispatched
                         </span>
+                      ) : selectedOrder.status === 'Cancelled' ? (
+                        <span className="inline-flex items-center gap-1 text-[11px] font-bold text-red-600 bg-red-100 border border-red-600/30 px-2 py-0.5 rounded uppercase">
+                          ✕ Order Canceled & Mail Dispatched
+                        </span>
                       ) : (
                         <span className="inline-flex items-center gap-1 text-[11px] font-bold text-gold-500 bg-gold-500/10 border border-gold-500/30 px-2 py-0.5 rounded uppercase">
                           <Clock className="w-3 h-3" /> Pending Confirmation
@@ -358,27 +372,37 @@ export default function AdminOrdersPage() {
               </div>
 
               <div className="pt-4 border-t border-parchment-300 flex flex-col gap-2 shrink-0">
-                {selectedOrder.status !== 'Confirmed' && (
+                <div className="grid grid-cols-2 gap-2">
                   <Button
-                    variant="ember"
-                    size="lg"
-                    disabled={isUpdating}
+                    variant={selectedOrder.status === 'Confirmed' ? 'outline' : 'ember'}
+                    size="md"
+                    disabled={isUpdating || selectedOrder.status === 'Confirmed'}
                     onClick={() => handleStatusChange(selectedOrder.id, 'Confirmed')}
-                    className="w-full flex items-center justify-center gap-2"
+                    className="flex items-center justify-center gap-1.5 text-xs"
                   >
                     {isUpdating ? (
-                      <>
-                        <Loader2 className="w-4 h-4 animate-spin text-white" />
-                        <span>Updating DB & Sending Confirmation Email...</span>
-                      </>
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
                     ) : (
-                      <>
-                        <CheckCircle2 className="w-4 h-4" />
-                        <span>Approve & Send Confirmation Email</span>
-                      </>
+                      <CheckCircle2 className="w-3.5 h-3.5" />
                     )}
+                    <span>{selectedOrder.status === 'Confirmed' ? 'Confirmed' : 'Approve & Send Mail'}</span>
                   </Button>
-                )}
+
+                  <Button
+                    variant={selectedOrder.status === 'Cancelled' ? 'outline' : 'danger'}
+                    size="md"
+                    disabled={isUpdating || selectedOrder.status === 'Cancelled'}
+                    onClick={() => handleStatusChange(selectedOrder.id, 'Cancelled')}
+                    className="flex items-center justify-center gap-1.5 text-xs"
+                  >
+                    {isUpdating ? (
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                    ) : (
+                      <span>✕</span>
+                    )}
+                    <span>{selectedOrder.status === 'Cancelled' ? 'Canceled' : 'Cancel & Send Mail'}</span>
+                  </Button>
+                </div>
 
                 <div className="flex items-center gap-2">
                   <Button

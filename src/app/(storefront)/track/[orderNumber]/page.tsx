@@ -187,7 +187,10 @@ export default function OrderTrackingPage({ params }: TrackPageProps) {
                 <div className="text-right">
                   <span className="text-xs font-bold uppercase text-muted">Total Amount:</span>
                   <div className="font-display text-2xl font-bold text-ember-600">₹{order.subtotal.toLocaleString('en-IN')}</div>
-                  <Badge variant={order.status === 'Confirmed' ? 'stock' : 'draft'} className="mt-1">
+                  <Badge
+                    variant={order.status === 'Confirmed' ? 'stock' : order.status === 'Cancelled' ? 'out-of-stock' : 'draft'}
+                    className="mt-1"
+                  >
                     Status: {order.status}
                   </Badge>
                 </div>
@@ -223,6 +226,17 @@ export default function OrderTrackingPage({ params }: TrackPageProps) {
                   Your <strong>2nd Email (Order Confirmation & Invoice)</strong> has been sent to <strong>{order.email}</strong>. You will also be contacted soon from our official WhatsApp number ({order.phone}) for payment details & freight dispatch confirmation.
                 </p>
               </div>
+            ) : order.status === 'Cancelled' ? (
+              <div className="bg-red-50 border-2 border-red-500 rounded-[10px] p-5 shadow-sm space-y-2">
+                <div className="flex items-center gap-2 text-red-900 font-extrabold text-base font-display">
+                  <AlertTriangle className="w-6 h-6 text-red-600 shrink-0" />
+                  <span>Order Request Canceled (Email 2 of 2 Dispatched)</span>
+                </div>
+                <p className="text-xs text-red-800 leading-relaxed font-medium">
+                  Your order request <strong>#{order.orderNumber}</strong> has been canceled by Shashi Enterprises Admin.
+                  Your <strong>2nd Email (Order Cancellation Notice)</strong> has been sent to <strong>{order.email}</strong>. If you have any questions or wish to submit a revised request, please contact our support team.
+                </p>
+              </div>
             ) : (
               <div className="bg-amber-50 border border-amber-300 rounded-[10px] p-5 shadow-sm space-y-2">
                 <div className="flex items-center gap-2 text-amber-900 font-bold text-sm font-display">
@@ -230,7 +244,7 @@ export default function OrderTrackingPage({ params }: TrackPageProps) {
                   <span>Order Request Submitted & Pending Admin Approval (Email 1 of 2 Dispatched)</span>
                 </div>
                 <p className="text-xs text-amber-800 leading-relaxed font-medium">
-                  Your order request <strong>#{order.orderNumber}</strong> has been submitted! Your <strong>1st Email (Order Received)</strong> has been sent to <strong>{order.email}</strong>. Once approved by Shashi Enterprises Admin, your status will be updated to <strong>Confirmed</strong> and your <strong>2nd Email (Order Confirmation)</strong> will be dispatched.
+                  Your order request <strong>#{order.orderNumber}</strong> has been submitted! Your <strong>1st Email (Order Received)</strong> has been sent to <strong>{order.email}</strong>. Once reviewed by Shashi Enterprises Admin, your status will be updated and your <strong>2nd Email (Order Confirmation or Cancellation)</strong> will be dispatched.
                 </p>
               </div>
             )}
@@ -252,13 +266,27 @@ export default function OrderTrackingPage({ params }: TrackPageProps) {
                   </p>
                 </div>
 
-                <div className={`p-3 rounded border ${order.status === 'Confirmed' ? 'bg-white border-emerald-500 ring-2 ring-emerald-500/30' : 'bg-white/60 border-blue-200'}`}>
+                <div className={`p-3 rounded border ${
+                  order.status === 'Confirmed'
+                    ? 'bg-white border-emerald-500 ring-2 ring-emerald-500/30'
+                    : order.status === 'Cancelled'
+                    ? 'bg-white border-red-500 ring-2 ring-red-500/30'
+                    : 'bg-white/60 border-blue-200'
+                }`}>
                   <div className="font-bold text-blue-950 text-xs flex items-center gap-1.5">
-                    <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] ${order.status === 'Confirmed' ? 'bg-emerald-600 text-white' : 'bg-parchment-400 text-ink-950'}`}>2</span>
-                    <span>2nd Email: Order Confirmation</span>
+                    <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] ${
+                      order.status === 'Confirmed'
+                        ? 'bg-emerald-600 text-white'
+                        : order.status === 'Cancelled'
+                        ? 'bg-red-600 text-white'
+                        : 'bg-parchment-400 text-ink-950'
+                    }`}>2</span>
+                    <span>2nd Email: {order.status === 'Cancelled' ? 'Order Cancellation' : 'Order Confirmation'}</span>
                   </div>
                   <p className="text-[11px] text-blue-900 mt-1 leading-snug">
-                    Dispatched when Admin verifies stock allocation and approves your quote request.
+                    {order.status === 'Cancelled'
+                      ? 'Dispatched by Admin notifying order cancellation.'
+                      : 'Dispatched when Admin verifies stock allocation and approves your quote request.'}
                   </p>
                 </div>
               </div>
@@ -276,35 +304,50 @@ export default function OrderTrackingPage({ params }: TrackPageProps) {
               </h3>
 
               <div className="relative flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:gap-2 pt-2">
-                {trackingSteps.map((step, idx) => {
-                  const isPassed = idx <= currentStepIdx;
-                  const isCurrent = idx === currentStepIdx;
+                {(() => {
+                  const steps = order.status === 'Cancelled' ? [
+                    { key: 'New', label: 'Order Request Submitted', desc: 'Pending Admin review & approval' },
+                    { key: 'Cancelled', label: 'Order Canceled', desc: 'Order was canceled by admin' },
+                  ] : [
+                    { key: 'New', label: 'Order Request Submitted', desc: 'Pending Admin review & approval' },
+                    { key: 'Confirmed', label: 'Approved & Confirmed', desc: 'Approved by admin! You will be contacted via WhatsApp' },
+                  ];
 
-                  return (
-                    <div key={step.key} className="flex md:flex-col items-center gap-3 md:gap-2 flex-1 relative z-10 text-left md:text-center">
-                      <div
-                        className={`w-9 h-9 rounded-full flex items-center justify-center font-bold text-xs shrink-0 transition-all ${
-                          isCurrent
-                            ? 'bg-ember-500 text-white ring-4 ring-ember-500/20 shadow-warm scale-110'
-                            : isPassed
-                            ? 'bg-jade-600 text-white'
-                            : 'bg-parchment-300 text-muted'
-                        }`}
-                      >
-                        {isPassed ? <CheckCircle2 className="w-5 h-5" /> : idx + 1}
-                      </div>
+                  const currentIdx = steps.findIndex(s => s.key === order.status);
 
-                      <div>
-                        <div className={`text-xs font-bold uppercase ${isPassed ? 'text-ink-950' : 'text-muted'}`}>
-                          {step.label}
+                  return steps.map((step, idx) => {
+                    const isPassed = idx <= currentIdx;
+                    const isCurrent = idx === currentIdx;
+                    const isCancelledStep = step.key === 'Cancelled';
+
+                    return (
+                      <div key={step.key} className="flex md:flex-col items-center gap-3 md:gap-2 flex-1 relative z-10 text-left md:text-center">
+                        <div
+                          className={`w-9 h-9 rounded-full flex items-center justify-center font-bold text-xs shrink-0 transition-all ${
+                            isCancelledStep
+                              ? 'bg-red-600 text-white ring-4 ring-red-500/20 shadow-warm scale-110'
+                              : isCurrent
+                              ? 'bg-ember-500 text-white ring-4 ring-ember-500/20 shadow-warm scale-110'
+                              : isPassed
+                              ? 'bg-jade-600 text-white'
+                              : 'bg-parchment-300 text-muted'
+                          }`}
+                        >
+                          {isCancelledStep ? '✕' : isPassed ? <CheckCircle2 className="w-5 h-5" /> : idx + 1}
                         </div>
-                        <div className="text-[11px] text-muted max-w-[140px] hidden md:block">
-                          {step.desc}
+
+                        <div>
+                          <div className={`text-xs font-bold uppercase ${isCancelledStep ? 'text-red-600' : isPassed ? 'text-ink-950' : 'text-muted'}`}>
+                            {step.label}
+                          </div>
+                          <div className="text-[11px] text-muted max-w-[140px] hidden md:block">
+                            {step.desc}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  });
+                })()}
               </div>
             </div>
 

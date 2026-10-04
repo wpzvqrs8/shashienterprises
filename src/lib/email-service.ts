@@ -342,3 +342,106 @@ export async function sendOrderConfirmedEmail(order: QuoteOrder): Promise<boolea
     htmlContent
   );
 }
+
+/**
+ * Send Email #2 Alternative: Order Canceled Email
+ */
+export async function sendOrderCanceledEmail(order: QuoteOrder): Promise<boolean> {
+  const trackingUrl = `${SITE_URL}/track/${order.orderNumber}`;
+
+  const itemsHtml = order.items
+    .map(
+      (item) => `
+      <tr>
+        <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-size: 13px; font-weight: 600; color: #141218;">
+          ${item.product.name}
+          <div style="font-size: 11px; color: #777; font-weight: normal;">SKU: ${item.product.sku}</div>
+        </td>
+        <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-size: 13px; text-align: center; color: #333;">
+          ${item.quantity}
+        </td>
+        <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-size: 13px; text-align: right; color: #333;">
+          ₹${item.selectedTierPrice.toLocaleString('en-IN')}
+        </td>
+        <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-size: 13px; text-align: right; font-weight: 700; color: #141218;">
+          ₹${item.lineTotal.toLocaleString('en-IN')}
+        </td>
+      </tr>
+    `
+    )
+    .join('');
+
+  const content = `
+    <div style="text-align: center; margin-bottom: 20px;">
+      <span style="display: inline-block; background-color: #fce8e6; color: #c5221f; border: 1px solid #f7c5c2; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">
+        ❌ Email 2 of 2: Order Canceled
+      </span>
+    </div>
+
+    <h2 style="color: #141218; margin: 0 0 12px 0; font-size: 22px; font-weight: 800; text-align: center;">
+      Order Status Update: <span style="color: #c5221f;">#${order.orderNumber} Canceled</span>
+    </h2>
+
+    <p style="font-size: 15px; line-height: 1.6; color: #3d3933; margin: 0 0 16px 0;">
+      Dear <strong>${order.contactPerson}</strong>,
+    </p>
+
+    <p style="font-size: 15px; line-height: 1.6; color: #3d3933; margin: 0 0 20px 0;">
+      We regret to inform you that your wholesale order request <strong>#${order.orderNumber}</strong> for <strong>${order.businessName}</strong> could not be approved at this time and has been <strong>CANCELED</strong>.
+    </p>
+
+    <!-- CANCELLATION NOTICE BOX -->
+    <div style="background-color: #fce8e6; border: 2px dashed #c5221f; padding: 18px 20px; border-radius: 8px; margin: 0 0 24px 0; text-align: center;">
+      <p style="margin: 0; color: #8c1d18; font-size: 14px; line-height: 1.5; font-weight: 700;">
+        ⚠️ Reason for cancellation may include stock unavailability, minimum order quantity shortfall, or unverified business details.
+      </p>
+      <p style="margin: 8px 0 0 0; color: #3d3933; font-size: 13px;">
+        If you believe this is an error or would like to modify your order, please contact our support team at <a href="tel:${SUPPORT_PHONE.replace(/\s+/g, '')}" style="color: #E2632B; font-weight: 700; text-decoration: none;">${SUPPORT_PHONE}</a> or email <a href="mailto:${SUPPORT_EMAIL}" style="color: #E2632B; font-weight: 700; text-decoration: none;">${SUPPORT_EMAIL}</a>.
+      </p>
+    </div>
+
+    <!-- ORDER ITEMS TABLE -->
+    <h3 style="margin: 24px 0 12px 0; font-size: 15px; font-weight: 700; color: #141218; text-transform: uppercase; letter-spacing: 0.5px;">
+      📦 Canceled Order Summary
+    </h3>
+
+    <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse: collapse; margin-bottom: 20px; border: 1px solid #e0d9cc; border-radius: 6px; overflow: hidden;">
+      <thead>
+        <tr style="background-color: #141218; color: #ffffff; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">
+          <th style="padding: 10px 12px; text-align: left;">Product</th>
+          <th style="padding: 10px 12px; text-align: center;">Qty</th>
+          <th style="padding: 10px 12px; text-align: right;">Unit Price</th>
+          <th style="padding: 10px 12px; text-align: right;">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${itemsHtml}
+      </tbody>
+      <tfoot>
+        <tr style="background-color: #faf8f3;">
+          <td colspan="3" style="padding: 12px; text-align: right; font-weight: 700; font-size: 14px; color: #141218; border-top: 2px solid #e0d9cc;">
+            Total Order Value:
+          </td>
+          <td style="padding: 12px; text-align: right; font-weight: 800; font-size: 16px; color: #c5221f; border-top: 2px solid #e0d9cc;">
+            ₹${order.subtotal.toLocaleString('en-IN')}
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <!-- ACTION BUTTON -->
+    <div style="text-align: center; margin: 28px 0 20px 0;">
+      <a href="${trackingUrl}" target="_blank" style="display: inline-block; background-color: #141218; color: #ffffff; text-decoration: none; padding: 14px 30px; border-radius: 8px; font-weight: 700; font-size: 14px; letter-spacing: 0.5px; border: 1px solid #333;">
+        🔍 Check Live Order Status
+      </a>
+    </div>
+  `;
+
+  const htmlContent = getEmailLayout(`Order #${order.orderNumber} Canceled`, content);
+  return await sendEmailWithResend(
+    order.email,
+    `Order Update: #${order.orderNumber} Canceled — Shashi Enterprises`,
+    htmlContent
+  );
+}
+
