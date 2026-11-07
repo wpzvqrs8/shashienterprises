@@ -1,0 +1,996 @@
+[
+  {
+    "id": "4fcb9d30-646b-4098-9207-5268d6bb66f1",
+    "sku": "SE-ANM-230",
+    "name": "Crayon Shin-chan Shinnosuke Nohara Crawling on Grass Chibi Wind-Up Toy",
+    "slug": "crayon-shin-chan-shinnosuke-nohara-crawling-on-grass-chibi-wind-up-toy",
+    "series": "Pop Culture",
+    "category": "Blind Box Toys",
+    "description": "Adorable Crayon Shin-chan Shinnosuke Nohara miniature crawling figure featuring his classic red tee and yellow shorts in a relaxed tummy grass crawling pose with wind-up roller mechanism.",
+    "short_desc": "7cm Crayon Shin-chan cute tummy crawl wind-up toy on wheels.",
+    "image_url": "/catalog/product-230.jpeg",
+    "gallery_urls": [
+      "/catalog/product-230.jpeg"
+    ],
+    "retail_reg_price": 120,
+    "retail_sale_price": 100,
+    "wholesale_price": 80,
+    "stock_qty": 30,
+    "moq": 10,
+    "height_cm": 7,
+    "material": "PVC/ABS",
+    "badges": [
+      "NEW",
+      "HOT"
+    ],
+    "show_old_price": true,
+    "featured": false,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:48.11406+00:00",
+    "updated_at": "2026-11-07T07:02:48.11406+00:00"
+  },
+  {
+    "id": "53632462-0247-4e2e-b00a-47f159a5bc54",
+    "sku": "SE-ANM-231",
+    "name": "We Bare Bears Panda Cute Laying Down Wind-Up Toy Figure",
+    "slug": "we-bare-bears-panda-cute-laying-down-wind-up-toy-figure",
+    "series": "Pop Culture",
+    "category": "Blind Box Toys",
+    "description": "Charming We Bare Bears Pan-Pan Panda rolling figure sculpted in a cute laying down pose on under-chassis roller wheels with side wind-up mechanism.",
+    "short_desc": "6cm We Bare Bears Panda lying down wind-up roller toy figure.",
+    "image_url": "/catalog/product-231.jpeg",
+    "gallery_urls": [
+      "/catalog/product-231.jpeg"
+    ],
+    "retail_reg_price": 127,
+    "retail_sale_price": 106,
+    "wholesale_price": 85,
+    "stock_qty": 30,
+    "moq": 10,
+    "height_cm": 6,
+    "material": "PVC/ABS",
+    "badges": [
+      "NEW"
+    ],
+    "show_old_price": true,
+    "featured": false,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:48.335929+00:00",
+    "updated_at": "2026-11-07T07:02:48.335929+00:00"
+  },
+  {
+    "id": "c3fe1199-b59a-4a0a-a107-f7835fa71a22",
+    "sku": "SE-ANM-232",
+    "name": "Demon Slayer Tsugikuni Yoriichi Sun Breathing Standing Figure 29cm with Collector Box",
+    "slug": "demon-slayer-tsugikuni-yoriichi-sun-breathing-standing-figure-29cm-with-collector-box",
+    "series": "Demon Slayer",
+    "category": "Action Figures",
+    "description": "Iconic 29cm Tsugikuni Yoriichi standing figure from Demon Slayer featuring flowing red haori, black hakama, unsheathed Nichirin katana, calligraphy Sun Breathing base, and matching collector box.",
+    "short_desc": "29cm Tsugikuni Yoriichi Sun Breathing figure with Nichirin sword and calligraphy base.",
+    "image_url": "/catalog/product-232.jpeg",
+    "gallery_urls": [
+      "/catalog/product-232.jpeg"
+    ],
+    "retail_reg_price": 915,
+    "retail_sale_price": 763,
+    "wholesale_price": 610,
+    "stock_qty": 15,
+    "moq": 5,
+    "height_cm": 29,
+    "material": "PVC/ABS",
+    "badges": [
+      "HOT",
+      "NEW"
+    ],
+    "show_old_price": true,
+    "featured": false,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:48.451378+00:00",
+    "updated_at": "2026-11-07T07:02:48.451378+00:00"
+  },
+  {
+    "id": "0f20f931-88eb-443a-8e9b-37928bcc7321",
+    "sku": "SE-ANM-233",
+    "name": "Marvel Iron Spider-Man Metallic Nano Suit with 4 Gold Mechanical Legs 27cm Statue",
+    "slug": "marvel-iron-spider-man-metallic-nano-suit-with-4-gold-mechanical-legs-27cm-statue",
+    "series": "Marvel",
+    "category": "Action Figures",
+    "description": "Dynamic 27cm Iron Spider-Man statue in metallic crimson and gold armored suit featuring four extended gold mechanical pincers on a rugged destroyed rocky foundation base.",
+    "short_desc": "27cm Iron Spider figure with 4 gold mechanical legs on rocky terrain base.",
+    "image_url": "/catalog/product-233.jpeg",
+    "gallery_urls": [
+      "/catalog/product-233.jpeg"
+    ],
+    "retail_reg_price": 1125,
+    "retail_sale_price": 938,
+    "wholesale_price": 750,
+    "stock_qty": 15,
+    "moq": 5,
+    "height_cm": 27,
+    "material": "PVC/ABS",
+    "badges": [
+      "HOT"
+    ],
+    "show_old_price": true,
+    "featured": false,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:48.566573+00:00",
+    "updated_at": "2026-11-07T07:02:48.566573+00:00"
+  },
+  {
+    "id": "a29f969f-79c7-4754-9f02-b772d7e539ee",
+    "sku": "SE-ANM-234",
+    "name": "Dragon Ball Z Majin Buu Saga Prince Vegeta Arms Crossed Figure with Super Saiyan Halo Head",
+    "slug": "dragon-ball-z-majin-buu-saga-prince-vegeta-arms-crossed-figure-with-super-saiyan-halo-head",
+    "series": "Dragon Ball Z",
+    "category": "Action Figures",
+    "description": "Classic Majin Buu Saga Prince Vegeta arms crossed standing figure in dark blue sleeveless jumpsuit with white gloves, featuring an interchangeable Super Saiyan head with yellow angel halo.",
+    "short_desc": "28cm Vegeta arms crossed standing figure with swap-out Super Saiyan Halo head.",
+    "image_url": "/catalog/product-234.jpeg",
+    "gallery_urls": [
+      "/catalog/product-234.jpeg"
+    ],
+    "retail_reg_price": 2025,
+    "retail_sale_price": 1688,
+    "wholesale_price": 1350,
+    "stock_qty": 12,
+    "moq": 3,
+    "height_cm": 28,
+    "material": "PVC/ABS",
+    "badges": [
+      "HOT"
+    ],
+    "show_old_price": true,
+    "featured": false,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:48.675847+00:00",
+    "updated_at": "2026-11-07T07:02:48.675847+00:00"
+  },
+  {
+    "id": "17116696-b875-4ed1-8bc9-f7ffd25e8491",
+    "sku": "SE-ANM-235",
+    "name": "One Piece Monkey D. Luffy Gear 5 Sun God Nika Lightning Bolt Spear 28cm Diorama Statue",
+    "slug": "one-piece-monkey-d-luffy-gear-5-sun-god-nika-lightning-bolt-spear-28cm-diorama-statue",
+    "series": "One Piece",
+    "category": "Action Figures",
+    "description": "Exuberant 28cm Gear 5 Sun God Nika Luffy statue wielding an electric translucent blue lightning bolt spear, enveloped in ethereal purple-tinted cloud aura wisps on a dark crystalline jagged rock base.",
+    "short_desc": "28cm Gear 5 Sun God Nika Luffy statue with blue lightning spear & cloud aura.",
+    "image_url": "/catalog/product-235.jpeg",
+    "gallery_urls": [
+      "/catalog/product-235.jpeg"
+    ],
+    "retail_reg_price": 2025,
+    "retail_sale_price": 1688,
+    "wholesale_price": 1350,
+    "stock_qty": 12,
+    "moq": 3,
+    "height_cm": 28,
+    "material": "PVC/Resin",
+    "badges": [
+      "HOT",
+      "NEW"
+    ],
+    "show_old_price": true,
+    "featured": true,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:48.769815+00:00",
+    "updated_at": "2026-11-07T07:02:48.769815+00:00"
+  },
+  {
+    "id": "7cb2630d-54c8-4f99-b2dc-973c75ce1e9a",
+    "sku": "SE-ANM-236",
+    "name": "Naruto Uzumaki Classic Kid Form with Rasengan & Toad Scroll Tree Trunk Diorama Statue",
+    "slug": "naruto-uzumaki-classic-kid-form-with-rasengan-toad-scroll-tree-trunk-diorama-statue",
+    "series": "Naruto",
+    "category": "Action Figures",
+    "description": "Nostalgic Naruto Uzumaki classic Genin orange jacket statue forming an intricate translucent blue Rasengan in his hand, standing atop an ancient weathered tree stump diorama with giant summoning scroll and small toad companion.",
+    "short_desc": "26cm Kid Naruto statue forming blue Rasengan on tree trunk base with scroll & toad.",
+    "image_url": "/catalog/product-236.jpeg",
+    "gallery_urls": [
+      "/catalog/product-236.jpeg"
+    ],
+    "retail_reg_price": 2025,
+    "retail_sale_price": 1688,
+    "wholesale_price": 1350,
+    "stock_qty": 12,
+    "moq": 3,
+    "height_cm": 26,
+    "material": "PVC/Resin",
+    "badges": [
+      "HOT"
+    ],
+    "show_old_price": true,
+    "featured": false,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:48.87632+00:00",
+    "updated_at": "2026-11-07T07:02:48.87632+00:00"
+  },
+  {
+    "id": "4910a672-d127-4d7c-b95b-acdd4487555e",
+    "sku": "SE-ANM-237",
+    "name": "Dragon Ball Super Super Hero Ultimate Gohan Base Form 28cm Standing Figure",
+    "slug": "dragon-ball-super-super-hero-ultimate-gohan-base-form-28cm-standing-figure",
+    "series": "Dragon Ball Super",
+    "category": "Action Figures",
+    "description": "Highly detailed 28cm Son Gohan standing figure from Dragon Ball Super: Super Hero wearing Piccolo tribute dark navy martial arts gi with purple undershirt, red wristbands, and red sash belt on black collector plinth.",
+    "short_desc": "28cm Ultimate Gohan base form figure in dark navy gi on black plinth.",
+    "image_url": "/catalog/product-237.jpeg",
+    "gallery_urls": [
+      "/catalog/product-237.jpeg"
+    ],
+    "retail_reg_price": 2243,
+    "retail_sale_price": 1869,
+    "wholesale_price": 1495,
+    "stock_qty": 12,
+    "moq": 3,
+    "height_cm": 28,
+    "material": "PVC/ABS",
+    "badges": [
+      "NEW"
+    ],
+    "show_old_price": true,
+    "featured": false,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:48.981335+00:00",
+    "updated_at": "2026-11-07T07:02:48.981335+00:00"
+  },
+  {
+    "id": "0c2c391b-01db-4a4d-99f7-4c6c8003d113",
+    "sku": "SE-ANM-238",
+    "name": "Dragon Ball GT Super Saiyan 4 Son Goku Holding 4-Star Dragon Ball 32cm Statue",
+    "slug": "dragon-ball-gt-super-saiyan-4-son-goku-holding-4-star-dragon-ball-32cm-statue",
+    "series": "Dragon Ball GT",
+    "category": "Action Figures",
+    "description": "Powerful 32cm Super Saiyan 4 Son Goku statue featuring dense black mane, crimson body fur, yellow martial arts gi pants, wiping face battle pose, and holding a translucent red Dragon Ball on black display plinth.",
+    "short_desc": "32cm SSJ4 Goku statue holding red Dragon Ball on black display base.",
+    "image_url": "/catalog/product-238.jpeg",
+    "gallery_urls": [
+      "/catalog/product-238.jpeg"
+    ],
+    "retail_reg_price": 2325,
+    "retail_sale_price": 1938,
+    "wholesale_price": 1550,
+    "stock_qty": 10,
+    "moq": 3,
+    "height_cm": 32,
+    "material": "PVC/Resin",
+    "badges": [
+      "HOT"
+    ],
+    "show_old_price": true,
+    "featured": true,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:49.08035+00:00",
+    "updated_at": "2026-11-07T07:02:49.08035+00:00"
+  },
+  {
+    "id": "20c497c7-e06a-488a-bef2-882701397bf0",
+    "sku": "SE-ANM-239",
+    "name": "Dragon Ball Super Son Goku Mastered Ultra Instinct Floating Statue with Dual Head Stands",
+    "slug": "dragon-ball-super-son-goku-mastered-ultra-instinct-floating-statue-with-dual-head-stands",
+    "series": "Dragon Ball Super",
+    "category": "Action Figures",
+    "description": "Mastered Ultra Instinct Silver Hair Son Goku floating action statue featuring translucent God ki pink energy aura flames, battle torn orange gi pants, clear levitation flight stand, and two extra Ultra Instinct Sign head sculpt display pedestals.",
+    "short_desc": "35cm floating Mastered Ultra Instinct Goku statue with pink aura & dual head stands.",
+    "image_url": "/catalog/product-239.jpeg",
+    "gallery_urls": [
+      "/catalog/product-239.jpeg"
+    ],
+    "retail_reg_price": 2475,
+    "retail_sale_price": 2063,
+    "wholesale_price": 1650,
+    "stock_qty": 10,
+    "moq": 3,
+    "height_cm": 35,
+    "material": "PVC/Resin",
+    "badges": [
+      "HOT",
+      "NEW"
+    ],
+    "show_old_price": true,
+    "featured": true,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:49.195436+00:00",
+    "updated_at": "2026-11-07T07:02:49.195436+00:00"
+  },
+  {
+    "id": "d62f0d9e-5bfd-4f48-83f1-8b9df9807ce9",
+    "sku": "SE-ANM-240",
+    "name": "Dragon Ball Z Super Saiyan 2 Youth Gohan Cell Games Orange Gi 31cm Standing Figure",
+    "slug": "dragon-ball-z-super-saiyan-2-youth-gohan-cell-games-orange-gi-31cm-standing-figure",
+    "series": "Dragon Ball Z",
+    "category": "Action Figures",
+    "description": "Imposing 31cm Super Saiyan 2 Son Gohan figure wearing Goku signature orange and blue turtle school gi, featuring golden spiky SSJ2 hair with signature single front bang and museum display base.",
+    "short_desc": "31cm Super Saiyan 2 Gohan figure in classic orange Turtle gi on display base.",
+    "image_url": "/catalog/product-240.jpeg",
+    "gallery_urls": [
+      "/catalog/product-240.jpeg"
+    ],
+    "retail_reg_price": 2475,
+    "retail_sale_price": 2063,
+    "wholesale_price": 1650,
+    "stock_qty": 10,
+    "moq": 3,
+    "height_cm": 31,
+    "material": "PVC/ABS",
+    "badges": [
+      "HOT",
+      "NEW"
+    ],
+    "show_old_price": true,
+    "featured": false,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:49.302572+00:00",
+    "updated_at": "2026-11-07T07:02:49.302572+00:00"
+  },
+  {
+    "id": "08cced4b-6cd5-4c95-ae22-917cad99c045",
+    "sku": "SE-ANM-241",
+    "name": "Dragon Ball Z Super Saiyan 3 Son Goku Star Track 34cm Standing Statue with Collector Box",
+    "slug": "dragon-ball-z-super-saiyan-3-son-goku-star-track-34cm-standing-statue-with-collector-box",
+    "series": "Dragon Ball Z",
+    "category": "Action Figures",
+    "description": "Masterful 34cm (910g) Super Saiyan 3 Son Goku Star Track series statue featuring immense flowing golden SSJ3 hair, muscular definition, classic orange gi, matte black display plinth, and premium collector packaging.",
+    "short_desc": "34cm Super Saiyan 3 Goku figure with massive golden hair and collector packaging.",
+    "image_url": "/catalog/product-241.jpeg",
+    "gallery_urls": [
+      "/catalog/product-241.jpeg"
+    ],
+    "retail_reg_price": 2700,
+    "retail_sale_price": 2250,
+    "wholesale_price": 1800,
+    "stock_qty": 10,
+    "moq": 3,
+    "height_cm": 34,
+    "material": "PVC/ABS",
+    "badges": [
+      "HOT"
+    ],
+    "show_old_price": true,
+    "featured": true,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:49.51447+00:00",
+    "updated_at": "2026-11-07T07:02:49.51447+00:00"
+  },
+  {
+    "id": "c27b1ad0-ce0b-42dc-85d4-d28f539bdcce",
+    "sku": "SE-ANM-242",
+    "name": "Bleach Kurosaki Ichigo Final Getsuga Tensho Mugetsu Purple Flame Aura 33cm Statue",
+    "slug": "bleach-kurosaki-ichigo-final-getsuga-tensho-mugetsu-purple-flame-aura-33cm-statue",
+    "series": "Bleach",
+    "category": "Limited Statues",
+    "description": "Extraordinary 33cm Final Getsuga Tensho Mugetsu Ichigo Kurosaki statue featuring body wrap bandages, jet black mane, right arm enveloped in translucent blue and purple spiritual pressure flame aura, set upon an engraved stone plinth with collector display books.",
+    "short_desc": "33cm Mugetsu Ichigo statue with blue-purple Reiatsu flame aura arm on stone plinth.",
+    "image_url": "/catalog/product-242.jpeg",
+    "gallery_urls": [
+      "/catalog/product-242.jpeg"
+    ],
+    "retail_reg_price": 2925,
+    "retail_sale_price": 2438,
+    "wholesale_price": 1950,
+    "stock_qty": 8,
+    "moq": 2,
+    "height_cm": 33,
+    "material": "PVC/Resin",
+    "badges": [
+      "HOT",
+      "LIMITED"
+    ],
+    "show_old_price": true,
+    "featured": true,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:49.617626+00:00",
+    "updated_at": "2026-11-07T07:02:49.617626+00:00"
+  },
+  {
+    "id": "994dc6ff-6e77-4cc2-b1e6-8b17719567f7",
+    "sku": "SE-ANM-243",
+    "name": "Dragon Ball Super Mastered Ultra Instinct Goku Shenron & Cosmic Dragon Balls 36cm Diorama Statue",
+    "slug": "dragon-ball-super-mastered-ultra-instinct-goku-shenron-cosmic-dragon-balls-36cm-diorama-statue",
+    "series": "Dragon Ball Super",
+    "category": "Limited Statues",
+    "description": "Breathtaking 36cm Mastered Ultra Instinct Son Goku diorama statue featuring silver hair, battle torn gi pants, hovering above a translucent swirling celestial blue aura base crowned with a golden Shenron dragon and cosmic glowing Dragon Balls.",
+    "short_desc": "36cm Mastered Ultra Instinct Goku statue on cosmic Shenron and Dragon Ball aura base.",
+    "image_url": "/catalog/product-243.jpeg",
+    "gallery_urls": [
+      "/catalog/product-243.jpeg"
+    ],
+    "retail_reg_price": 2925,
+    "retail_sale_price": 2438,
+    "wholesale_price": 1950,
+    "stock_qty": 8,
+    "moq": 2,
+    "height_cm": 36,
+    "material": "PVC/Resin",
+    "badges": [
+      "HOT",
+      "LIMITED"
+    ],
+    "show_old_price": true,
+    "featured": true,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:49.721061+00:00",
+    "updated_at": "2026-11-07T07:02:49.721061+00:00"
+  },
+  {
+    "id": "4018dd54-c01e-4747-8389-3b8433b1302e",
+    "sku": "SE-ANM-244",
+    "name": "Dragon Ball Super SSGSS Blue & Super Saiyan God Red Vegeta LED Crystal Base 34cm Statue with Dual Heads",
+    "slug": "dragon-ball-super-ssgss-blue-super-saiyan-god-red-vegeta-led-crystal-base-34cm-statue-with-dual-heads",
+    "series": "Dragon Ball Super",
+    "category": "LED Dioramas & Displays",
+    "description": "High-end 34cm Prince Vegeta statue in modern grey-accent Saiyan battle armor with Big Bang Attack energy effect, LED light-up crystalline ice base, and two interchangeable heads (Super Saiyan Blue and Super Saiyan God Red).",
+    "short_desc": "34cm SSGSS & SSG God Vegeta statue with LED light-up crystal base & dual heads.",
+    "image_url": "/catalog/product-244.jpeg",
+    "gallery_urls": [
+      "/catalog/product-244.jpeg"
+    ],
+    "retail_reg_price": 3075,
+    "retail_sale_price": 2563,
+    "wholesale_price": 2050,
+    "stock_qty": 8,
+    "moq": 2,
+    "height_cm": 34,
+    "material": "PVC/Resin",
+    "badges": [
+      "HOT",
+      "LED",
+      "NEW"
+    ],
+    "show_old_price": true,
+    "featured": true,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:49.827472+00:00",
+    "updated_at": "2026-11-07T07:02:49.827472+00:00"
+  },
+  {
+    "id": "061dbbcd-277e-4017-ad5c-bbcdea1672c5",
+    "sku": "SE-ANM-245",
+    "name": "Bleach Ichigo Kurosaki Final Getsuga Tensho Mugetsu Slash Attack Pose 32cm Statue",
+    "slug": "bleach-ichigo-kurosaki-final-getsuga-tensho-mugetsu-slash-attack-pose-32cm-statue",
+    "series": "Bleach",
+    "category": "Limited Statues",
+    "description": "Dynamic 32cm Ichigo Kurosaki Mugetsu statue unleashing the ultimate attack in a deep combat lunging stance with dark black spiritual sword raised overhead, cloth-textured black hakama, and weathered cliff rock base.",
+    "short_desc": "32cm Mugetsu Ichigo deep battle stance slash statue on rocky cliff base.",
+    "image_url": "/catalog/product-245.jpeg",
+    "gallery_urls": [
+      "/catalog/product-245.jpeg"
+    ],
+    "retail_reg_price": 3075,
+    "retail_sale_price": 2563,
+    "wholesale_price": 2050,
+    "stock_qty": 8,
+    "moq": 2,
+    "height_cm": 32,
+    "material": "PVC/Resin",
+    "badges": [
+      "HOT",
+      "LIMITED"
+    ],
+    "show_old_price": true,
+    "featured": true,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:49.925333+00:00",
+    "updated_at": "2026-11-07T07:02:49.925333+00:00"
+  },
+  {
+    "id": "fc6ecc26-b2d9-4e18-b4fd-fab3d40239bd",
+    "sku": "SE-ANM-246",
+    "name": "Bleach Ulquiorra Cifer Segunda Etapa Resurreccion Demon Wings 30cm Statue",
+    "slug": "bleach-ulquiorra-cifer-segunda-etapa-resurreccion-demon-wings-30cm-statue",
+    "series": "Bleach",
+    "category": "Limited Statues",
+    "description": "Chilling 30cm Espada 4 Ulquiorra Cifer in his Segunda Etapa second release state featuring massive black bat wings, chest hollow hole, green spiritual energy Lanza del Relampago spear, and demonic bat-claw legs.",
+    "short_desc": "30cm Ulquiorra Segunda Etapa statue with massive bat wings & green energy spear.",
+    "image_url": "/catalog/product-246.jpeg",
+    "gallery_urls": [
+      "/catalog/product-246.jpeg"
+    ],
+    "retail_reg_price": 3375,
+    "retail_sale_price": 2813,
+    "wholesale_price": 2250,
+    "stock_qty": 6,
+    "moq": 2,
+    "height_cm": 30,
+    "material": "PVC/Resin",
+    "badges": [
+      "HOT",
+      "LIMITED"
+    ],
+    "show_old_price": true,
+    "featured": true,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:50.038381+00:00",
+    "updated_at": "2026-11-07T07:02:50.038381+00:00"
+  },
+  {
+    "id": "ab249734-a661-4706-902e-a4fca1f22c72",
+    "sku": "SE-ANM-247",
+    "name": "One Piece Monkey D. Luffy Gear 5 Sun God Nika Standing Atop Kaido Azure Dragon 34cm Statue",
+    "slug": "one-piece-monkey-d-luffy-gear-5-sun-god-nika-standing-atop-kaido-azure-dragon-34cm-statue",
+    "series": "One Piece",
+    "category": "Limited Statues",
+    "description": "Spectacular 34cm Gear 5 Sun God Nika Luffy statue triumphantly standing atop the defeated Azure Dragon Kaido, wielding blue translucent lightning bolts with red Armament Haki fist and billowing cloud aura.",
+    "short_desc": "34cm Gear 5 Nika Luffy statue standing on Kaido Azure Dragon with lightning spear.",
+    "image_url": "/catalog/product-247.jpeg",
+    "gallery_urls": [
+      "/catalog/product-247.jpeg"
+    ],
+    "retail_reg_price": 3525,
+    "retail_sale_price": 2938,
+    "wholesale_price": 2350,
+    "stock_qty": 6,
+    "moq": 2,
+    "height_cm": 34,
+    "material": "PVC/Resin",
+    "badges": [
+      "HOT",
+      "NEW",
+      "LIMITED"
+    ],
+    "show_old_price": true,
+    "featured": true,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:50.303071+00:00",
+    "updated_at": "2026-11-07T07:02:50.303071+00:00"
+  },
+  {
+    "id": "3356e570-ca0b-4df9-aa22-ec8aa21cd110",
+    "sku": "SE-ANM-248",
+    "name": "Pokemon Evolution Pikachu Charmander Squirtle & Bulbasaur Kanto Starters 26cm Diorama Statue with Box",
+    "slug": "pokemon-evolution-pikachu-charmander-squirtle-bulbasaur-kanto-starters-26cm-diorama-statue-with-box",
+    "series": "Pokemon",
+    "category": "Collectible Figure Sets",
+    "description": "Charming 26cm Kanto Starters Evolution diorama featuring Pikachu with electric spark aura, Charmander in volcanic flames, Squirtle riding ocean surf waves, Bulbasaur nestled in lush foliage with floating Poke Balls and collector packaging.",
+    "short_desc": "26cm Kanto Starters Pikachu, Charmander, Squirtle & Bulbasaur elemental diorama.",
+    "image_url": "/catalog/product-248.jpeg",
+    "gallery_urls": [
+      "/catalog/product-248.jpeg"
+    ],
+    "retail_reg_price": 3675,
+    "retail_sale_price": 3063,
+    "wholesale_price": 2450,
+    "stock_qty": 8,
+    "moq": 2,
+    "height_cm": 26,
+    "material": "PVC/Resin",
+    "badges": [
+      "HOT",
+      "NEW"
+    ],
+    "show_old_price": true,
+    "featured": true,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:50.432113+00:00",
+    "updated_at": "2026-11-07T07:02:50.432113+00:00"
+  },
+  {
+    "id": "3804758e-dbb0-4536-929b-75d9378cacdd",
+    "sku": "SE-ANM-249",
+    "name": "Marvel Avengers Iron Man Mark 50 Metallic Helmet 1:1 Scale Bust Display with LED Eyes",
+    "slug": "marvel-avengers-iron-man-mark-50-metallic-helmet-1-1-scale-bust-display-with-led-eyes",
+    "series": "Marvel",
+    "category": "LED Dioramas & Displays",
+    "description": "Full-scale 1:1 replica Iron Man Mark 50 metallic red and gold faceplate helmet bust featuring light-up LED slotted eye lenses mounted on an official Stark Industries collector plinth.",
+    "short_desc": "1:1 scale Iron Man Mark 50 metallic helmet bust with illuminated LED eyes.",
+    "image_url": "/catalog/product-249.jpeg",
+    "gallery_urls": [
+      "/catalog/product-249.jpeg"
+    ],
+    "retail_reg_price": 3675,
+    "retail_sale_price": 3063,
+    "wholesale_price": 2450,
+    "stock_qty": 8,
+    "moq": 2,
+    "height_cm": 30,
+    "material": "PVC/ABS",
+    "badges": [
+      "HOT",
+      "LED",
+      "NEW"
+    ],
+    "show_old_price": true,
+    "featured": true,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:50.528316+00:00",
+    "updated_at": "2026-11-07T07:02:50.528316+00:00"
+  },
+  {
+    "id": "dae16355-0270-476f-8f38-9dc53b9c28f5",
+    "sku": "SE-ANM-250",
+    "name": "Jujutsu Kaisen Satoru Gojo Shinjuku Battle Damaged Hollow Purple Spark 25cm Statue",
+    "slug": "jujutsu-kaisen-satoru-gojo-shinjuku-battle-damaged-hollow-purple-spark-25cm-statue",
+    "series": "Jujutsu Kaisen",
+    "category": "Limited Statues",
+    "description": "Intense 25cm Satoru Gojo statue from the Shinjuku Showdown battle wearing ripped black compression tee and white hakama trousers, wielding glowing blue and purple cursed energy in hand on fractured crater terrain base.",
+    "short_desc": "25cm Shinjuku Showdown Gojo Satoru statue with cursed energy sparks on crater base.",
+    "image_url": "/catalog/product-250.jpeg",
+    "gallery_urls": [
+      "/catalog/product-250.jpeg"
+    ],
+    "retail_reg_price": 5025,
+    "retail_sale_price": 4188,
+    "wholesale_price": 3350,
+    "stock_qty": 6,
+    "moq": 2,
+    "height_cm": 25,
+    "material": "PVC/Resin",
+    "badges": [
+      "HOT",
+      "NEW",
+      "LIMITED"
+    ],
+    "show_old_price": true,
+    "featured": true,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:50.642398+00:00",
+    "updated_at": "2026-11-07T07:02:50.642398+00:00"
+  },
+  {
+    "id": "67c28bb8-b959-4e5b-85cc-e3abcdc416b1",
+    "sku": "SE-ANM-251",
+    "name": "Dragon Ball Super SSGSS Vegito Spirit Sword & Blue Ki Whirlwind Pedestal 38cm Statue",
+    "slug": "dragon-ball-super-ssgss-vegito-spirit-sword-blue-ki-whirlwind-pedestal-38cm-statue",
+    "series": "Dragon Ball Super",
+    "category": "Limited Statues",
+    "description": "Grand 38cm Super Saiyan Blue Vegito statue channeling the colossal golden Spirit Sword energy blade from his hand, surrounded by spiraling translucent blue God Ki aura waves on an ornate Romanesque temple pedestal plinth.",
+    "short_desc": "38cm SSGSS Blue Vegito statue with giant golden Spirit Sword on ornate pedestal base.",
+    "image_url": "/catalog/product-251.jpeg",
+    "gallery_urls": [
+      "/catalog/product-251.jpeg"
+    ],
+    "retail_reg_price": 5250,
+    "retail_sale_price": 4375,
+    "wholesale_price": 3500,
+    "stock_qty": 5,
+    "moq": 1,
+    "height_cm": 38,
+    "material": "PVC/Resin",
+    "badges": [
+      "HOT",
+      "LIMITED"
+    ],
+    "show_old_price": true,
+    "featured": true,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:50.738525+00:00",
+    "updated_at": "2026-11-07T07:02:50.738525+00:00"
+  },
+  {
+    "id": "75eeb157-c5a6-458a-94a7-06b0e138041d",
+    "sku": "SE-ANM-252",
+    "name": "Naruto Shippuden Sasuke & Itachi Uchiha Cursed Seal Awakening Crow Tree Diorama Statue",
+    "slug": "naruto-shippuden-sasuke-itachi-uchiha-cursed-seal-awakening-crow-tree-diorama-statue",
+    "series": "Naruto Shippuden",
+    "category": "Limited Statues",
+    "description": "Masterpiece Uchiha Brothers battle diorama featuring shirtless Curse Mark Sasuke with purple rope belt and Chidori stance in the foreground, with Akatsuki Itachi perched on a gnarled crow tree with perched raven and flying hawk on blood-soaked rock base.",
+    "short_desc": "38cm Sasuke & Itachi Uchiha duo battle diorama statue with crow tree & blood base.",
+    "image_url": "/catalog/product-252.jpeg",
+    "gallery_urls": [
+      "/catalog/product-252.jpeg"
+    ],
+    "retail_reg_price": 5400,
+    "retail_sale_price": 4500,
+    "wholesale_price": 3600,
+    "stock_qty": 5,
+    "moq": 1,
+    "height_cm": 38,
+    "material": "PVC/Resin",
+    "badges": [
+      "HOT",
+      "LIMITED"
+    ],
+    "show_old_price": true,
+    "featured": true,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:50.837774+00:00",
+    "updated_at": "2026-11-07T07:02:50.837774+00:00"
+  },
+  {
+    "id": "f7752a06-bbf5-4080-9f65-51480f64ce00",
+    "sku": "SE-ANM-253",
+    "name": "Naruto Shippuden Six Paths Sage Mode Naruto with Kurama Chakra Avatar & Truth-Seeking Orbs 38cm Statue",
+    "slug": "naruto-shippuden-six-paths-sage-mode-naruto-kurama-chakra-avatar-truth-seeking-orbs-38cm-statue",
+    "series": "Naruto Shippuden",
+    "category": "Limited Statues",
+    "description": "Magnificent 38cm Six Paths Sage Mode Naruto Uzumaki statue brandishing dual chakra rods, floating Truth-Seeking Orbs, glowing blue Rasenshuriken, and emerging roaring golden Kurama Nine-Tails fox chakra avatar base atop rocky mountain crags.",
+    "short_desc": "38cm Six Paths Naruto statue with Kurama fox avatar, Rasenshuriken & chakra orbs.",
+    "image_url": "/catalog/product-253.jpeg",
+    "gallery_urls": [
+      "/catalog/product-253.jpeg"
+    ],
+    "retail_reg_price": 5550,
+    "retail_sale_price": 4625,
+    "wholesale_price": 3700,
+    "stock_qty": 5,
+    "moq": 1,
+    "height_cm": 38,
+    "material": "PVC/Resin",
+    "badges": [
+      "HOT",
+      "LIMITED"
+    ],
+    "show_old_price": true,
+    "featured": true,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:50.956628+00:00",
+    "updated_at": "2026-11-07T07:02:50.956628+00:00"
+  },
+  {
+    "id": "d8c16e7c-28a2-44af-8d17-9010eee95746",
+    "sku": "SE-ANM-254",
+    "name": "Pokemon Pichu Pikachu & Raichu Lightning Energy Spikes 45cm Scale Diorama Statue",
+    "slug": "pokemon-pichu-pikachu-raichu-lightning-energy-spikes-45cm-scale-diorama-statue",
+    "series": "Pokemon",
+    "category": "Limited Statues",
+    "description": "Epic 45cm scale Pokemon evolution diorama featuring Pichu, Pikachu, and Raichu leaping together surrounded by translucent electric yellow lightning energy spikes, rock crags, and a custom circular Poke Ball pedestal base.",
+    "short_desc": "45cm Pichu, Pikachu & Raichu triple evolution diorama with massive lightning spikes.",
+    "image_url": "/catalog/product-254.jpeg",
+    "gallery_urls": [
+      "/catalog/product-254.jpeg"
+    ],
+    "retail_reg_price": 6375,
+    "retail_sale_price": 5313,
+    "wholesale_price": 4250,
+    "stock_qty": 4,
+    "moq": 1,
+    "height_cm": 45,
+    "material": "Resin/Polystone",
+    "badges": [
+      "HOT",
+      "LIMITED"
+    ],
+    "show_old_price": true,
+    "featured": true,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:51.055171+00:00",
+    "updated_at": "2026-11-07T07:02:51.055171+00:00"
+  },
+  {
+    "id": "7a33c00f-128f-4008-a873-42135496d38c",
+    "sku": "SE-ANM-255",
+    "name": "Demon Slayer Tanjiro Kamado Hinokami Kagura Sun Dragon Dance vs Rui 38cm Diorama Statue with Extra Head",
+    "slug": "demon-slayer-tanjiro-kamado-hinokami-kagura-sun-dragon-dance-vs-rui-38cm-diorama-statue-with-extra-head",
+    "series": "Demon Slayer",
+    "category": "Limited Statues",
+    "description": "Spectacular 38cm battle diorama capturing Tanjiro Kamado executing the Hinokami Kagura Sun Halo Dragon Dance enveloped in blazing translucent fire swirls against Rui severed head, including swap-out intense battle expression head sculpt.",
+    "short_desc": "38cm Tanjiro Hinokami Kagura flame dragon diorama statue with swap head & Rui.",
+    "image_url": "/catalog/product-255.jpeg",
+    "gallery_urls": [
+      "/catalog/product-255.jpeg"
+    ],
+    "retail_reg_price": 6675,
+    "retail_sale_price": 5563,
+    "wholesale_price": 4450,
+    "stock_qty": 4,
+    "moq": 1,
+    "height_cm": 38,
+    "material": "PVC/Resin",
+    "badges": [
+      "HOT",
+      "LIMITED"
+    ],
+    "show_old_price": true,
+    "featured": true,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:51.15982+00:00",
+    "updated_at": "2026-11-07T07:02:51.15982+00:00"
+  },
+  {
+    "id": "a3830fec-560d-4781-9c6f-ee6018725602",
+    "sku": "SE-ANM-256",
+    "name": "Naruto Shippuden Kurama Link Mode Naruto Dual Hand LED Light-Up Rasenshuriken 35cm Diorama Statue with Box",
+    "slug": "naruto-shippuden-kurama-link-mode-naruto-dual-hand-led-light-up-rasenshuriken-35cm-diorama-statue-with-box",
+    "series": "Naruto Shippuden",
+    "category": "LED Dioramas & Displays",
+    "description": "Masterpiece 35cm (3.85kg) Kurama Nine-Tails Link Mode Naruto statue featuring glowing LED illuminated dual-hand Wind Style Rasenshuriken and Tailed Beast Bomb spheres, massive golden Nine-Tails Fox tails, flame aura base, and collector box.",
+    "short_desc": "35cm Kurama Link Naruto statue with dual LED light-up Rasenshuriken & collector box.",
+    "image_url": "/catalog/product-256.jpeg",
+    "gallery_urls": [
+      "/catalog/product-256.jpeg"
+    ],
+    "retail_reg_price": 7425,
+    "retail_sale_price": 6188,
+    "wholesale_price": 4950,
+    "stock_qty": 4,
+    "moq": 1,
+    "height_cm": 35,
+    "material": "PVC/Resin",
+    "badges": [
+      "HOT",
+      "LED",
+      "LIMITED"
+    ],
+    "show_old_price": true,
+    "featured": true,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:51.260188+00:00",
+    "updated_at": "2026-11-07T07:02:51.260188+00:00"
+  },
+  {
+    "id": "75f1d8f8-d102-4f1c-931d-eee43a9ec3c4",
+    "sku": "SE-ANM-257",
+    "name": "One Piece Red-Haired Shanks Emperor of the Sea Gryphon Saber Conqueror Haki 38cm Scale Statue",
+    "slug": "one-piece-red-haired-shanks-emperor-of-the-sea-gryphon-saber-conqueror-haki-38cm-scale-statue",
+    "series": "One Piece",
+    "category": "Resin & Scale Statues",
+    "description": "Monumental 38cm scale statue of Four Emperors Red-Haired Shanks standing commanding in open white shirt, patterned red trousers, black captain cape, unsheathing Gryphon saber with crackling red Conqueror Haki lightning on volcanic rock plinth.",
+    "short_desc": "38cm Emperor Shanks scale statue with Gryphon saber & red Conqueror Haki lightning.",
+    "image_url": "/catalog/product-257.jpeg",
+    "gallery_urls": [
+      "/catalog/product-257.jpeg"
+    ],
+    "retail_reg_price": 8250,
+    "retail_sale_price": 6875,
+    "wholesale_price": 5500,
+    "stock_qty": 3,
+    "moq": 1,
+    "height_cm": 38,
+    "material": "Resin/Polystone",
+    "badges": [
+      "HOT",
+      "LIMITED",
+      "RESIN"
+    ],
+    "show_old_price": true,
+    "featured": true,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:51.362944+00:00",
+    "updated_at": "2026-11-07T07:02:51.362944+00:00"
+  },
+  {
+    "id": "3bc4adfb-7676-46b5-86b3-2006243a5dd3",
+    "sku": "SE-ANM-258",
+    "name": "One Piece Monkey D. Luffy Gear 3 Elephant Gun Gomu Gomu no Red Roc Colossal Fist 40cm Diorama Statue",
+    "slug": "one-piece-monkey-d-luffy-gear-3-elephant-gun-gomu-gomu-no-red-roc-colossal-fist-40cm-diorama-statue",
+    "series": "One Piece",
+    "category": "Resin & Scale Statues",
+    "description": "Colossal 40cm centerpiece diorama featuring Monkey D. Luffy unleashing an immense, molten Red Roc flame fist infused with black and red Armament Haki lightning trails rising from jagged volcanic crags.",
+    "short_desc": "40cm Luffy colossal Red Roc molten flame fist diorama statue with Haki lightning.",
+    "image_url": "/catalog/product-258.jpeg",
+    "gallery_urls": [
+      "/catalog/product-258.jpeg"
+    ],
+    "retail_reg_price": 8850,
+    "retail_sale_price": 7375,
+    "wholesale_price": 5900,
+    "stock_qty": 3,
+    "moq": 1,
+    "height_cm": 40,
+    "material": "Resin/Polystone",
+    "badges": [
+      "HOT",
+      "LIMITED",
+      "RESIN"
+    ],
+    "show_old_price": true,
+    "featured": true,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:51.470963+00:00",
+    "updated_at": "2026-11-07T07:02:51.470963+00:00"
+  },
+  {
+    "id": "6fb7067e-f4c1-452c-a7f2-0a553e66a86f",
+    "sku": "SE-ANM-259",
+    "name": "Pokemon Venusaur & Grass Starters Rainforest Garden 33cm Scale Masterpiece Diorama Statue",
+    "slug": "pokemon-venusaur-grass-starters-rainforest-garden-33cm-scale-masterpiece-diorama-statue",
+    "series": "Pokemon",
+    "category": "Resin & Scale Statues",
+    "description": "Exquisite 33cm museum-grade Pokemon diorama featuring a massive blooming Venusaur surrounded by all generations of Grass Starters including Chikorita, Treecko, Turtwig, Snivy, Chespin, Rowlet, Grookey, and Sprigatito playing among lush flowering vines and mountain cliffs.",
+    "short_desc": "33cm Venusaur & all-generation Grass Starters rainforest garden diorama statue.",
+    "image_url": "/catalog/product-259.jpeg",
+    "gallery_urls": [
+      "/catalog/product-259.jpeg"
+    ],
+    "retail_reg_price": 8850,
+    "retail_sale_price": 7375,
+    "wholesale_price": 5900,
+    "stock_qty": 3,
+    "moq": 1,
+    "height_cm": 33,
+    "material": "Resin/Polystone",
+    "badges": [
+      "HOT",
+      "LIMITED",
+      "RESIN"
+    ],
+    "show_old_price": true,
+    "featured": true,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:51.569173+00:00",
+    "updated_at": "2026-11-07T07:02:51.569173+00:00"
+  },
+  {
+    "id": "2da04b2c-e7ff-4046-bde4-5d0c338113c8",
+    "sku": "SE-ANM-260",
+    "name": "Pokemon Eeveelutions Waterfall Sanctuary All 9 Eevee Forms 36cm Scale Masterpiece Diorama Statue",
+    "slug": "pokemon-eeveelutions-waterfall-sanctuary-all-9-eevee-forms-36cm-scale-masterpiece-diorama-statue",
+    "series": "Pokemon",
+    "category": "Resin & Scale Statues",
+    "description": "Ultimate collector masterpiece diorama uniting all 9 Eeveelutions in a lush magical waterfall haven: Eevee, Vaporeon in crystalline stream, Jolteon, Flareon, Espeon & Umbreon perched on ancient roots, Leafeon, Glaceon leaping down waterfall, and Sylveon on tree stump.",
+    "short_desc": "36cm all 9 Eeveelutions waterfall sanctuary masterpiece diorama statue.",
+    "image_url": "/catalog/product-260.jpeg",
+    "gallery_urls": [
+      "/catalog/product-260.jpeg"
+    ],
+    "retail_reg_price": 9900,
+    "retail_sale_price": 8250,
+    "wholesale_price": 6600,
+    "stock_qty": 2,
+    "moq": 1,
+    "height_cm": 36,
+    "material": "Resin/Polystone",
+    "badges": [
+      "HOT",
+      "LIMITED",
+      "RESIN"
+    ],
+    "show_old_price": true,
+    "featured": true,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:51.674508+00:00",
+    "updated_at": "2026-11-07T07:02:51.674508+00:00"
+  },
+  {
+    "id": "8b913b46-262f-4612-86fe-56402c0452cd",
+    "sku": "SE-ANM-261",
+    "name": "Marvel Avengers Hulkbuster Iron Man Armor Heavy Artillery 55cm Large Scale Statue",
+    "slug": "marvel-avengers-hulkbuster-iron-man-armor-heavy-artillery-55cm-large-scale-statue",
+    "series": "Marvel",
+    "category": "Resin & Scale Statues",
+    "description": "Monumental 55cm large-scale Hulkbuster armor statue in crimson and gold battle armor posing in an imposing combat ground-slam stance on a fractured street asphalt rubble foundation.",
+    "short_desc": "55cm monumental Hulkbuster Iron Man heavy armor collector statue on rubble base.",
+    "image_url": "/catalog/product-261.jpeg",
+    "gallery_urls": [
+      "/catalog/product-261.jpeg"
+    ],
+    "retail_reg_price": 12750,
+    "retail_sale_price": 10625,
+    "wholesale_price": 8500,
+    "stock_qty": 2,
+    "moq": 1,
+    "height_cm": 55,
+    "material": "Resin/Polystone",
+    "badges": [
+      "HOT",
+      "LIMITED",
+      "RESIN"
+    ],
+    "show_old_price": true,
+    "featured": true,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:51.797633+00:00",
+    "updated_at": "2026-11-07T07:02:51.797633+00:00"
+  },
+  {
+    "id": "39a638c3-dde3-444f-a7df-5c90108f7f7a",
+    "sku": "SE-ANM-262",
+    "name": "Marvel Spider-Man Classic Red & Blue Suit vs Green Goblin 70cm Centerpiece Scale Statue",
+    "slug": "marvel-spider-man-classic-red-blue-suit-vs-green-goblin-70cm-centerpiece-scale-statue",
+    "series": "Marvel",
+    "category": "Resin & Scale Statues",
+    "description": "Grand 70cm museum-grade collector statue of Spider-Man in classic red and blue textured web-suit leaping above Green Goblin pumpkin bomb smoke trails and urban destruction platform.",
+    "short_desc": "70cm grand scale Spider-Man museum centerpiece statue with villain smoke base.",
+    "image_url": "/catalog/product-262.jpeg",
+    "gallery_urls": [
+      "/catalog/product-262.jpeg"
+    ],
+    "retail_reg_price": 21750,
+    "retail_sale_price": 18125,
+    "wholesale_price": 14500,
+    "stock_qty": 2,
+    "moq": 1,
+    "height_cm": 70,
+    "material": "Resin/Polystone",
+    "badges": [
+      "HOT",
+      "LIMITED",
+      "RESIN"
+    ],
+    "show_old_price": true,
+    "featured": true,
+    "status": "ACTIVE",
+    "created_at": "2026-11-07T07:02:51.896417+00:00",
+    "updated_at": "2026-11-07T07:02:51.896417+00:00"
+  }
+]
